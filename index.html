@@ -105,8 +105,36 @@
   .ma-list .arr { color: var(--muted); }
   .ma-list .pr { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; }
 
+  /* Anchor nav */
+  .anchor-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--faint);
+    flex-wrap: wrap;
+  }
+  .anchor-nav a {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .anchor-nav a:hover { color: var(--secondary); }
+  .anchor-nav .nav-dot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--faint);
+    margin: 0 10px;
+    flex-shrink: 0;
+  }
+
   /* Legend */
-  .legend { display: flex; gap: 20px; margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--faint); }
+  .legend { display: flex; gap: 20px; margin: 0 0 16px; padding-bottom: 20px; border-bottom: 1px solid var(--faint); }
   .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
   .legend-swatch { width: 32px; height: 18px; border-radius: 4px; }
 
@@ -452,7 +480,7 @@
       <h1>The Agent Payments Stack</h1>
       <p class="deck">Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.</p>
       <div class="hdr-meta">
-        <span>86 projects mapped</span>
+        <span>87 projects mapped</span>
         <span>Updated Mar 25, 2026</span>
       </div>
     </div>
@@ -462,6 +490,31 @@
       <div><div class="num-v">~$600M</div><div class="num-l">Annualized</div></div>
     </div>
   </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(255,255,255,0.06)"></div>Live with volume</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(212,168,64,0.08);border:1px solid rgba(212,168,64,0.15)"></div>Live / early</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:transparent;border:1px dashed rgba(255,255,255,0.12)"></div>Announced</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(232,105,74,0.1)"></div>Acquired</div>
+  </div>
+
+  <!-- Anchor nav -->
+  <nav class="anchor-nav">
+    <a href="#application">Application</a>
+    <span class="nav-dot"></span>
+    <a href="#governance">Governance</a>
+    <span class="nav-dot"></span>
+    <a href="#protocol">Protocol</a>
+    <span class="nav-dot"></span>
+    <a href="#routing">Routing</a>
+    <span class="nav-dot"></span>
+    <a href="#wallets">Wallets</a>
+    <span class="nav-dot"></span>
+    <a href="#settlement">Settlement</a>
+    <span class="nav-dot"></span>
+    <a href="#hackathons">Hackathons</a>
+  </nav>
 
   <div class="stack">
 
@@ -520,7 +573,7 @@
     <div class="row" id="protocol">
       <div class="row-label">
         <span class="row-n">03</span>
-        <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">11</span></div><div class="row-q">How the payment flows</div></div>
+        <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">12</span></div><div class="row-q">How the payment flows</div></div>
       </div>
       <div class="row-content">
         <a class="t" href="https://x402.org" target="_blank" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem.">x402 <span class="sm">75M/30d</span></a>
@@ -660,14 +713,6 @@
     </div>
   </div>
 
-  <!-- Legend -->
-  <div class="legend">
-    <div class="legend-item"><div class="legend-swatch" style="background:rgba(255,255,255,0.06)"></div>Live with volume</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:rgba(212,168,64,0.08);border:1px solid rgba(212,168,64,0.15)"></div>Live / early</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:transparent;border:1px dashed rgba(255,255,255,0.12)"></div>Announced</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:rgba(232,105,74,0.1)"></div>Acquired</div>
-  </div>
-
   <!-- Hackathons -->
   <div class="hackathons" id="hackathons">
     <div class="hack-header">
@@ -720,7 +765,7 @@
   <!-- Submit -->
   <div class="submit-bar">
     <span>Missing a project? <a href="mailto:jordan@jordanlyall.com?subject=Agent%20Payments%20Stack%20Suggestion&body=Project%20name:%0AURL:%0ALayer:%0AOne-line%20description:">Submit a suggestion</a></span>
-    <span>86 projects across 6 layers</span>
+    <span>87 projects across 6 layers</span>
   </div>
 
   <div class="foot">
@@ -753,19 +798,6 @@
 
   <p>This is no longer speculative infrastructure. <strong>98.6% of agent payments settle in USDC</strong>, and annualized volume is approaching $600M.</p>
 
-  <h3>The stack has six layers</h3>
-
-  <p>The agent payments stack has crystallized into six distinct layers, each answering a different question in the payment flow:</p>
-
-  <ul>
-    <li><strong>Settlement (L0)</strong> answers where transactions land. Base leads with 119M x402 transactions. Solana leads in dollar volume share. Everything else is positioning.</li>
-    <li><strong>Wallet and key management (L1)</strong> answers where keys live. The market has split into full-stack agent wallets (Coinbase, MoonPay OWS, Crossmint) and signing primitives (Turnkey, Lit, Safe). A wave of acquisitions (Stripe bought Privy, Fireblocks bought Dynamic, Arbitrum bought ZeroDev) is consolidating this layer fast.</li>
-    <li><strong>Routing and abstraction (L2)</strong> answers which chain, which token, which rail. The biggest trend: convergence of crypto and card rails through a single abstraction. Mastercard's $1.8B BVNK acquisition and Stripe's $1.1B Bridge acquisition are the clearest signals.</li>
-    <li><strong>Payment protocol (L3)</strong> answers how the payment flow works. Three paradigms are crystallizing: x402 (crypto-native HTTP payments), Tempo MPP (multi-rail sessions), and Google AP2 (payment-agnostic authorization). They are designed to interoperate.</li>
-    <li><strong>Governance and policy (L4)</strong> answers whether an agent may spend, and how much. The "Brex for agents" category has gone from concept to reality. Ramp and Brex now offer agent card products. Crypto-native alternatives like Skyfire and Sponge provide stablecoin-based controls.</li>
-    <li><strong>Application (L5)</strong> answers what gets bought and why. DeFi trading agents are the most mature category. Agent economy platforms (Virtuals, ElizaOS, Olas) are the most hyped. Services agents pay for (compute, data, creative assets) represent the longest tail.</li>
-  </ul>
-
   <h3>Five companies are trying to own the whole stack</h3>
 
   <p><strong>Coinbase</strong> is the most vertically integrated, controlling settlement (Base), wallets (AgentKit), protocol (x402), identity (ERC-8004), and onramp/offramp. <strong>Stripe</strong> matches that span through Tempo (settlement), Privy (wallets), MPP + ACP (protocol), Bridge (routing), and SPTs (governance). <strong>Circle</strong> controls the monetary base layer: 98.6% of agent payments settle in their stablecoin. <strong>Google</strong> plays the standards layer with AP2 and A2A. <strong>MoonPay</strong> bet on open standards with OWS.</p>
@@ -784,7 +816,7 @@
   <div class="changelog">
     <h3>Changelog</h3>
     <ul>
-      <li><span class="cl-date">Mar 25</span> Initial release. 86 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
+      <li><span class="cl-date">Mar 25</span> Initial release. 87 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
     </ul>
   </div>
 
