@@ -635,10 +635,11 @@
   <div class="email-capture">
     <h3>Get notified when the stack updates</h3>
     <p>New projects, acquisitions, and protocol launches. No spam.</p>
-    <form class="email-form" action="https://subscribe-forms.beehiiv.com/f1e64851-1e51-4d99-9bab-863fc85428dc" method="post" target="_blank">
-      <input type="email" name="email" placeholder="you@company.com" required>
-      <button type="submit">Subscribe</button>
+    <form class="email-form" id="sf">
+      <input type="email" id="se" placeholder="you@company.com" required>
+      <button type="submit" id="sb">Subscribe</button>
     </form>
+    <p id="sm" style="display:none;font-size:12px;margin-top:8px;"></p>
   </div>
 </div>
 
@@ -694,5 +695,17 @@
   </div>
 </div>
 
+<script>
+document.getElementById('sf').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const b=document.getElementById('sb'),m=document.getElementById('sm'),v=document.getElementById('se').value;
+  b.textContent='...';b.disabled=true;m.style.display='none';
+  try{
+    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})});
+    if(r.ok){m.textContent="Subscribed. You'll hear from us when the stack updates.";m.style.color='var(--secondary)';m.style.display='block';document.getElementById('se').value='';b.textContent='Done';}
+    else{m.textContent='Something went wrong. Try again.';m.style.color='var(--acq)';m.style.display='block';b.textContent='Subscribe';b.disabled=false;}
+  }catch{m.textContent='Something went wrong. Try again.';m.style.color='var(--acq)';m.style.display='block';b.textContent='Subscribe';b.disabled=false;}
+});
+</script>
 </body>
 </html>
