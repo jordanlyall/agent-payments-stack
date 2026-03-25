@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Payments Stack</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0a0a;
+    --text: #f0f0f0;
+    --secondary: #999;
+    --muted: #666;
+    --faint: #1e1e1e;
+    --surface: #161616;
+    --live: #f0f0f0;
+    --early: #d4a840;
+    --ann: #555;
+    --acq: #e8694a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'cv01', 'cv02', 'ss01';
+  }
+
+  .page {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 48px 56px 40px;
+  }
+
+  /* Header */
+  .hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+  }
+
+  h1 {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+
+  .deck {
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.5;
+    max-width: 480px;
+    margin-top: 10px;
+  }
+
+  .nums {
+    display: flex;
+    gap: 32px;
+  }
+
+  .num-v {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.5px;
+  }
+
+  .num-l {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* Grid */
+  .stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-top: 1px solid var(--faint);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    border-bottom: 1px solid var(--faint);
+    min-height: 64px;
+  }
+
+  .row-label {
+    padding: 18px 24px 18px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-right: 1px solid var(--faint);
+  }
+
+  .row-n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .row-title {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+
+  .row-q {
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .row-content {
+    padding: 14px 0 14px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Tags */
+  .t {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 11px;
+    border-radius: 6px;
+    font-size: 12.5px;
+    font-weight: 480;
+    white-space: nowrap;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .t.early {
+    background: rgba(212,168,64,0.08);
+    color: var(--early);
+    border: 1px solid rgba(212,168,64,0.15);
+  }
+
+  .t.ann {
+    background: transparent;
+    color: var(--ann);
+    border: 1px dashed rgba(255,255,255,0.12);
+  }
+
+  .t.acq {
+    background: rgba(232,105,74,0.1);
+    color: var(--acq);
+    font-weight: 520;
+  }
+
+  .t .sm {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    opacity: 0.5;
+    margin-left: 4px;
+  }
+
+  /* Separator dot between subcategories */
+  .sep {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--faint);
+    margin: 0 4px;
+    flex-shrink: 0;
+  }
+
+  /* Bottom */
+  .bottom {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--faint);
+  }
+
+  .bot-title {
+    font-size: 12px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  /* Vertical integration */
+  .vi-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .vi-name {
+    font-size: 12px;
+    font-weight: 600;
+    width: 60px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .vi-track {
+    flex: 1;
+    height: 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vi-fill {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    border-radius: 4px;
+    opacity: 0.15;
+  }
+
+  .vi-dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .vi-dot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vi-dot.active::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .vi-labels {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    margin-left: 72px;
+    margin-top: 4px;
+  }
+
+  .vi-labels span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--muted);
+    text-align: center;
+  }
+
+  /* M&A */
+  .ma-list { list-style: none; }
+
+  .ma-list li {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 420;
+  }
+
+  .ma-list .arr { color: var(--muted); }
+
+  .ma-list .pr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--acq);
+    margin-left: auto;
+  }
+
+  /* Footer */
+  .foot {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .foot b { color: var(--text); font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="hdr">
+    <div>
+      <h1>The Agent Payments Stack</h1>
+      <p class="deck">Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.</p>
+    </div>
+    <div class="nums">
+      <div><div class="num-v">$43M</div><div class="num-l">Volume (9mo)</div></div>
+      <div><div class="num-v">140M</div><div class="num-l">Transactions</div></div>
+      <div><div class="num-v">~$600M</div><div class="num-l">Annualized</div></div>
+    </div>
+  </div>
+
+  <div class="stack">
+
+    <div class="row">
+      <div class="row-label">
+        <span class="row-n">05</span>
+        <div>
+          <div class="row-title">Application</div>
+          <div class="row-q">What gets bought and why</div>
+        </div>
+      </div>
+      <div class="row-content">
+        <span class="t">Virtuals Protocol</span>
+        <span class="t">ElizaOS</span>
+        <span class="t">Olas</span>
+        <span class="t">Botto</span>
+        <span class="sep"></span>
+        <span class="t">Axiom</span>
+        <span class="t">Theoriq</span>
+        <span class="t">Giza ARMA</span>
+        <span class="t">Almanak</span>
+        <span class="t">Brahma.fi</span>
+        <span class="sep"></span>
+        <span class="t">x402engine</span>
+        <span class="t">Nansen</span>
+        <span class="t">Akash</span>
+        <span class="t">Art Blocks</span>
+        <span class="t">mint.day</span>
+        <span class="t">Apify</span>
+        <span class="t">Render</span>
+        <span class="t">Ocean Protocol</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span class="row-n">04</span>
+        <div>
+          <div class="row-title">Governance & Policy</div>
+          <div class="row-q">May this agent spend</div>
+        </div>
+      </div>
+      <div class="row-content">
+        <span class="t">Ramp Agent Cards</span>
+        <span class="t acq">Brex <span class="sm">$5.15B</span></span>
+        <span class="t">Skyfire KYA</span>
+        <span class="t">Sponge Gateway</span>
+        <span class="t early">Payman AI</span>
+        <span class="sep"></span>
+        <span class="t">ERC-8004</span>
+        <span class="t">OWS Policies</span>
+        <span class="t">Visa Intelligent Commerce</span>
+        <span class="t">Stripe SPTs</span>
+        <span class="t">Crossmint</span>
+        <span class="t ann">Mastercard Agentic Tokens</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span class="row-n">03</span>
+        <div>
+          <div class="row-title">Payment Protocol</div>
+          <div class="row-q">How the payment flows</div>
+        </div>
+      </div>
+      <div class="row-content">
+        <span class="t">x402 <span class="sm">75M/30d</span></span>
+        <span class="t">Tempo MPP <span class="sm">100+ svc</span></span>
+        <span class="t ann">Google AP2 <span class="sm">60+ partners</span></span>
+        <span class="t">ACP <span class="sm">OpenAI + Stripe</span></span>
+        <span class="sep"></span>
+        <span class="t early">Circle Nanopayments</span>
+        <span class="t">L402 / Lightning</span>
+        <span class="t early">ATXP</span>
+        <span class="t">Fewsats</span>
+        <span class="t">Superfluid</span>
+        <span class="sep"></span>
+        <span class="t early">ERC-8183</span>
+        <span class="t">Interledger</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span class="row-n">02</span>
+        <div>
+          <div class="row-title">Routing & Abstraction</div>
+          <div class="row-q">Which chain, token, rail</div>
+        </div>
+      </div>
+      <div class="row-content">
+        <span class="t">Skyfire</span>
+        <span class="t">Mesh</span>
+        <span class="t">Crossmint</span>
+        <span class="t">Biconomy DAN</span>
+        <span class="t acq">BVNK <span class="sm">MC $1.8B</span></span>
+        <span class="t">Unifold</span>
+        <span class="sep"></span>
+        <span class="t">Circle CCTP</span>
+        <span class="t acq">Bridge <span class="sm">Stripe $1.1B</span></span>
+        <span class="t">Across</span>
+        <span class="t">Li.Fi</span>
+        <span class="t">Socket</span>
+        <span class="t">deBridge</span>
+        <span class="t">Wormhole</span>
+        <span class="t">LayerZero</span>
+        <span class="sep"></span>
+        <span class="t">Jupiter</span>
+        <span class="t">1inch</span>
+        <span class="t">Uniswap</span>
+        <span class="t">CoW Protocol</span>
+        <span class="t">MoonPay</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span class="row-n">01</span>
+        <div>
+          <div class="row-title">Wallet & Key Mgmt</div>
+          <div class="row-q">Where the keys live</div>
+        </div>
+      </div>
+      <div class="row-content">
+        <span class="t">Coinbase Agentic Wallets</span>
+        <span class="t">MoonPay OWS</span>
+        <span class="t">Crossmint</span>
+        <span class="t">Thirdweb</span>
+        <span class="t">Openfort</span>
+        <span class="t">World AgentKit</span>
+        <span class="sep"></span>
+        <span class="t">Turnkey</span>
+        <span class="t acq">Privy <span class="sm">Stripe</span></span>
+        <span class="t acq">Dynamic <span class="sm">Fireblocks</span></span>
+        <span class="t">Lit Protocol</span>
+        <span class="t">Safe</span>
+        <span class="t acq">ZeroDev <span class="sm">Arbitrum</span></span>
+        <span class="t">Biconomy</span>
+        <span class="t">Fireblocks</span>
+        <span class="t">Alchemy</span>
+        <span class="t">Phantom</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row-label">
+        <span class="row-n">00</span>
+        <div>
+          <div class="row-title">Settlement</div>
+          <div class="row-q">Where transactions land</div>
+        </div>
+      </div>
+      <div class="row-content">
+        <span class="t">Base <span class="sm">119M txns</span></span>
+        <span class="t">Solana <span class="sm">38.6M txns</span></span>
+        <span class="t">Ethereum</span>
+        <span class="t">Tempo <span class="sm">$5B</span></span>
+        <span class="t">Arbitrum</span>
+        <span class="t">Sui</span>
+        <span class="t">Polygon</span>
+        <span class="t">BNB Chain</span>
+        <span class="t">Gnosis</span>
+        <span class="t early">NEAR</span>
+        <span class="t">Avalanche</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="bottom">
+    <div>
+      <div class="bot-title">Vertical Integration</div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#0052ff">Coinbase</div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#0052ff"></div><div class="vi-dots"><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#635bff">Stripe</div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#635bff"></div><div class="vi-dots"><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#00a868">Circle</div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:34%;background:#00a868"></div><div class="vi-dots"><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#c0392b">Google</div>
+        <div class="vi-track"><div class="vi-fill" style="left:50%;right:17%;background:#c0392b"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#7b61ff">MoonPay</div>
+        <div class="vi-track"><div class="vi-fill" style="left:17%;right:34%;background:#7b61ff"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-labels">
+        <span>L0</span><span>L1</span><span>L2</span><span>L3</span><span>L4</span><span>L5</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="bot-title">2025-2026 Consolidation</div>
+      <ul class="ma-list">
+        <li>Capital One <span class="arr">&rarr;</span> Brex <span class="pr">$5.15B</span></li>
+        <li>Mastercard <span class="arr">&rarr;</span> BVNK <span class="pr">$1.8B</span></li>
+        <li>Stripe <span class="arr">&rarr;</span> Bridge <span class="pr">$1.1B</span></li>
+        <li>LayerZero <span class="arr">&rarr;</span> Stargate <span class="pr">$120M</span></li>
+        <li>Stripe <span class="arr">&rarr;</span> Privy</li>
+        <li>Fireblocks <span class="arr">&rarr;</span> Dynamic</li>
+        <li>Arbitrum <span class="arr">&rarr;</span> ZeroDev</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><b>@jordanlyall</b> &middot; March 2026</div>
+    <div>98.6% of agent payments settle in USDC</div>
+  </div>
+
+</div>
+</body>
+</html>
