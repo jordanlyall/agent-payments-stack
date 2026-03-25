@@ -213,6 +213,111 @@
 
   .cta a:hover { opacity: 0.85; }
 
+  /* Header meta line */
+  .hdr-meta {
+    display: flex;
+    gap: 16px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .hdr-meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* Email capture */
+  .email-capture {
+    margin-top: 48px;
+    padding: 28px 32px;
+    border: 1px solid var(--faint);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .email-capture h3 {
+    font-size: 16px;
+    font-weight: 650;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+  }
+  .email-capture p { font-size: 13px; color: var(--secondary); margin-bottom: 16px; }
+  .email-form {
+    display: flex;
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .email-form input {
+    flex: 1;
+    padding: 10px 14px;
+    background: var(--faint);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .email-form input::placeholder { color: var(--muted); }
+  .email-form input:focus { border-color: rgba(255,255,255,0.2); }
+  .email-form button {
+    padding: 10px 20px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  .email-form button:hover { opacity: 0.85; }
+
+  /* Submit + Changelog */
+  .submit-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--faint);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .submit-bar a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .submit-bar a:hover { color: var(--text); }
+
+  /* Changelog */
+  .changelog { margin-top: 32px; }
+  .changelog h3 {
+    font-size: 13px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .changelog ul { list-style: none; }
+  .changelog li {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 6px;
+    display: flex;
+    gap: 12px;
+  }
+  .changelog .cl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    min-width: 72px;
+    flex-shrink: 0;
+  }
+
   /* Tooltips */
   a.t { position: relative; }
   a.t[data-tip]:hover::after {
@@ -295,6 +400,10 @@
     <div>
       <h1>The Agent Payments Stack</h1>
       <p class="deck">Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.</p>
+      <div class="hdr-meta">
+        <span>86 projects mapped</span>
+        <span>Updated Mar 25, 2026</span>
+      </div>
     </div>
     <div class="nums">
       <div><div class="num-v">$43M</div><div class="num-l">Volume (9mo)</div></div>
@@ -508,6 +617,12 @@
     <div class="legend-item"><div class="legend-swatch" style="background:rgba(232,105,74,0.1)"></div>Acquired</div>
   </div>
 
+  <!-- Submit -->
+  <div class="submit-bar">
+    <span>Missing a project? <a href="mailto:jordan@jordanlyall.com?subject=Agent%20Payments%20Stack%20Suggestion&body=Project%20name:%0AURL:%0ALayer:%0AOne-line%20description:">Submit a suggestion</a></span>
+    <span>86 projects across 6 layers</span>
+  </div>
+
   <div class="foot">
     <div><a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a> &middot; March 2026</div>
     <div>98.6% of agent payments settle in USDC</div>
@@ -552,9 +667,27 @@
 
   <p>The clearest near-term signal is consolidation. Five acquisitions exceeding $100M occurred in the past year. The convergence of traditional payments (Visa, Mastercard, Stripe) with crypto-native infrastructure (Coinbase, Circle, Cloudflare) is compressing timelines. The rails being laid today will determine who collects tolls on agentic commerce for the next decade.</p>
 
-  <!-- CTA -->
-  <div class="cta">
-    <p>This landscape is updated regularly. Follow for updates.</p>
+  <!-- Email capture -->
+  <div class="email-capture">
+    <h3>Get notified when the stack updates</h3>
+    <p>New projects, acquisitions, and protocol launches. No spam.</p>
+    <form class="email-form" action="https://buttondown.com/api/emails/embed-subscribe/agentpaymentsstack" method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@company.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+
+  <!-- Changelog -->
+  <div class="changelog">
+    <h3>Changelog</h3>
+    <ul>
+      <li><span class="cl-date">Mar 25</span> Initial release. 86 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
+    </ul>
+  </div>
+
+  <!-- Follow -->
+  <div class="cta" style="margin-top: 32px;">
+    <p>Built by Jordan Lyall. Follow for updates on agent commerce and infrastructure.</p>
     <a href="https://x.com/jordanlyall" target="_blank">Follow @jordanlyall on X</a>
   </div>
 </div>
