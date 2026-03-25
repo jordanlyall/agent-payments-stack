@@ -25,6 +25,25 @@
 <link rel="canonical" href="https://agentpaymentsstack.com">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Agent Payments Stack",
+  "description": "A curated directory of every company building infrastructure for AI agent payments. 87 projects across six layers from blockchain settlement to application.",
+  "url": "https://agentpaymentsstack.com",
+  "creator": {
+    "@type": "Person",
+    "name": "Jordan Lyall",
+    "url": "https://x.com/jordanlyall"
+  },
+  "datePublished": "2026-03-25",
+  "dateModified": "2026-03-25",
+  "keywords": ["agent payments", "x402", "AI agents", "crypto payments", "stablecoin", "USDC", "machine payments"],
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+}
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -438,8 +457,41 @@
     margin-left: 4px;
   }
 
+  /* Site nav */
+  .site-nav {
+    border-bottom: 1px solid var(--faint);
+  }
+  .site-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 14px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-nav-logo {
+    font-size: 13px;
+    font-weight: 650;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .site-nav-links {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .site-nav-links a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .site-nav-links a:hover { color: var(--text); }
+
   /* ── Mobile ── */
   @media (max-width: 900px) {
+    .site-nav-links { display: none; }
+    .site-nav-inner { padding: 14px 20px; }
     .page { padding: 28px 20px 32px; }
     .hdr { flex-direction: column; align-items: flex-start; gap: 24px; }
     h1 { font-size: 28px; letter-spacing: -1px; }
@@ -473,6 +525,17 @@
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/" class="site-nav-logo">The Agent Payments Stack</a>
+    <div class="site-nav-links">
+      <a href="#about">About</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#changelog">Changelog</a>
+      <a href="mailto:jordan@jordanlyall.com?subject=Agent%20Payments%20Stack%20Suggestion&body=Project%20name:%0AURL:%0ALayer:%0AOne-line%20description:">Submit</a>
+    </div>
+  </div>
+</nav>
 <div class="page">
 
   <div class="hdr">
@@ -813,10 +876,29 @@
   <p>The clearest near-term signal is consolidation. Five acquisitions exceeding $100M occurred in the past year. The convergence of traditional payments (Visa, Mastercard, Stripe) with crypto-native infrastructure (Coinbase, Circle, Cloudflare) is compressing timelines. The rails being laid today will determine who collects tolls on agentic commerce for the next decade.</p>
 
   <!-- Changelog -->
-  <div class="changelog">
+  <div class="changelog" id="changelog">
     <h3>Changelog</h3>
     <ul>
       <li><span class="cl-date">Mar 25</span> Initial release. 87 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
+    </ul>
+  </div>
+
+  <!-- About -->
+  <div id="about">
+    <h3>About</h3>
+    <p>The Agent Payments Stack is an independent research project mapping every company building infrastructure for AI agent payments. It is maintained by Jordan Lyall, CPO at Art Blocks and builder of mint.day.</p>
+    <p>This is not affiliated with or sponsored by any project listed. Inclusion is based on shipping product, not paying for placement.</p>
+  </div>
+
+  <!-- Methodology -->
+  <div id="methodology">
+    <h3>Methodology</h3>
+    <ul>
+      <li>Projects are included if they have shipped a product, protocol, or standard that directly enables AI agents to hold, move, or authorize money.</li>
+      <li>Status classifications: Live means demonstrated transaction volume or production users. Early means product shipped but limited volume data. Announced means spec published or funding secured but no production deployment.</li>
+      <li>Acquired projects are marked with the acquirer and deal value where public.</li>
+      <li>Hackathon projects are listed separately as they represent prototypes, not production infrastructure.</li>
+      <li>This landscape is updated as the space evolves. Suggest additions via email.</li>
     </ul>
   </div>
 
