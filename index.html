@@ -23,6 +23,7 @@
 <meta name="twitter:creator" content="@jordanlyall">
 
 <link rel="canonical" href="https://agentpaymentsstack.com">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -211,6 +212,80 @@
   }
 
   .cta a:hover { opacity: 0.85; }
+
+  /* Tooltips */
+  a.t { position: relative; }
+  a.t[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2a2a2a;
+    color: #ddd;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.4;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  /* Anchor links */
+  .row[id] { scroll-margin-top: 20px; }
+  .row-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .row-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Layer count */
+  .row-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-left: 4px;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 900px) {
+    .page { padding: 28px 20px 32px; }
+    .hdr { flex-direction: column; align-items: flex-start; gap: 24px; }
+    h1 { font-size: 28px; letter-spacing: -1px; }
+    .deck { font-size: 14px; max-width: 100%; }
+    .nums { gap: 20px; }
+    .num-v { font-size: 20px; }
+    .row { grid-template-columns: 1fr; }
+    .row-label { border-right: none; border-bottom: 1px solid var(--faint); padding: 14px 0 10px; }
+    .row-content { padding: 10px 0 16px; }
+    a.t, .t { font-size: 11.5px; padding: 3px 9px; }
+    .t .sm { font-size: 8px; }
+    .bottom { grid-template-columns: 1fr; gap: 32px; }
+    .vi-name { width: 52px; font-size: 11px; }
+    .legend { flex-wrap: wrap; gap: 12px; }
+    .foot { flex-direction: column; gap: 8px; }
+    .writeup { margin-top: 40px; padding-top: 32px; }
+    .writeup h2 { font-size: 22px; }
+    .writeup h3 { font-size: 16px; }
+    .writeup p { font-size: 14px; }
+    .writeup ul li { font-size: 13px; }
+    a.t[data-tip]:hover::after { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .page { padding: 20px 16px 24px; }
+    h1 { font-size: 24px; }
+    .nums { gap: 16px; }
+    .num-v { font-size: 18px; }
+    a.t, .t { font-size: 11px; padding: 2px 7px; }
+  }
 </style>
 </head>
 <body>
@@ -231,155 +306,155 @@
   <div class="stack">
 
     <!-- L5 Application -->
-    <div class="row">
+    <div class="row" id="application">
       <div class="row-label">
         <span class="row-n">05</span>
-        <div><div class="row-title">Application</div><div class="row-q">What gets bought and why</div></div>
+        <div><div class="row-title"><a href="#application">Application</a> <span class="row-count">18</span></div><div class="row-q">What gets bought and why</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="https://app.virtuals.io" target="_blank">Virtuals Protocol</a>
-        <a class="t" href="https://elizaos.ai" target="_blank">ElizaOS</a>
-        <a class="t" href="https://olas.network" target="_blank">Olas</a>
-        <a class="t" href="https://botto.com" target="_blank">Botto</a>
+        <a class="t" href="https://app.virtuals.io" target="_blank" data-tip="Tokenized AI agent creation on Base">Virtuals Protocol</a>
+        <a class="t" href="https://elizaos.ai" target="_blank" data-tip="Open-source multi-agent framework, 17K GitHub stars">ElizaOS</a>
+        <a class="t" href="https://olas.network" target="_blank" data-tip="Decentralized agent services with on-chain staking">Olas</a>
+        <a class="t" href="https://botto.com" target="_blank" data-tip="Autonomous AI artist, $5M+ sales, 15K-member DAO">Botto</a>
         <span class="sep"></span>
-        <a class="t" href="https://www.axiom.trade" target="_blank">Axiom</a>
-        <a class="t" href="https://www.theoriq.ai" target="_blank">Theoriq</a>
-        <a class="t" href="https://www.gizatech.xyz" target="_blank">Giza ARMA</a>
-        <a class="t" href="https://www.almanak.co" target="_blank">Almanak</a>
-        <a class="t" href="https://www.brahma.fi" target="_blank">Brahma.fi</a>
+        <a class="t" href="https://www.axiom.trade" target="_blank" data-tip="DeFi trading agents for memecoins, perps, yield">Axiom</a>
+        <a class="t" href="https://www.theoriq.ai" target="_blank" data-tip="AI-managed yield vault, $25M TVL">Theoriq</a>
+        <a class="t" href="https://www.gizatech.xyz" target="_blank" data-tip="Cross-protocol stablecoin yield optimization on Base">Giza ARMA</a>
+        <a class="t" href="https://www.almanak.co" target="_blank" data-tip="Non-custodial DeFi strategy automation">Almanak</a>
+        <a class="t" href="https://www.brahma.fi" target="_blank" data-tip="Agent-based DeFi console with sub-accounts">Brahma.fi</a>
         <span class="sep"></span>
-        <a class="t" href="https://x402engine.app" target="_blank">x402engine</a>
-        <a class="t" href="https://www.nansen.ai" target="_blank">Nansen</a>
-        <a class="t" href="https://akash.network" target="_blank">Akash</a>
-        <a class="t" href="https://www.artblocks.io" target="_blank">Art Blocks</a>
-        <a class="t" href="https://mint.day" target="_blank">mint.day</a>
-        <a class="t" href="https://apify.com" target="_blank">Apify</a>
-        <a class="t" href="https://rendernetwork.com" target="_blank">Render</a>
-        <a class="t" href="https://oceanprotocol.com" target="_blank">Ocean Protocol</a>
+        <a class="t" href="https://x402engine.app" target="_blank" data-tip="45 pay-per-call APIs via x402">x402engine</a>
+        <a class="t" href="https://www.nansen.ai" target="_blank" data-tip="On-chain analytics at $0.01/query via x402">Nansen</a>
+        <a class="t" href="https://akash.network" target="_blank" data-tip="Decentralized cloud with agent deploy">Akash</a>
+        <a class="t" href="https://www.artblocks.io" target="_blank" data-tip="Generative art platform with MCP + Universal Purchase API">Art Blocks</a>
+        <a class="t" href="https://mint.day" target="_blank" data-tip="NFT minting service for AI agents">mint.day</a>
+        <a class="t" href="https://apify.com" target="_blank" data-tip="Web scraping/automation with Skyfire payment integration">Apify</a>
+        <a class="t" href="https://rendernetwork.com" target="_blank" data-tip="GPU marketplace for compute">Render</a>
+        <a class="t" href="https://oceanprotocol.com" target="_blank" data-tip="Data marketplace, $800M/month Predictoor volume">Ocean Protocol</a>
       </div>
     </div>
 
     <!-- L4 Governance -->
-    <div class="row">
+    <div class="row" id="governance">
       <div class="row-label">
         <span class="row-n">04</span>
-        <div><div class="row-title">Governance & Policy</div><div class="row-q">May this agent spend</div></div>
+        <div><div class="row-title"><a href="#governance">Governance & Policy</a> <span class="row-count">11</span></div><div class="row-q">May this agent spend</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="https://ramp.com" target="_blank">Ramp Agent Cards</a>
-        <a class="t acq" href="https://brex.com" target="_blank">Brex <span class="sm">$5.15B</span></a>
-        <a class="t" href="https://skyfire.xyz" target="_blank">Skyfire KYA</a>
-        <a class="t" href="https://paysponge.com" target="_blank">Sponge Gateway</a>
-        <a class="t early" href="https://paymanai.net" target="_blank">Payman AI</a>
+        <a class="t" href="https://ramp.com" target="_blank" data-tip="Virtual Visa cards for agents with spend limits">Ramp Agent Cards</a>
+        <a class="t acq" href="https://brex.com" target="_blank" data-tip="Agent Mesh architecture. Acquired by Capital One.">Brex <span class="sm">$5.15B</span></a>
+        <a class="t" href="https://skyfire.xyz" target="_blank" data-tip="Know Your Agent protocol with per-tx caps">Skyfire KYA</a>
+        <a class="t" href="https://paysponge.com" target="_blank" data-tip="Agents onboard and pay businesses via uploaded API specs">Sponge Gateway</a>
+        <a class="t early" href="https://paymanai.net" target="_blank" data-tip="AI-to-human payments with segregated wallets">Payman AI</a>
         <span class="sep"></span>
-        <a class="t" href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank">ERC-8004</a>
-        <a class="t" href="https://openwallet.sh" target="_blank">OWS Policies</a>
-        <a class="t" href="https://usa.visa.com" target="_blank">Visa Intelligent Commerce</a>
-        <a class="t" href="https://stripe.com" target="_blank">Stripe SPTs</a>
-        <a class="t" href="https://crossmint.com" target="_blank">Crossmint</a>
-        <span class="t ann">Mastercard Agentic Tokens</span>
+        <a class="t" href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" data-tip="On-chain agent identity and reputation registries">ERC-8004</a>
+        <a class="t" href="https://openwallet.sh" target="_blank" data-tip="Pre-signing policy engine in MoonPay OWS">OWS Policies</a>
+        <a class="t" href="https://usa.visa.com" target="_blank" data-tip="Agent-initiated tokenized card transactions, 100+ partners">Visa Intelligent Commerce</a>
+        <a class="t" href="https://stripe.com" target="_blank" data-tip="Scoped, time-limited tokens for agent card payments">Stripe SPTs</a>
+        <a class="t" href="https://crossmint.com" target="_blank" data-tip="Open payment standard with Visa, Circle, Solana">Crossmint</a>
+        <span class="t ann" data-tip="Tokenization framework for agent-initiated transactions">Mastercard Agentic Tokens</span>
       </div>
     </div>
 
     <!-- L3 Protocol -->
-    <div class="row">
+    <div class="row" id="protocol">
       <div class="row-label">
         <span class="row-n">03</span>
-        <div><div class="row-title">Payment Protocol</div><div class="row-q">How the payment flows</div></div>
+        <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">11</span></div><div class="row-q">How the payment flows</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="https://x402.org" target="_blank">x402 <span class="sm">75M/30d</span></a>
-        <a class="t" href="https://tempo.xyz" target="_blank">Tempo MPP <span class="sm">100+ svc</span></a>
-        <a class="t ann" href="https://github.com/google-agentic-commerce/AP2" target="_blank">Google AP2 <span class="sm">60+ partners</span></a>
-        <a class="t" href="https://stripe.com/blog/agentic-commerce" target="_blank">ACP <span class="sm">OpenAI + Stripe</span></a>
+        <a class="t" href="https://x402.org" target="_blank" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare.">x402 <span class="sm">75M/30d</span></a>
+        <a class="t" href="https://tempo.xyz" target="_blank" data-tip="Multi-rail sessions: stablecoins + cards + Bitcoin">Tempo MPP <span class="sm">100+ svc</span></a>
+        <a class="t ann" href="https://github.com/google-agentic-commerce/AP2" target="_blank" data-tip="Payment-agnostic authorization via signed mandates">Google AP2 <span class="sm">60+ partners</span></a>
+        <a class="t" href="https://stripe.com/blog/agentic-commerce" target="_blank" data-tip="Agentic Commerce Protocol. Checkout layer paired with MPP.">ACP <span class="sm">OpenAI + Stripe</span></a>
         <span class="sep"></span>
-        <a class="t early" href="https://circle.com" target="_blank">Circle Nanopayments</a>
-        <a class="t" href="https://docs.lightning.engineering" target="_blank">L402 / Lightning</a>
-        <a class="t early" href="https://www.circuitandchisel.com" target="_blank">ATXP</a>
-        <a class="t" href="https://fewsats.com" target="_blank">Fewsats</a>
-        <a class="t" href="https://superfluid.finance" target="_blank">Superfluid</a>
+        <a class="t early" href="https://circle.com" target="_blank" data-tip="Gas-free USDC micropayments, $0.000001 minimum. Testnet.">Circle Nanopayments</a>
+        <a class="t" href="https://docs.lightning.engineering" target="_blank" data-tip="HTTP auth + Lightning micropayments since 2020">L402 / Lightning</a>
+        <a class="t early" href="https://www.circuitandchisel.com" target="_blank" data-tip="Full commerce lifecycle protocol. $19.2M seed.">ATXP</a>
+        <a class="t" href="https://fewsats.com" target="_blank" data-tip="L402-compatible SDK and API marketplace for agents">Fewsats</a>
+        <a class="t" href="https://superfluid.finance" target="_blank" data-tip="Per-second token streaming">Superfluid</a>
         <span class="sep"></span>
-        <a class="t early" href="https://eips.ethereum.org/EIPS/eip-8183" target="_blank">ERC-8183</a>
-        <a class="t" href="https://interledger.org" target="_blank">Interledger</a>
+        <a class="t early" href="https://eips.ethereum.org/EIPS/eip-8183" target="_blank" data-tip="Programmable escrow for conditional agent-to-agent payments">ERC-8183</a>
+        <a class="t" href="https://interledger.org" target="_blank" data-tip="Cross-ledger value routing. TCP/IP for money.">Interledger</a>
       </div>
     </div>
 
     <!-- L2 Routing -->
-    <div class="row">
+    <div class="row" id="routing">
       <div class="row-label">
         <span class="row-n">02</span>
-        <div><div class="row-title">Routing & Abstraction</div><div class="row-q">Which chain, token, rail</div></div>
+        <div><div class="row-title"><a href="#routing">Routing & Abstraction</a> <span class="row-count">19</span></div><div class="row-q">Which chain, token, rail</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="https://skyfire.xyz" target="_blank">Skyfire</a>
-        <a class="t" href="https://meshconnect.com" target="_blank">Mesh</a>
-        <a class="t" href="https://crossmint.com" target="_blank">Crossmint</a>
-        <a class="t" href="https://biconomy.io" target="_blank">Biconomy DAN</a>
-        <a class="t acq" href="https://bvnk.com" target="_blank">BVNK <span class="sm">MC $1.8B</span></a>
-        <a class="t" href="https://unifold.io" target="_blank">Unifold</a>
+        <a class="t" href="https://skyfire.xyz" target="_blank" data-tip="'Visa for the AI economy.' KYA identity, $9.5M seed.">Skyfire</a>
+        <a class="t" href="https://meshconnect.com" target="_blank" data-tip="Routes payments across 100+ wallets/exchanges. Powers PayPal.">Mesh</a>
+        <a class="t" href="https://crossmint.com" target="_blank" data-tip="Dual-rail: Visa/Mastercard cards + stablecoin wallets">Crossmint</a>
+        <a class="t" href="https://biconomy.io" target="_blank" data-tip="Delegated auth for agents to execute on-chain on users' behalf">Biconomy DAN</a>
+        <a class="t acq" href="https://bvnk.com" target="_blank" data-tip="Enterprise stablecoin API. $30B+ volume. Acquired by Mastercard.">BVNK <span class="sm">MC $1.8B</span></a>
+        <a class="t" href="https://unifold.io" target="_blank" data-tip="Multi-chain deposits in <10 lines of code. YC W26.">Unifold</a>
         <span class="sep"></span>
-        <a class="t" href="https://circle.com" target="_blank">Circle CCTP</a>
-        <a class="t acq" href="https://bridge.xyz" target="_blank">Bridge <span class="sm">Stripe $1.1B</span></a>
-        <a class="t" href="https://across.to" target="_blank">Across</a>
-        <a class="t" href="https://li.fi" target="_blank">Li.Fi</a>
-        <a class="t" href="https://socket.tech" target="_blank">Socket</a>
-        <a class="t" href="https://debridge.finance" target="_blank">deBridge</a>
-        <a class="t" href="https://wormhole.com" target="_blank">Wormhole</a>
-        <a class="t" href="https://layerzero.network" target="_blank">LayerZero</a>
+        <a class="t" href="https://circle.com" target="_blank" data-tip="Native USDC burn-and-mint across 17 chains. $126B+ volume.">Circle CCTP</a>
+        <a class="t acq" href="https://bridge.xyz" target="_blank" data-tip="Stablecoin orchestration. Acquired by Stripe.">Bridge <span class="sm">Stripe $1.1B</span></a>
+        <a class="t" href="https://across.to" target="_blank" data-tip="Cross-chain intents. Co-authored ERC-7683.">Across</a>
+        <a class="t" href="https://li.fi" target="_blank" data-tip="Bridge/swap aggregator. 15+ bridges, 30+ DEXs.">Li.Fi</a>
+        <a class="t" href="https://socket.tech" target="_blank" data-tip="Cross-chain data and asset movement">Socket</a>
+        <a class="t" href="https://debridge.finance" target="_blank" data-tip="Zero-TVL bridge. ~2 second transfers. $18B+ processed.">deBridge</a>
+        <a class="t" href="https://wormhole.com" target="_blank" data-tip="Cross-chain messaging. $2.5B valuation.">Wormhole</a>
+        <a class="t" href="https://layerzero.network" target="_blank" data-tip="Omnichain interop. 120+ chains. $3B valuation.">LayerZero</a>
         <span class="sep"></span>
-        <a class="t" href="https://jup.ag" target="_blank">Jupiter</a>
-        <a class="t" href="https://1inch.io" target="_blank">1inch</a>
-        <a class="t" href="https://uniswap.org" target="_blank">Uniswap</a>
-        <a class="t" href="https://cow.fi" target="_blank">CoW Protocol</a>
-        <a class="t" href="https://moonpay.com" target="_blank">MoonPay</a>
+        <a class="t" href="https://jup.ag" target="_blank" data-tip="Solana-dominant DEX aggregator">Jupiter</a>
+        <a class="t" href="https://1inch.io" target="_blank" data-tip="400K+ tokens. Fusion gasless swaps.">1inch</a>
+        <a class="t" href="https://uniswap.org" target="_blank" data-tip="Deepest liquidity. ERC-7683 intent standard.">Uniswap</a>
+        <a class="t" href="https://cow.fi" target="_blank" data-tip="MEV protection via batch auctions">CoW Protocol</a>
+        <a class="t" href="https://moonpay.com" target="_blank" data-tip="Fiat onramp + agent products. $555M raised.">MoonPay</a>
       </div>
     </div>
 
     <!-- L1 Wallet -->
-    <div class="row">
+    <div class="row" id="wallets">
       <div class="row-label">
         <span class="row-n">01</span>
-        <div><div class="row-title">Wallet & Key Mgmt</div><div class="row-q">Where the keys live</div></div>
+        <div><div class="row-title"><a href="#wallets">Wallet & Key Mgmt</a> <span class="row-count">16</span></div><div class="row-q">Where the keys live</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="https://coinbase.com/developer-platform" target="_blank">Coinbase Agentic Wallets</a>
-        <a class="t" href="https://openwallet.sh" target="_blank">MoonPay OWS</a>
-        <a class="t" href="https://crossmint.com" target="_blank">Crossmint</a>
-        <a class="t" href="https://thirdweb.com" target="_blank">Thirdweb</a>
-        <a class="t" href="https://openfort.io" target="_blank">Openfort</a>
-        <a class="t" href="https://world.org" target="_blank">World AgentKit</a>
+        <a class="t" href="https://coinbase.com/developer-platform" target="_blank" data-tip="TEE agent wallets with spending limits, gasless on Base">Coinbase Agentic Wallets</a>
+        <a class="t" href="https://openwallet.sh" target="_blank" data-tip="Open-source wallet standard (MIT). 8 chain families. x402-native.">MoonPay OWS</a>
+        <a class="t" href="https://crossmint.com" target="_blank" data-tip="Dual-key agent wallets with stablecoin + card rails">Crossmint</a>
+        <a class="t" href="https://thirdweb.com" target="_blank" data-tip="Engine backend wallets. Deepest AI framework integrations.">Thirdweb</a>
+        <a class="t" href="https://openfort.io" target="_blank" data-tip="Open-source, self-hostable agent wallets with TEE backend">Openfort</a>
+        <a class="t" href="https://world.org" target="_blank" data-tip="Proof of human backing via World ID + ZK proofs">World AgentKit</a>
         <span class="sep"></span>
-        <a class="t" href="https://turnkey.com" target="_blank">Turnkey</a>
-        <a class="t acq" href="https://privy.io" target="_blank">Privy <span class="sm">Stripe</span></a>
-        <a class="t acq" href="https://dynamic.xyz" target="_blank">Dynamic <span class="sm">Fireblocks</span></a>
-        <a class="t" href="https://litprotocol.com" target="_blank">Lit Protocol</a>
-        <a class="t" href="https://safe.global" target="_blank">Safe</a>
-        <a class="t acq" href="https://zerodev.app" target="_blank">ZeroDev <span class="sm">Arbitrum</span></a>
-        <a class="t" href="https://biconomy.io" target="_blank">Biconomy</a>
-        <a class="t" href="https://fireblocks.com" target="_blank">Fireblocks</a>
-        <a class="t" href="https://alchemy.com" target="_blank">Alchemy</a>
-        <a class="t" href="https://phantom.app" target="_blank">Phantom</a>
+        <a class="t" href="https://turnkey.com" target="_blank" data-tip="Non-custodial TEE key management. 50ms signing.">Turnkey</a>
+        <a class="t acq" href="https://privy.io" target="_blank" data-tip="Server wallets with TEE + key sharding. Acquired by Stripe.">Privy <span class="sm">Stripe</span></a>
+        <a class="t acq" href="https://dynamic.xyz" target="_blank" data-tip="Embedded wallets with TSS-MPC. Acquired by Fireblocks.">Dynamic <span class="sm">Fireblocks</span></a>
+        <a class="t" href="https://litprotocol.com" target="_blank" data-tip="Decentralized threshold MPC + TEE hybrid. 25M+ requests.">Lit Protocol</a>
+        <a class="t" href="https://safe.global" target="_blank" data-tip="Battle-tested multisig. $100B+ secured. Agents as signers.">Safe</a>
+        <a class="t acq" href="https://zerodev.app" target="_blank" data-tip="ERC-7579 smart accounts. Acquired by Arbitrum.">ZeroDev <span class="sm">Arbitrum</span></a>
+        <a class="t" href="https://biconomy.io" target="_blank" data-tip="Nexus smart accounts with paymaster tooling">Biconomy</a>
+        <a class="t" href="https://fireblocks.com" target="_blank" data-tip="Enterprise MPC. $8B valuation. 1,800+ institutions.">Fireblocks</a>
+        <a class="t" href="https://alchemy.com" target="_blank" data-tip="Smart wallets with Gas Manager and Bundler">Alchemy</a>
+        <a class="t" href="https://phantom.app" target="_blank" data-tip="Consumer wallet with MCP server for agent integration">Phantom</a>
       </div>
     </div>
 
     <!-- L0 Settlement -->
-    <div class="row">
+    <div class="row" id="settlement">
       <div class="row-label">
         <span class="row-n">00</span>
-        <div><div class="row-title">Settlement</div><div class="row-q">Where transactions land</div></div>
+        <div><div class="row-title"><a href="#settlement">Settlement</a> <span class="row-count">11</span></div><div class="row-q">Where transactions land</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="https://base.org" target="_blank">Base <span class="sm">119M txns</span></a>
-        <a class="t" href="https://solana.com" target="_blank">Solana <span class="sm">38.6M txns</span></a>
-        <a class="t" href="https://ethereum.org" target="_blank">Ethereum</a>
-        <a class="t" href="https://tempo.xyz" target="_blank">Tempo <span class="sm">$5B</span></a>
-        <a class="t" href="https://arbitrum.io" target="_blank">Arbitrum</a>
-        <a class="t" href="https://sui.io" target="_blank">Sui</a>
-        <a class="t" href="https://polygon.technology" target="_blank">Polygon</a>
-        <a class="t" href="https://bnbchain.org" target="_blank">BNB Chain</a>
-        <a class="t" href="https://gnosis.io" target="_blank">Gnosis</a>
-        <a class="t early" href="https://near.org" target="_blank">NEAR</a>
-        <a class="t" href="https://avax.network" target="_blank">Avalanche</a>
+        <a class="t" href="https://base.org" target="_blank" data-tip="Coinbase L2. Dominant x402 chain. Gasless paymasters.">Base <span class="sm">119M txns</span></a>
+        <a class="t" href="https://solana.com" target="_blank" data-tip="Leads in dollar volume share. Sub-second finality.">Solana <span class="sm">38.6M txns</span></a>
+        <a class="t" href="https://ethereum.org" target="_blank" data-tip="Security/settlement layer for L2 agent activity">Ethereum</a>
+        <a class="t" href="https://tempo.xyz" target="_blank" data-tip="Purpose-built payments L1 by Stripe/Paradigm">Tempo <span class="sm">$5B</span></a>
+        <a class="t" href="https://arbitrum.io" target="_blank" data-tip="$2M in AI agent grants. Acquired ZeroDev.">Arbitrum</a>
+        <a class="t" href="https://sui.io" target="_blank" data-tip="Google AP2 launch partner. Object-centric model.">Sui</a>
+        <a class="t" href="https://polygon.technology" target="_blank" data-tip="x402 facilitator support. OWS contributor.">Polygon</a>
+        <a class="t" href="https://bnbchain.org" target="_blank" data-tip="ERC-8004 deployed. BAP-578 Non-Fungible Agents standard.">BNB Chain</a>
+        <a class="t" href="https://gnosis.io" target="_blank" data-tip="Safe origin. Autonolas agents active.">Gnosis</a>
+        <a class="t early" href="https://near.org" target="_blank" data-tip="Aggressive positioning but lacks volume proof">NEAR</a>
+        <a class="t" href="https://avax.network" target="_blank" data-tip="x402 facilitator support. AI grants category.">Avalanche</a>
       </div>
     </div>
 
