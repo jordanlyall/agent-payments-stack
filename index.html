@@ -213,6 +213,57 @@
 
   .cta a:hover { opacity: 0.85; }
 
+  /* Hackathon section */
+  .hackathons {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--faint);
+  }
+  .hack-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+  .hack-title {
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -0.2px;
+  }
+  .hack-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .hack-group {
+    margin-bottom: 16px;
+  }
+  .hack-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hack-label a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 10px;
+  }
+  .hack-label a:hover { text-decoration: underline; }
+  .hack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .hack-tags .t {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px;
+  }
+
   /* Header meta line */
   .hdr-meta {
     display: flex;
@@ -615,6 +666,40 @@
     <div class="legend-item"><div class="legend-swatch" style="background:rgba(212,168,64,0.08);border:1px solid rgba(212,168,64,0.15)"></div>Live / early</div>
     <div class="legend-item"><div class="legend-swatch" style="background:transparent;border:1px dashed rgba(255,255,255,0.12)"></div>Announced</div>
     <div class="legend-item"><div class="legend-swatch" style="background:rgba(232,105,74,0.1)"></div>Acquired</div>
+  </div>
+
+  <!-- Hackathons -->
+  <div class="hackathons" id="hackathons">
+    <div class="hack-header">
+      <div class="hack-title">Building right now</div>
+      <div class="hack-subtitle">Hackathon projects shipping across the stack</div>
+    </div>
+
+    <div class="hack-group">
+      <div class="hack-label">Tempo MPP Hackathon &middot; March 2026 &middot; 42 projects <a href="https://tempo-hackathon-projects.vercel.app/" target="_blank">view all</a></div>
+      <div class="hack-tags">
+        <span class="t" data-tip="'Ramp/Mercury for AI agents' with policies and audit trails">SpendOS</span>
+        <span class="t" data-tip="Runtime policy layer: may this agent pay this vendor?">BotPolice</span>
+        <span class="t" data-tip="Three-party escrow with LLM judge evaluation">Agent Escrow</span>
+        <span class="t" data-tip="Intent orderbook where agents post wants, solvers compete">Payload Exchange</span>
+        <span class="t" data-tip="Brings 43 non-MPP APIs behind one payment layer">mpp-gateway</span>
+        <span class="t" data-tip="$0.01/query deep research service via MPP">Dossier</span>
+        <span class="t" data-tip="ERC-4626 vault giving agents credit lines for paid services">Agent Credit Protocol</span>
+        <span class="t" data-tip="Agent swarm dispatcher with budget assignment and live ops">Monitor</span>
+        <span class="t" data-tip="Surge pricing for AI inference endpoints">MPP Dynamic Pricing</span>
+        <span class="t" data-tip="Privacy-preserving agent audit trail via ZK proofs">Private MPP</span>
+        <span class="t" data-tip="Agent-to-human task marketplace">human402</span>
+        <span class="t" data-tip="Social network where agents tip each other in USDC">AgentNet</span>
+        <span class="t" data-tip="Cross-chain Polymarket trading for agents">Solver as a Service</span>
+      </div>
+    </div>
+
+    <div class="hack-group">
+      <div class="hack-label">Synthesis Hackathon &middot; March 2026 <a href="https://synthesis.md" target="_blank">view</a></div>
+      <div class="hack-tags">
+        <a class="t" href="https://mint.day" target="_blank" data-tip="Free NFT minting for agents. Natural language to on-chain.">mint.day</a>
+      </div>
+    </div>
   </div>
 
   <!-- Submit -->
