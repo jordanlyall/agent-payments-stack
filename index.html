@@ -635,8 +635,10 @@
   <div class="email-capture">
     <h3>Get notified when the stack updates</h3>
     <p>New projects, acquisitions, and protocol launches. No spam.</p>
-    <script async src="https://subscribe-forms.beehiiv.com/embed.js"></script>
-    <iframe src="https://subscribe-forms.beehiiv.com/f1e64851-1e51-4d99-9bab-863fc85428dc" class="beehiiv-embed" data-test-id="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;max-width:480px;height:52px;margin:0;border-radius:6px;background:transparent;"></iframe>
+    <form class="email-form" action="https://subscribe-forms.beehiiv.com/f1e64851-1e51-4d99-9bab-863fc85428dc" method="post" target="_blank">
+      <input type="email" name="email" placeholder="you@company.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
   </div>
 </div>
 
