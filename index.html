@@ -3,7 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Agent Payments Stack</title>
+<title>The Agent Payments Stack: A Complete Landscape Map</title>
+<meta name="description" content="The definitive landscape of how AI agents move money. 140M transactions, $43M settled, six layers from blockchain settlement to application. Updated March 2026.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="The Agent Payments Stack">
+<meta property="og:description" content="The definitive landscape of how AI agents move money. 140M+ transactions across six layers. Every major payment network is building.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentpaymentsstack.com">
+<meta property="og:image" content="https://agentpaymentsstack.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Agent Payments Stack">
+<meta name="twitter:description" content="The definitive landscape of how AI agents move money. 140M+ transactions. Every major payment network is building.">
+<meta name="twitter:image" content="https://agentpaymentsstack.com/og.png">
+<meta name="twitter:creator" content="@jordanlyall">
+
+<link rel="canonical" href="https://agentpaymentsstack.com">
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
@@ -13,8 +33,6 @@
     --secondary: #999;
     --muted: #666;
     --faint: #1e1e1e;
-    --surface: #161616;
-    --live: #f0f0f0;
     --early: #d4a840;
     --ann: #555;
     --acq: #e8694a;
@@ -30,282 +48,169 @@
     font-feature-settings: 'cv01', 'cv02', 'ss01';
   }
 
-  .page {
-    width: 1200px;
-    margin: 0 auto;
-    padding: 48px 56px 40px;
-  }
+  .page { max-width: 1200px; margin: 0 auto; padding: 48px 56px 40px; }
 
   /* Header */
-  .hdr {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 40px;
-  }
+  .hdr { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+  h1 { font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -1.5px; }
+  .deck { font-size: 15px; color: var(--secondary); line-height: 1.5; max-width: 480px; margin-top: 10px; }
+  .nums { display: flex; gap: 32px; }
+  .num-v { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; line-height: 1; letter-spacing: -0.5px; }
+  .num-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-top: 4px; font-weight: 500; }
 
-  h1 {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -1.5px;
-  }
-
-  .deck {
-    font-size: 15px;
-    color: var(--secondary);
-    line-height: 1.5;
-    max-width: 480px;
-    margin-top: 10px;
-  }
-
-  .nums {
-    display: flex;
-    gap: 32px;
-  }
-
-  .num-v {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.5px;
-  }
-
-  .num-l {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
-    margin-top: 4px;
-    font-weight: 500;
-  }
-
-  /* Grid */
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border-top: 1px solid var(--faint);
-  }
-
-  .row {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    border-bottom: 1px solid var(--faint);
-    min-height: 64px;
-  }
-
-  .row-label {
-    padding: 18px 24px 18px 0;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    border-right: 1px solid var(--faint);
-  }
-
-  .row-n {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-  }
-
-  .row-title {
-    font-size: 15px;
-    font-weight: 600;
-    letter-spacing: -0.2px;
-  }
-
-  .row-q {
-    font-size: 11.5px;
-    color: var(--muted);
-    margin-top: 2px;
-    font-weight: 400;
-  }
-
-  .row-content {
-    padding: 14px 0 14px 24px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
+  /* Stack grid */
+  .stack { display: flex; flex-direction: column; border-top: 1px solid var(--faint); }
+  .row { display: grid; grid-template-columns: 260px 1fr; border-bottom: 1px solid var(--faint); min-height: 64px; }
+  .row-label { padding: 18px 24px 18px 0; display: flex; align-items: baseline; gap: 12px; border-right: 1px solid var(--faint); }
+  .row-n { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--muted); }
+  .row-title { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
+  .row-q { font-size: 11.5px; color: var(--muted); margin-top: 2px; font-weight: 400; }
+  .row-content { padding: 14px 0 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
 
   /* Tags */
-  .t {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 11px;
-    border-radius: 6px;
-    font-size: 12.5px;
-    font-weight: 480;
-    white-space: nowrap;
-    background: rgba(255,255,255,0.06);
-    color: var(--text);
-    line-height: 1.4;
+  a.t, .t {
+    display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 6px;
+    font-size: 12.5px; font-weight: 480; white-space: nowrap;
+    background: rgba(255,255,255,0.06); color: var(--text); line-height: 1.4;
+    text-decoration: none; transition: background 0.15s;
   }
+  a.t:hover { background: rgba(255,255,255,0.12); }
+  .t.early, a.t.early { background: rgba(212,168,64,0.08); color: var(--early); border: 1px solid rgba(212,168,64,0.15); }
+  a.t.early:hover { background: rgba(212,168,64,0.16); }
+  .t.ann, a.t.ann { background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.12); }
+  a.t.ann:hover { background: rgba(255,255,255,0.06); }
+  .t.acq, a.t.acq { background: rgba(232,105,74,0.1); color: var(--acq); font-weight: 520; }
+  a.t.acq:hover { background: rgba(232,105,74,0.18); }
+  .t .sm { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; opacity: 0.5; margin-left: 4px; }
+  .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); margin: 0 4px; flex-shrink: 0; }
 
-  .t.early {
-    background: rgba(212,168,64,0.08);
-    color: var(--early);
-    border: 1px solid rgba(212,168,64,0.15);
-  }
-
-  .t.ann {
-    background: transparent;
-    color: var(--ann);
-    border: 1px dashed rgba(255,255,255,0.12);
-  }
-
-  .t.acq {
-    background: rgba(232,105,74,0.1);
-    color: var(--acq);
-    font-weight: 520;
-  }
-
-  .t .sm {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    opacity: 0.5;
-    margin-left: 4px;
-  }
-
-  /* Separator dot between subcategories */
-  .sep {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--faint);
-    margin: 0 4px;
-    flex-shrink: 0;
-  }
-
-  /* Bottom */
-  .bottom {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid var(--faint);
-  }
-
-  .bot-title {
-    font-size: 12px;
-    font-weight: 650;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
+  /* Bottom grid */
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--faint); }
+  .bot-title { font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 16px; }
 
   /* Vertical integration */
-  .vi-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-
-  .vi-name {
-    font-size: 12px;
-    font-weight: 600;
-    width: 60px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .vi-track {
-    flex: 1;
-    height: 20px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .vi-fill {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    border-radius: 4px;
-    opacity: 0.15;
-  }
-
-  .vi-dots {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .vi-dot {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .vi-dot.active::after {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-  }
-
-  .vi-labels {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    margin-left: 72px;
-    margin-top: 4px;
-  }
-
-  .vi-labels span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--muted);
-    text-align: center;
-  }
+  .vi-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .vi-name { font-size: 12px; font-weight: 600; width: 60px; text-align: right; flex-shrink: 0; }
+  .vi-track { flex: 1; height: 20px; background: rgba(255,255,255,0.04); border-radius: 4px; position: relative; overflow: hidden; }
+  .vi-fill { position: absolute; top: 0; height: 100%; border-radius: 4px; opacity: 0.15; }
+  .vi-dots { position: absolute; top: 0; left: 0; right: 0; height: 100%; display: grid; grid-template-columns: repeat(6, 1fr); }
+  .vi-dot { display: flex; align-items: center; justify-content: center; }
+  .vi-labels { display: grid; grid-template-columns: repeat(6, 1fr); margin-left: 72px; margin-top: 4px; }
+  .vi-labels span { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); text-align: center; }
 
   /* M&A */
   .ma-list { list-style: none; }
-
-  .ma-list li {
-    font-size: 13px;
-    color: var(--secondary);
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 420;
-  }
-
+  .ma-list li { font-size: 13px; color: var(--secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-weight: 420; }
   .ma-list .arr { color: var(--muted); }
+  .ma-list .pr { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; }
 
-  .ma-list .pr {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--acq);
-    margin-left: auto;
-  }
+  /* Legend */
+  .legend { display: flex; gap: 20px; margin: 32px 0 0; padding-top: 20px; border-top: 1px solid var(--faint); }
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+  .legend-swatch { width: 32px; height: 18px; border-radius: 4px; }
 
   /* Footer */
-  .foot {
-    margin-top: 28px;
-    padding-top: 16px;
+  .foot { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
+  .foot a { color: var(--text); font-weight: 600; text-decoration: none; }
+  .foot a:hover { text-decoration: underline; }
+
+  /* ── Write-up section ── */
+  .writeup {
+    max-width: 720px;
+    margin: 64px auto 0;
+    padding-top: 48px;
     border-top: 1px solid var(--faint);
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--muted);
   }
 
-  .foot b { color: var(--text); font-weight: 600; }
+  .writeup h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-bottom: 24px;
+    line-height: 1.2;
+  }
+
+  .writeup h3 {
+    font-size: 18px;
+    font-weight: 650;
+    letter-spacing: -0.3px;
+    margin: 36px 0 12px;
+    color: var(--text);
+  }
+
+  .writeup p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--secondary);
+    margin-bottom: 16px;
+  }
+
+  .writeup p strong { color: var(--text); font-weight: 600; }
+
+  .writeup ul {
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  .writeup ul li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--secondary);
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 6px;
+  }
+
+  .writeup ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 4px;
+    height: 4px;
+    border-radius: 1px;
+    background: var(--muted);
+  }
+
+  .writeup ul li strong { color: var(--text); font-weight: 550; }
+
+  .writeup .updated {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  /* CTA */
+  .cta {
+    margin-top: 48px;
+    padding: 32px;
+    border: 1px solid var(--faint);
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .cta p {
+    font-size: 14px;
+    color: var(--secondary);
+    margin-bottom: 16px;
+  }
+
+  .cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .cta a:hover { opacity: 0.85; }
 </style>
 </head>
 <body>
@@ -325,201 +230,187 @@
 
   <div class="stack">
 
+    <!-- L5 Application -->
     <div class="row">
       <div class="row-label">
         <span class="row-n">05</span>
-        <div>
-          <div class="row-title">Application</div>
-          <div class="row-q">What gets bought and why</div>
-        </div>
+        <div><div class="row-title">Application</div><div class="row-q">What gets bought and why</div></div>
       </div>
       <div class="row-content">
-        <span class="t">Virtuals Protocol</span>
-        <span class="t">ElizaOS</span>
-        <span class="t">Olas</span>
-        <span class="t">Botto</span>
+        <a class="t" href="https://app.virtuals.io" target="_blank">Virtuals Protocol</a>
+        <a class="t" href="https://elizaos.ai" target="_blank">ElizaOS</a>
+        <a class="t" href="https://olas.network" target="_blank">Olas</a>
+        <a class="t" href="https://botto.com" target="_blank">Botto</a>
         <span class="sep"></span>
-        <span class="t">Axiom</span>
-        <span class="t">Theoriq</span>
-        <span class="t">Giza ARMA</span>
-        <span class="t">Almanak</span>
-        <span class="t">Brahma.fi</span>
+        <a class="t" href="https://www.axiom.trade" target="_blank">Axiom</a>
+        <a class="t" href="https://www.theoriq.ai" target="_blank">Theoriq</a>
+        <a class="t" href="https://www.gizatech.xyz" target="_blank">Giza ARMA</a>
+        <a class="t" href="https://www.almanak.co" target="_blank">Almanak</a>
+        <a class="t" href="https://www.brahma.fi" target="_blank">Brahma.fi</a>
         <span class="sep"></span>
-        <span class="t">x402engine</span>
-        <span class="t">Nansen</span>
-        <span class="t">Akash</span>
-        <span class="t">Art Blocks</span>
-        <span class="t">mint.day</span>
-        <span class="t">Apify</span>
-        <span class="t">Render</span>
-        <span class="t">Ocean Protocol</span>
+        <a class="t" href="https://x402engine.app" target="_blank">x402engine</a>
+        <a class="t" href="https://www.nansen.ai" target="_blank">Nansen</a>
+        <a class="t" href="https://akash.network" target="_blank">Akash</a>
+        <a class="t" href="https://www.artblocks.io" target="_blank">Art Blocks</a>
+        <a class="t" href="https://mint.day" target="_blank">mint.day</a>
+        <a class="t" href="https://apify.com" target="_blank">Apify</a>
+        <a class="t" href="https://rendernetwork.com" target="_blank">Render</a>
+        <a class="t" href="https://oceanprotocol.com" target="_blank">Ocean Protocol</a>
       </div>
     </div>
 
+    <!-- L4 Governance -->
     <div class="row">
       <div class="row-label">
         <span class="row-n">04</span>
-        <div>
-          <div class="row-title">Governance & Policy</div>
-          <div class="row-q">May this agent spend</div>
-        </div>
+        <div><div class="row-title">Governance & Policy</div><div class="row-q">May this agent spend</div></div>
       </div>
       <div class="row-content">
-        <span class="t">Ramp Agent Cards</span>
-        <span class="t acq">Brex <span class="sm">$5.15B</span></span>
-        <span class="t">Skyfire KYA</span>
-        <span class="t">Sponge Gateway</span>
-        <span class="t early">Payman AI</span>
+        <a class="t" href="https://ramp.com" target="_blank">Ramp Agent Cards</a>
+        <a class="t acq" href="https://brex.com" target="_blank">Brex <span class="sm">$5.15B</span></a>
+        <a class="t" href="https://skyfire.xyz" target="_blank">Skyfire KYA</a>
+        <a class="t" href="https://paysponge.com" target="_blank">Sponge Gateway</a>
+        <a class="t early" href="https://paymanai.net" target="_blank">Payman AI</a>
         <span class="sep"></span>
-        <span class="t">ERC-8004</span>
-        <span class="t">OWS Policies</span>
-        <span class="t">Visa Intelligent Commerce</span>
-        <span class="t">Stripe SPTs</span>
-        <span class="t">Crossmint</span>
+        <a class="t" href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank">ERC-8004</a>
+        <a class="t" href="https://openwallet.sh" target="_blank">OWS Policies</a>
+        <a class="t" href="https://usa.visa.com" target="_blank">Visa Intelligent Commerce</a>
+        <a class="t" href="https://stripe.com" target="_blank">Stripe SPTs</a>
+        <a class="t" href="https://crossmint.com" target="_blank">Crossmint</a>
         <span class="t ann">Mastercard Agentic Tokens</span>
       </div>
     </div>
 
+    <!-- L3 Protocol -->
     <div class="row">
       <div class="row-label">
         <span class="row-n">03</span>
-        <div>
-          <div class="row-title">Payment Protocol</div>
-          <div class="row-q">How the payment flows</div>
-        </div>
+        <div><div class="row-title">Payment Protocol</div><div class="row-q">How the payment flows</div></div>
       </div>
       <div class="row-content">
-        <span class="t">x402 <span class="sm">75M/30d</span></span>
-        <span class="t">Tempo MPP <span class="sm">100+ svc</span></span>
-        <span class="t ann">Google AP2 <span class="sm">60+ partners</span></span>
-        <span class="t">ACP <span class="sm">OpenAI + Stripe</span></span>
+        <a class="t" href="https://x402.org" target="_blank">x402 <span class="sm">75M/30d</span></a>
+        <a class="t" href="https://tempo.xyz" target="_blank">Tempo MPP <span class="sm">100+ svc</span></a>
+        <a class="t ann" href="https://github.com/google-agentic-commerce/AP2" target="_blank">Google AP2 <span class="sm">60+ partners</span></a>
+        <a class="t" href="https://stripe.com/blog/agentic-commerce" target="_blank">ACP <span class="sm">OpenAI + Stripe</span></a>
         <span class="sep"></span>
-        <span class="t early">Circle Nanopayments</span>
-        <span class="t">L402 / Lightning</span>
-        <span class="t early">ATXP</span>
-        <span class="t">Fewsats</span>
-        <span class="t">Superfluid</span>
+        <a class="t early" href="https://circle.com" target="_blank">Circle Nanopayments</a>
+        <a class="t" href="https://docs.lightning.engineering" target="_blank">L402 / Lightning</a>
+        <a class="t early" href="https://www.circuitandchisel.com" target="_blank">ATXP</a>
+        <a class="t" href="https://fewsats.com" target="_blank">Fewsats</a>
+        <a class="t" href="https://superfluid.finance" target="_blank">Superfluid</a>
         <span class="sep"></span>
-        <span class="t early">ERC-8183</span>
-        <span class="t">Interledger</span>
+        <a class="t early" href="https://eips.ethereum.org/EIPS/eip-8183" target="_blank">ERC-8183</a>
+        <a class="t" href="https://interledger.org" target="_blank">Interledger</a>
       </div>
     </div>
 
+    <!-- L2 Routing -->
     <div class="row">
       <div class="row-label">
         <span class="row-n">02</span>
-        <div>
-          <div class="row-title">Routing & Abstraction</div>
-          <div class="row-q">Which chain, token, rail</div>
-        </div>
+        <div><div class="row-title">Routing & Abstraction</div><div class="row-q">Which chain, token, rail</div></div>
       </div>
       <div class="row-content">
-        <span class="t">Skyfire</span>
-        <span class="t">Mesh</span>
-        <span class="t">Crossmint</span>
-        <span class="t">Biconomy DAN</span>
-        <span class="t acq">BVNK <span class="sm">MC $1.8B</span></span>
-        <span class="t">Unifold</span>
+        <a class="t" href="https://skyfire.xyz" target="_blank">Skyfire</a>
+        <a class="t" href="https://meshconnect.com" target="_blank">Mesh</a>
+        <a class="t" href="https://crossmint.com" target="_blank">Crossmint</a>
+        <a class="t" href="https://biconomy.io" target="_blank">Biconomy DAN</a>
+        <a class="t acq" href="https://bvnk.com" target="_blank">BVNK <span class="sm">MC $1.8B</span></a>
+        <a class="t" href="https://unifold.io" target="_blank">Unifold</a>
         <span class="sep"></span>
-        <span class="t">Circle CCTP</span>
-        <span class="t acq">Bridge <span class="sm">Stripe $1.1B</span></span>
-        <span class="t">Across</span>
-        <span class="t">Li.Fi</span>
-        <span class="t">Socket</span>
-        <span class="t">deBridge</span>
-        <span class="t">Wormhole</span>
-        <span class="t">LayerZero</span>
+        <a class="t" href="https://circle.com" target="_blank">Circle CCTP</a>
+        <a class="t acq" href="https://bridge.xyz" target="_blank">Bridge <span class="sm">Stripe $1.1B</span></a>
+        <a class="t" href="https://across.to" target="_blank">Across</a>
+        <a class="t" href="https://li.fi" target="_blank">Li.Fi</a>
+        <a class="t" href="https://socket.tech" target="_blank">Socket</a>
+        <a class="t" href="https://debridge.finance" target="_blank">deBridge</a>
+        <a class="t" href="https://wormhole.com" target="_blank">Wormhole</a>
+        <a class="t" href="https://layerzero.network" target="_blank">LayerZero</a>
         <span class="sep"></span>
-        <span class="t">Jupiter</span>
-        <span class="t">1inch</span>
-        <span class="t">Uniswap</span>
-        <span class="t">CoW Protocol</span>
-        <span class="t">MoonPay</span>
+        <a class="t" href="https://jup.ag" target="_blank">Jupiter</a>
+        <a class="t" href="https://1inch.io" target="_blank">1inch</a>
+        <a class="t" href="https://uniswap.org" target="_blank">Uniswap</a>
+        <a class="t" href="https://cow.fi" target="_blank">CoW Protocol</a>
+        <a class="t" href="https://moonpay.com" target="_blank">MoonPay</a>
       </div>
     </div>
 
+    <!-- L1 Wallet -->
     <div class="row">
       <div class="row-label">
         <span class="row-n">01</span>
-        <div>
-          <div class="row-title">Wallet & Key Mgmt</div>
-          <div class="row-q">Where the keys live</div>
-        </div>
+        <div><div class="row-title">Wallet & Key Mgmt</div><div class="row-q">Where the keys live</div></div>
       </div>
       <div class="row-content">
-        <span class="t">Coinbase Agentic Wallets</span>
-        <span class="t">MoonPay OWS</span>
-        <span class="t">Crossmint</span>
-        <span class="t">Thirdweb</span>
-        <span class="t">Openfort</span>
-        <span class="t">World AgentKit</span>
+        <a class="t" href="https://coinbase.com/developer-platform" target="_blank">Coinbase Agentic Wallets</a>
+        <a class="t" href="https://openwallet.sh" target="_blank">MoonPay OWS</a>
+        <a class="t" href="https://crossmint.com" target="_blank">Crossmint</a>
+        <a class="t" href="https://thirdweb.com" target="_blank">Thirdweb</a>
+        <a class="t" href="https://openfort.io" target="_blank">Openfort</a>
+        <a class="t" href="https://world.org" target="_blank">World AgentKit</a>
         <span class="sep"></span>
-        <span class="t">Turnkey</span>
-        <span class="t acq">Privy <span class="sm">Stripe</span></span>
-        <span class="t acq">Dynamic <span class="sm">Fireblocks</span></span>
-        <span class="t">Lit Protocol</span>
-        <span class="t">Safe</span>
-        <span class="t acq">ZeroDev <span class="sm">Arbitrum</span></span>
-        <span class="t">Biconomy</span>
-        <span class="t">Fireblocks</span>
-        <span class="t">Alchemy</span>
-        <span class="t">Phantom</span>
+        <a class="t" href="https://turnkey.com" target="_blank">Turnkey</a>
+        <a class="t acq" href="https://privy.io" target="_blank">Privy <span class="sm">Stripe</span></a>
+        <a class="t acq" href="https://dynamic.xyz" target="_blank">Dynamic <span class="sm">Fireblocks</span></a>
+        <a class="t" href="https://litprotocol.com" target="_blank">Lit Protocol</a>
+        <a class="t" href="https://safe.global" target="_blank">Safe</a>
+        <a class="t acq" href="https://zerodev.app" target="_blank">ZeroDev <span class="sm">Arbitrum</span></a>
+        <a class="t" href="https://biconomy.io" target="_blank">Biconomy</a>
+        <a class="t" href="https://fireblocks.com" target="_blank">Fireblocks</a>
+        <a class="t" href="https://alchemy.com" target="_blank">Alchemy</a>
+        <a class="t" href="https://phantom.app" target="_blank">Phantom</a>
       </div>
     </div>
 
+    <!-- L0 Settlement -->
     <div class="row">
       <div class="row-label">
         <span class="row-n">00</span>
-        <div>
-          <div class="row-title">Settlement</div>
-          <div class="row-q">Where transactions land</div>
-        </div>
+        <div><div class="row-title">Settlement</div><div class="row-q">Where transactions land</div></div>
       </div>
       <div class="row-content">
-        <span class="t">Base <span class="sm">119M txns</span></span>
-        <span class="t">Solana <span class="sm">38.6M txns</span></span>
-        <span class="t">Ethereum</span>
-        <span class="t">Tempo <span class="sm">$5B</span></span>
-        <span class="t">Arbitrum</span>
-        <span class="t">Sui</span>
-        <span class="t">Polygon</span>
-        <span class="t">BNB Chain</span>
-        <span class="t">Gnosis</span>
-        <span class="t early">NEAR</span>
-        <span class="t">Avalanche</span>
+        <a class="t" href="https://base.org" target="_blank">Base <span class="sm">119M txns</span></a>
+        <a class="t" href="https://solana.com" target="_blank">Solana <span class="sm">38.6M txns</span></a>
+        <a class="t" href="https://ethereum.org" target="_blank">Ethereum</a>
+        <a class="t" href="https://tempo.xyz" target="_blank">Tempo <span class="sm">$5B</span></a>
+        <a class="t" href="https://arbitrum.io" target="_blank">Arbitrum</a>
+        <a class="t" href="https://sui.io" target="_blank">Sui</a>
+        <a class="t" href="https://polygon.technology" target="_blank">Polygon</a>
+        <a class="t" href="https://bnbchain.org" target="_blank">BNB Chain</a>
+        <a class="t" href="https://gnosis.io" target="_blank">Gnosis</a>
+        <a class="t early" href="https://near.org" target="_blank">NEAR</a>
+        <a class="t" href="https://avax.network" target="_blank">Avalanche</a>
       </div>
     </div>
 
   </div>
 
+  <!-- Bottom -->
   <div class="bottom">
     <div>
       <div class="bot-title">Vertical Integration</div>
       <div class="vi-row">
         <div class="vi-name" style="color:#0052ff">Coinbase</div>
-        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#0052ff"></div><div class="vi-dots"><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"></div></div></div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#0052ff"></div><div class="vi-dots"><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"></div></div></div>
       </div>
       <div class="vi-row">
         <div class="vi-name" style="color:#635bff">Stripe</div>
-        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#635bff"></div><div class="vi-dots"><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"></div></div></div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#635bff"></div><div class="vi-dots"><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"></div></div></div>
       </div>
       <div class="vi-row">
         <div class="vi-name" style="color:#00a868">Circle</div>
-        <div class="vi-track"><div class="vi-fill" style="left:0;right:34%;background:#00a868"></div><div class="vi-dots"><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:34%;background:#00a868"></div><div class="vi-dots"><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
       </div>
       <div class="vi-row">
         <div class="vi-name" style="color:#c0392b">Google</div>
-        <div class="vi-track"><div class="vi-fill" style="left:50%;right:17%;background:#c0392b"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot"></div></div></div>
+        <div class="vi-track"><div class="vi-fill" style="left:50%;right:17%;background:#c0392b"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot"></div></div></div>
       </div>
       <div class="vi-row">
         <div class="vi-name" style="color:#7b61ff">MoonPay</div>
-        <div class="vi-track"><div class="vi-fill" style="left:17%;right:34%;background:#7b61ff"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot active"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
+        <div class="vi-track"><div class="vi-fill" style="left:17%;right:34%;background:#7b61ff"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
       </div>
-      <div class="vi-labels">
-        <span>L0</span><span>L1</span><span>L2</span><span>L3</span><span>L4</span><span>L5</span>
-      </div>
+      <div class="vi-labels"><span>L0</span><span>L1</span><span>L2</span><span>L3</span><span>L4</span><span>L5</span></div>
     </div>
-
     <div>
       <div class="bot-title">2025-2026 Consolidation</div>
       <ul class="ma-list">
@@ -534,11 +425,64 @@
     </div>
   </div>
 
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(255,255,255,0.06)"></div>Live with volume</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(212,168,64,0.08);border:1px solid rgba(212,168,64,0.15)"></div>Live / early</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:transparent;border:1px dashed rgba(255,255,255,0.12)"></div>Announced</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:rgba(232,105,74,0.1)"></div>Acquired</div>
+  </div>
+
   <div class="foot">
-    <div><b>@jordanlyall</b> &middot; March 2026</div>
+    <div><a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a> &middot; March 2026</div>
     <div>98.6% of agent payments settle in USDC</div>
   </div>
 
 </div>
+
+<!-- Write-up -->
+<div class="page writeup">
+  <p class="updated">Last updated: March 25, 2026</p>
+
+  <h2>How AI agents will move $600M this year</h2>
+
+  <p>AI agents settled <strong>$43 million across 140 million transactions</strong> in just nine months. Every major payment network is now racing to build the rails. The week of March 17-23, 2026 alone saw Mastercard's $1.8B acquisition of BVNK, Stripe's Tempo mainnet launch, and MoonPay's Open Wallet Standard release.</p>
+
+  <p>This is no longer speculative infrastructure. <strong>98.6% of agent payments settle in USDC</strong>, and annualized volume is approaching $600M.</p>
+
+  <h3>The stack has six layers</h3>
+
+  <p>The agent payments stack has crystallized into six distinct layers, each answering a different question in the payment flow:</p>
+
+  <ul>
+    <li><strong>Settlement (L0)</strong> answers where transactions land. Base leads with 119M x402 transactions. Solana leads in dollar volume share. Everything else is positioning.</li>
+    <li><strong>Wallet and key management (L1)</strong> answers where keys live. The market has split into full-stack agent wallets (Coinbase, MoonPay OWS, Crossmint) and signing primitives (Turnkey, Lit, Safe). A wave of acquisitions (Stripe bought Privy, Fireblocks bought Dynamic, Arbitrum bought ZeroDev) is consolidating this layer fast.</li>
+    <li><strong>Routing and abstraction (L2)</strong> answers which chain, which token, which rail. The biggest trend: convergence of crypto and card rails through a single abstraction. Mastercard's $1.8B BVNK acquisition and Stripe's $1.1B Bridge acquisition are the clearest signals.</li>
+    <li><strong>Payment protocol (L3)</strong> answers how the payment flow works. Three paradigms are crystallizing: x402 (crypto-native HTTP payments), Tempo MPP (multi-rail sessions), and Google AP2 (payment-agnostic authorization). They are designed to interoperate.</li>
+    <li><strong>Governance and policy (L4)</strong> answers whether an agent may spend, and how much. The "Brex for agents" category has gone from concept to reality. Ramp and Brex now offer agent card products. Crypto-native alternatives like Skyfire and Sponge provide stablecoin-based controls.</li>
+    <li><strong>Application (L5)</strong> answers what gets bought and why. DeFi trading agents are the most mature category. Agent economy platforms (Virtuals, ElizaOS, Olas) are the most hyped. Services agents pay for (compute, data, creative assets) represent the longest tail.</li>
+  </ul>
+
+  <h3>Five companies are trying to own the whole stack</h3>
+
+  <p><strong>Coinbase</strong> is the most vertically integrated, controlling settlement (Base), wallets (AgentKit), protocol (x402), identity (ERC-8004), and onramp/offramp. <strong>Stripe</strong> matches that span through Tempo (settlement), Privy (wallets), MPP + ACP (protocol), Bridge (routing), and SPTs (governance). <strong>Circle</strong> controls the monetary base layer: 98.6% of agent payments settle in their stablecoin. <strong>Google</strong> plays the standards layer with AP2 and A2A. <strong>MoonPay</strong> bet on open standards with OWS.</p>
+
+  <h3>Three bets shaping the stack</h3>
+
+  <p><strong>The first bet is settlement rails.</strong> Coinbase's x402 argues the future is crypto-native HTTP payments on Base and Solana. Stripe's MPP argues agents need multi-rail access settling on Tempo. These are not mutually exclusive, but they represent different visions of where value accrues.</p>
+
+  <p><strong>The second bet is identity and authorization.</strong> Google's AP2 mandates, Visa's Trusted Agent Protocol, ERC-8004's on-chain registries, and Skyfire's KYA all compete to answer "should this agent be trusted to spend?" The winner captures the governance chokepoint.</p>
+
+  <p><strong>The third bet is vertical versus horizontal.</strong> Coinbase and Stripe are building full stacks, while Skyfire, ATXP, and MoonPay bet that open standards and middleware layers will capture value between the giants.</p>
+
+  <p>The clearest near-term signal is consolidation. Five acquisitions exceeding $100M occurred in the past year. The convergence of traditional payments (Visa, Mastercard, Stripe) with crypto-native infrastructure (Coinbase, Circle, Cloudflare) is compressing timelines. The rails being laid today will determine who collects tolls on agentic commerce for the next decade.</p>
+
+  <!-- CTA -->
+  <div class="cta">
+    <p>This landscape is updated regularly. Follow for updates.</p>
+    <a href="https://x.com/jordanlyall" target="_blank">Follow @jordanlyall on X</a>
+  </div>
+</div>
+
 </body>
 </html>
