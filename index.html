@@ -1117,9 +1117,13 @@ async function doSubscribe(email,btn,msg){
 }
 document.getElementById('nsf').addEventListener('submit',async e=>{
   e.preventDefault();
-  const v=document.getElementById('nse').value,b=document.getElementById('nsb');
-  await doSubscribe(v,b,b);
-  document.getElementById('nse').value='';b.textContent='✓';
+  const v=document.getElementById('nse').value,b=document.getElementById('nsb'),i=document.getElementById('nse');
+  b.textContent='...';b.disabled=true;
+  try{
+    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})});
+    if(r.ok){b.textContent='✓';i.value='';i.placeholder='Subscribed!';}
+    else{b.textContent='Subscribe';b.disabled=false;}
+  }catch{b.textContent='Subscribe';b.disabled=false;}
 });
 document.getElementById('sf').addEventListener('submit',async e=>{
   e.preventDefault();
