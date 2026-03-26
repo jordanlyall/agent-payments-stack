@@ -373,6 +373,52 @@
   }
   .email-form button:hover { opacity: 0.85; }
 
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px 0 8px;
+  }
+  .filter-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--faint);
+    border-radius: 7px;
+    padding: 7px 12px;
+  }
+  .filter-search svg { opacity: 0.3; flex-shrink: 0; }
+  .filter-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+  }
+  .filter-search input::placeholder { color: var(--muted); }
+  .filter-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .fb {
+    background: transparent;
+    border: 1px solid var(--faint);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+  .fb:hover { border-color: rgba(255,255,255,0.2); color: var(--secondary); }
+  .fb.on { border-color: rgba(255,255,255,0.35); color: var(--text); background: rgba(255,255,255,0.06); }
+  .filter-count { font-size: 11px; color: var(--muted); flex-shrink: 0; white-space: nowrap; }
+  .no-results { padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); display: none; }
+
   /* Nav subscribe form */
   .nav-sub {
     display: flex;
@@ -620,6 +666,23 @@
     <span class="nav-dot"></span>
     <a href="#hackathons">Hackathons</a>
   </nav>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="filter-search">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input type="text" id="q" placeholder="Search 91 projects..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="filter-btns">
+      <button class="fb on" data-f="all">All</button>
+      <button class="fb" data-f="live">Live</button>
+      <button class="fb" data-f="early">Early</button>
+      <button class="fb" data-f="ann">Announced</button>
+      <button class="fb" data-f="acq">Acquired</button>
+    </div>
+    <span class="filter-count" id="fc">91 projects</span>
+  </div>
+  <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
 
   <div class="stack">
 
@@ -1108,6 +1171,57 @@
 </script>
 
 <script>
+// Filter + search
+(function(){
+  const TOTAL = 91;
+  let activeF = 'all', q = '';
+
+  function run(){
+    let shown = 0;
+    document.querySelectorAll('.t').forEach(c=>{
+      const name = c.textContent.replace(/\s+/g,' ').trim().toLowerCase();
+      const matchQ = !q || name.includes(q);
+      let matchF = true;
+      if(activeF !== 'all'){
+        if(activeF === 'live') matchF = !c.classList.contains('early') && !c.classList.contains('ann') && !c.classList.contains('acq');
+        else matchF = c.classList.contains(activeF);
+      }
+      const vis = matchQ && matchF;
+      c.style.display = vis ? '' : 'none';
+      if(vis) shown++;
+    });
+
+    // Hide rows with no visible chips; hide orphaned seps
+    document.querySelectorAll('.row').forEach(row=>{
+      const chips = row.querySelectorAll('.t');
+      const anyVis = [...chips].some(c=>c.style.display !== 'none');
+      row.style.display = anyVis ? '' : 'none';
+      // Hide sep if no visible chip follows it before next sep/end
+      row.querySelectorAll('.sep').forEach(sep=>{
+        let next = sep.nextElementSibling;
+        let hasVis = false;
+        while(next && !next.classList.contains('sep')){
+          if(next.classList.contains('t') && next.style.display !== 'none'){ hasVis = true; break; }
+          next = next.nextElementSibling;
+        }
+        sep.style.display = hasVis ? '' : 'none';
+      });
+    });
+
+    document.getElementById('fc').textContent = shown === TOTAL ? TOTAL+' projects' : shown+' of '+TOTAL;
+    document.getElementById('nr').style.display = shown === 0 ? 'block' : 'none';
+  }
+
+  document.getElementById('q').addEventListener('input', e=>{ q=e.target.value.toLowerCase().trim(); run(); });
+  document.querySelectorAll('.fb').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      activeF = btn.dataset.f;
+      document.querySelectorAll('.fb').forEach(b=>b.classList.toggle('on', b===btn));
+      run();
+    });
+  });
+}());
+
 async function doSubscribe(email,btn,msg){
   btn.textContent='...';btn.disabled=true;
   try{
