@@ -6,9 +6,12 @@
 
 A curated, layer-by-layer map of the agent payments ecosystem. Updated monthly by @jordanlyall. 88 projects across 6 layers as of March 2026.
 
-## Structured data
+## Machine interfaces
 
-Full JSON available at: /data.json
+Full JSON: /data.json
+MCP server: /api/mcp (JSON-RPC 2.0, POST, no auth required)
+
+MCP tools: stack_search_projects, stack_filter_by_layer, stack_filter_by_status, stack_get_acquisitions, stack_get_stats
 
 Fields per project: name, layer, status (live / early / announced / acquired), url, description, metadata, acquirer, acquisition_value.
 
