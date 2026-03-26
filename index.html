@@ -373,6 +373,40 @@
   }
   .email-form button:hover { opacity: 0.85; }
 
+  /* Embed code blocks */
+  .embed-code {
+    position: relative;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--faint);
+    border-radius: 7px;
+    padding: 12px 80px 12px 14px;
+    cursor: pointer;
+  }
+  .embed-code:hover { border-color: rgba(255,255,255,0.15); }
+  .embed-code code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+  .embed-copy {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--faint);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+  .embed-code:hover .embed-copy { color: var(--text); }
+
   /* Filter bar */
   .filter-bar {
     display: flex;
@@ -616,6 +650,7 @@
       <a href="#methodology">Methodology</a>
       <a href="#changelog">Changelog</a>
       <a href="#api">API</a>
+      <a href="#embed">Embed</a>
       <a href="https://tally.so/r/rjVvd5" target="_blank">Submit</a>
       <form class="nav-sub" id="nsf">
         <input type="email" id="nse" placeholder="your@email.com" required>
@@ -1030,6 +1065,32 @@
     <p>To connect in Claude Code: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">mcp add --transport http https://agentpaymentsstack.com/api/mcp</code></p>
   </div>
 
+  <!-- Embed -->
+  <div id="embed" style="margin-top:40px;">
+    <h3>Embed the Stack</h3>
+    <p>Drop the stack into any blog post, Substack, or Notion page. No account needed.</p>
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:20px;">
+
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;">Full stack</div>
+        <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+          <code>&lt;iframe src="https://agentpaymentsstack.com/embed" style="width:100%;height:520px;border:none;border-radius:8px;" loading="lazy"&gt;&lt;/iframe&gt;</code>
+          <span class="embed-copy">Copy</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;">Single layer — replace L3 with L0–L5</div>
+        <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+          <code>&lt;iframe src="https://agentpaymentsstack.com/embed?layer=L3" style="width:100%;height:220px;border:none;border-radius:8px;" loading="lazy"&gt;&lt;/iframe&gt;</code>
+          <span class="embed-copy">Copy</span>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin-top:16px;font-size:12px;color:var(--muted);">Preview: <a href="/embed?layer=L3" target="_blank" style="color:var(--secondary);text-decoration:none;">embed?layer=L3 →</a></p>
+  </div>
+
   <!-- Follow -->
   <div class="cta" style="margin-top: 32px;">
     <p>Built by Jordan Lyall. Follow for updates on agent commerce and infrastructure.</p>
@@ -1221,6 +1282,15 @@
     });
   });
 }());
+
+function copyEmbed(el){
+  const code = el.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(()=>{
+    const btn = el.querySelector('.embed-copy');
+    btn.textContent = 'Copied!';
+    setTimeout(()=>{ btn.textContent = 'Copy'; }, 2000);
+  });
+}
 
 async function doSubscribe(email,btn,msg){
   btn.textContent='...';btn.disabled=true;
