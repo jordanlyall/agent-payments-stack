@@ -533,6 +533,7 @@
       <a href="#about">About</a>
       <a href="#methodology">Methodology</a>
       <a href="#changelog">Changelog</a>
+      <a href="#api">API</a>
       <a href="mailto:jordan.lyall@gmail.com?subject=Agent%20Payments%20Stack%20Suggestion&body=Project%20name:%0AURL:%0ALayer:%0AOne-line%20description:">Submit</a>
     </div>
   </div>
@@ -835,7 +836,7 @@
 
   <div class="foot">
     <div><a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a> &middot; March 2026</div>
-    <div>98.6% of agent payments settle in USDC &middot; <a href="/data.json" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Machine-readable JSON">data.json</a> &middot; <a href="/llms.txt" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Agent-readable summary">llms.txt</a></div>
+    <div>98.6% of agent payments settle in USDC &middot; <a href="/data.json" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Machine-readable JSON">data.json</a> &middot; <a href="/llms.txt" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Agent-readable summary">llms.txt</a> &middot; <a href="#api" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="MCP server">mcp</a></div>
   </div>
 
 </div>
@@ -902,6 +903,18 @@
       <li>Hackathon projects are listed separately as they represent prototypes, not production infrastructure.</li>
       <li>This landscape is updated as the space evolves. Suggest additions via email.</li>
     </ul>
+  </div>
+
+  <!-- API -->
+  <div id="api">
+    <h3>For Agents</h3>
+    <p>The stack is machine-readable via three endpoints. No auth required.</p>
+    <ul>
+      <li><strong><a href="/data.json" style="color:var(--text);">/data.json</a></strong> — Full structured dataset. 88 projects, status, URLs, descriptions, M&A, vertical integration.</li>
+      <li><strong><a href="/llms.txt" style="color:var(--text);">/llms.txt</a></strong> — Plain-text summary for LLM context. Key facts, layer descriptions, usage notes.</li>
+      <li><strong>/api/mcp</strong> — MCP server (JSON-RPC 2.0, POST). Five tools: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_search_projects</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_filter_by_layer</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_filter_by_status</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_get_acquisitions</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_get_stats</code>.</li>
+    </ul>
+    <p>To connect in Claude Code: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">mcp add --transport http https://agentpaymentsstack.com/api/mcp</code></p>
   </div>
 
   <!-- Follow -->
