@@ -23,6 +23,7 @@
 <meta name="twitter:creator" content="@jordanlyall">
 
 <link rel="canonical" href="https://agentpaymentsstack.com">
+<link rel="alternate" type="application/json" href="/data.json" title="Agent Payments Stack — Structured Data">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
 
 <script type="application/ld+json">
@@ -582,7 +583,7 @@
   <div class="stack">
 
     <!-- L5 Application -->
-    <div class="row" id="application">
+    <div class="row" id="application" data-layer="L5" data-layer-name="Application">
       <div class="row-label">
         <span class="row-n">05</span>
         <div><div class="row-title"><a href="#application">Application</a> <span class="row-count">19</span></div><div class="row-q">What gets bought and why</div></div>
@@ -612,7 +613,7 @@
     </div>
 
     <!-- L4 Governance -->
-    <div class="row" id="governance">
+    <div class="row" id="governance" data-layer="L4" data-layer-name="Governance &amp; Policy">
       <div class="row-label">
         <span class="row-n">04</span>
         <div><div class="row-title"><a href="#governance">Governance & Policy</a> <span class="row-count">11</span></div><div class="row-q">May this agent spend</div></div>
@@ -634,7 +635,7 @@
     </div>
 
     <!-- L3 Protocol -->
-    <div class="row" id="protocol">
+    <div class="row" id="protocol" data-layer="L3" data-layer-name="Payment Protocol">
       <div class="row-label">
         <span class="row-n">03</span>
         <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">12</span></div><div class="row-q">How the payment flows</div></div>
@@ -657,7 +658,7 @@
     </div>
 
     <!-- L2 Routing -->
-    <div class="row" id="routing">
+    <div class="row" id="routing" data-layer="L2" data-layer-name="Routing &amp; Abstraction">
       <div class="row-label">
         <span class="row-n">02</span>
         <div><div class="row-title"><a href="#routing">Routing & Abstraction</a> <span class="row-count">19</span></div><div class="row-q">Which chain, token, rail</div></div>
@@ -688,7 +689,7 @@
     </div>
 
     <!-- L1 Wallet -->
-    <div class="row" id="wallets">
+    <div class="row" id="wallets" data-layer="L1" data-layer-name="Wallet &amp; Key Management">
       <div class="row-label">
         <span class="row-n">01</span>
         <div><div class="row-title"><a href="#wallets">Wallet & Key Mgmt</a> <span class="row-count">16</span></div><div class="row-q">Where the keys live</div></div>
@@ -715,7 +716,7 @@
     </div>
 
     <!-- L0 Settlement -->
-    <div class="row" id="settlement">
+    <div class="row" id="settlement" data-layer="L0" data-layer-name="Settlement">
       <div class="row-label">
         <span class="row-n">00</span>
         <div><div class="row-title"><a href="#settlement">Settlement</a> <span class="row-count">11</span></div><div class="row-q">Where transactions land</div></div>
@@ -834,7 +835,7 @@
 
   <div class="foot">
     <div><a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a> &middot; March 2026</div>
-    <div>98.6% of agent payments settle in USDC</div>
+    <div>98.6% of agent payments settle in USDC &middot; <a href="/data.json" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Machine-readable JSON">data.json</a> &middot; <a href="/llms.txt" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Agent-readable summary">llms.txt</a></div>
   </div>
 
 </div>
@@ -909,6 +910,139 @@
     <a href="https://x.com/jordanlyall" target="_blank">Follow @jordanlyall on X</a>
   </div>
 </div>
+
+<script type="application/json" id="stack-data">
+{
+  "title": "The Agent Payments Stack",
+  "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
+  "updated": "2026-03-25",
+  "source": "agentpaymentsstack.com",
+  "author": "@jordanlyall",
+  "stats": { "volume_9mo": "$43M", "transactions": "140M", "annualized": "~$600M", "usdc_share": "98.6%" },
+  "layers": [
+    { "id": "L5", "name": "Application", "question": "What gets bought and why", "projects": [
+      { "name": "Virtuals Protocol", "status": "live", "url": "https://app.virtuals.io", "description": "Tokenized AI agent creation on Base" },
+      { "name": "ElizaOS", "status": "live", "url": "https://elizaos.ai", "description": "Open-source multi-agent framework, 17K GitHub stars" },
+      { "name": "Olas", "status": "live", "url": "https://olas.network", "description": "Decentralized agent services with on-chain staking" },
+      { "name": "Botto", "status": "live", "url": "https://botto.com", "description": "Autonomous AI artist, $5M+ sales, 15K-member DAO" },
+      { "name": "Axiom", "status": "live", "url": "https://www.axiom.trade", "description": "DeFi trading agents for memecoins, perps, yield" },
+      { "name": "Theoriq", "status": "live", "url": "https://www.theoriq.ai", "description": "AI-managed yield vault, $25M TVL" },
+      { "name": "Giza ARMA", "status": "live", "url": "https://www.gizatech.xyz", "description": "Cross-protocol stablecoin yield optimization on Base" },
+      { "name": "Almanak", "status": "live", "url": "https://www.almanak.co", "description": "Non-custodial DeFi strategy automation" },
+      { "name": "Brahma.fi", "status": "live", "url": "https://www.brahma.fi", "description": "Agent-based DeFi console with sub-accounts" },
+      { "name": "Kraken CLI", "status": "live", "url": "https://blog.kraken.com/news/industry-news/announcing-the-kraken-cli", "description": "Exchange CLI with built-in MCP server. 134 commands. First exchange natively compatible with Claude Code." },
+      { "name": "x402engine", "status": "live", "url": "https://x402engine.app", "description": "45 pay-per-call APIs via x402" },
+      { "name": "Nansen", "status": "live", "url": "https://www.nansen.ai", "description": "On-chain analytics at $0.01/query via x402" },
+      { "name": "Akash", "status": "live", "url": "https://akash.network", "description": "Decentralized cloud with agent deploy" },
+      { "name": "Art Blocks", "status": "live", "url": "https://www.artblocks.io", "description": "Generative art platform with MCP + Universal Purchase API" },
+      { "name": "mint.day", "status": "live", "url": "https://mint.day", "description": "NFT minting service for AI agents" },
+      { "name": "Apify", "status": "live", "url": "https://apify.com", "description": "Web scraping/automation with Skyfire payment integration" },
+      { "name": "Render", "status": "live", "url": "https://rendernetwork.com", "description": "GPU marketplace for compute" },
+      { "name": "Ocean Protocol", "status": "live", "url": "https://oceanprotocol.com", "description": "Data marketplace, $800M/month Predictoor volume" }
+    ]},
+    { "id": "L4", "name": "Governance & Policy", "question": "May this agent spend", "projects": [
+      { "name": "Ramp Agent Cards", "status": "live", "url": "https://ramp.com", "description": "Virtual Visa cards for agents with spend limits" },
+      { "name": "Brex", "status": "acquired", "acquirer": "Capital One", "acquisition_value": "$5.15B", "url": "https://brex.com", "description": "Agent Mesh architecture" },
+      { "name": "Skyfire KYA", "status": "live", "url": "https://skyfire.xyz", "description": "Know Your Agent protocol with per-tx caps" },
+      { "name": "Sponge Gateway", "status": "live", "url": "https://paysponge.com", "description": "Agents onboard and pay businesses via uploaded API specs" },
+      { "name": "Payman AI", "status": "early", "url": "https://paymanai.net", "description": "AI-to-human payments with segregated wallets" },
+      { "name": "ERC-8004", "status": "live", "url": "https://eips.ethereum.org/EIPS/eip-8004", "description": "On-chain agent identity and reputation registries" },
+      { "name": "OWS Policies", "status": "live", "url": "https://openwallet.sh", "description": "Pre-signing policy engine in MoonPay OWS" },
+      { "name": "Visa Intelligent Commerce", "status": "live", "url": "https://usa.visa.com", "description": "Agent-initiated tokenized card transactions, 100+ partners" },
+      { "name": "Stripe SPTs", "status": "live", "url": "https://stripe.com", "description": "Scoped, time-limited tokens for agent card payments" },
+      { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Open payment standard with Visa, Circle, Solana" },
+      { "name": "Mastercard Agentic Tokens", "status": "announced", "description": "Tokenization framework for agent-initiated transactions" }
+    ]},
+    { "id": "L3", "name": "Payment Protocol", "question": "How the payment flows", "projects": [
+      { "name": "x402", "status": "live", "url": "https://x402.org", "metadata": "75M/30d", "description": "HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem." },
+      { "name": "Tempo MPP", "status": "live", "url": "https://tempo.xyz", "metadata": "100+ services", "description": "Multi-rail sessions: stablecoins + cards + Bitcoin" },
+      { "name": "Google AP2", "status": "announced", "url": "https://github.com/google-agentic-commerce/AP2", "metadata": "60+ partners", "description": "Payment-agnostic authorization via signed mandates" },
+      { "name": "ACP", "status": "live", "url": "https://stripe.com/blog/agentic-commerce", "metadata": "OpenAI + Stripe", "description": "Agentic Commerce Protocol. Checkout layer paired with MPP." },
+      { "name": "Circle Nanopayments", "status": "early", "url": "https://circle.com", "description": "Gas-free USDC micropayments, $0.000001 minimum. Testnet." },
+      { "name": "L402 / Lightning", "status": "live", "url": "https://docs.lightning.engineering", "description": "HTTP auth + Lightning micropayments since 2020" },
+      { "name": "ATXP", "status": "early", "url": "https://www.circuitandchisel.com", "description": "Full commerce lifecycle protocol. $19.2M seed." },
+      { "name": "Fewsats", "status": "live", "url": "https://fewsats.com", "description": "L402-compatible SDK and API marketplace for agents" },
+      { "name": "Superfluid", "status": "live", "url": "https://superfluid.finance", "description": "Per-second token streaming" },
+      { "name": "ERC-8183", "status": "early", "url": "https://eips.ethereum.org/EIPS/eip-8183", "description": "Programmable escrow for conditional agent-to-agent payments" },
+      { "name": "Interledger", "status": "live", "url": "https://interledger.org", "description": "Cross-ledger value routing. TCP/IP for money." }
+    ]},
+    { "id": "L2", "name": "Routing & Abstraction", "question": "Which chain, token, rail", "projects": [
+      { "name": "Skyfire", "status": "live", "url": "https://skyfire.xyz", "description": "'Visa for the AI economy.' KYA identity, $9.5M seed." },
+      { "name": "Mesh", "status": "live", "url": "https://meshconnect.com", "description": "Routes payments across 100+ wallets/exchanges. Powers PayPal." },
+      { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Dual-rail: Visa/Mastercard cards + stablecoin wallets" },
+      { "name": "Biconomy DAN", "status": "live", "url": "https://biconomy.io", "description": "Delegated auth for agents to execute on-chain on users' behalf" },
+      { "name": "BVNK", "status": "acquired", "acquirer": "Mastercard", "acquisition_value": "$1.8B", "url": "https://bvnk.com", "description": "Enterprise stablecoin API. $30B+ volume." },
+      { "name": "Unifold", "status": "live", "url": "https://unifold.io", "description": "Multi-chain deposits in <10 lines of code. YC W26." },
+      { "name": "Circle CCTP", "status": "live", "url": "https://circle.com", "description": "Native USDC burn-and-mint across 17 chains. $126B+ volume." },
+      { "name": "Bridge", "status": "acquired", "acquirer": "Stripe", "acquisition_value": "$1.1B", "url": "https://bridge.xyz", "description": "Stablecoin orchestration." },
+      { "name": "Across", "status": "live", "url": "https://across.to", "description": "Cross-chain intents. Co-authored ERC-7683." },
+      { "name": "Li.Fi", "status": "live", "url": "https://li.fi", "description": "Bridge/swap aggregator. 15+ bridges, 30+ DEXs." },
+      { "name": "Socket", "status": "live", "url": "https://socket.tech", "description": "Cross-chain data and asset movement" },
+      { "name": "deBridge", "status": "live", "url": "https://debridge.finance", "description": "Zero-TVL bridge. ~2 second transfers. $18B+ processed." },
+      { "name": "Wormhole", "status": "live", "url": "https://wormhole.com", "description": "Cross-chain messaging. $2.5B valuation." },
+      { "name": "LayerZero", "status": "live", "url": "https://layerzero.network", "description": "Omnichain interop. 120+ chains. $3B valuation." },
+      { "name": "Jupiter", "status": "live", "url": "https://jup.ag", "description": "Solana-dominant DEX aggregator" },
+      { "name": "1inch", "status": "live", "url": "https://1inch.io", "description": "400K+ tokens. Fusion gasless swaps." },
+      { "name": "Uniswap", "status": "live", "url": "https://uniswap.org", "description": "Deepest liquidity. ERC-7683 intent standard." },
+      { "name": "CoW Protocol", "status": "live", "url": "https://cow.fi", "description": "MEV protection via batch auctions" },
+      { "name": "MoonPay", "status": "live", "url": "https://moonpay.com", "description": "Fiat onramp + agent products. $555M raised." }
+    ]},
+    { "id": "L1", "name": "Wallet & Key Management", "question": "Where the keys live", "projects": [
+      { "name": "Coinbase Agentic Wallets", "status": "live", "url": "https://coinbase.com/developer-platform", "description": "TEE agent wallets with spending limits, gasless on Base" },
+      { "name": "MoonPay OWS", "status": "live", "url": "https://openwallet.sh", "description": "Open-source wallet standard (MIT). 8 chain families. x402-native." },
+      { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Dual-key agent wallets with stablecoin + card rails" },
+      { "name": "Thirdweb", "status": "live", "url": "https://thirdweb.com", "description": "Engine backend wallets. Deepest AI framework integrations." },
+      { "name": "Openfort", "status": "live", "url": "https://openfort.io", "description": "Open-source, self-hostable agent wallets with TEE backend" },
+      { "name": "World AgentKit", "status": "live", "url": "https://world.org", "description": "Proof of human backing via World ID + ZK proofs" },
+      { "name": "Turnkey", "status": "live", "url": "https://turnkey.com", "description": "Non-custodial TEE key management. 50ms signing." },
+      { "name": "Privy", "status": "acquired", "acquirer": "Stripe", "url": "https://privy.io", "description": "Server wallets with TEE + key sharding." },
+      { "name": "Dynamic", "status": "acquired", "acquirer": "Fireblocks", "url": "https://dynamic.xyz", "description": "Embedded wallets with TSS-MPC." },
+      { "name": "Lit Protocol", "status": "live", "url": "https://litprotocol.com", "description": "Decentralized threshold MPC + TEE hybrid. 25M+ requests." },
+      { "name": "Safe", "status": "live", "url": "https://safe.global", "description": "Battle-tested multisig. $100B+ secured. Agents as signers." },
+      { "name": "ZeroDev", "status": "acquired", "acquirer": "Arbitrum", "url": "https://zerodev.app", "description": "ERC-7579 smart accounts." },
+      { "name": "Biconomy", "status": "live", "url": "https://biconomy.io", "description": "Nexus smart accounts with paymaster tooling" },
+      { "name": "Fireblocks", "status": "live", "url": "https://fireblocks.com", "description": "Enterprise MPC. $8B valuation. 1,800+ institutions." },
+      { "name": "Alchemy", "status": "live", "url": "https://alchemy.com", "description": "Smart wallets with Gas Manager and Bundler" },
+      { "name": "Phantom", "status": "live", "url": "https://phantom.app", "description": "Consumer wallet with MCP server for agent integration" }
+    ]},
+    { "id": "L0", "name": "Settlement", "question": "Where transactions land", "projects": [
+      { "name": "Base", "status": "live", "url": "https://base.org", "metadata": "119M txns", "description": "Coinbase L2. Dominant x402 chain. Gasless paymasters." },
+      { "name": "Solana", "status": "live", "url": "https://solana.com", "metadata": "38.6M txns", "description": "Leads in dollar volume share. Sub-second finality." },
+      { "name": "Ethereum", "status": "live", "url": "https://ethereum.org", "description": "Security/settlement layer for L2 agent activity" },
+      { "name": "Tempo", "status": "live", "url": "https://tempo.xyz", "metadata": "$5B", "description": "Purpose-built payments L1 by Stripe/Paradigm" },
+      { "name": "Arbitrum", "status": "live", "url": "https://arbitrum.io", "description": "$2M in AI agent grants. Acquired ZeroDev." },
+      { "name": "Sui", "status": "live", "url": "https://sui.io", "description": "Google AP2 launch partner. Object-centric model." },
+      { "name": "Polygon", "status": "live", "url": "https://polygon.technology", "description": "x402 facilitator support. OWS contributor." },
+      { "name": "BNB Chain", "status": "live", "url": "https://bnbchain.org", "description": "ERC-8004 deployed. BAP-578 Non-Fungible Agents standard." },
+      { "name": "Gnosis", "status": "live", "url": "https://gnosis.io", "description": "Safe origin. Autonolas agents active." },
+      { "name": "NEAR", "status": "early", "url": "https://near.org", "description": "Aggressive positioning but lacks volume proof" },
+      { "name": "Avalanche", "status": "live", "url": "https://avax.network", "description": "x402 facilitator support. AI grants category." }
+    ]}
+  ],
+  "consolidation": [
+    { "acquirer": "Capital One", "target": "Brex", "value": "$5.15B", "period": "2025-2026" },
+    { "acquirer": "Mastercard", "target": "BVNK", "value": "$1.8B", "period": "2025-2026" },
+    { "acquirer": "Stripe", "target": "Bridge", "value": "$1.1B", "period": "2025-2026" },
+    { "acquirer": "LayerZero", "target": "Stargate", "value": "$120M", "period": "2025-2026" },
+    { "acquirer": "Stripe", "target": "Privy", "period": "2025-2026" },
+    { "acquirer": "Fireblocks", "target": "Dynamic", "period": "2025-2026" },
+    { "acquirer": "Arbitrum", "target": "ZeroDev", "period": "2025-2026" }
+  ],
+  "vertical_integration": [
+    { "name": "Coinbase", "layers": ["L0","L1","L2","L3","L4"] },
+    { "name": "Stripe", "layers": ["L0","L1","L2","L3","L4"] },
+    { "name": "Circle", "layers": ["L0","L1","L2","L3"] },
+    { "name": "Google", "layers": ["L3","L4"] },
+    { "name": "MoonPay", "layers": ["L1","L2","L3"] }
+  ],
+  "status_legend": {
+    "live": "Shipped and in production",
+    "early": "Live but early-stage or limited access",
+    "announced": "Publicly announced, not yet shipped",
+    "acquired": "Acquired — operating under parent company"
+  }
+}
+</script>
 
 <script>
 document.getElementById('sf').addEventListener('submit',async e=>{

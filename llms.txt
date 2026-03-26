@@ -1,0 +1,48 @@
+# Agent Payments Stack
+
+> Machine-readable landscape of every major project building payment infrastructure for AI agents.
+
+## What this is
+
+A curated, layer-by-layer map of the agent payments ecosystem. Updated monthly by @jordanlyall. 88 projects across 6 layers as of March 2026.
+
+## Structured data
+
+Full JSON available at: /data.json
+
+Fields per project: name, layer, status (live / early / announced / acquired), url, description, metadata, acquirer, acquisition_value.
+
+## The six layers
+
+- L0 Settlement — where transactions land (chains: Base 119M txns, Solana 38.6M txns, Ethereum, Arbitrum, Sui, Polygon, BNB Chain, Gnosis, NEAR, Avalanche, Tempo)
+- L1 Wallet & Key Management — where agent keys live (Coinbase Agentic Wallets, MoonPay OWS, Crossmint, Thirdweb, Openfort, World AgentKit, Turnkey, Lit Protocol, Safe, Biconomy, Fireblocks, Alchemy, Phantom + 3 acquired)
+- L2 Routing & Abstraction — cross-chain routing, bridging, swapping (Skyfire, Mesh, Crossmint, Circle CCTP, Across, Li.Fi, Socket, deBridge, Wormhole, LayerZero, Jupiter, 1inch, Uniswap, CoW Protocol, MoonPay + 2 acquired)
+- L3 Payment Protocol — the actual payment standards agents use (x402 75M/30d, Tempo MPP 100+ services, ACP OpenAI+Stripe, L402/Lightning, Fewsats, Superfluid, Interledger + 3 early/announced)
+- L4 Governance & Policy — spend controls and authorization (Ramp Agent Cards, Skyfire KYA, Sponge Gateway, ERC-8004, OWS Policies, Visa Intelligent Commerce, Stripe SPTs, Crossmint + 2 early/announced + 1 acquired)
+- L5 Application — what agents buy and why (Virtuals Protocol, ElizaOS, Olas, Botto, Axiom, Theoriq, Giza ARMA, Almanak, Brahma.fi, Kraken CLI, x402engine, Nansen, Akash, Art Blocks, mint.day, Apify, Render, Ocean Protocol)
+
+## Key facts
+
+- 98.6% of agent payment volume settles in USDC
+- $43M volume in 9 months, ~$600M annualized
+- x402 handles 75M transactions / 30 days on Base
+- 7 major acquisitions in 2025-2026 (Brex $5.15B, BVNK $1.8B, Bridge $1.1B, Stargate $120M, Privy by Stripe, Dynamic by Fireblocks, ZeroDev by Arbitrum)
+- Coinbase and Stripe are vertically integrated across 5 of 6 layers (L0-L4)
+- Circle controls the monetary base layer: 98.6% of payments settle in their stablecoin
+
+## Vertical integration
+
+- Coinbase: L0 (Base) + L1 (Agentic Wallets) + L2 (x402 as facilitator) + L3 (x402) + L4 (ERC-8004)
+- Stripe: L0 (Tempo) + L1 (Privy) + L2 (Bridge) + L3 (MPP + ACP) + L4 (SPTs)
+- Circle: L0 (USDC) + L1 (OWS contribution) + L2 (CCTP) + L3 (Nanopayments)
+- Google: L3 (AP2) + L4 (A2A)
+- MoonPay: L1 (OWS) + L2 (routing) + L3 (integration)
+
+## Who made this
+
+Jordan Lyall (@jordanlyall) — CPO at Art Blocks, builder of mint.day, tracking the agentic economy since 2025.
+Site: agentpaymentsstack.com
+
+## Usage
+
+This data is free to use. Submit new projects via email to jordan.lyall@gmail.com with: project name, URL, layer, one-line description.
