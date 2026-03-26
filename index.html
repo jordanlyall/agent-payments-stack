@@ -372,6 +372,45 @@
   }
   .email-form button:hover { opacity: 0.85; }
 
+  /* Inline subscribe strip */
+  .inline-sub {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0 8px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--faint);
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .inline-sub span { color: var(--secondary); flex-shrink: 0; }
+  .inline-sub input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+    min-width: 0;
+  }
+  .inline-sub input::placeholder { color: var(--muted); }
+  .inline-sub button {
+    background: var(--text);
+    color: #0a0a0a;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-family: inherit;
+  }
+  .inline-sub button:hover { opacity: 0.85; }
+  .inline-sub .is-done { color: var(--secondary); font-size: 12px; }
+
   /* Submit + Changelog */
   .submit-bar {
     display: flex;
@@ -580,6 +619,14 @@
     <span class="nav-dot"></span>
     <a href="#hackathons">Hackathons</a>
   </nav>
+
+  <!-- Inline subscribe -->
+  <form class="inline-sub" id="isf">
+    <span>Get updates when the stack changes:</span>
+    <input type="email" id="ise" placeholder="you@company.com" required>
+    <button type="submit" id="isb">Subscribe</button>
+    <span class="is-done" id="ism" style="display:none"></span>
+  </form>
 
   <div class="stack">
 
@@ -1068,15 +1115,25 @@
 </script>
 
 <script>
+async function doSubscribe(email,btn,msg){
+  btn.textContent='...';btn.disabled=true;
+  try{
+    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    if(r.ok){msg.textContent='Subscribed.';msg.style.color='var(--secondary)';msg.style.display='inline';btn.style.display='none';}
+    else{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
+  }catch{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
+}
+document.getElementById('isf').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=document.getElementById('ise').value;
+  await doSubscribe(v,document.getElementById('isb'),document.getElementById('ism'));
+  document.getElementById('ise').value='';
+});
 document.getElementById('sf').addEventListener('submit',async e=>{
   e.preventDefault();
-  const b=document.getElementById('sb'),m=document.getElementById('sm'),v=document.getElementById('se').value;
-  b.textContent='...';b.disabled=true;m.style.display='none';
-  try{
-    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})});
-    if(r.ok){m.textContent="Subscribed. You'll hear from us when the stack updates.";m.style.color='var(--secondary)';m.style.display='block';document.getElementById('se').value='';b.textContent='Done';}
-    else{m.textContent='Something went wrong. Try again.';m.style.color='var(--acq)';m.style.display='block';b.textContent='Subscribe';b.disabled=false;}
-  }catch{m.textContent='Something went wrong. Try again.';m.style.color='var(--acq)';m.style.display='block';b.textContent='Subscribe';b.disabled=false;}
+  const v=document.getElementById('se').value;
+  await doSubscribe(v,document.getElementById('sb'),document.getElementById('sm'));
+  document.getElementById('se').value='';
 });
 </script>
 </body>
