@@ -372,44 +372,40 @@
   }
   .email-form button:hover { opacity: 0.85; }
 
-  /* Inline subscribe strip */
-  .inline-sub {
+  /* Nav subscribe form */
+  .nav-sub {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin: 16px 0 8px;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--faint);
-    border-radius: 8px;
-    font-size: 13px;
+    gap: 0;
+    margin-left: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    overflow: hidden;
   }
-  .inline-sub span { color: var(--secondary); flex-shrink: 0; }
-  .inline-sub input {
-    flex: 1;
+  .nav-sub input {
     background: transparent;
     border: none;
     outline: none;
     color: var(--text);
-    font-size: 13px;
-    font-family: inherit;
-    min-width: 0;
-  }
-  .inline-sub input::placeholder { color: var(--muted); }
-  .inline-sub button {
-    background: var(--text);
-    color: #0a0a0a;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 12px;
     font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    flex-shrink: 0;
     font-family: inherit;
+    padding: 4px 10px;
+    width: 150px;
   }
-  .inline-sub button:hover { opacity: 0.85; }
-  .inline-sub .is-done { color: var(--secondary); font-size: 12px; }
+  .nav-sub input::placeholder { color: var(--muted); }
+  .nav-sub button {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+    border: none;
+    border-left: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .nav-sub button:hover { background: rgba(255,255,255,0.14); }
 
   /* Submit + Changelog */
   .submit-bar {
@@ -574,6 +570,10 @@
       <a href="#changelog">Changelog</a>
       <a href="#api">API</a>
       <a href="https://tally.so/r/rjVvd5" target="_blank">Submit</a>
+      <form class="nav-sub" id="nsf">
+        <input type="email" id="nse" placeholder="your@email.com" required>
+        <button type="submit" id="nsb">Subscribe</button>
+      </form>
     </div>
   </div>
 </nav>
@@ -619,14 +619,6 @@
     <span class="nav-dot"></span>
     <a href="#hackathons">Hackathons</a>
   </nav>
-
-  <!-- Inline subscribe -->
-  <form class="inline-sub" id="isf">
-    <span>Get updates when the stack changes:</span>
-    <input type="email" id="ise" placeholder="you@company.com" required>
-    <button type="submit" id="isb">Subscribe</button>
-    <span class="is-done" id="ism" style="display:none"></span>
-  </form>
 
   <div class="stack">
 
@@ -1123,11 +1115,11 @@ async function doSubscribe(email,btn,msg){
     else{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
   }catch{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
 }
-document.getElementById('isf').addEventListener('submit',async e=>{
+document.getElementById('nsf').addEventListener('submit',async e=>{
   e.preventDefault();
-  const v=document.getElementById('ise').value;
-  await doSubscribe(v,document.getElementById('isb'),document.getElementById('ism'));
-  document.getElementById('ise').value='';
+  const v=document.getElementById('nse').value,b=document.getElementById('nsb');
+  await doSubscribe(v,b,b);
+  document.getElementById('nse').value='';b.textContent='✓';
 });
 document.getElementById('sf').addEventListener('submit',async e=>{
   e.preventDefault();
