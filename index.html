@@ -155,9 +155,6 @@
   }
 
   /* Legend */
-  .legend { display: flex; gap: 20px; margin: 0 0 16px; padding-bottom: 20px; border-bottom: 1px solid var(--faint); }
-  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
-  .legend-swatch { width: 32px; height: 18px; border-radius: 4px; }
 
   /* Footer */
   .foot { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
@@ -438,18 +435,36 @@
   .filter-btns { display: flex; gap: 6px; flex-shrink: 0; }
   .fb {
     background: transparent;
-    border: 1px solid var(--faint);
-    border-radius: 20px;
-    padding: 4px 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 5px;
+    padding: 4px 11px;
     font-size: 12px;
-    color: var(--muted);
+    font-weight: 500;
+    color: rgba(255,255,255,0.35);
     cursor: pointer;
     font-family: inherit;
     transition: all 0.12s;
     white-space: nowrap;
+    opacity: 0.6;
   }
-  .fb:hover { border-color: rgba(255,255,255,0.2); color: var(--secondary); }
-  .fb.on { border-color: rgba(255,255,255,0.35); color: var(--text); background: rgba(255,255,255,0.06); }
+  .fb:hover { opacity: 1; }
+  .fb.on { opacity: 1; }
+  /* All */
+  .fb[data-f="all"] { background: rgba(255,255,255,0.04); color: var(--muted); }
+  .fb[data-f="all"].on { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: var(--text); }
+  /* Live */
+  .fb[data-f="live"] { background: rgba(255,255,255,0.04); color: var(--secondary); border-color: rgba(255,255,255,0.1); }
+  .fb[data-f="live"].on { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); color: var(--text); }
+  /* Early */
+  .fb[data-f="early"] { background: rgba(212,168,64,0.06); border-color: rgba(212,168,64,0.18); color: rgba(212,168,64,0.7); }
+  .fb[data-f="early"].on { background: rgba(212,168,64,0.1); border-color: rgba(212,168,64,0.35); color: rgba(212,168,64,1); }
+  /* Announced */
+  .fb[data-f="ann"] { background: transparent; border: 1px dashed rgba(255,255,255,0.15); color: rgba(255,255,255,0.35); }
+  .fb[data-f="ann"].on { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); }
+  /* Acquired */
+  .fb[data-f="acq"] { background: rgba(232,105,74,0.07); border-color: rgba(232,105,74,0.2); color: rgba(232,105,74,0.65); }
+  .fb[data-f="acq"].on { background: rgba(232,105,74,0.12); border-color: rgba(232,105,74,0.4); color: rgba(232,105,74,1); }
+
   .filter-count { font-size: 11px; color: var(--muted); flex-shrink: 0; white-space: nowrap; }
   .no-results { padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); display: none; }
 
@@ -622,7 +637,6 @@
     .t .sm { font-size: 8px; }
     .bottom { grid-template-columns: 1fr; gap: 32px; }
     .vi-name { width: 52px; font-size: 11px; }
-    .legend { flex-wrap: wrap; gap: 12px; }
     .foot { flex-direction: column; gap: 8px; }
     .writeup { margin-top: 40px; padding-top: 32px; }
     .writeup h2 { font-size: 22px; }
@@ -678,14 +692,7 @@
   </div>
 
   <!-- Legend -->
-  <div class="legend">
-    <div class="legend-item"><div class="legend-swatch" style="background:rgba(255,255,255,0.06)"></div>Live with volume</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:rgba(212,168,64,0.08);border:1px solid rgba(212,168,64,0.15)"></div>Live / early</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:transparent;border:1px dashed rgba(255,255,255,0.12)"></div>Announced</div>
-    <div class="legend-item"><div class="legend-swatch" style="background:rgba(232,105,74,0.1)"></div>Acquired</div>
-  </div>
-
-  <!-- Anchor nav -->
+    <!-- Anchor nav -->
   <nav class="anchor-nav">
     <a href="#application">Application</a>
     <span class="nav-dot"></span>
