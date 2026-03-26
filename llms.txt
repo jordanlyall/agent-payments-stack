@@ -4,7 +4,7 @@
 
 ## What this is
 
-A curated, layer-by-layer map of the agent payments ecosystem. Updated monthly by @jordanlyall. 88 projects across 6 layers as of March 2026.
+A curated, layer-by-layer map of the agent payments ecosystem. Updated regularly by @jordanlyall. 91 projects across 6 layers as of March 26, 2026.
 
 ## Machine interfaces
 
@@ -17,12 +17,12 @@ Fields per project: name, layer, status (live / early / announced / acquired), u
 
 ## The six layers
 
-- L0 Settlement — where transactions land (chains: Base 119M txns, Solana 38.6M txns, Ethereum, Arbitrum, Sui, Polygon, BNB Chain, Gnosis, NEAR, Avalanche, Tempo)
-- L1 Wallet & Key Management — where agent keys live (Coinbase Agentic Wallets, MoonPay OWS, Crossmint, Thirdweb, Openfort, World AgentKit, Turnkey, Lit Protocol, Safe, Biconomy, Fireblocks, Alchemy, Phantom + 3 acquired)
-- L2 Routing & Abstraction — cross-chain routing, bridging, swapping (Skyfire, Mesh, Crossmint, Circle CCTP, Across, Li.Fi, Socket, deBridge, Wormhole, LayerZero, Jupiter, 1inch, Uniswap, CoW Protocol, MoonPay + 2 acquired)
-- L3 Payment Protocol — the actual payment standards agents use (x402 75M/30d, Tempo MPP 100+ services, ACP OpenAI+Stripe, L402/Lightning, Fewsats, Superfluid, Interledger + 3 early/announced)
-- L4 Governance & Policy — spend controls and authorization (Ramp Agent Cards, Skyfire KYA, Sponge Gateway, ERC-8004, OWS Policies, Visa Intelligent Commerce, Stripe SPTs, Crossmint + 2 early/announced + 1 acquired)
-- L5 Application — what agents buy and why (Virtuals Protocol, ElizaOS, Olas, Botto, Axiom, Theoriq, Giza ARMA, Almanak, Brahma.fi, Kraken CLI, x402engine, Nansen, Akash, Art Blocks, mint.day, Apify, Render, Ocean Protocol)
+- L0 Settlement — where transactions land (Base 119M txns, Solana 38.6M txns, Ethereum, Arbitrum, Sui, Polygon, BNB Chain, Gnosis, NEAR, Avalanche, Tempo)
+- L1 Wallet & Key Management — where agent keys live (Coinbase Agentic Wallets, MoonPay OWS, Crossmint, Thirdweb, Openfort, World AgentKit, Turnkey, Lit Protocol, Safe, Biconomy, Fireblocks, Alchemy, Phantom, WalletConnect, Dfns + 3 acquired)
+- L2 Routing & Abstraction — cross-chain routing, bridging, swapping (Skyfire, Mesh, Crossmint, Circle CCTP, Across, Li.Fi, Socket, deBridge, Wormhole, LayerZero, Jupiter, 1inch, Uniswap, CoW Protocol, MoonPay, ReqCast + 2 acquired)
+- L3 Payment Protocol — the actual payment standards agents use (x402 75M/30d, Tempo MPP 100+ services, ACP OpenAI+Stripe, L402/Lightning, Fewsats, Superfluid, Interledger, AgentPay, Dhali + 3 early/announced)
+- L4 Governance & Policy — spend controls and authorization (Ramp Agent Cards, Skyfire KYA, Sponge Gateway, ERC-8004, OWS Policies, Visa Intelligent Commerce, Stripe SPTs, Crossmint, AgentPay + 2 early/announced + 1 acquired)
+- L5 Application — what agents buy and why (Virtuals Protocol, ElizaOS, Olas, Botto, Axiom, Theoriq, Giza ARMA, Almanak, Brahma.fi, Kraken CLI, x402engine, Nansen, Akash, Art Blocks, mint.day, Apify, Render, Ocean Protocol, Run402, Cascade)
 
 ## Key facts
 
@@ -46,6 +46,7 @@ Fields per project: name, layer, status (live / early / announced / acquired), u
 Jordan Lyall (@jordanlyall) — CPO at Art Blocks, builder of mint.day, tracking the agentic economy since 2025.
 Site: agentpaymentsstack.com
 
-## Usage
+## Submit a project
 
-This data is free to use. Submit new projects via email to jordan.lyall@gmail.com with: project name, URL, layer, one-line description.
+Submit via: https://tally.so/r/rjVvd5
+Criteria: purpose-built for agent payments, live or credibly announced, fits one of the six layers, agents are a primary use case.
