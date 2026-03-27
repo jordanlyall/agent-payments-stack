@@ -3,7 +3,7 @@
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
   "updated": "2026-03-27",
-  "version": "1.9",
+  "version": "1.10",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -41,7 +41,8 @@
           ],
           "docs": "https://whitepaper.virtuals.io",
           "chain": "Base",
-          "funding": "$16M seed/ICO"
+          "funding": "$16M seed/ICO",
+          "editorial": "Largest tokenized agent launchpad by TVL. Revenue-sharing model between agents and token holders is a novel economic primitive. M raised, Base-native."
         },
         {
           "layer": "L5",
@@ -78,7 +79,8 @@
           "npm": {
             "package": "@elizaos/core",
             "weekly_downloads": 9036
-          }
+          },
+          "editorial": "Most-forked agent framework. De facto standard for multi-agent deployments. The x402 and Coinbase Agentic Wallet SDKs both have ElizaOS plugins."
         },
         {
           "layer": "L5",
@@ -554,7 +556,8 @@
           ],
           "url": "https://www.brex.com",
           "x": "brex",
-          "funding": "$1.2B total"
+          "funding": "$1.2B total",
+          "editorial": "Acquired by Capital One for .15B in 2025. Agent card issuing and spend management product now under Capital One umbrella. Largest acquisition in the stack by deal value."
         },
         {
           "layer": "L4",
@@ -685,7 +688,8 @@
             "skyfire-kya"
           ],
           "docs": "https://docs.stripe.com/payments/stablecoin-payments",
-          "chain": "multi"
+          "chain": "multi",
+          "editorial": "Stripe's stablecoin-native answer to agent payments. SPTs abstract the USDC/USDB complexity for merchants already on Stripe. Convergence play: Stripe is acquiring its way across the stack (Privy, Bridge)."
         },
         {
           "layer": "L4",
@@ -1054,7 +1058,8 @@
             "reqcast"
           ],
           "url": "https://www.x402.org",
-          "docs": "https://docs.cdp.coinbase.com/x402/welcome"
+          "docs": "https://docs.cdp.coinbase.com/x402/welcome",
+          "editorial": "The de facto standard for agent micropayments. Coinbase, Anthropic, and Stripe are all building around it. 75M transactions on Base in 30 days as of March 2026. Open spec — anyone can implement."
         },
         {
           "layer": "L3",
@@ -1239,7 +1244,8 @@
           "npm": {
             "package": "@superfluid-finance/sdk-core",
             "weekly_downloads": 4338
-          }
+          },
+          "editorial": "Only streaming payment protocol with meaningful adoption. Real-time per-second flows are the natural payment model for subscription agents and continuous services. 14M+ streams created."
         },
         {
           "layer": "L3",
@@ -1538,7 +1544,8 @@
           "npm": {
             "package": "@skyfire-xyz/skyfire-sdk",
             "weekly_downloads": 106
-          }
+          },
+          "editorial": "Fullest-stack agent payment network: identity (KYA), wallet provisioning, and routing in one product. .5M seed. Competes with piecemeal stacks built from x402 + Coinbase + Circle."
         },
         {
           "layer": "L2",
@@ -1685,7 +1692,8 @@
           "url": "https://www.circle.com/cross-chain-transfer-protocol",
           "x": "circle",
           "docs": "https://developers.circle.com/cctp",
-          "funding": "$1.1B pre-IPO"
+          "funding": "$1.1B pre-IPO",
+          "editorial": "Native burn-and-mint USDC bridging across 9 chains. No wrapped tokens, no bridge risk. The clean-room solution for agents that need USDC on the right chain."
         },
         {
           "layer": "L2",
@@ -1723,7 +1731,8 @@
           ],
           "url": "https://www.bridge.xyz",
           "x": "Stablecoin",
-          "funding": "$58M pre-acquisition"
+          "funding": "$58M pre-acquisition",
+          "editorial": "Acquired by Stripe for .1B in 2024. Stablecoin issuance and cross-border rails now part of the Stripe stack. Key for fiat-to-stablecoin conversion in agent payment flows."
         },
         {
           "layer": "L2",
@@ -1763,7 +1772,8 @@
           "npm": {
             "package": "@across-protocol/app-sdk",
             "weekly_downloads": 2936
-          }
+          },
+          "editorial": "Fastest USDC bridge by settlement time. Optimistic architecture (no ZK wait) makes it practical for agent payment flows that need cross-chain funds in seconds, not minutes."
         },
         {
           "layer": "L2",
@@ -1932,7 +1942,8 @@
           "x": "LayerZero_Labs",
           "docs": "https://docs.layerzero.network",
           "chain": "multi",
-          "funding": "$263M total"
+          "funding": "$263M total",
+          "editorial": "Widest chain coverage (100+) for agent payment routing. Note: dual-licensed MIT + LZBL-1.2 — the commercial license is restrictive. Review before building a product on top."
         },
         {
           "layer": "L2",
@@ -2203,7 +2214,8 @@
           "npm": {
             "package": "@coinbase/agentkit",
             "weekly_downloads": 3000
-          }
+          },
+          "editorial": "The reference implementation for agent wallets. Deep integration with x402 and Coinbase CDP. If you're building on x402, this is the path of least resistance for wallet provisioning."
         },
         {
           "layer": "L1",
@@ -2326,7 +2338,8 @@
           "npm": {
             "package": "@turnkey/sdk-server",
             "weekly_downloads": 137506
-          }
+          },
+          "editorial": "Leading L1 by npm adoption — 137K weekly downloads. API-first MPC signing is the developer-preferred approach for agent key management. No seed phrases, no HSMs required."
         },
         {
           "layer": "L1",
@@ -2360,7 +2373,8 @@
           "npm": {
             "package": "@privy-io/react-auth",
             "weekly_downloads": 128267
-          }
+          },
+          "editorial": "Acquired by Stripe in 2025. The embedded wallet SDK most consumer apps use. Now part of Stripe's agent commerce stack alongside Bridge and SPTs."
         },
         {
           "layer": "L1",
@@ -2425,7 +2439,8 @@
           "npm": {
             "package": "@lit-protocol/lit-node-client",
             "weekly_downloads": 5478
-          }
+          },
+          "editorial": "Enables programmable signing conditions — agents can execute transactions only when specified conditions are met. Threshold cryptography without a central key custodian."
         },
         {
           "layer": "L1",
@@ -2481,7 +2496,8 @@
           "npm": {
             "package": "@safe-global/protocol-kit",
             "weekly_downloads": 49434
-          }
+          },
+          "editorial": "The standard for programmable agent treasuries. Multi-sig + spending rules make it the default for agents holding meaningful funds. M strategic raise signals institutional adoption."
         },
         {
           "layer": "L1",
@@ -2732,7 +2748,8 @@
           "url": "https://base.org",
           "x": "base",
           "docs": "https://docs.base.org",
-          "chain": "Base"
+          "chain": "Base",
+          "editorial": "Dominant settlement chain for agent payments by transaction count. x402, Tempo, and most L3 protocols default to Base. Coinbase subsidy keeps gas near-zero for agents."
         },
         {
           "layer": "L0",
@@ -2784,7 +2801,8 @@
           ],
           "url": "https://tempo.xyz",
           "x": "tempo",
-          "docs": "https://docs.tempo.xyz"
+          "docs": "https://docs.tempo.xyz",
+          "editorial": "The only regulated stablecoin payment network built specifically for agent commerce. MPP (Machine Payments Protocol), co-developed with Stripe, is the off-chain counterpart to x402. B+ volume predates the agent focus."
         },
         {
           "layer": "L0",
