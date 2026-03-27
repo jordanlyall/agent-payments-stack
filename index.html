@@ -797,6 +797,31 @@
     margin: 0 14px 0 56px;
   }
 
+
+  /* Stack Rankings */
+  .rankings { margin: 36px 0 0; padding: 28px 0 0; border-top: 1px solid var(--faint); }
+  .rankings-header { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; }
+  .rankings-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .rankings-sub { font-size: 11px; color: var(--faint); font-family: 'JetBrains Mono', monospace; }
+  .rankings-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 6px; overflow: hidden; }
+  .rank-table { background: var(--bg); padding: 16px; }
+  .rank-layer-head { display: flex; align-items: baseline; gap: 7px; margin-bottom: 12px; }
+  .rank-layer-id { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; color: var(--muted); }
+  .rank-layer-name { font-size: 12px; font-weight: 600; color: var(--text); }
+  .rank-signal-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--faint); margin-left: auto; }
+  .rank-rows { display: flex; flex-direction: column; gap: 1px; }
+  .rank-row { display: flex; align-items: center; gap: 9px; padding: 7px 8px; border-radius: 4px; text-decoration: none; transition: background 0.1s; }
+  .rank-row:hover { background: rgba(255,255,255,0.04); }
+  .rank-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--faint); width: 12px; flex-shrink: 0; text-align: right; }
+  .rank-name { font-size: 12.5px; font-weight: 450; color: var(--text); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .rank-val { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--secondary); flex-shrink: 0; }
+  .rank-row.rank-acq .rank-name { color: var(--acq); }
+  .rank-row.rank-early .rank-name { color: var(--early); }
+  .rank-no-data { font-size: 11.5px; color: var(--faint); padding: 8px 0; font-style: italic; }
+  .rank-more { font-size: 10.5px; color: var(--faint); margin-top: 8px; font-family: 'JetBrains Mono', monospace; }
+  @media (max-width: 720px) { .rankings-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 480px) { .rankings-grid { grid-template-columns: 1fr; } }
+
 </style>
 </head>
 <body>
@@ -1061,6 +1086,134 @@
   </div>
 
   <!-- Bottom -->
+<!-- RANKINGS-START -->
+<div class="rankings">
+  <div class="rankings-header"><span class="rankings-title">Stack Rankings</span><span class="rankings-sub">by developer adoption signal</span></div>
+  <div class="rankings-grid">
+  <div class="rank-table">
+    <div class="rank-layer-head">
+      <span class="rank-layer-id">L1</span><span class="rank-layer-name">Wallet & Keys</span><span class="rank-signal-label">npm downloads</span>
+    </div>
+    <div class="rank-rows">
+      <a class="rank-row" href="/walletconnect">
+        <span class="rank-num">1</span>
+        <span class="rank-name">WalletConnect</span>
+        <span class="rank-val">854K /wk</span>
+      </a>
+      <a class="rank-row" href="/turnkey">
+        <span class="rank-num">2</span>
+        <span class="rank-name">Turnkey</span>
+        <span class="rank-val">138K /wk</span>
+      </a>
+      <a class="rank-row rank-acq" href="/privy">
+        <span class="rank-num">3</span>
+        <span class="rank-name">Privy</span>
+        <span class="rank-val">128K /wk</span>
+      </a>
+      <a class="rank-row" href="/alchemy">
+        <span class="rank-num">4</span>
+        <span class="rank-name">Alchemy</span>
+        <span class="rank-val">53.8K /wk</span>
+      </a>
+    </div>
+    <div class="rank-more">15 more in this layer</div>
+  </div>
+  <div class="rank-table">
+    <div class="rank-layer-head">
+      <span class="rank-layer-id">L2</span><span class="rank-layer-name">Routing</span><span class="rank-signal-label">GitHub stars</span>
+    </div>
+    <div class="rank-rows">
+      <a class="rank-row" href="/uniswap">
+        <span class="rank-num">1</span>
+        <span class="rank-name">Uniswap</span>
+        <span class="rank-val">2.5K ★</span>
+      </a>
+      <a class="rank-row" href="/li-fi">
+        <span class="rank-num">2</span>
+        <span class="rank-name">Li.Fi</span>
+        <span class="rank-val">23.7K /wk</span>
+      </a>
+      <a class="rank-row" href="/wormhole">
+        <span class="rank-num">3</span>
+        <span class="rank-name">Wormhole</span>
+        <span class="rank-val">1.9K ★</span>
+      </a>
+      <a class="rank-row" href="/layerzero">
+        <span class="rank-num">4</span>
+        <span class="rank-name">LayerZero</span>
+        <span class="rank-val">769 ★</span>
+      </a>
+    </div>
+    <div class="rank-more">18 more in this layer</div>
+  </div>
+  <div class="rank-table">
+    <div class="rank-layer-head">
+      <span class="rank-layer-id">L3</span><span class="rank-layer-name">Protocol</span><span class="rank-signal-label">GitHub stars</span>
+    </div>
+    <div class="rank-rows">
+      <a class="rank-row" href="/x402">
+        <span class="rank-num">1</span>
+        <span class="rank-name">x402</span>
+        <span class="rank-val">5.8K ★</span>
+      </a>
+      <a class="rank-row" href="/interledger">
+        <span class="rank-num">2</span>
+        <span class="rank-name">Interledger</span>
+        <span class="rank-val">512 ★</span>
+      </a>
+      <a class="rank-row" href="/superfluid">
+        <span class="rank-num">3</span>
+        <span class="rank-name">Superfluid</span>
+        <span class="rank-val">4.3K /wk</span>
+      </a>
+      <a class="rank-row" href="/faremeter">
+        <span class="rank-num">4</span>
+        <span class="rank-name">Faremeter</span>
+        <span class="rank-val">61 ★</span>
+      </a>
+    </div>
+    <div class="rank-more">22 more in this layer</div>
+  </div>
+  <div class="rank-table">
+    <div class="rank-layer-head">
+      <span class="rank-layer-id">L4</span><span class="rank-layer-name">Governance</span>
+    </div>
+    <div class="rank-no-data">No public metrics yet</div>
+  </div>
+  <div class="rank-table">
+    <div class="rank-layer-head">
+      <span class="rank-layer-id">L5</span><span class="rank-layer-name">Application</span><span class="rank-signal-label">npm downloads</span>
+    </div>
+    <div class="rank-rows">
+      <a class="rank-row" href="/elizaos">
+        <span class="rank-num">1</span>
+        <span class="rank-name">ElizaOS</span>
+        <span class="rank-val">9.0K /wk</span>
+      </a>
+      <a class="rank-row" href="/olas">
+        <span class="rank-num">2</span>
+        <span class="rank-name">Olas</span>
+        <span class="rank-val">119 ★</span>
+      </a>
+    </div>
+    <div class="rank-more">22 more in this layer</div>
+  </div>
+  <div class="rank-table">
+    <div class="rank-layer-head">
+      <span class="rank-layer-id">L0</span><span class="rank-layer-name">Settlement</span><span class="rank-signal-label">on-chain volume</span>
+    </div>
+    <div class="rank-rows">
+      <a class="rank-row" href="/base">
+        <span class="rank-num">1</span>
+        <span class="rank-name">Base</span>
+        <span class="rank-val">119M txns/30d</span>
+      </a>
+    </div>
+    <div class="rank-more">12 more in this layer</div>
+  </div>
+  </div>
+</div>
+<!-- RANKINGS-END -->
   <div class="bottom">
     <div>
       <div class="bot-title">Vertical Integration</div>
