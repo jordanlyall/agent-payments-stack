@@ -74,7 +74,11 @@
             "tempo-mpp"
           ],
           "docs": "https://docs.elizaos.ai",
-          "chain": "multi"
+          "chain": "multi",
+          "npm": {
+            "package": "@elizaos/core",
+            "weekly_downloads": 9036
+          }
         },
         {
           "layer": "L5",
@@ -1140,7 +1144,11 @@
             "coinbase-agentic-wallets"
           ],
           "docs": "https://docs.superfluid.org",
-          "funding": "$14.1M total"
+          "funding": "$14.1M total",
+          "npm": {
+            "package": "@superfluid-finance/sdk-core",
+            "weekly_downloads": 4338
+          }
         },
         {
           "layer": "L3",
@@ -1418,7 +1426,11 @@
           "x": "trySkyfire",
           "docs": "https://docs.skyfire.xyz",
           "chain": "Base",
-          "funding": "$9.5M seed"
+          "funding": "$9.5M seed",
+          "npm": {
+            "package": "@skyfire-xyz/skyfire-sdk",
+            "weekly_downloads": 106
+          }
         },
         {
           "layer": "L2",
@@ -1639,7 +1651,11 @@
           "x": "AcrossProtocol",
           "docs": "https://docs.across.to",
           "chain": "multi",
-          "funding": "$51M total"
+          "funding": "$51M total",
+          "npm": {
+            "package": "@across-protocol/app-sdk",
+            "weekly_downloads": 2936
+          }
         },
         {
           "layer": "L2",
@@ -1673,7 +1689,11 @@
           "x": "lifiprotocol",
           "docs": "https://docs.li.fi",
           "chain": "multi",
-          "funding": "$51.7M total"
+          "funding": "$51.7M total",
+          "npm": {
+            "package": "@lifi/sdk",
+            "weekly_downloads": 23713
+          }
         },
         {
           "layer": "L2",
@@ -2048,7 +2068,11 @@
             "elizaos",
             "skyfire-kya"
           ],
-          "docs": "https://docs.cdp.coinbase.com/agentic-wallet/welcome"
+          "docs": "https://docs.cdp.coinbase.com/agentic-wallet/welcome",
+          "npm": {
+            "package": "@coinbase/agentkit",
+            "weekly_downloads": 3000
+          }
         },
         {
           "layer": "L1",
@@ -2082,7 +2106,11 @@
           "x": "crossmint",
           "docs": "https://docs.crossmint.com",
           "chain": "multi",
-          "funding": "$23.6M total"
+          "funding": "$23.6M total",
+          "npm": {
+            "package": "@crossmint/client-sdk-react-ui",
+            "weekly_downloads": 5799
+          }
         },
         {
           "layer": "L1",
@@ -2100,7 +2128,11 @@
           "x": "thirdweb",
           "docs": "https://portal.thirdweb.com",
           "chain": "multi",
-          "funding": "$29M total"
+          "funding": "$29M total",
+          "npm": {
+            "package": "thirdweb",
+            "weekly_downloads": 34986
+          }
         },
         {
           "layer": "L1",
@@ -2119,7 +2151,11 @@
           "x": "openfortxyz",
           "docs": "https://www.openfort.io/docs",
           "chain": "multi",
-          "funding": "$3M seed"
+          "funding": "$3M seed",
+          "npm": {
+            "package": "@openfort/openfort-js",
+            "weekly_downloads": 700
+          }
         },
         {
           "layer": "L1",
@@ -2155,7 +2191,11 @@
           "x": "turnkeyhq",
           "docs": "https://docs.turnkey.com",
           "chain": "multi",
-          "funding": "$50M+ total"
+          "funding": "$50M+ total",
+          "npm": {
+            "package": "@turnkey/sdk-server",
+            "weekly_downloads": 137506
+          }
         },
         {
           "layer": "L1",
@@ -2185,7 +2225,11 @@
           "x": "privy_io",
           "docs": "https://docs.privy.io",
           "chain": "multi",
-          "funding": "$41M total"
+          "funding": "$41M total",
+          "npm": {
+            "package": "@privy-io/react-auth",
+            "weekly_downloads": 128267
+          }
         },
         {
           "layer": "L1",
@@ -2215,7 +2259,11 @@
           "x": "dynamic_xyz",
           "docs": "https://docs.dynamic.xyz",
           "chain": "multi",
-          "funding": "$21M total"
+          "funding": "$21M total",
+          "npm": {
+            "package": "@dynamic-labs/sdk-react-core",
+            "weekly_downloads": 34951
+          }
         },
         {
           "layer": "L1",
@@ -2242,7 +2290,11 @@
           "x": "LitProtocol",
           "docs": "https://developer.litprotocol.com",
           "chain": "multi",
-          "funding": "$17.5M total"
+          "funding": "$17.5M total",
+          "npm": {
+            "package": "@lit-protocol/lit-node-client",
+            "weekly_downloads": 5478
+          }
         },
         {
           "layer": "L1",
@@ -2294,7 +2346,11 @@
             "elizaos"
           ],
           "docs": "https://docs.safe.global",
-          "funding": "$100M strategic"
+          "funding": "$100M strategic",
+          "npm": {
+            "package": "@safe-global/protocol-kit",
+            "weekly_downloads": 49434
+          }
         },
         {
           "layer": "L1",
@@ -2333,7 +2389,11 @@
           "x": "zerodev_app",
           "docs": "https://docs.zerodev.app",
           "chain": "multi",
-          "funding": "$1M pre-seed"
+          "funding": "$1M pre-seed",
+          "npm": {
+            "package": "@zerodev/sdk",
+            "weekly_downloads": 25720
+          }
         },
         {
           "layer": "L1",
@@ -2361,7 +2421,11 @@
           "x": "biconomy",
           "docs": "https://docs.biconomy.io",
           "chain": "multi",
-          "funding": "$10.5M equity"
+          "funding": "$10.5M equity",
+          "npm": {
+            "package": "@biconomy/abstractjs",
+            "weekly_downloads": 6870
+          }
         },
         {
           "layer": "L1",
@@ -2399,7 +2463,11 @@
           "x": "AlchemyPlatform",
           "docs": "https://docs.alchemy.com",
           "chain": "multi",
-          "funding": "$564M total"
+          "funding": "$564M total",
+          "npm": {
+            "package": "alchemy-sdk",
+            "weekly_downloads": 53754
+          }
         },
         {
           "layer": "L1",
@@ -2437,7 +2505,11 @@
           ],
           "x": "WalletConnect",
           "docs": "https://docs.walletconnect.network",
-          "chain": "multi"
+          "chain": "multi",
+          "npm": {
+            "package": "@walletconnect/sign-client",
+            "weekly_downloads": 853574
+          }
         },
         {
           "layer": "L1",
@@ -2456,7 +2528,11 @@
           "x": "dfnsHQ",
           "docs": "https://docs.dfns.co",
           "chain": "multi",
-          "funding": "$29.5M total"
+          "funding": "$29.5M total",
+          "npm": {
+            "package": "@dfns/sdk",
+            "weekly_downloads": 19326
+          }
         },
         {
           "layer": "L1",
