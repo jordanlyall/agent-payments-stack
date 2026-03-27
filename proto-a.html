@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Payments Stack — Proto A: Map | Data</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Space Grotesk',-apple-system,sans-serif; -webkit-font-smoothing:antialiased; font-feature-settings:'ss01'; }
+  .page { max-width:1200px; margin:0 auto; padding:48px 56px 40px; }
+  .hdr { display:flex; flex-direction:column; margin-bottom:40px; }
+  .eyebrow { font-size:10.5px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  h1 { font-size:46px; font-weight:700; line-height:1; letter-spacing:-2px; }
+  .deck { font-size:15px; color:var(--secondary); line-height:1.55; max-width:520px; margin-top:10px; }
+  .nums { display:flex; margin-top:24px; padding-top:20px; border-top:1px solid var(--faint); align-items:flex-end; justify-content:space-between; }
+  .nums-stats { display:flex; gap:44px; align-items:flex-end; }
+  .num-v { font-size:26px; font-weight:600; line-height:1; letter-spacing:-.8px; font-variant-numeric:tabular-nums; }
+  .num-l { font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin-top:5px; font-weight:500; }
+  .controls { display:flex; align-items:center; gap:16px; }
+  .search-wrap { position:relative; }
+  .search-wrap input { background:var(--faint); border:1px solid rgba(255,255,255,.07); color:var(--text); font-family:'Space Grotesk',sans-serif; font-size:13px; padding:7px 12px 7px 32px; border-radius:5px; width:240px; outline:none; transition:border-color .15s; }
+  .search-wrap input::placeholder { color:var(--muted); }
+  .search-wrap input:focus { border-color:rgba(255,255,255,.16); }
+  .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; font-size:14px; }
+  .toggle { display:flex; background:var(--faint); border:1px solid rgba(255,255,255,.07); border-radius:5px; overflow:hidden; }
+  .toggle button { background:none; border:none; color:var(--secondary); font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:500; padding:7px 16px; cursor:pointer; letter-spacing:.03em; transition:background .12s,color .12s; }
+  .toggle button.active { background:rgba(255,255,255,.1); color:var(--text); }
+  .toggle button:hover:not(.active) { background:rgba(255,255,255,.05); color:var(--text); }
+  .stack { display:flex; flex-direction:column; border-top:1px solid var(--faint); }
+  .row { display:grid; grid-template-columns:260px 1fr; border-bottom:1px solid var(--faint); min-height:64px; }
+  .row-label { padding:18px 24px 18px 0; display:flex; flex-direction:column; justify-content:center; gap:3px; border-right:1px solid var(--faint); }
+  .row-n { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; color:var(--muted); letter-spacing:.02em; }
+  .row-title { font-size:14.5px; font-weight:600; letter-spacing:-.2px; }
+  .row-q { font-size:11px; color:var(--muted); font-weight:400; letter-spacing:.01em; }
+  .row-content { padding:14px 0 14px 24px; display:flex; flex-wrap:wrap; align-items:center; gap:5px; }
+  a.t, .t { display:inline-flex; align-items:center; padding:3px 10px; border-radius:4px; font-size:12px; font-weight:450; white-space:nowrap; background:rgba(255,255,255,.05); color:var(--text); line-height:1.45; border:1px solid rgba(255,255,255,.09); text-decoration:none; transition:background .12s,border-color .12s; }
+  a.t:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.16); }
+  .t.early, a.t.early { background:rgba(201,158,50,.08); color:var(--early); border:1px solid rgba(201,158,50,.22); }
+  a.t.early:hover { background:rgba(201,158,50,.14); border-color:rgba(201,158,50,.34); }
+  .t.ann, a.t.ann { background:transparent; color:var(--muted); border:1px dashed rgba(255,255,255,.14); }
+  a.t.ann:hover { background:rgba(255,255,255,.04); color:var(--secondary); }
+  .t.acq, a.t.acq { background:rgba(217,97,63,.09); color:var(--acq); border:1px solid rgba(217,97,63,.2); font-weight:480; }
+  a.t.acq:hover { background:rgba(217,97,63,.16); border-color:rgba(217,97,63,.32); }
+  .t .sig { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:500; opacity:.45; margin-left:4px; }
+  .t .fav { width:12px; height:12px; border-radius:2px; margin-right:5px; flex-shrink:0; opacity:.8; display:block; }
+  .data-view { display:none; flex-direction:column; }
+  .data-view.visible { display:flex; }
+  .map-view.hidden { display:none; }
+  .data-section { border-top:1px solid var(--faint); }
+  .data-section-hdr { display:grid; grid-template-columns:80px 1fr 120px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,.04); align-items:baseline; }
+  .data-layer-badge { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:600; color:var(--muted); letter-spacing:.04em; }
+  .data-layer-name { font-size:12px; font-weight:650; text-transform:uppercase; letter-spacing:.08em; color:var(--secondary); }
+  .data-sort-label { font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--muted); text-align:right; font-family:'JetBrains Mono',monospace; }
+  .data-rows { list-style:none; }
+  .data-row { display:grid; grid-template-columns:28px 36px 1fr 140px 80px; align-items:center; padding:9px 0; border-bottom:1px solid rgba(255,255,255,.03); }
+  .data-row:last-child { border-bottom:none; }
+  .data-row:hover { background:rgba(255,255,255,.02); margin:0 -8px; padding:9px 8px; }
+  .rank { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); font-weight:500; }
+  .data-fav { width:14px; height:14px; border-radius:2px; opacity:.75; }
+  .data-name { font-size:13.5px; font-weight:550; color:var(--text); padding-left:10px; }
+  .data-signal { font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; color:var(--secondary); text-align:right; }
+  .data-signal.top { color:var(--text); }
+  .data-signal.none { color:var(--muted); font-size:10px; }
+  .data-badge { text-align:right; }
+  .data-badge span { font-size:10px; font-weight:550; padding:2px 6px; border-radius:3px; background:rgba(255,255,255,.05); color:var(--muted); }
+  .data-badge span.early { background:rgba(201,158,50,.08); color:var(--early); }
+  .data-badge span.acq { background:rgba(217,97,63,.09); color:var(--acq); }
+  .data-badge span.ann { background:transparent; color:var(--ann); }
+  .data-more { font-size:12px; color:var(--muted); padding:10px 0 14px 64px; cursor:pointer; letter-spacing:.01em; }
+  .data-more:hover { color:var(--secondary); }
+  .data-more span { text-decoration:underline; text-underline-offset:3px; }
+  .foot { margin-top:28px; padding-top:16px; border-top:1px solid var(--faint); display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); }
+  .foot a { color:var(--secondary); font-weight:500; text-decoration:none; }
+  .foot a:hover { color:var(--text); }
+  .legend { display:flex; gap:20px; align-items:center; flex-wrap:wrap; }
+  .leg-item { display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--muted); }
+  .leg-dot { width:6px; height:6px; border-radius:2px; flex-shrink:0; }
+  .leg-dot.live { background:rgba(255,255,255,.25); }
+  .leg-dot.early { background:var(--early); opacity:.6; }
+  .leg-dot.ann { background:var(--ann); }
+  .leg-dot.acq { background:var(--acq); opacity:.7; }
+  @media(max-width:768px) {
+    .page { padding:32px 24px; }
+    h1 { font-size:32px; letter-spacing:-1.2px; }
+    .row { grid-template-columns:1fr; }
+    .row-label { border-right:none; border-bottom:1px solid var(--faint); padding:14px 0; }
+    .row-content { padding:12px 0; }
+    .nums-stats { gap:24px; }
+    .controls { flex-wrap:wrap; gap:10px; }
+    .search-wrap input { width:100%; }
+    .data-row { grid-template-columns:22px 30px 1fr 100px; }
+    .data-badge { display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hdr">
+    <div class="eyebrow">Research · March 2026</div>
+    <h1>Agent Payments Stack</h1>
+    <p class="deck">Every project building payment infrastructure for AI agents. 134 entries across 6 layers — from settlement rails to application logic.</p>
+    <div class="nums">
+      <div class="nums-stats">
+        <div><div class="num-v">134</div><div class="num-l">Projects</div></div>
+        <div><div class="num-v">6</div><div class="num-l">Layers</div></div>
+        <div><div class="num-v">$9.6B</div><div class="num-l">30d Volume</div></div>
+        <div><div class="num-v">98.6%</div><div class="num-l">USDC Settlement</div></div>
+      </div>
+      <div class="controls">
+        <div class="search-wrap">
+          <span class="search-icon">⌕</span>
+          <input type="text" id="search" placeholder="Search projects..." autocomplete="off">
+        </div>
+        <div class="toggle">
+          <button id="btn-map" class="active" onclick="setView('map')">Map</button>
+          <button id="btn-data" onclick="setView('data')">Data</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="stack map-view" id="map-view"></div>
+  <div class="data-view" id="data-view"></div>
+  <footer class="foot">
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot live"></div>Live</div>
+      <div class="leg-item"><div class="leg-dot early"></div>Early / Beta</div>
+      <div class="leg-item"><div class="leg-dot ann"></div>Announced</div>
+      <div class="leg-item"><div class="leg-dot acq"></div>Acquired</div>
+    </div>
+    <div><a href="https://x.com/jordanlyall">@jordanlyall</a> · Updated March 2026</div>
+  </footer>
+</div>
+<script>
+const LAYERS = [
+  { id:'L5', name:'Application', desc:'What gets bought and why', count:24, sort:'npm downloads',
+    projects:[
+      {id:'elizaos',name:'ElizaOS',domain:'elizaos.ai',status:'live',signal:{type:'npm',val:9036,label:'9K /wk'}},
+      {id:'virtuals-protocol',name:'Virtuals Protocol',domain:'virtuals.io',status:'live',signal:null},
+      {id:'olas',name:'Olas',domain:'olas.network',status:'live',signal:{type:'stars',val:119,label:'119 ★'}},
+      {id:'art-blocks',name:'Art Blocks',domain:'artblocks.io',status:'live',signal:null},
+      {id:'akash',name:'Akash',domain:'akash.network',status:'live',signal:null},
+      {id:'ocean-protocol',name:'Ocean Protocol',domain:'oceanprotocol.com',status:'live',signal:null},
+      {id:'botto',name:'Botto',domain:'botto.com',status:'live',signal:null},
+      {id:'axiom',name:'Axiom',domain:'axiom.xyz',status:'live',signal:null},
+      {id:'mint-day',name:'mint.day',domain:'mint.day',status:'live',signal:null}
+    ]},
+  { id:'L4', name:'Governance & Policy', desc:'May this agent spend?', count:30, sort:'launch signal',
+    projects:[
+      {id:'ramp-agent-cards',name:'Ramp Agent Cards',domain:'ramp.com',status:'live',signal:null},
+      {id:'brex',name:'Brex',domain:'brex.com',status:'acquired',signal:null},
+      {id:'skyfire-kya',name:'Skyfire KYA',domain:'skyfire.xyz',status:'live',signal:null},
+      {id:'stripe-spts',name:'Stripe SPTs',domain:'stripe.com',status:'live',signal:null},
+      {id:'visa-ic',name:'Visa Intelligent Commerce',domain:'visa.com',status:'early',signal:null},
+      {id:'erc-8004',name:'ERC-8004',domain:'ethereum.org',status:'early',signal:null},
+      {id:'openmatter',name:'OpenMatter',domain:'openmatter.xyz',status:'early',signal:null},
+      {id:'ghostspeak',name:'GhostSpeak',domain:'ghostspeak.ai',status:'live',signal:null},
+      {id:'agentpay-l4',name:'AgentPay',domain:'agentpay.dev',status:'early',signal:null}
+    ]},
+  { id:'L3', name:'Payment Protocol', desc:'How the payment flows', count:26, sort:'GitHub stars',
+    projects:[
+      {id:'x402',name:'x402',domain:'x402.org',status:'live',signal:{type:'stars',val:5800,label:'5.8K ★'}},
+      {id:'tempo-mpp',name:'Tempo MPP',domain:'usetempo.ai',status:'live',signal:null},
+      {id:'google-ap2',name:'Google AP2',domain:'google.com',status:'ann',signal:null},
+      {id:'acp',name:'ACP',domain:'agentcommerceprotocol.com',status:'live',signal:null},
+      {id:'l402',name:'L402 / Lightning',domain:'lightning.network',status:'live',signal:null},
+      {id:'superfluid',name:'Superfluid',domain:'superfluid.finance',status:'live',signal:{type:'npm',val:4338,label:'4.3K /wk'}},
+      {id:'interledger',name:'Interledger',domain:'interledger.org',status:'live',signal:{type:'stars',val:512,label:'512 ★'}},
+      {id:'faremeter',name:'Faremeter',domain:'faremeter.io',status:'early',signal:{type:'stars',val:61,label:'61 ★'}},
+      {id:'circle-nanopayments',name:'Circle Nanopayments',domain:'circle.com',status:'live',signal:null}
+    ]},
+  { id:'L2', name:'Routing & Abstraction', desc:'Which chain, token, rail', count:22, sort:'npm downloads',
+    projects:[
+      {id:'skyfire',name:'Skyfire',domain:'skyfire.xyz',status:'live',signal:null},
+      {id:'wormhole',name:'Wormhole',domain:'wormhole.com',status:'live',signal:{type:'stars',val:1900,label:'1.9K ★'}},
+      {id:'layerzero',name:'LayerZero',domain:'layerzero.network',status:'live',signal:{type:'stars',val:769,label:'769 ★'}},
+      {id:'li-fi',name:'Li.Fi',domain:'li.fi',status:'live',signal:{type:'npm',val:23713,label:'23.7K /wk'}},
+      {id:'uniswap',name:'Uniswap',domain:'uniswap.org',status:'live',signal:{type:'stars',val:2500,label:'2.5K ★'}},
+      {id:'circle-cctp',name:'Circle CCTP',domain:'circle.com',status:'live',signal:null},
+      {id:'kibble',name:'Kibble',domain:'kibble.xyz',status:'early',signal:null},
+      {id:'across',name:'Across',domain:'across.to',status:'live',signal:{type:'npm',val:2936,label:'2.9K /wk'}},
+      {id:'bridge',name:'Bridge',domain:'bridge.xyz',status:'acquired',signal:null}
+    ]},
+  { id:'L1', name:'Wallet & Key Mgmt', desc:'Where the keys live', count:19, sort:'npm downloads',
+    projects:[
+      {id:'walletconnect',name:'WalletConnect',domain:'walletconnect.com',status:'live',signal:{type:'npm',val:853574,label:'854K /wk'}},
+      {id:'turnkey',name:'Turnkey',domain:'turnkey.com',status:'live',signal:{type:'npm',val:137506,label:'138K /wk'}},
+      {id:'privy',name:'Privy',domain:'privy.io',status:'acquired',signal:{type:'npm',val:128267,label:'128K /wk'}},
+      {id:'safe',name:'Safe',domain:'safe.global',status:'live',signal:{type:'npm',val:49434,label:'49K /wk'}},
+      {id:'dynamic',name:'Dynamic',domain:'dynamic.xyz',status:'live',signal:{type:'npm',val:34951,label:'35K /wk'}},
+      {id:'thirdweb',name:'Thirdweb',domain:'thirdweb.com',status:'live',signal:{type:'npm',val:34986,label:'35K /wk'}},
+      {id:'dfns',name:'Dfns',domain:'dfns.co',status:'live',signal:{type:'npm',val:19326,label:'19K /wk'}},
+      {id:'coinbase-agentic-wallets',name:'Coinbase Agentic Wallets',domain:'coinbase.com',status:'live',signal:{type:'npm',val:3000,label:'3K /wk'}},
+      {id:'fireblocks',name:'Fireblocks',domain:'fireblocks.com',status:'live',signal:null}
+    ]},
+  { id:'L0', name:'Settlement', desc:'Where transactions land', count:13, sort:'volume',
+    projects:[
+      {id:'base',name:'Base',domain:'base.org',status:'live',signal:{type:'volume',val:119000000,label:'119M txns/30d'}},
+      {id:'solana',name:'Solana',domain:'solana.com',status:'live',signal:null},
+      {id:'ethereum',name:'Ethereum',domain:'ethereum.org',status:'live',signal:null},
+      {id:'arbitrum',name:'Arbitrum',domain:'arbitrum.io',status:'live',signal:null},
+      {id:'sui',name:'Sui',domain:'sui.io',status:'live',signal:null},
+      {id:'polygon',name:'Polygon',domain:'polygon.technology',status:'live',signal:null},
+      {id:'bnb-chain',name:'BNB Chain',domain:'bnbchain.org',status:'live',signal:null}
+    ]}
+];
+
+const FAVURL = d => `https://www.google.com/s2/favicons?domain=${d}&sz=32`;
+function sc(s){ return s==='early'?'early':s==='ann'||s==='announced'?'ann':s==='acquired'?'acq':''; }
+
+function buildMap(q) {
+  const c = document.getElementById('map-view');
+  c.innerHTML = '';
+  const ql = (q||'').toLowerCase().trim();
+  LAYERS.forEach(layer => {
+    const projs = ql ? layer.projects.filter(p=>p.name.toLowerCase().includes(ql)) : layer.projects;
+    if (ql && projs.length===0) return;
+    const row = document.createElement('div');
+    row.className = 'row';
+    const lbl = document.createElement('div');
+    lbl.className = 'row-label';
+    const ln = document.createElement('div');
+    ln.className = 'row-n'; ln.textContent = layer.id;
+    const lt = document.createElement('div');
+    lt.className = 'row-title'; lt.textContent = layer.name;
+    const lq = document.createElement('div');
+    lq.className = 'row-q'; lq.textContent = layer.desc;
+    lbl.appendChild(ln); lbl.appendChild(lt); lbl.appendChild(lq);
+    const cont = document.createElement('div');
+    cont.className = 'row-content';
+    projs.forEach(p => {
+      const cls = sc(p.status);
+      const a = document.createElement('a');
+      a.className = 't' + (cls ? ' '+cls : '');
+      a.href = '#';
+      a.addEventListener('click', e => e.preventDefault());
+      const img = document.createElement('img');
+      img.className = 'fav'; img.src = FAVURL(p.domain); img.alt = '';
+      img.loading = 'lazy'; img.onerror = function(){ this.style.display='none'; };
+      const nm = document.createElement('span'); nm.textContent = p.name;
+      a.appendChild(img); a.appendChild(nm);
+      if (p.signal) {
+        const sig = document.createElement('span');
+        sig.className = 'sig'; sig.textContent = p.signal.label;
+        a.appendChild(sig);
+      }
+      cont.appendChild(a);
+    });
+    if (!ql && layer.projects.length < layer.count) {
+      const more = document.createElement('span');
+      more.className = 't ann';
+      more.textContent = '+' + (layer.count - layer.projects.length) + ' more';
+      cont.appendChild(more);
+    }
+    row.appendChild(lbl); row.appendChild(cont);
+    c.appendChild(row);
+  });
+}
+
+function buildData(q) {
+  const c = document.getElementById('data-view');
+  c.innerHTML = '';
+  const ql = (q||'').toLowerCase().trim();
+  const SHOW = 5;
+  LAYERS.forEach(layer => {
+    const sorted = [...layer.projects].sort((a,b)=>(b.signal?b.signal.val:-1)-(a.signal?a.signal.val:-1));
+    const filtered = ql ? sorted.filter(p=>p.name.toLowerCase().includes(ql)) : sorted;
+    if (ql && filtered.length===0) return;
+    const section = document.createElement('div');
+    section.className = 'data-section';
+    const hdr = document.createElement('div');
+    hdr.className = 'data-section-hdr';
+    const badge = document.createElement('span'); badge.className='data-layer-badge'; badge.textContent=layer.id;
+    const name = document.createElement('span'); name.className='data-layer-name'; name.textContent=layer.name;
+    const sortlbl = document.createElement('span'); sortlbl.className='data-sort-label'; sortlbl.textContent='by '+layer.sort;
+    hdr.appendChild(badge); hdr.appendChild(name); hdr.appendChild(sortlbl);
+    section.appendChild(hdr);
+    const list = document.createElement('ul');
+    list.className = 'data-rows';
+    const display = ql ? filtered : filtered.slice(0, SHOW);
+    function makeRow(p, i) {
+      const cls = sc(p.status);
+      const li = document.createElement('li');
+      li.className = 'data-row';
+      const rankEl = document.createElement('span'); rankEl.className='rank'; rankEl.textContent=i+1;
+      const imgEl = document.createElement('img'); imgEl.className='data-fav'; imgEl.src=FAVURL(p.domain); imgEl.alt=''; imgEl.loading='lazy'; imgEl.onerror=function(){this.style.display='none';};
+      const nameEl = document.createElement('span'); nameEl.className='data-name'; nameEl.textContent=p.name;
+      const sigEl = document.createElement('span');
+      sigEl.className = 'data-signal' + (p.signal ? (i===0?' top':'') : ' none');
+      sigEl.textContent = p.signal ? p.signal.label : '—';
+      const bdgEl = document.createElement('span'); bdgEl.className='data-badge';
+      const bdgInner = document.createElement('span'); bdgInner.className=cls||'live'; bdgInner.textContent=p.status;
+      bdgEl.appendChild(bdgInner);
+      li.appendChild(rankEl); li.appendChild(imgEl); li.appendChild(nameEl); li.appendChild(sigEl); li.appendChild(bdgEl);
+      return li;
+    }
+    display.forEach((p,i) => list.appendChild(makeRow(p,i)));
+    section.appendChild(list);
+    if (!ql && filtered.length > SHOW) {
+      const more = document.createElement('div');
+      more.className = 'data-more';
+      const sp = document.createElement('span');
+      sp.textContent = '+ ' + (filtered.length - SHOW) + ' more in ' + layer.name;
+      more.appendChild(sp);
+      more.addEventListener('click', () => {
+        filtered.slice(SHOW).forEach((p,i) => list.appendChild(makeRow(p, SHOW+i)));
+        more.remove();
+      });
+      section.appendChild(more);
+    }
+    c.appendChild(section);
+  });
+}
+
+function setView(v) {
+  const mapEl = document.getElementById('map-view');
+  const dataEl = document.getElementById('data-view');
+  const bm = document.getElementById('btn-map');
+  const bd = document.getElementById('btn-data');
+  if (v==='map') {
+    mapEl.classList.remove('hidden'); dataEl.classList.remove('visible');
+    bm.classList.add('active'); bd.classList.remove('active');
+  } else {
+    mapEl.classList.add('hidden'); dataEl.classList.add('visible');
+    bm.classList.remove('active'); bd.classList.add('active');
+  }
+}
+
+let timer;
+document.getElementById('search').addEventListener('input', function() {
+  clearTimeout(timer);
+  timer = setTimeout(() => { buildMap(this.value); buildData(this.value); }, 120);
+});
+
+buildMap(); buildData();
+</script>
+</body>
+</html>

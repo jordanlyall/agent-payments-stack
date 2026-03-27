@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Payments Stack — Proto C: Signal + Map</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+    --parchment: #f2ede3; --parch-text: #1a1713; --parch-secondary: #4a4540;
+    --parch-muted: #8a8178; --parch-faint: #e4ddd2; --parch-accent: #3d2e1e;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Space Grotesk',-apple-system,sans-serif; -webkit-font-smoothing:antialiased; font-feature-settings:'ss01'; }
+
+  /* =========================================
+     SIGNAL ZONE — warm parchment
+  ========================================= */
+  .signal-zone {
+    background: var(--parchment);
+    color: var(--parch-text);
+    padding: 64px 0 56px;
+  }
+  .signal-inner { max-width:1100px; margin:0 auto; padding:0 56px; }
+
+  .sig-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--parch-muted);
+    margin-bottom: 20px;
+  }
+
+  .sig-headline {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 800;
+    line-height: .96;
+    letter-spacing: -2.5px;
+    color: var(--parch-text);
+    max-width: 700px;
+    margin-bottom: 20px;
+  }
+  .sig-headline em { font-style: italic; font-weight: 300; color: var(--parch-secondary); }
+
+  .sig-deck {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    color: var(--parch-secondary);
+    line-height: 1.6;
+    max-width: 540px;
+    margin-bottom: 40px;
+  }
+
+  /* Stats row */
+  .sig-stats {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--parch-faint);
+    border-bottom: 1px solid var(--parch-faint);
+    margin-bottom: 48px;
+    padding: 0;
+  }
+  .sig-stat {
+    flex: 1;
+    padding: 20px 0;
+    border-right: 1px solid var(--parch-faint);
+  }
+  .sig-stat:last-child { border-right: none; }
+  .sig-stat-v {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: var(--parch-text);
+  }
+  .sig-stat-l {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--parch-muted);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+
+  /* Rankings grid */
+  .rankings-label {
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--parch-muted);
+    margin-bottom: 16px;
+  }
+  .rankings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    border: 1px solid var(--parch-faint);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .rank-block {
+    padding: 20px 24px;
+    border-right: 1px solid var(--parch-faint);
+    border-bottom: 1px solid var(--parch-faint);
+  }
+  .rank-block:nth-child(2n) { border-right: none; }
+  .rank-block:nth-last-child(-n+2) { border-bottom: none; }
+
+  .rank-block-hdr {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .rank-layer-id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--parch-muted);
+    letter-spacing: .06em;
+  }
+  .rank-layer-name {
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--parch-text);
+  }
+
+  .rank-rows { list-style: none; }
+  .rank-row {
+    display: grid;
+    grid-template-columns: 18px 20px 1fr 80px;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(0,0,0,.04);
+    gap: 0;
+  }
+  .rank-row:last-child { border-bottom: none; }
+  .rank-pos {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--parch-muted);
+  }
+  .rank-fav { width:14px; height:14px; border-radius:2px; opacity:.8; }
+  .rank-name {
+    font-size: 12.5px;
+    font-weight: 550;
+    color: var(--parch-text);
+    padding-left: 7px;
+  }
+  .rank-sig {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--parch-secondary);
+    text-align: right;
+  }
+  .rank-sig.top-sig { color: var(--parch-text); }
+  .rank-sig.no-sig { color: var(--parch-muted); font-size: 10px; }
+  .rank-no-data {
+    font-size: 11px;
+    color: var(--parch-muted);
+    font-style: italic;
+    padding: 4px 0;
+  }
+
+  /* Zone break */
+  .zone-break {
+    background: var(--parchment);
+    padding: 0 0 24px;
+  }
+  .zone-break-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 56px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .zone-break-line {
+    flex: 1;
+    height: 1px;
+    background: var(--parch-faint);
+  }
+  .zone-break-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--parch-muted);
+    white-space: nowrap;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* =========================================
+     MAP ZONE — dark
+  ========================================= */
+  .map-zone {
+    background: var(--bg);
+    padding: 48px 0 56px;
+  }
+  .map-inner { max-width:1100px; margin:0 auto; padding:0 56px; }
+
+  .map-hdr {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  .map-hdr-left h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -.6px;
+    color: var(--text);
+  }
+  .map-hdr-left p {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-top: 4px;
+  }
+
+  .search-wrap { position:relative; }
+  .search-wrap input { background:var(--faint); border:1px solid rgba(255,255,255,.07); color:var(--text); font-family:'Space Grotesk',sans-serif; font-size:13px; padding:7px 12px 7px 32px; border-radius:5px; width:240px; outline:none; transition:border-color .15s; }
+  .search-wrap input::placeholder { color:var(--muted); }
+  .search-wrap input:focus { border-color:rgba(255,255,255,.16); }
+  .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; font-size:14px; }
+
+  /* Map grid */
+  .stack { display:flex; flex-direction:column; border-top:1px solid var(--faint); }
+  .row { display:grid; grid-template-columns:240px 1fr; border-bottom:1px solid var(--faint); min-height:64px; }
+  .row-label { padding:18px 24px 18px 0; display:flex; flex-direction:column; justify-content:center; gap:3px; border-right:1px solid var(--faint); }
+  .row-n { font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; color:var(--muted); letter-spacing:.02em; }
+  .row-title { font-size:14px; font-weight:600; letter-spacing:-.2px; }
+  .row-q { font-size:11px; color:var(--muted); font-weight:400; letter-spacing:.01em; }
+  .row-content { padding:14px 0 14px 24px; display:flex; flex-wrap:wrap; align-items:center; gap:5px; }
+
+  a.t, .t { display:inline-flex; align-items:center; padding:3px 10px; border-radius:4px; font-size:12px; font-weight:450; white-space:nowrap; background:rgba(255,255,255,.05); color:var(--text); line-height:1.45; border:1px solid rgba(255,255,255,.09); text-decoration:none; transition:background .12s,border-color .12s; }
+  a.t:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.16); }
+  .t.early, a.t.early { background:rgba(201,158,50,.08); color:var(--early); border:1px solid rgba(201,158,50,.22); }
+  .t.ann, a.t.ann { background:transparent; color:var(--muted); border:1px dashed rgba(255,255,255,.14); }
+  .t.acq, a.t.acq { background:rgba(217,97,63,.09); color:var(--acq); border:1px solid rgba(217,97,63,.2); }
+  a.t.acq:hover { background:rgba(217,97,63,.16); }
+  .t .fav { width:12px; height:12px; border-radius:2px; margin-right:5px; flex-shrink:0; opacity:.8; display:block; }
+  .t .sig { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:500; opacity:.4; margin-left:4px; }
+
+  /* Footer */
+  .foot { max-width:1100px; margin:0 auto; padding:16px 56px 0; border-top:1px solid var(--faint); display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); }
+  .foot a { color:var(--secondary); font-weight:500; text-decoration:none; }
+  .foot a:hover { color:var(--text); }
+  .legend { display:flex; gap:20px; align-items:center; }
+  .leg-item { display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--muted); }
+  .leg-dot { width:6px; height:6px; border-radius:2px; flex-shrink:0; }
+  .leg-dot.live { background:rgba(255,255,255,.25); }
+  .leg-dot.early { background:var(--early); opacity:.6; }
+  .leg-dot.ann { background:var(--ann); }
+  .leg-dot.acq { background:var(--acq); opacity:.7; }
+
+  @media(max-width:768px) {
+    .signal-inner,.map-inner { padding:0 24px; }
+    .zone-break-inner { padding:0 24px; }
+    .sig-headline { font-size:42px; letter-spacing:-1.5px; }
+    .rankings-grid { grid-template-columns:1fr; }
+    .rank-block:nth-child(2n) { border-right:1px solid var(--parch-faint); }
+    .rank-block:nth-last-child(-n+2) { border-bottom:1px solid var(--parch-faint); }
+    .rank-block:last-child { border-bottom:none; }
+    .row { grid-template-columns:1fr; }
+    .row-label { border-right:none; border-bottom:1px solid var(--faint); padding:14px 0; }
+    .row-content { padding:12px 0; }
+    .foot { padding:16px 24px 0; flex-direction:column; gap:12px; }
+    .sig-stats { flex-wrap:wrap; }
+    .sig-stat { min-width:50%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIGNAL ZONE -->
+<section class="signal-zone">
+  <div class="signal-inner">
+    <div class="sig-eyebrow">Market Intelligence · March 2026</div>
+    <h1 class="sig-headline">The <em>Agent</em><br>Payments Stack</h1>
+    <p class="sig-deck">Every project building payment infrastructure for AI agents. 134 entries across 6 layers. The plumbing is being laid in real time.</p>
+
+    <div class="sig-stats">
+      <div class="sig-stat">
+        <div class="sig-stat-v">134</div>
+        <div class="sig-stat-l">Projects Mapped</div>
+      </div>
+      <div class="sig-stat">
+        <div class="sig-stat-v">$9.6B</div>
+        <div class="sig-stat-l">30d Volume</div>
+      </div>
+      <div class="sig-stat">
+        <div class="sig-stat-v">98.6%</div>
+        <div class="sig-stat-l">USDC Settlement</div>
+      </div>
+      <div class="sig-stat">
+        <div class="sig-stat-v">6</div>
+        <div class="sig-stat-l">Infrastructure Layers</div>
+      </div>
+      <div class="sig-stat">
+        <div class="sig-stat-v">854K</div>
+        <div class="sig-stat-l">Peak npm Downloads/wk</div>
+      </div>
+    </div>
+
+    <div class="rankings-label">Layer Leaders by Adoption Signal</div>
+    <div class="rankings-grid" id="rankings-grid"></div>
+  </div>
+</section>
+
+<!-- ZONE BREAK -->
+<div class="zone-break">
+  <div class="zone-break-inner">
+    <div class="zone-break-line"></div>
+    <div class="zone-break-label">Full Landscape ↓</div>
+    <div class="zone-break-line"></div>
+  </div>
+</div>
+
+<!-- MAP ZONE -->
+<section class="map-zone">
+  <div class="map-inner">
+    <div class="map-hdr">
+      <div class="map-hdr-left">
+        <h2>Complete Map</h2>
+        <p>All 134 projects across 6 layers</p>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search" placeholder="Search projects..." autocomplete="off">
+      </div>
+    </div>
+    <div class="stack" id="map-view"></div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot live"></div>Live</div>
+    <div class="leg-item"><div class="leg-dot early"></div>Early / Beta</div>
+    <div class="leg-item"><div class="leg-dot ann"></div>Announced</div>
+    <div class="leg-item"><div class="leg-dot acq"></div>Acquired</div>
+  </div>
+  <div><a href="https://x.com/jordanlyall">@jordanlyall</a> · Updated March 2026</div>
+</footer>
+
+<script>
+const LAYERS = [
+  { id:'L5', name:'Application', desc:'What gets bought and why', count:24,
+    projects:[
+      {name:'ElizaOS',domain:'elizaos.ai',status:'live',signal:{val:9036,label:'9K /wk'}},
+      {name:'Virtuals Protocol',domain:'virtuals.io',status:'live',signal:null},
+      {name:'Olas',domain:'olas.network',status:'live',signal:{val:119,label:'119 ★'}},
+      {name:'Art Blocks',domain:'artblocks.io',status:'live',signal:null},
+      {name:'Akash',domain:'akash.network',status:'live',signal:null},
+      {name:'Ocean Protocol',domain:'oceanprotocol.com',status:'live',signal:null},
+      {name:'Botto',domain:'botto.com',status:'live',signal:null},
+      {name:'Axiom',domain:'axiom.xyz',status:'live',signal:null},
+      {name:'mint.day',domain:'mint.day',status:'live',signal:null}
+    ]},
+  { id:'L4', name:'Governance & Policy', desc:'May this agent spend?', count:30,
+    projects:[
+      {name:'Ramp Agent Cards',domain:'ramp.com',status:'live',signal:null},
+      {name:'Brex',domain:'brex.com',status:'acquired',signal:null},
+      {name:'Skyfire KYA',domain:'skyfire.xyz',status:'live',signal:null},
+      {name:'Stripe SPTs',domain:'stripe.com',status:'live',signal:null},
+      {name:'Visa Intelligent Commerce',domain:'visa.com',status:'early',signal:null},
+      {name:'ERC-8004',domain:'ethereum.org',status:'early',signal:null},
+      {name:'OpenMatter',domain:'openmatter.xyz',status:'early',signal:null},
+      {name:'GhostSpeak',domain:'ghostspeak.ai',status:'live',signal:null},
+      {name:'AgentPay',domain:'agentpay.dev',status:'early',signal:null}
+    ]},
+  { id:'L3', name:'Payment Protocol', desc:'How the payment flows', count:26,
+    projects:[
+      {name:'x402',domain:'x402.org',status:'live',signal:{val:5800,label:'5.8K ★'}},
+      {name:'Tempo MPP',domain:'usetempo.ai',status:'live',signal:null},
+      {name:'Google AP2',domain:'google.com',status:'ann',signal:null},
+      {name:'ACP',domain:'agentcommerceprotocol.com',status:'live',signal:null},
+      {name:'L402 / Lightning',domain:'lightning.network',status:'live',signal:null},
+      {name:'Superfluid',domain:'superfluid.finance',status:'live',signal:{val:4338,label:'4.3K /wk'}},
+      {name:'Interledger',domain:'interledger.org',status:'live',signal:{val:512,label:'512 ★'}},
+      {name:'Faremeter',domain:'faremeter.io',status:'early',signal:{val:61,label:'61 ★'}},
+      {name:'Circle Nanopayments',domain:'circle.com',status:'live',signal:null}
+    ]},
+  { id:'L2', name:'Routing & Abstraction', desc:'Which chain, token, rail', count:22,
+    projects:[
+      {name:'Skyfire',domain:'skyfire.xyz',status:'live',signal:null},
+      {name:'Wormhole',domain:'wormhole.com',status:'live',signal:{val:1900,label:'1.9K ★'}},
+      {name:'LayerZero',domain:'layerzero.network',status:'live',signal:{val:769,label:'769 ★'}},
+      {name:'Li.Fi',domain:'li.fi',status:'live',signal:{val:23713,label:'23.7K /wk'}},
+      {name:'Uniswap',domain:'uniswap.org',status:'live',signal:{val:2500,label:'2.5K ★'}},
+      {name:'Circle CCTP',domain:'circle.com',status:'live',signal:null},
+      {name:'Kibble',domain:'kibble.xyz',status:'early',signal:null},
+      {name:'Across',domain:'across.to',status:'live',signal:{val:2936,label:'2.9K /wk'}},
+      {name:'Bridge',domain:'bridge.xyz',status:'acquired',signal:null}
+    ]},
+  { id:'L1', name:'Wallet & Key Mgmt', desc:'Where the keys live', count:19,
+    projects:[
+      {name:'WalletConnect',domain:'walletconnect.com',status:'live',signal:{val:853574,label:'854K /wk'}},
+      {name:'Turnkey',domain:'turnkey.com',status:'live',signal:{val:137506,label:'138K /wk'}},
+      {name:'Privy',domain:'privy.io',status:'acquired',signal:{val:128267,label:'128K /wk'}},
+      {name:'Safe',domain:'safe.global',status:'live',signal:{val:49434,label:'49K /wk'}},
+      {name:'Dynamic',domain:'dynamic.xyz',status:'live',signal:{val:34951,label:'35K /wk'}},
+      {name:'Thirdweb',domain:'thirdweb.com',status:'live',signal:{val:34986,label:'35K /wk'}},
+      {name:'Dfns',domain:'dfns.co',status:'live',signal:{val:19326,label:'19K /wk'}},
+      {name:'Coinbase Agentic Wallets',domain:'coinbase.com',status:'live',signal:{val:3000,label:'3K /wk'}},
+      {name:'Fireblocks',domain:'fireblocks.com',status:'live',signal:null}
+    ]},
+  { id:'L0', name:'Settlement', desc:'Where transactions land', count:13,
+    projects:[
+      {name:'Base',domain:'base.org',status:'live',signal:{val:119000000,label:'119M txns/30d'}},
+      {name:'Solana',domain:'solana.com',status:'live',signal:null},
+      {name:'Ethereum',domain:'ethereum.org',status:'live',signal:null},
+      {name:'Arbitrum',domain:'arbitrum.io',status:'live',signal:null},
+      {name:'Sui',domain:'sui.io',status:'live',signal:null},
+      {name:'Polygon',domain:'polygon.technology',status:'live',signal:null},
+      {name:'BNB Chain',domain:'bnbchain.org',status:'live',signal:null}
+    ]}
+];
+
+const FAVURL = d => `https://www.google.com/s2/favicons?domain=${d}&sz=32`;
+function sc(s){ return s==='early'?'early':s==='ann'||s==='announced'?'ann':s==='acquired'?'acq':''; }
+
+// Build signal zone rankings
+function buildRankings() {
+  const grid = document.getElementById('rankings-grid');
+  grid.innerHTML = '';
+
+  LAYERS.forEach(layer => {
+    const sorted = [...layer.projects].sort((a,b)=>(b.signal?b.signal.val:-1)-(a.signal?a.signal.val:-1));
+    const block = document.createElement('div');
+    block.className = 'rank-block';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'rank-block-hdr';
+    const idEl = document.createElement('span'); idEl.className='rank-layer-id'; idEl.textContent=layer.id;
+    const nameEl = document.createElement('span'); nameEl.className='rank-layer-name'; nameEl.textContent=layer.name;
+    hdr.appendChild(idEl); hdr.appendChild(nameEl);
+
+    const list = document.createElement('ul');
+    list.className = 'rank-rows';
+
+    const withSignal = sorted.filter(p=>p.signal);
+    const show = withSignal.slice(0,3);
+
+    if (show.length === 0) {
+      const nd = document.createElement('div');
+      nd.className = 'rank-no-data';
+      nd.textContent = 'Signal data pending';
+      list.appendChild(nd);
+    } else {
+      show.forEach((p,i) => {
+        const li = document.createElement('li');
+        li.className = 'rank-row';
+        const pos = document.createElement('span'); pos.className='rank-pos'; pos.textContent=i+1;
+        const img = document.createElement('img'); img.className='rank-fav'; img.src=FAVURL(p.domain); img.alt=''; img.loading='lazy'; img.onerror=function(){this.style.display='none';};
+        const nm = document.createElement('span'); nm.className='rank-name'; nm.textContent=p.name;
+        const sig = document.createElement('span');
+        sig.className = 'rank-sig' + (i===0?' top-sig':'');
+        sig.textContent = p.signal.label;
+        li.appendChild(pos); li.appendChild(img); li.appendChild(nm); li.appendChild(sig);
+        list.appendChild(li);
+      });
+    }
+
+    block.appendChild(hdr);
+    block.appendChild(list);
+    grid.appendChild(block);
+  });
+}
+
+// Build map
+function buildMap(q) {
+  const c = document.getElementById('map-view');
+  c.innerHTML = '';
+  const ql = (q||'').toLowerCase().trim();
+  LAYERS.forEach(layer => {
+    const projs = ql ? layer.projects.filter(p=>p.name.toLowerCase().includes(ql)) : layer.projects;
+    if (ql && projs.length===0) return;
+    const row = document.createElement('div');
+    row.className = 'row';
+    const lbl = document.createElement('div');
+    lbl.className = 'row-label';
+    const ln = document.createElement('div'); ln.className='row-n'; ln.textContent=layer.id;
+    const lt = document.createElement('div'); lt.className='row-title'; lt.textContent=layer.name;
+    const lq = document.createElement('div'); lq.className='row-q'; lq.textContent=layer.desc;
+    lbl.appendChild(ln); lbl.appendChild(lt); lbl.appendChild(lq);
+    const cont = document.createElement('div');
+    cont.className = 'row-content';
+    projs.forEach(p => {
+      const cls = sc(p.status);
+      const a = document.createElement('a');
+      a.className = 't' + (cls?' '+cls:'');
+      a.href='#'; a.addEventListener('click',e=>e.preventDefault());
+      const img = document.createElement('img'); img.className='fav'; img.src=FAVURL(p.domain); img.alt=''; img.loading='lazy'; img.onerror=function(){this.style.display='none';};
+      const nm = document.createElement('span'); nm.textContent=p.name;
+      a.appendChild(img); a.appendChild(nm);
+      if (p.signal) {
+        const sig = document.createElement('span'); sig.className='sig'; sig.textContent=p.signal.label;
+        a.appendChild(sig);
+      }
+      cont.appendChild(a);
+    });
+    if (!ql && layer.projects.length < layer.count) {
+      const more = document.createElement('span'); more.className='t ann';
+      more.textContent='+' + (layer.count - layer.projects.length) + ' more';
+      cont.appendChild(more);
+    }
+    row.appendChild(lbl); row.appendChild(cont);
+    c.appendChild(row);
+  });
+}
+
+let timer;
+document.getElementById('search').addEventListener('input', function() {
+  clearTimeout(timer);
+  timer = setTimeout(() => buildMap(this.value), 120);
+});
+
+buildRankings();
+buildMap();
+</script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Agent Payments Stack — Proto B: Layer Accordion</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --faint2: #2a2622; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Space Grotesk',-apple-system,sans-serif; -webkit-font-smoothing:antialiased; font-feature-settings:'ss01'; }
+  .page { max-width:1100px; margin:0 auto; padding:48px 56px 56px; }
+
+  /* Header */
+  .eyebrow { font-size:10.5px; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  h1 { font-size:46px; font-weight:700; line-height:1; letter-spacing:-2px; }
+  .deck { font-size:15px; color:var(--secondary); line-height:1.55; max-width:520px; margin-top:10px; }
+  .nums { display:flex; margin-top:24px; padding-top:20px; border-top:1px solid var(--faint); align-items:flex-end; justify-content:space-between; }
+  .nums-stats { display:flex; gap:44px; align-items:flex-end; }
+  .num-v { font-size:26px; font-weight:600; line-height:1; letter-spacing:-.8px; font-variant-numeric:tabular-nums; }
+  .num-l { font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--muted); margin-top:5px; font-weight:500; }
+
+  /* Search */
+  .search-wrap { position:relative; }
+  .search-wrap input { background:var(--faint); border:1px solid rgba(255,255,255,.07); color:var(--text); font-family:'Space Grotesk',sans-serif; font-size:13px; padding:7px 12px 7px 32px; border-radius:5px; width:240px; outline:none; transition:border-color .15s; }
+  .search-wrap input::placeholder { color:var(--muted); }
+  .search-wrap input:focus { border-color:rgba(255,255,255,.16); }
+  .search-icon { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--muted); pointer-events:none; font-size:14px; }
+
+  /* Accordion */
+  .accordion { margin-top:40px; border-top:1px solid var(--faint2); }
+
+  .layer-row {
+    border-bottom:1px solid var(--faint2);
+    overflow:hidden;
+  }
+
+  .layer-hdr {
+    display:grid;
+    grid-template-columns:72px 1fr 56px 300px 32px;
+    align-items:center;
+    padding:20px 0;
+    cursor:pointer;
+    user-select:none;
+    gap:0;
+    transition:background .12s;
+  }
+  .layer-hdr:hover { background:rgba(255,255,255,.015); margin:0 -8px; padding:20px 8px; }
+
+  .layer-badge {
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    letter-spacing:.04em;
+  }
+  .layer-name {
+    font-size:17px;
+    font-weight:680;
+    letter-spacing:-.4px;
+    color:var(--text);
+  }
+  .layer-count {
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    font-weight:500;
+    color:var(--muted);
+    text-align:right;
+    padding-right:20px;
+  }
+  .layer-preview {
+    display:flex;
+    gap:5px;
+    flex-wrap:nowrap;
+    overflow:hidden;
+    align-items:center;
+  }
+  .chevron {
+    font-size:14px;
+    color:var(--muted);
+    transition:transform .22s ease;
+    text-align:right;
+    font-family:'JetBrains Mono',monospace;
+  }
+  .layer-row.open .chevron { transform:rotate(90deg); }
+
+  /* Preview chips */
+  .chip-preview {
+    display:inline-flex; align-items:center; padding:2px 8px; border-radius:3px;
+    font-size:11.5px; font-weight:500; white-space:nowrap;
+    background:rgba(255,255,255,.05); color:var(--secondary);
+    border:1px solid rgba(255,255,255,.08);
+  }
+  .chip-preview .fav { width:10px; height:10px; border-radius:2px; margin-right:4px; opacity:.7; display:block; }
+  .more-preview {
+    font-size:11px;
+    color:var(--muted);
+    font-family:'JetBrains Mono',monospace;
+    white-space:nowrap;
+    padding-left:4px;
+  }
+
+  /* Expanded chips area */
+  .layer-body {
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .28s ease;
+  }
+  .layer-row.open .layer-body { grid-template-rows:1fr; }
+  .layer-body-inner { overflow:hidden; }
+  .layer-chips {
+    padding:4px 0 24px 72px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+  }
+
+  /* Full chips */
+  a.t, .t {
+    display:inline-flex; align-items:center; padding:4px 11px; border-radius:4px;
+    font-size:12.5px; font-weight:450; white-space:nowrap;
+    background:rgba(255,255,255,.055); color:var(--text); line-height:1.45;
+    border:1px solid rgba(255,255,255,.09);
+    text-decoration:none; transition:background .12s,border-color .12s;
+  }
+  a.t:hover { background:rgba(255,255,255,.1); border-color:rgba(255,255,255,.16); }
+  .t.early, a.t.early { background:rgba(201,158,50,.08); color:var(--early); border:1px solid rgba(201,158,50,.22); }
+  a.t.early:hover { background:rgba(201,158,50,.14); }
+  .t.ann, a.t.ann { background:transparent; color:var(--muted); border:1px dashed rgba(255,255,255,.14); }
+  a.t.ann:hover { background:rgba(255,255,255,.04); color:var(--secondary); }
+  .t.acq, a.t.acq { background:rgba(217,97,63,.09); color:var(--acq); border:1px solid rgba(217,97,63,.2); }
+  a.t.acq:hover { background:rgba(217,97,63,.16); }
+  .t .fav { width:12px; height:12px; border-radius:2px; margin-right:5px; flex-shrink:0; opacity:.8; display:block; }
+  .t .sig { font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:500; opacity:.4; margin-left:5px; }
+
+  /* Layer desc in hdr */
+  .layer-desc-line {
+    grid-column:2; grid-row:2;
+    font-size:11px;
+    color:var(--muted);
+    padding-top:3px;
+    letter-spacing:.01em;
+  }
+
+  /* Summary bar above accordion */
+  .summary-bar {
+    display:flex;
+    gap:0;
+    margin-top:32px;
+    border:1px solid var(--faint2);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .sum-seg {
+    flex:1;
+    padding:14px 16px;
+    border-right:1px solid var(--faint2);
+    cursor:pointer;
+    transition:background .12s;
+  }
+  .sum-seg:last-child { border-right:none; }
+  .sum-seg:hover { background:rgba(255,255,255,.025); }
+  .sum-seg.active { background:rgba(255,255,255,.04); }
+  .sum-id { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600; color:var(--muted); margin-bottom:5px; letter-spacing:.04em; }
+  .sum-name { font-size:12px; font-weight:600; color:var(--text); letter-spacing:-.1px; }
+  .sum-count { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted); margin-top:4px; }
+
+  /* Footer */
+  .foot { margin-top:32px; padding-top:16px; border-top:1px solid var(--faint); display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); }
+  .foot a { color:var(--secondary); font-weight:500; text-decoration:none; }
+  .foot a:hover { color:var(--text); }
+  .legend { display:flex; gap:20px; align-items:center; }
+  .leg-item { display:flex; align-items:center; gap:5px; font-size:10.5px; color:var(--muted); }
+  .leg-dot { width:6px; height:6px; border-radius:2px; flex-shrink:0; }
+  .leg-dot.live { background:rgba(255,255,255,.25); }
+  .leg-dot.early { background:var(--early); opacity:.6; }
+  .leg-dot.ann { background:var(--ann); }
+  .leg-dot.acq { background:var(--acq); opacity:.7; }
+
+  @media(max-width:768px) {
+    .page { padding:32px 20px; }
+    h1 { font-size:30px; letter-spacing:-1px; }
+    .layer-hdr { grid-template-columns:56px 1fr 40px 0 28px; }
+    .layer-preview { display:none; }
+    .layer-chips { padding-left:56px; }
+    .summary-bar { display:none; }
+    .nums-stats { gap:20px; }
+    .nums { flex-direction:column; align-items:flex-start; gap:16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">Research · March 2026</div>
+    <h1>Agent Payments Stack</h1>
+    <p class="deck">134 projects across 6 layers — from settlement rails to autonomous applications. Click any layer to explore.</p>
+    <div class="nums">
+      <div class="nums-stats">
+        <div><div class="num-v">134</div><div class="num-l">Projects</div></div>
+        <div><div class="num-v">6</div><div class="num-l">Layers</div></div>
+        <div><div class="num-v">$9.6B</div><div class="num-l">30d Volume</div></div>
+        <div><div class="num-v">98.6%</div><div class="num-l">USDC Settlement</div></div>
+      </div>
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input type="text" id="search" placeholder="Search projects..." autocomplete="off">
+      </div>
+    </div>
+  </header>
+
+  <div class="summary-bar" id="summary-bar"></div>
+  <div class="accordion" id="accordion"></div>
+
+  <footer class="foot">
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot live"></div>Live</div>
+      <div class="leg-item"><div class="leg-dot early"></div>Early</div>
+      <div class="leg-item"><div class="leg-dot ann"></div>Announced</div>
+      <div class="leg-item"><div class="leg-dot acq"></div>Acquired</div>
+    </div>
+    <div><a href="https://x.com/jordanlyall">@jordanlyall</a> · March 2026</div>
+  </footer>
+</div>
+
+<script>
+const LAYERS = [
+  { id:'L5', name:'Application', desc:'What gets bought and why', count:24,
+    projects:[
+      {name:'ElizaOS',domain:'elizaos.ai',status:'live',signal:{label:'9K /wk'}},
+      {name:'Virtuals Protocol',domain:'virtuals.io',status:'live',signal:null},
+      {name:'Olas',domain:'olas.network',status:'live',signal:{label:'119 ★'}},
+      {name:'Art Blocks',domain:'artblocks.io',status:'live',signal:null},
+      {name:'Akash',domain:'akash.network',status:'live',signal:null},
+      {name:'Ocean Protocol',domain:'oceanprotocol.com',status:'live',signal:null},
+      {name:'Botto',domain:'botto.com',status:'live',signal:null},
+      {name:'Axiom',domain:'axiom.xyz',status:'live',signal:null},
+      {name:'mint.day',domain:'mint.day',status:'live',signal:null}
+    ]},
+  { id:'L4', name:'Governance & Policy', desc:'May this agent spend?', count:30,
+    projects:[
+      {name:'Ramp Agent Cards',domain:'ramp.com',status:'live',signal:null},
+      {name:'Brex',domain:'brex.com',status:'acquired',signal:null},
+      {name:'Skyfire KYA',domain:'skyfire.xyz',status:'live',signal:null},
+      {name:'Stripe SPTs',domain:'stripe.com',status:'live',signal:null},
+      {name:'Visa Intelligent Commerce',domain:'visa.com',status:'early',signal:null},
+      {name:'ERC-8004',domain:'ethereum.org',status:'early',signal:null},
+      {name:'OpenMatter',domain:'openmatter.xyz',status:'early',signal:null},
+      {name:'GhostSpeak',domain:'ghostspeak.ai',status:'live',signal:null},
+      {name:'AgentPay',domain:'agentpay.dev',status:'early',signal:null}
+    ]},
+  { id:'L3', name:'Payment Protocol', desc:'How the payment flows', count:26,
+    projects:[
+      {name:'x402',domain:'x402.org',status:'live',signal:{label:'5.8K ★'}},
+      {name:'Tempo MPP',domain:'usetempo.ai',status:'live',signal:null},
+      {name:'Google AP2',domain:'google.com',status:'ann',signal:null},
+      {name:'ACP',domain:'agentcommerceprotocol.com',status:'live',signal:null},
+      {name:'L402 / Lightning',domain:'lightning.network',status:'live',signal:null},
+      {name:'Superfluid',domain:'superfluid.finance',status:'live',signal:{label:'4.3K /wk'}},
+      {name:'Interledger',domain:'interledger.org',status:'live',signal:{label:'512 ★'}},
+      {name:'Faremeter',domain:'faremeter.io',status:'early',signal:{label:'61 ★'}},
+      {name:'Circle Nanopayments',domain:'circle.com',status:'live',signal:null}
+    ]},
+  { id:'L2', name:'Routing & Abstraction', desc:'Which chain, token, rail', count:22,
+    projects:[
+      {name:'Skyfire',domain:'skyfire.xyz',status:'live',signal:null},
+      {name:'Wormhole',domain:'wormhole.com',status:'live',signal:{label:'1.9K ★'}},
+      {name:'LayerZero',domain:'layerzero.network',status:'live',signal:{label:'769 ★'}},
+      {name:'Li.Fi',domain:'li.fi',status:'live',signal:{label:'23.7K /wk'}},
+      {name:'Uniswap',domain:'uniswap.org',status:'live',signal:{label:'2.5K ★'}},
+      {name:'Circle CCTP',domain:'circle.com',status:'live',signal:null},
+      {name:'Kibble',domain:'kibble.xyz',status:'early',signal:null},
+      {name:'Across',domain:'across.to',status:'live',signal:{label:'2.9K /wk'}},
+      {name:'Bridge',domain:'bridge.xyz',status:'acquired',signal:null}
+    ]},
+  { id:'L1', name:'Wallet & Key Mgmt', desc:'Where the keys live', count:19,
+    projects:[
+      {name:'WalletConnect',domain:'walletconnect.com',status:'live',signal:{label:'854K /wk'}},
+      {name:'Turnkey',domain:'turnkey.com',status:'live',signal:{label:'138K /wk'}},
+      {name:'Privy',domain:'privy.io',status:'acquired',signal:{label:'128K /wk'}},
+      {name:'Safe',domain:'safe.global',status:'live',signal:{label:'49K /wk'}},
+      {name:'Dynamic',domain:'dynamic.xyz',status:'live',signal:{label:'35K /wk'}},
+      {name:'Thirdweb',domain:'thirdweb.com',status:'live',signal:{label:'35K /wk'}},
+      {name:'Dfns',domain:'dfns.co',status:'live',signal:{label:'19K /wk'}},
+      {name:'Coinbase Agentic Wallets',domain:'coinbase.com',status:'live',signal:{label:'3K /wk'}},
+      {name:'Fireblocks',domain:'fireblocks.com',status:'live',signal:null}
+    ]},
+  { id:'L0', name:'Settlement', desc:'Where transactions land', count:13,
+    projects:[
+      {name:'Base',domain:'base.org',status:'live',signal:{label:'119M txns/30d'}},
+      {name:'Solana',domain:'solana.com',status:'live',signal:null},
+      {name:'Ethereum',domain:'ethereum.org',status:'live',signal:null},
+      {name:'Arbitrum',domain:'arbitrum.io',status:'live',signal:null},
+      {name:'Sui',domain:'sui.io',status:'live',signal:null},
+      {name:'Polygon',domain:'polygon.technology',status:'live',signal:null},
+      {name:'BNB Chain',domain:'bnbchain.org',status:'live',signal:null}
+    ]}
+];
+
+// Default open: L1, L3, L5
+const DEFAULT_OPEN = new Set(['L5','L3','L1']);
+const FAVURL = d => `https://www.google.com/s2/favicons?domain=${d}&sz=32`;
+function sc(s){ return s==='early'?'early':s==='ann'||s==='announced'?'ann':s==='acquired'?'acq':''; }
+
+function buildSummaryBar() {
+  const bar = document.getElementById('summary-bar');
+  bar.innerHTML = '';
+  LAYERS.forEach(layer => {
+    const seg = document.createElement('div');
+    seg.className = 'sum-seg' + (DEFAULT_OPEN.has(layer.id)?' active':'');
+    seg.dataset.id = layer.id;
+    const id = document.createElement('div'); id.className='sum-id'; id.textContent=layer.id;
+    const nm = document.createElement('div'); nm.className='sum-name'; nm.textContent=layer.name;
+    const ct = document.createElement('div'); ct.className='sum-count'; ct.textContent=layer.count+' projects';
+    seg.appendChild(id); seg.appendChild(nm); seg.appendChild(ct);
+    seg.addEventListener('click', () => {
+      const rowEl = document.querySelector('[data-layer="'+layer.id+'"]');
+      if (rowEl) {
+        toggleLayer(rowEl, layer.id);
+        seg.classList.toggle('active', rowEl.classList.contains('open'));
+      }
+    });
+    bar.appendChild(seg);
+  });
+}
+
+function buildAccordion(q) {
+  const acc = document.getElementById('accordion');
+  acc.innerHTML = '';
+  const ql = (q||'').toLowerCase().trim();
+
+  LAYERS.forEach(layer => {
+    const projs = ql ? layer.projects.filter(p=>p.name.toLowerCase().includes(ql)) : layer.projects;
+    if (ql && projs.length===0) return;
+
+    const isOpen = ql ? true : DEFAULT_OPEN.has(layer.id);
+
+    const rowEl = document.createElement('div');
+    rowEl.className = 'layer-row' + (isOpen?' open':'');
+    rowEl.dataset.layer = layer.id;
+
+    // Header
+    const hdrEl = document.createElement('div');
+    hdrEl.className = 'layer-hdr';
+
+    const badge = document.createElement('span'); badge.className='layer-badge'; badge.textContent=layer.id;
+    const nameWrap = document.createElement('div');
+    const nm = document.createElement('div'); nm.className='layer-name'; nm.textContent=layer.name;
+    const desc = document.createElement('div'); desc.className='layer-desc-line'; desc.textContent=layer.desc;
+    nameWrap.appendChild(nm); nameWrap.appendChild(desc);
+    const ct = document.createElement('span'); ct.className='layer-count'; ct.textContent=layer.count;
+
+    // Preview chips (first 3)
+    const preview = document.createElement('div'); preview.className='layer-preview';
+    const previewProjs = (ql ? projs : layer.projects).slice(0,3);
+    previewProjs.forEach(p => {
+      const chip = document.createElement('span'); chip.className='chip-preview';
+      const img = document.createElement('img'); img.className='fav'; img.src=FAVURL(p.domain); img.alt=''; img.loading='lazy'; img.onerror=function(){this.style.display='none';};
+      const nm2 = document.createElement('span'); nm2.textContent=p.name;
+      chip.appendChild(img); chip.appendChild(nm2);
+      preview.appendChild(chip);
+    });
+    const remaining = layer.count - 3;
+    if (remaining > 0 && !ql) {
+      const more = document.createElement('span'); more.className='more-preview'; more.textContent='+'+remaining;
+      preview.appendChild(more);
+    }
+
+    const chev = document.createElement('span'); chev.className='chevron'; chev.textContent='›';
+
+    hdrEl.appendChild(badge);
+    hdrEl.appendChild(nameWrap);
+    hdrEl.appendChild(ct);
+    hdrEl.appendChild(preview);
+    hdrEl.appendChild(chev);
+
+    // Body
+    const bodyEl = document.createElement('div'); bodyEl.className='layer-body';
+    const innerEl = document.createElement('div'); innerEl.className='layer-body-inner';
+    const chipsEl = document.createElement('div'); chipsEl.className='layer-chips';
+
+    projs.forEach(p => {
+      const cls = sc(p.status);
+      const a = document.createElement('a');
+      a.className = 't' + (cls?' '+cls:'');
+      a.href='#'; a.addEventListener('click', e=>e.preventDefault());
+      const img = document.createElement('img'); img.className='fav'; img.src=FAVURL(p.domain); img.alt=''; img.loading='lazy'; img.onerror=function(){this.style.display='none';};
+      const nameEl = document.createElement('span'); nameEl.textContent=p.name;
+      a.appendChild(img); a.appendChild(nameEl);
+      if (p.signal) {
+        const sig = document.createElement('span'); sig.className='sig'; sig.textContent=p.signal.label;
+        a.appendChild(sig);
+      }
+      chipsEl.appendChild(a);
+    });
+
+    if (!ql && layer.projects.length < layer.count) {
+      const more = document.createElement('span'); more.className='t ann';
+      more.textContent='+' + (layer.count - layer.projects.length) + ' more';
+      chipsEl.appendChild(more);
+    }
+
+    innerEl.appendChild(chipsEl);
+    bodyEl.appendChild(innerEl);
+    rowEl.appendChild(hdrEl);
+    rowEl.appendChild(bodyEl);
+
+    hdrEl.addEventListener('click', () => {
+      toggleLayer(rowEl, layer.id);
+      // sync summary bar
+      const seg = document.querySelector('[data-id="'+layer.id+'"]');
+      if (seg) seg.classList.toggle('active', rowEl.classList.contains('open'));
+    });
+
+    acc.appendChild(rowEl);
+  });
+}
+
+function toggleLayer(rowEl, id) {
+  rowEl.classList.toggle('open');
+}
+
+let timer;
+document.getElementById('search').addEventListener('input', function() {
+  clearTimeout(timer);
+  timer = setTimeout(() => buildAccordion(this.value), 120);
+});
+
+buildSummaryBar();
+buildAccordion();
+</script>
+</body>
+</html>
