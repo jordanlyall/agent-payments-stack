@@ -247,8 +247,9 @@
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  function getParam(name) {
-    return new URLSearchParams(window.location.search).get(name);
+  function getSlug() {
+    var path = window.location.pathname;
+    return path.replace(/^//, '').split('?')[0] || null;
   }
 
   function findProject(layers, id) {
@@ -379,7 +380,7 @@
       crumb + hdr + metaHtml + tagsHtml + ghHtml + histHtml + linkHtml;
   }
 
-  var id = getParam('id');
+  var id = getSlug();
   if (!id) { window.location.href = '/'; return; }
 
   fetch('/data.json')

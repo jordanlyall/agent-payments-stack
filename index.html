@@ -1336,7 +1336,7 @@ document.getElementById('sf').addEventListener('submit',async e=>{
     if (!chip) return;
     if (e.ctrlKey || e.metaKey || e.shiftKey) return; // allow external URL
     e.preventDefault();
-    window.location.href = '/projects?id=' + chip.getAttribute('data-id');
+    window.location.href = '/' + chip.getAttribute('data-id');
   });
 })();
 </script>
