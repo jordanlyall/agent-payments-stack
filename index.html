@@ -1247,7 +1247,8 @@
     let shown = 0;
     document.querySelectorAll('.t').forEach(c=>{
       const name = c.textContent.replace(/\s+/g,' ').trim().toLowerCase();
-      const matchQ = !q || name.includes(q);
+      const tip = (c.getAttribute('data-tip') || '').toLowerCase();
+      const matchQ = !q || name.includes(q) || tip.includes(q);
       let matchF = true;
       if(activeF !== 'all'){
         if(activeF === 'live') matchF = !c.classList.contains('early') && !c.classList.contains('ann') && !c.classList.contains('acq');
