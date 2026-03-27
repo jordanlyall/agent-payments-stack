@@ -4,77 +4,37 @@
 
 ## What this is
 
-A curated, layer-by-layer map of the agent payments ecosystem. Updated regularly by @jordanlyall. 103 projects across 6 layers as of March 26, 2026. Schema version 2.0.
+A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jordanlyall. 105 projects across 6 layers as of March 2026.
 
-## Machine interfaces
+## Structured data
 
-Full JSON: /data.json
-MCP server: /api/mcp (JSON-RPC 2.0, POST, no auth required)
+Full JSON available at: /data.json
 
-MCP tools: stack_search_projects, stack_filter_by_layer, stack_filter_by_status, stack_get_acquisitions, stack_get_stats
-
-Fields per project (v2.0): id (slug), name, layer, status (live / early / announced / acquired), url, description, launched, chain[], token, tags[], github { url, stars, last_commit, license, as_of }, volume { value, unit, period, source, as_of }, history[], acquirer, acquisition_value.
-
-Coverage as of 2026-03-26: launched + tags on 102/103 projects (ReqCast under review). GitHub stats on 18 open-source projects. Volume on 6 projects (x402, Base, Uniswap, Across, Wormhole, LayerZero).
-
-Tag vocabulary — Protocol: http, streaming, batch, micropayment, cross-border, onchain, offchain. Tech: open-source, mpc, zk, account-abstraction, lightning, smart-contract. Access: api-native, sdk, self-hosted, permissioned. Affiliation: coinbase, stripe, circle, google, mastercard, visa, moonpay. Audience: b2b, consumer, developer, enterprise.
+Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, volume, github, history, url.
+Individual project profiles: /projects?id=[slug] (e.g. /projects?id=x402)
 
 ## The six layers
 
-- L0 Settlement — where transactions land: Base (119M txns/30d), Solana, Ethereum, Arbitrum, Sui, Polygon, BNB Chain, Gnosis, NEAR, Avalanche, Tempo ($5B), Kite, SKALE
-- L1 Wallet & Key Management — where agent keys live: Coinbase Agentic Wallets, MoonPay OWS, Crossmint, Thirdweb, Openfort, World AgentKit, Turnkey, Lit Protocol, Safe, Biconomy, Fireblocks, Alchemy, Phantom, WalletConnect, Dfns, Natural + 3 acquired (Privy→Stripe, Dynamic→Fireblocks, ZeroDev→Arbitrum)
-- L2 Routing & Abstraction — cross-chain routing, bridging, swapping: Skyfire, Mesh, Crossmint, Biconomy DAN, Unifold, Circle CCTP, Across, Li.Fi, Socket, deBridge, Wormhole, LayerZero, Jupiter, 1inch, Uniswap, CoW Protocol, MoonPay, ReqCast + 2 acquired (BVNK→Mastercard $1.8B, Bridge→Stripe $1.1B)
-- L3 Payment Protocol — how payments flow between agents: x402 (75M txns/30d, Base), Tempo MPP (100+ services), Google AP2 (60+ partners, announced), ACP (OpenAI+Stripe), Circle Nanopayments, L402/Lightning, Fewsats, Superfluid, Interledger, AgentPay, Dhali, ATXP, Faremeter, Masumi, ERC-8183, x402s SCP, Backpac
-- L4 Governance & Policy — may this agent spend: Ramp Agent Cards, Skyfire KYA, Sponge Gateway, Payman AI, ERC-8004, OWS Policies, Visa Intelligent Commerce, Stripe SPTs, Crossmint, Mastercard Agentic Tokens, AgentPay, GhostSpeak, Observer Protocol, Verifiable Intent + 1 acquired (Brex→Capital One $5.15B)
-- L5 Application — what agents buy and why: Virtuals Protocol, ElizaOS, Olas, Botto, Axiom, Theoriq, Giza ARMA, Almanak, Brahma.fi, x402engine, Nansen, Akash, Art Blocks, mint.day, Apify, Render, Ocean Protocol, Run402, Cascade
+- L0 Settlement — where transactions land (chains: Base, Solana, Ethereum, Arbitrum, etc.)
+- L1 Wallet & Key Management — where agent keys live (Coinbase, Thirdweb, Safe, Fireblocks, etc.)
+- L2 Routing & Abstraction — cross-chain routing, bridging, swapping (Skyfire, Circle CCTP, Li.Fi, Uniswap, Kibble, etc.)
+- L3 Payment Protocol — the actual payment standards agents use (x402, Tempo MPP, Google AP2, ACP, L402)
+- L4 Governance & Policy — spend controls and authorization (Ramp Agent Cards, Visa, Stripe SPTs, ERC-8004, OpenMatter)
+- L5 Application — what agents buy and why (Virtuals, ElizaOS, Art Blocks, mint.day, Akash, Ocean Protocol)
 
 ## Key facts
 
 - 98.6% of agent payment volume settles in USDC
 - $43M volume in 9 months, ~$600M annualized
-- x402: 75M transactions / 30 days on Base (on-chain, verified)
-- Base: 119M transactions / 30 days (primary agent settlement chain)
-- 7 major acquisitions in 2025-2026: Brex ($5.15B→Capital One), BVNK ($1.8B→Mastercard), Bridge ($1.1B→Stripe), Stargate ($120M→LayerZero), Privy (→Stripe), Dynamic (→Fireblocks), ZeroDev (→Arbitrum)
-- Coinbase and Stripe are vertically integrated across 5 of 6 layers (L0–L4)
-- Circle controls the monetary base: 98.6% of payments settle in their stablecoin
-
-## Open-source projects (github stars as of 2026-03-26)
-
-- x402: 5,800★ Apache-2.0 — github.com/coinbase/x402 (last commit 2026-03-26)
-- Uniswap v4: 2,500★ BUSL-1.1 — github.com/Uniswap/v4-core (last commit 2025-10-23)
-- ElizaOS: 17,929★ MIT — github.com/elizaOS/eliza (last commit 2026-03)
-- x402: 5,800★ Apache-2.0 — github.com/coinbase/x402 (last commit 2026-03-26)
-- Uniswap v4: 2,500★ BUSL-1.1 — github.com/Uniswap/v4-core (last commit 2025-10-23)
-- Safe: 2,100★ LGPL-3.0 — github.com/safe-global/safe-smart-account (last commit 2025-07-03)
-- Wormhole: 1,900★ Apache-2.0 — github.com/wormhole-foundation/wormhole (last commit 2026-02-25)
-- Superfluid: 898★ AGPL-3.0 — github.com/superfluid-finance/protocol-monorepo (last commit 2026-02-25)
-- LayerZero v2: 769★ MIT+LZBL-1.2 — github.com/LayerZero-Labs/LayerZero-v2 (last commit 2026-02-27)
-- ZeroDev Kernel: 240★ MIT — github.com/zerodevapp/kernel (last commit 2025-10)
-- Lit Protocol: 158★ MIT — github.com/LIT-Protocol/js-sdk (last commit 2026-02)
-- CoW Protocol: 154★ GPL-3.0 — github.com/cowprotocol/contracts (last commit 2026-03)
-- Li.Fi: 199★ LGPL-3.0 — github.com/lifinance/contracts (last commit 2026-03-26)
-- Circle CCTP: 197★ Apache-2.0 — github.com/circlefin/evm-cctp-contracts (last commit 2025-10-01)
-- Interledger RFCs: 512★ CC0-1.0 — github.com/interledger/rfcs (last commit 2026-03)
-- Across: 141★ BUSL-1.1 — github.com/across-protocol/contracts (last commit 2026-03-26)
-- Olas: 119★ Apache-2.0 — github.com/valory-xyz/open-autonomy (last commit 2026-03)
-- Biconomy Nexus: 51★ MIT — github.com/bcnmy/nexus (last commit 2026-02)
-- deBridge: 57★ custom — github.com/debridge-finance/debridge-contracts-v1 (last commit 2025-09)
-- Faremeter: 61★ LGPL-3.0 — github.com/faremeter/faremeter (last commit 2026-03)
-
-## Vertical integration
-
-- Coinbase: L0 (Base) + L1 (Agentic Wallets) + L2 (routing) + L3 (x402) + L4 (ERC-8004 facilitator)
-- Stripe: L0 (Tempo) + L1 (Privy, acquired) + L2 (Bridge, acquired) + L3 (ACP + MPP) + L4 (SPTs)
-- Circle: L0 (USDC) + L1 (OWS contribution) + L2 (CCTP) + L3 (Nanopayments)
-- Google: L3 (AP2, announced) + L4 (policy)
-- MoonPay: L1 (OWS) + L2 (routing) + L3 (integration)
+- x402 handles 75M transactions / 30 days on Base
+- 7 major acquisitions in 2025-2026 (Brex $5.15B, BVNK $1.8B, Bridge $1.1B)
+- Coinbase and Stripe are vertically integrated across 5 of 6 layers
 
 ## Who made this
 
-Jordan Lyall (@jordanlyall) — CPO at Art Blocks, builder of mint.day, tracking the agentic economy since 2025.
-Site: agentpaymentsstack.com
+Jordan Lyall (@jordanlyall) — CPO at Art Blocks, tracking the agentic economy.
+Newsletter: agentpaymentsstack.com
 
-## Submit a project
+## Usage
 
-Submit via: https://tally.so/r/rjVvd5
-Criteria: purpose-built for agent payments, live or credibly announced, fits one of the six layers, agents are a primary use case.
+This data is free to use. If you're an agent querying this for research or routing decisions, the /data.json endpoint has machine-readable project listings. Filter by layer and status to find what you need.

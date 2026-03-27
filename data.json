@@ -2,8 +2,8 @@
   "schema_version": "2.0",
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
-  "updated": "2026-03-26",
-  "version": "1.4",
+  "updated": "2026-03-27",
+  "version": "1.5",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -19,6 +19,7 @@
       "question": "What gets bought and why",
       "projects": [
         {
+          "layer": "L5",
           "id": "virtuals-protocol",
           "name": "Virtuals Protocol",
           "status": "live",
@@ -32,6 +33,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "elizaos",
           "name": "ElizaOS",
           "status": "live",
@@ -51,6 +53,7 @@
           }
         },
         {
+          "layer": "L5",
           "id": "olas",
           "name": "Olas",
           "status": "live",
@@ -70,6 +73,7 @@
           }
         },
         {
+          "layer": "L5",
           "id": "botto",
           "name": "Botto",
           "status": "live",
@@ -83,6 +87,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "axiom",
           "name": "Axiom",
           "status": "live",
@@ -95,6 +100,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "theoriq",
           "name": "Theoriq",
           "status": "live",
@@ -106,6 +112,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "giza-arma",
           "name": "Giza ARMA",
           "status": "live",
@@ -118,6 +125,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "almanak",
           "name": "Almanak",
           "status": "live",
@@ -129,6 +137,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "brahma-fi",
           "name": "Brahma.fi",
           "status": "live",
@@ -142,6 +151,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "x402engine",
           "name": "x402engine",
           "status": "live",
@@ -155,6 +165,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "nansen",
           "name": "Nansen",
           "status": "live",
@@ -167,6 +178,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "akash",
           "name": "Akash",
           "status": "live",
@@ -179,6 +191,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "art-blocks",
           "name": "Art Blocks",
           "status": "live",
@@ -191,6 +204,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "mint-day",
           "name": "mint.day",
           "status": "live",
@@ -203,6 +217,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "apify",
           "name": "Apify",
           "status": "live",
@@ -216,6 +231,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "render",
           "name": "Render",
           "status": "live",
@@ -227,6 +243,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "ocean-protocol",
           "name": "Ocean Protocol",
           "status": "live",
@@ -239,6 +256,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "run402",
           "name": "Run402",
           "status": "live",
@@ -253,6 +271,7 @@
           ]
         },
         {
+          "layer": "L5",
           "id": "cascade",
           "name": "Cascade",
           "status": "live",
@@ -273,6 +292,7 @@
       "question": "May this agent spend",
       "projects": [
         {
+          "layer": "L4",
           "id": "ramp-agent-cards",
           "name": "Ramp Agent Cards",
           "status": "live",
@@ -286,6 +306,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "brex",
           "name": "Brex",
           "status": "acquired",
@@ -312,6 +333,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "skyfire-kya",
           "name": "Skyfire KYA",
           "status": "live",
@@ -325,6 +347,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "sponge-gateway",
           "name": "Sponge Gateway",
           "status": "live",
@@ -337,6 +360,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "payman-ai",
           "name": "Payman AI",
           "status": "early",
@@ -349,6 +373,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "erc-8004",
           "name": "ERC-8004",
           "status": "live",
@@ -362,6 +387,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "ows-policies",
           "name": "OWS Policies",
           "status": "live",
@@ -374,6 +400,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "visa-intelligent-commerce",
           "name": "Visa Intelligent Commerce",
           "status": "live",
@@ -388,6 +415,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "stripe-spts",
           "name": "Stripe SPTs",
           "status": "live",
@@ -402,7 +430,8 @@
           ]
         },
         {
-          "id": "crossmint",
+          "layer": "L4",
+          "id": "crossmint-l4",
           "name": "Crossmint",
           "status": "live",
           "description": "Multi-chain infrastructure for wallets, minting, and payments. Provides REST APIs for agent spending policy enforcement.",
@@ -414,6 +443,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "mastercard-agentic-tokens",
           "name": "Mastercard Agentic Tokens",
           "status": "live",
@@ -427,7 +457,8 @@
           ]
         },
         {
-          "id": "agentpay",
+          "layer": "L4",
+          "id": "agentpay-l4",
           "name": "AgentPay",
           "status": "live",
           "url": "https://agent.tech",
@@ -440,6 +471,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "ghostspeak",
           "name": "GhostSpeak",
           "status": "live",
@@ -453,6 +485,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "observer-protocol",
           "name": "Observer Protocol",
           "status": "early",
@@ -466,6 +499,7 @@
           ]
         },
         {
+          "layer": "L4",
           "id": "verifiable-intent",
           "name": "Verifiable Intent",
           "status": "live",
@@ -477,6 +511,20 @@
             "developer",
             "onchain"
           ]
+        },
+        {
+          "id": "openmatter",
+          "layer": "L4",
+          "name": "OpenMatter",
+          "status": "early",
+          "url": "https://github.com/openmatter",
+          "description": "ZK execution firewall for payment MCPs. Wraps Stripe MCP with a RISC Zero zkVM — blocks malformed tool calls, threshold decryption for API keys, PII redaction before logs.",
+          "tags": [
+            "zk",
+            "open-source",
+            "developer",
+            "stripe"
+          ]
         }
       ]
     },
@@ -486,6 +534,7 @@
       "question": "How the payment flows",
       "projects": [
         {
+          "layer": "L3",
           "id": "x402",
           "name": "x402",
           "status": "live",
@@ -530,6 +579,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "tempo-mpp",
           "name": "Tempo MPP",
           "status": "live",
@@ -545,6 +595,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "google-ap2",
           "name": "Google AP2",
           "status": "announced",
@@ -560,6 +611,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "acp",
           "name": "ACP",
           "status": "live",
@@ -574,6 +626,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "circle-nanopayments",
           "name": "Circle Nanopayments",
           "status": "early",
@@ -587,6 +640,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "l402-lightning",
           "name": "L402 / Lightning",
           "status": "live",
@@ -599,6 +653,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "atxp",
           "name": "ATXP",
           "status": "early",
@@ -612,6 +667,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "fewsats",
           "name": "Fewsats",
           "status": "live",
@@ -625,6 +681,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "superfluid",
           "name": "Superfluid",
           "status": "live",
@@ -659,6 +716,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "erc-8183",
           "name": "ERC-8183",
           "status": "early",
@@ -672,6 +730,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "interledger",
           "name": "Interledger",
           "status": "live",
@@ -691,7 +750,8 @@
           }
         },
         {
-          "id": "agentpay",
+          "layer": "L3",
+          "id": "agentpay-l3",
           "name": "AgentPay",
           "status": "live",
           "url": "https://agent.tech",
@@ -704,6 +764,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "dhali",
           "name": "Dhali",
           "status": "live",
@@ -717,6 +778,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "x402s-scp",
           "name": "x402s SCP",
           "status": "early",
@@ -730,6 +792,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "faremeter",
           "name": "Faremeter",
           "status": "live",
@@ -750,6 +813,7 @@
           }
         },
         {
+          "layer": "L3",
           "id": "masumi",
           "name": "Masumi",
           "status": "live",
@@ -763,6 +827,7 @@
           ]
         },
         {
+          "layer": "L3",
           "id": "backpac",
           "name": "Backpac",
           "status": "early",
@@ -783,6 +848,7 @@
       "question": "Which chain, token, rail",
       "projects": [
         {
+          "layer": "L2",
           "id": "skyfire",
           "name": "Skyfire",
           "status": "live",
@@ -796,6 +862,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "mesh",
           "name": "Mesh",
           "status": "live",
@@ -808,7 +875,8 @@
           ]
         },
         {
-          "id": "crossmint",
+          "layer": "L2",
+          "id": "crossmint-l2",
           "name": "Crossmint",
           "status": "live",
           "description": "Multi-chain infrastructure for wallets, minting, and payments. Routes agent transactions across chains via REST API.",
@@ -820,6 +888,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "biconomy-dan",
           "name": "Biconomy DAN",
           "status": "live",
@@ -833,6 +902,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "bvnk",
           "name": "BVNK",
           "status": "acquired",
@@ -861,6 +931,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "unifold",
           "name": "Unifold",
           "status": "live",
@@ -873,6 +944,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "circle-cctp",
           "name": "Circle CCTP",
           "status": "live",
@@ -909,6 +981,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "bridge",
           "name": "Bridge",
           "status": "acquired",
@@ -943,6 +1016,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "across",
           "name": "Across",
           "status": "live",
@@ -971,6 +1045,7 @@
           }
         },
         {
+          "layer": "L2",
           "id": "li-fi",
           "name": "Li.Fi",
           "status": "live",
@@ -991,6 +1066,7 @@
           }
         },
         {
+          "layer": "L2",
           "id": "socket",
           "name": "Socket",
           "status": "live",
@@ -1004,6 +1080,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "debridge",
           "name": "deBridge",
           "status": "live",
@@ -1024,6 +1101,7 @@
           }
         },
         {
+          "layer": "L2",
           "id": "wormhole",
           "name": "Wormhole",
           "status": "live",
@@ -1058,6 +1136,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "layerzero",
           "name": "LayerZero",
           "status": "live",
@@ -1092,6 +1171,7 @@
           }
         },
         {
+          "layer": "L2",
           "id": "jupiter",
           "name": "Jupiter",
           "status": "live",
@@ -1107,6 +1187,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "1inch",
           "name": "1inch",
           "status": "live",
@@ -1119,6 +1200,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "uniswap",
           "name": "Uniswap",
           "status": "live",
@@ -1159,10 +1241,11 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "cow-protocol",
           "name": "CoW Protocol",
           "status": "live",
-          "description": "Intent-based DEX on Ethereum. Batches orders for MEV protection \u2014 useful for large agent settlement transactions.",
+          "description": "Intent-based DEX on Ethereum. Batches orders for MEV protection — useful for large agent settlement transactions.",
           "launched": "2021",
           "tags": [
             "open-source",
@@ -1179,6 +1262,7 @@
           }
         },
         {
+          "layer": "L2",
           "id": "moonpay",
           "name": "MoonPay",
           "status": "live",
@@ -1193,6 +1277,7 @@
           ]
         },
         {
+          "layer": "L2",
           "id": "reqcast",
           "name": "ReqCast",
           "status": "live",
@@ -1210,6 +1295,20 @@
           "chain": [
             "Base"
           ]
+        },
+        {
+          "id": "kibble",
+          "layer": "L2",
+          "name": "Kibble",
+          "status": "early",
+          "url": "https://github.com/0xJim/kibble",
+          "description": "Cross-chain wallet funding skill for agents. Solves the cold-start problem: bridges USDC to the right chain via LI.FI before first payment. npm install kibble-pay.",
+          "tags": [
+            "cross-border",
+            "sdk",
+            "developer",
+            "open-source"
+          ]
         }
       ]
     },
@@ -1219,6 +1318,7 @@
       "question": "Where the keys live",
       "projects": [
         {
+          "layer": "L1",
           "id": "coinbase-agentic-wallets",
           "name": "Coinbase Agentic Wallets",
           "status": "live",
@@ -1246,6 +1346,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "moonpay-ows",
           "name": "MoonPay OWS",
           "status": "live",
@@ -1259,7 +1360,8 @@
           ]
         },
         {
-          "id": "crossmint",
+          "layer": "L1",
+          "id": "crossmint-l1",
           "name": "Crossmint",
           "status": "live",
           "description": "Multi-chain wallet and NFT custody infrastructure. Provides REST APIs for agent wallet creation and asset management.",
@@ -1271,6 +1373,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "thirdweb",
           "name": "Thirdweb",
           "status": "live",
@@ -1283,6 +1386,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "openfort",
           "name": "Openfort",
           "status": "live",
@@ -1296,6 +1400,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "world-agentkit",
           "name": "World AgentKit",
           "status": "live",
@@ -1308,6 +1413,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "turnkey",
           "name": "Turnkey",
           "status": "live",
@@ -1320,6 +1426,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "privy",
           "name": "Privy",
           "status": "acquired",
@@ -1344,6 +1451,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "dynamic",
           "name": "Dynamic",
           "status": "acquired",
@@ -1368,6 +1476,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "lit-protocol",
           "name": "Lit Protocol",
           "status": "live",
@@ -1387,6 +1496,7 @@
           }
         },
         {
+          "layer": "L1",
           "id": "safe",
           "name": "Safe",
           "status": "live",
@@ -1426,6 +1536,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "zerodev",
           "name": "ZeroDev",
           "status": "acquired",
@@ -1457,6 +1568,7 @@
           }
         },
         {
+          "layer": "L1",
           "id": "biconomy",
           "name": "Biconomy",
           "status": "live",
@@ -1477,6 +1589,7 @@
           }
         },
         {
+          "layer": "L1",
           "id": "fireblocks",
           "name": "Fireblocks",
           "status": "live",
@@ -1491,6 +1604,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "alchemy",
           "name": "Alchemy",
           "status": "live",
@@ -1503,6 +1617,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "phantom",
           "name": "Phantom",
           "status": "live",
@@ -1519,6 +1634,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "walletconnect",
           "name": "WalletConnect",
           "status": "live",
@@ -1532,6 +1648,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "dfns",
           "name": "Dfns",
           "status": "live",
@@ -1546,6 +1663,7 @@
           ]
         },
         {
+          "layer": "L1",
           "id": "natural",
           "name": "Natural",
           "status": "early",
@@ -1566,6 +1684,7 @@
       "question": "Where transactions land",
       "projects": [
         {
+          "layer": "L0",
           "id": "base",
           "name": "Base",
           "status": "live",
@@ -1593,6 +1712,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "solana",
           "name": "Solana",
           "status": "live",
@@ -1606,6 +1726,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "ethereum",
           "name": "Ethereum",
           "status": "live",
@@ -1618,6 +1739,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "tempo",
           "name": "Tempo",
           "status": "live",
@@ -1631,6 +1753,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "arbitrum",
           "name": "Arbitrum",
           "status": "live",
@@ -1643,6 +1766,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "sui",
           "name": "Sui",
           "status": "live",
@@ -1655,6 +1779,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "polygon",
           "name": "Polygon",
           "status": "live",
@@ -1667,6 +1792,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "bnb-chain",
           "name": "BNB Chain",
           "status": "live",
@@ -1678,6 +1804,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "gnosis",
           "name": "Gnosis",
           "status": "live",
@@ -1690,6 +1817,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "near",
           "name": "NEAR",
           "status": "early",
@@ -1702,6 +1830,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "avalanche",
           "name": "Avalanche",
           "status": "live",
@@ -1714,6 +1843,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "kite",
           "name": "Kite",
           "status": "live",
@@ -1726,6 +1856,7 @@
           ]
         },
         {
+          "layer": "L0",
           "id": "skale",
           "name": "SKALE",
           "status": "live",
@@ -1837,6 +1968,6 @@
     "live": "Shipped and in production",
     "early": "Live but early-stage or limited access",
     "announced": "Publicly announced, not yet shipped",
-    "acquired": "Acquired \u2014 operating under parent company"
+    "acquired": "Acquired — operating under parent company"
   }
 }

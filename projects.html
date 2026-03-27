@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Profile — Agent Payments Stack</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0a0a0a;
+    --text: #f0f0f0;
+    --secondary: #999;
+    --muted: #666;
+    --faint: #1e1e1e;
+    --surface: #161616;
+    --early: #d4a840;
+    --ann: #555;
+    --acq: #e8694a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'cv01','cv02','ss01';
+  }
+
+  .page { width: 1200px; margin: 0 auto; padding: 48px 56px 64px; }
+
+  /* Breadcrumb */
+  .crumb {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .crumb a { color: var(--muted); text-decoration: none; }
+  .crumb a:hover { color: var(--secondary); }
+  .crumb-sep { color: var(--faint); }
+
+  /* Profile header */
+  .prof-hdr {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--faint);
+  }
+
+  .prof-name {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -1.5px;
+  }
+
+  .prof-layer {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-top: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .prof-desc {
+    font-size: 15px;
+    color: var(--secondary);
+    line-height: 1.65;
+    max-width: 580px;
+    margin-top: 14px;
+  }
+
+  /* Status badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-live     { background: rgba(240,240,240,0.06); color: var(--text); }
+  .badge-early    { background: rgba(212,168,64,0.1); color: var(--early); border: 1px solid rgba(212,168,64,0.2); }
+  .badge-announced{ background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.12); }
+  .badge-acquired { background: rgba(232,105,74,0.1); color: var(--acq); }
+
+  /* Meta grid */
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--faint);
+    border: 1px solid var(--faint);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .meta-cell { background: var(--bg); padding: 18px 20px; }
+
+  .meta-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--muted);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .meta-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .meta-note { font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+  /* Tags */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 32px; }
+
+  .tag {
+    display: inline-flex;
+    padding: 3px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--secondary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Section */
+  .section { margin-bottom: 32px; }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 650;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* GitHub */
+  .gh-row {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--faint);
+  }
+  .gh-row a { font-size: 13px; color: var(--secondary); text-decoration: none; }
+  .gh-row a:hover { color: var(--text); }
+  .gh-stat { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+  .license-warn {
+    font-size: 12px;
+    color: var(--early);
+    background: rgba(212,168,64,0.06);
+    border: 1px solid rgba(212,168,64,0.12);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 10px;
+  }
+
+  /* History */
+  .history-list { list-style: none; }
+  .history-list li {
+    font-size: 13px;
+    color: var(--secondary);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--faint);
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+  }
+  .history-list li:last-child { border-bottom: none; }
+  .hist-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); flex-shrink: 0; }
+  .hist-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; }
+
+  /* External link */
+  .ext-link {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  .ext-link a { color: var(--secondary); text-decoration: none; }
+  .ext-link a:hover { color: var(--text); }
+
+  /* Footer */
+  .foot {
+    margin-top: 48px;
+    padding-top: 16px;
+    border-top: 1px solid var(--faint);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .foot b { color: var(--text); font-weight: 600; }
+  .foot a { color: inherit; text-decoration: none; opacity: 0.5; }
+  .foot a:hover { opacity: 0.8; }
+
+  /* Not found */
+  .not-found { text-align: center; padding: 80px 0; color: var(--muted); }
+  .not-found a { color: var(--secondary); }
+</style>
+</head>
+<body>
+<div class="page">
+  <div id="root"></div>
+  <div class="foot">
+    <div><b>@jordanlyall</b> &middot; agentpaymentsstack.com</div>
+    <div>
+      <a href="/">The Agent Payments Stack</a>
+      &middot; <a href="/data.json">data.json</a>
+      &middot; <a href="/llms.txt">llms.txt</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// All values pass through esc() before DOM insertion. Data source is static authored JSON, not user input.
+(function () {
+  var LAYER_NAMES = {
+    L0: 'Settlement', L1: 'Wallet & Key Management',
+    L2: 'Routing & Abstraction', L3: 'Payment Protocol',
+    L4: 'Governance & Policy', L5: 'Application'
+  };
+
+  function esc(s) {
+    return s == null ? '' : String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name);
+  }
+
+  function findProject(layers, id) {
+    for (var i = 0; i < layers.length; i++) {
+      var layer = layers[i];
+      for (var j = 0; j < layer.projects.length; j++) {
+        if (layer.projects[j].id === id) {
+          var p = layer.projects[j];
+          if (!p.layer) p.layer = layer.id;
+          return p;
+        }
+      }
+    }
+    return null;
+  }
+
+  function badgeClass(status) {
+    return 'badge badge-' + (status || 'live');
+  }
+
+  function renderNotFound(id) {
+    document.title = 'Not Found — Agent Payments Stack';
+    document.getElementById('root').innerHTML =
+      '<div class="not-found">' +
+      '<p style="font-size:14px;margin-bottom:12px;">Project not found: <code>' + esc(id) + '</code></p>' +
+      '<p><a href="/">Back to the stack &rarr;</a></p>' +
+      '</div>';
+  }
+
+  function renderProfile(p) {
+    document.title = esc(p.name) + ' — Agent Payments Stack';
+
+    var layerLabel = p.layer
+      ? esc(p.layer) + ' &mdash; ' + esc(LAYER_NAMES[p.layer] || '')
+      : '';
+
+    var crumb =
+      '<div class="crumb">' +
+      '<a href="/">Agent Payments Stack</a>' +
+      '<span class="crumb-sep">/</span>' +
+      (p.layer ? '<span>' + esc(LAYER_NAMES[p.layer] || p.layer) + '</span><span class="crumb-sep">/</span>' : '') +
+      '<span>' + esc(p.name) + '</span>' +
+      '</div>';
+
+    var hdr =
+      '<div class="prof-hdr">' +
+      '<div>' +
+      '<div class="prof-name">' + esc(p.name) + '</div>' +
+      (layerLabel ? '<div class="prof-layer">' + layerLabel + '</div>' : '') +
+      (p.description ? '<p class="prof-desc">' + esc(p.description) + '</p>' : '') +
+      '</div>' +
+      '<div><span class="' + badgeClass(p.status) + '">' + esc(p.status || 'live') + '</span></div>' +
+      '</div>';
+
+    // Meta cells
+    var cells = [];
+    if (p.volume && p.volume['30d'] && p.volume['30d'] !== 'tracked') {
+      cells.push({ label: 'Volume (30d)', val: p.volume['30d'], note: p.volume.source });
+    }
+    if (p.metadata && !p.volume) {
+      cells.push({ label: 'Activity', val: p.metadata });
+    }
+    if (p.chain) cells.push({ label: 'Chain', val: p.chain });
+    if (p.launched) cells.push({ label: 'Launched', val: p.launched });
+    if (p.github && p.github.stars) {
+      cells.push({ label: 'Stars', val: p.github.stars.toLocaleString() });
+    }
+
+    var metaHtml = cells.length
+      ? '<div class="meta-grid">' +
+        cells.map(function(c) {
+          return '<div class="meta-cell">' +
+            '<div class="meta-label">' + esc(c.label) + '</div>' +
+            '<div class="meta-val">' + esc(c.val) + '</div>' +
+            (c.note ? '<div class="meta-note">' + esc(c.note) + '</div>' : '') +
+            '</div>';
+        }).join('') + '</div>'
+      : '';
+
+    // Tags
+    var tagsHtml = (p.tags && p.tags.length)
+      ? '<div class="tags">' +
+        p.tags.map(function(t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') +
+        '</div>'
+      : '';
+
+    // GitHub
+    var ghHtml = '';
+    if (p.github) {
+      var dualLicense = p.github.license && p.github.license.indexOf('LZBL') !== -1;
+      ghHtml =
+        '<div class="section">' +
+        '<div class="section-title">Open Source</div>' +
+        '<div class="gh-row">' +
+        '<a href="' + esc(p.github.url) + '" target="_blank" rel="noopener">' + esc(p.github.url) + '</a>' +
+        (p.github.license ? '<span class="gh-stat">' + esc(p.github.license) + '</span>' : '') +
+        '</div>' +
+        (dualLicense ? '<div class="license-warn">Dual-licensed: MIT (non-commercial) + LZBL-1.2. Commercial use requires a separate agreement.</div>' : '') +
+        '</div>';
+    }
+
+    // History
+    var histHtml = '';
+    if (p.history && p.history.length) {
+      histHtml =
+        '<div class="section">' +
+        '<div class="section-title">History</div>' +
+        '<ul class="history-list">' +
+        p.history.map(function(h) {
+          var label = h.event === 'acquired'
+            ? 'Acquired by ' + esc(h.acquirer || h.target)
+            : esc(h.event);
+          return '<li>' +
+            '<span class="hist-date">' + esc(h.date || '') + '</span>' +
+            '<span>' + label + '</span>' +
+            (h.value ? '<span class="hist-val">' + esc(h.value) + '</span>' : '') +
+            '</li>';
+        }).join('') +
+        '</ul></div>';
+    }
+
+    // External link
+    var linkHtml = p.url
+      ? '<div class="ext-link"><a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.url) + ' &rarr;</a></div>'
+      : '';
+
+    document.getElementById('root').innerHTML =
+      crumb + hdr + metaHtml + tagsHtml + ghHtml + histHtml + linkHtml;
+  }
+
+  var id = getParam('id');
+  if (!id) { window.location.href = '/'; return; }
+
+  fetch('/data.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('fetch failed');
+      return r.json();
+    })
+    .then(function(data) {
+      var p = findProject(data.layers, id);
+      if (p) renderProfile(p); else renderNotFound(id);
+    })
+    .catch(function() {
+      document.getElementById('root').innerHTML =
+        '<div class="not-found"><p>Could not load stack data.</p><p><a href="/">Back to the stack &rarr;</a></p></div>';
+    });
+}());
+</script>
+</body>
+</html>
