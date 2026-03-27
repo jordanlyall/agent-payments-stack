@@ -38,7 +38,9 @@
             "coinbase-agentic-wallets",
             "uniswap",
             "elizaos"
-          ]
+          ],
+          "docs": "https://whitepaper.virtuals.io",
+          "chain": "Base"
         },
         {
           "layer": "L5",
@@ -67,7 +69,9 @@
             "superfluid",
             "skyfire-kya",
             "tempo-mpp"
-          ]
+          ],
+          "docs": "https://docs.elizaos.ai",
+          "chain": "multi"
         },
         {
           "layer": "L5",
@@ -89,7 +93,9 @@
             "as_of": "2026-03-26"
           },
           "url": "https://olas.network",
-          "x": "autonolas"
+          "x": "autonolas",
+          "docs": "https://docs.autonolas.network",
+          "chain": "multi"
         },
         {
           "layer": "L5",
@@ -105,7 +111,9 @@
             "consumer"
           ],
           "url": "https://botto.com",
-          "x": "bottoproject"
+          "x": "bottoproject",
+          "docs": "https://docs.botto.com",
+          "chain": "Ethereum"
         },
         {
           "layer": "L5",
@@ -120,7 +128,8 @@
             "onchain"
           ],
           "url": "https://axiom.trade",
-          "x": "axiom"
+          "x": "axiom",
+          "chain": "Solana"
         },
         {
           "layer": "L5",
@@ -132,7 +141,11 @@
           "tags": [
             "developer",
             "b2b"
-          ]
+          ],
+          "url": "https://www.theoriq.ai",
+          "x": "TheoriqAI",
+          "docs": "https://docs.theoriq.ai",
+          "chain": "Ethereum"
         },
         {
           "layer": "L5",
@@ -145,7 +158,11 @@
             "open-source",
             "developer",
             "b2b"
-          ]
+          ],
+          "url": "https://www.gizatech.xyz",
+          "x": "gizatechxyz",
+          "docs": "https://docs.gizatech.xyz",
+          "chain": "Base"
         },
         {
           "layer": "L5",
@@ -157,13 +174,17 @@
           "tags": [
             "developer",
             "b2b"
-          ]
+          ],
+          "url": "https://almanak.co",
+          "x": "Almanak__",
+          "docs": "https://docs.almanak.co",
+          "chain": "multi"
         },
         {
           "layer": "L5",
           "id": "brahma-fi",
           "name": "Brahma.fi",
-          "status": "live",
+          "status": "acquired",
           "description": "On-chain execution environment for DeFi agents. Provides safe execution rails with programmable spending controls.",
           "launched": "2023",
           "tags": [
@@ -171,6 +192,16 @@
             "developer",
             "onchain",
             "account-abstraction"
+          ],
+          "url": "https://brahma.fi",
+          "x": "BrahmaFi",
+          "chain": "multi",
+          "history": [
+            {
+              "date": "2026-03",
+              "event": "acquired",
+              "acquirer": "Polymarket"
+            }
           ]
         },
         {
@@ -187,7 +218,9 @@
             "onchain"
           ],
           "url": "https://x402.org",
-          "x": "x402xyz"
+          "x": "x402xyz",
+          "docs": "https://docs.cdp.coinbase.com/x402/welcome",
+          "chain": "Base"
         },
         {
           "layer": "L5",
@@ -200,7 +233,10 @@
             "b2b",
             "developer",
             "offchain"
-          ]
+          ],
+          "url": "https://www.nansen.ai",
+          "x": "nansen_ai",
+          "chain": "multi"
         },
         {
           "layer": "L5",
@@ -215,7 +251,9 @@
             "onchain"
           ],
           "url": "https://akash.network",
-          "x": "akashnet_"
+          "x": "akashnet_",
+          "docs": "https://akash.network/docs",
+          "chain": "multi"
         },
         {
           "layer": "L5",
@@ -230,7 +268,9 @@
             "consumer"
           ],
           "url": "https://artblocks.io",
-          "x": "artblocks_io"
+          "x": "artblocks_io",
+          "docs": "https://docs.artblocks.io",
+          "chain": "Ethereum"
         },
         {
           "layer": "L5",
@@ -243,7 +283,8 @@
             "developer",
             "onchain",
             "consumer"
-          ]
+          ],
+          "chain": "Base"
         },
         {
           "layer": "L5",
@@ -257,7 +298,10 @@
             "developer",
             "b2b",
             "offchain"
-          ]
+          ],
+          "url": "https://apify.com",
+          "x": "apify",
+          "docs": "https://docs.apify.com"
         },
         {
           "layer": "L5",
@@ -269,7 +313,11 @@
           "tags": [
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://rendernetwork.com",
+          "x": "rendernetwork",
+          "docs": "https://know.rendernetwork.com",
+          "chain": "Solana"
         },
         {
           "layer": "L5",
@@ -282,7 +330,11 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://oceanprotocol.com",
+          "x": "oceanprotocol",
+          "docs": "https://docs.oceanprotocol.com",
+          "chain": "multi"
         },
         {
           "layer": "L5",
@@ -297,7 +349,8 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "chain": "Base"
         },
         {
           "layer": "L5",
@@ -311,7 +364,8 @@
             "http",
             "developer",
             "b2b"
-          ]
+          ],
+          "chain": "Solana"
         },
         {
           "id": "kraken-cli",
@@ -323,7 +377,9 @@
             "api-native",
             "developer",
             "b2b"
-          ]
+          ],
+          "x": "krakenfx",
+          "chain": "multi"
         },
         {
           "id": "monitor",
@@ -392,7 +448,9 @@
             "b2b",
             "enterprise",
             "offchain"
-          ]
+          ],
+          "url": "https://ramp.com",
+          "x": "tryramp"
         },
         {
           "layer": "L4",
@@ -419,7 +477,9 @@
               "acquirer": "Capital One",
               "value": "$5.15B"
             }
-          ]
+          ],
+          "url": "https://www.brex.com",
+          "x": "brex"
         },
         {
           "layer": "L4",
@@ -441,7 +501,9 @@
             "coinbase-agentic-wallets",
             "stripe-spts",
             "openmatter"
-          ]
+          ],
+          "docs": "https://docs.skyfire.xyz",
+          "chain": "multi"
         },
         {
           "layer": "L4",
@@ -454,7 +516,10 @@
             "http",
             "open-source",
             "developer"
-          ]
+          ],
+          "url": "https://paysponge.com",
+          "x": "sponge_wallet",
+          "docs": "https://docs.paysponge.com"
         },
         {
           "layer": "L4",
@@ -467,7 +532,10 @@
             "api-native",
             "developer",
             "b2b"
-          ]
+          ],
+          "url": "https://paymanai.com",
+          "x": "paymanai",
+          "docs": "https://docs.paymanai.com"
         },
         {
           "layer": "L4",
@@ -481,7 +549,9 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://eips.ethereum.org/EIPS/eip-8004",
+          "chain": "Ethereum"
         },
         {
           "layer": "L4",
@@ -494,7 +564,9 @@
             "api-native",
             "moonpay",
             "developer"
-          ]
+          ],
+          "url": "https://openwallet.sh",
+          "chain": "multi"
         },
         {
           "layer": "L4",
@@ -509,7 +581,10 @@
             "enterprise",
             "b2b",
             "offchain"
-          ]
+          ],
+          "url": "https://corporate.visa.com/en/products/intelligent-commerce.html",
+          "x": "Visa",
+          "docs": "https://developer.visa.com/capabilities/visa-intelligent-commerce"
         },
         {
           "layer": "L4",
@@ -532,7 +607,9 @@
             "openmatter",
             "elizaos",
             "skyfire-kya"
-          ]
+          ],
+          "docs": "https://docs.stripe.com/payments/stablecoin-payments",
+          "chain": "multi"
         },
         {
           "layer": "L4",
@@ -545,7 +622,11 @@
             "api-native",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://www.crossmint.com",
+          "x": "crossmint",
+          "docs": "https://docs.crossmint.com",
+          "chain": "multi"
         },
         {
           "layer": "L4",
@@ -559,7 +640,9 @@
             "enterprise",
             "b2b",
             "offchain"
-          ]
+          ],
+          "url": "https://www.mastercard.com",
+          "x": "Mastercard"
         },
         {
           "layer": "L4",
@@ -587,7 +670,8 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "chain": "Solana"
         },
         {
           "layer": "L4",
@@ -601,7 +685,8 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "chain": "multi"
         },
         {
           "layer": "L4",
@@ -764,7 +849,8 @@
           "tags": [
             "smart-contract",
             "onchain"
-          ]
+          ],
+          "chain": "Base"
         },
         {
           "id": "lookout",
@@ -856,7 +942,9 @@
             "skyfire-kya",
             "elizaos",
             "reqcast"
-          ]
+          ],
+          "url": "https://www.x402.org",
+          "docs": "https://docs.cdp.coinbase.com/x402/welcome"
         },
         {
           "layer": "L3",
@@ -879,7 +967,11 @@
             "mpp-gateway",
             "spendos",
             "dossier"
-          ]
+          ],
+          "url": "https://tempo.xyz",
+          "x": "tempo",
+          "docs": "https://docs.tempo.xyz",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -895,7 +987,9 @@
             "enterprise",
             "b2b",
             "offchain"
-          ]
+          ],
+          "url": "https://ap2-protocol.org",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -910,7 +1004,9 @@
             "developer",
             "api-native",
             "onchain"
-          ]
+          ],
+          "url": "https://www.agenticcommerce.dev",
+          "docs": "https://docs.stripe.com/agentic-commerce/protocol"
         },
         {
           "layer": "L3",
@@ -932,7 +1028,9 @@
             "x402",
             "uniswap",
             "across"
-          ]
+          ],
+          "docs": "https://developers.circle.com",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -945,7 +1043,8 @@
             "lightning",
             "open-source",
             "developer"
-          ]
+          ],
+          "docs": "https://docs.lightning.engineering/the-lightning-network/l402"
         },
         {
           "layer": "L3",
@@ -959,7 +1058,9 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://circuitandchisel.com",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -973,7 +1074,9 @@
             "open-source",
             "developer",
             "b2b"
-          ]
+          ],
+          "url": "https://www.fewsats.com",
+          "x": "fewsats"
         },
         {
           "layer": "L3",
@@ -1015,7 +1118,8 @@
             "elizaos",
             "safe",
             "coinbase-agentic-wallets"
-          ]
+          ],
+          "docs": "https://docs.superfluid.org"
         },
         {
           "layer": "L3",
@@ -1029,7 +1133,9 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://eips.ethereum.org/EIPS/eip-8183",
+          "chain": "Ethereum"
         },
         {
           "layer": "L3",
@@ -1049,7 +1155,11 @@
             "last_commit": "2026-03",
             "license": "CC0-1.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://interledger.org",
+          "x": "Interledger",
+          "docs": "https://interledger.org/developers/get-started",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -1077,7 +1187,9 @@
             "http",
             "developer",
             "b2b"
-          ]
+          ],
+          "x": "dhali_io",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -1091,7 +1203,8 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "chain": "Solana"
         },
         {
           "layer": "L3",
@@ -1112,7 +1225,9 @@
             "last_commit": "2026-03",
             "license": "LGPL-3.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "docs": "https://docs.corbits.dev/faremeter/overview",
+          "chain": "multi"
         },
         {
           "layer": "L3",
@@ -1126,7 +1241,9 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "x": "MasumiNetwork",
+          "docs": "https://docs.masumi.network"
         },
         {
           "layer": "L3",
@@ -1140,7 +1257,10 @@
             "developer",
             "b2b",
             "api-native"
-          ]
+          ],
+          "x": "BackpacXYZ",
+          "docs": "https://docs.backpac.xyz",
+          "chain": "multi"
         },
         {
           "id": "mpp-gateway",
@@ -1268,7 +1388,11 @@
             "developer",
             "b2b",
             "enterprise"
-          ]
+          ],
+          "url": "https://skyfire.xyz",
+          "x": "trySkyfire",
+          "docs": "https://docs.skyfire.xyz",
+          "chain": "Base"
         },
         {
           "layer": "L2",
@@ -1281,7 +1405,11 @@
             "api-native",
             "developer",
             "b2b"
-          ]
+          ],
+          "url": "https://www.meshpay.com",
+          "x": "meshpay",
+          "docs": "https://docs.meshconnect.com",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1294,7 +1422,11 @@
             "api-native",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://www.crossmint.com",
+          "x": "crossmint",
+          "docs": "https://docs.crossmint.com",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1308,7 +1440,11 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://www.biconomy.io",
+          "x": "biconomy",
+          "docs": "https://docs.biconomy.io",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1337,7 +1473,10 @@
               "acquirer": "Mastercard",
               "value": "$1.8B"
             }
-          ]
+          ],
+          "url": "https://bvnk.com",
+          "x": "BVNKFinance",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1350,7 +1489,10 @@
             "api-native",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://unifold.io",
+          "x": "unifold_io",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1387,7 +1529,10 @@
               "event": "launched",
               "note": "v1 on Ethereum and Avalanche"
             }
-          ]
+          ],
+          "url": "https://www.circle.com/cross-chain-transfer-protocol",
+          "x": "circle",
+          "docs": "https://developers.circle.com/cctp"
         },
         {
           "layer": "L2",
@@ -1422,7 +1567,9 @@
               "acquirer": "Stripe",
               "value": "$1.1B"
             }
-          ]
+          ],
+          "url": "https://www.bridge.xyz",
+          "x": "Stablecoin"
         },
         {
           "layer": "L2",
@@ -1451,7 +1598,11 @@
             "source": "on_chain",
             "as_of": "2026-03-26",
             "note": "DeFi Llama bridge volume"
-          }
+          },
+          "url": "https://across.to",
+          "x": "AcrossProtocol",
+          "docs": "https://docs.across.to",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1478,7 +1629,11 @@
             "across",
             "kibble",
             "coinbase-agentic-wallets"
-          ]
+          ],
+          "url": "https://li.fi",
+          "x": "lifiprotocol",
+          "docs": "https://docs.li.fi",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1492,7 +1647,11 @@
             "cross-border",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://socket.tech",
+          "x": "socketdottech",
+          "docs": "https://docs.socket.tech",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1513,7 +1672,11 @@
             "last_commit": "2025-09",
             "license": "custom",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://debridge.finance",
+          "x": "deBridgeFinance",
+          "docs": "https://docs.debridge.com",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1548,7 +1711,11 @@
               "event": "launched",
               "note": "Mainnet launch"
             }
-          ]
+          ],
+          "url": "https://wormhole.com",
+          "x": "wormhole",
+          "docs": "https://wormhole.com/docs",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1583,7 +1750,11 @@
             "period": "30d",
             "source": "layerzeroscan.com",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://layerzero.network",
+          "x": "LayerZero_Labs",
+          "docs": "https://docs.layerzero.network",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1599,7 +1770,10 @@
           ],
           "chain": [
             "Solana"
-          ]
+          ],
+          "url": "https://jup.ag",
+          "x": "JupiterExchange",
+          "docs": "https://station.jup.ag/docs"
         },
         {
           "layer": "L2",
@@ -1612,7 +1786,11 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://1inch.io",
+          "x": "1inch",
+          "docs": "https://docs.1inch.io",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1661,7 +1839,8 @@
             "kibble",
             "li-fi",
             "coinbase-agentic-wallets"
-          ]
+          ],
+          "docs": "https://docs.uniswap.org"
         },
         {
           "layer": "L2",
@@ -1682,7 +1861,11 @@
             "last_commit": "2026-03",
             "license": "GPL-3.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://cow.fi",
+          "x": "CoWSwap",
+          "docs": "https://docs.cow.fi",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1697,7 +1880,11 @@
             "b2b",
             "consumer",
             "offchain"
-          ]
+          ],
+          "url": "https://www.moonpay.com",
+          "x": "moonpay",
+          "docs": "https://dev.moonpay.com",
+          "chain": "multi"
         },
         {
           "layer": "L2",
@@ -1742,7 +1929,8 @@
             "coinbase-agentic-wallets",
             "li-fi",
             "elizaos"
-          ]
+          ],
+          "chain": "multi"
         },
         {
           "id": "reveel",
@@ -1756,7 +1944,9 @@
             "api-native",
             "agent-native",
             "onchain"
-          ]
+          ],
+          "x": "r3vl_xyz",
+          "chain": "multi"
         }
       ]
     },
@@ -1800,7 +1990,8 @@
             "safe",
             "elizaos",
             "skyfire-kya"
-          ]
+          ],
+          "docs": "https://docs.cdp.coinbase.com/agentic-wallet/welcome"
         },
         {
           "layer": "L1",
@@ -1814,7 +2005,9 @@
             "api-native",
             "b2b",
             "developer"
-          ]
+          ],
+          "url": "https://openwallet.sh",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1827,7 +2020,11 @@
             "api-native",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://www.crossmint.com",
+          "x": "crossmint",
+          "docs": "https://docs.crossmint.com",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1842,7 +2039,9 @@
             "developer"
           ],
           "url": "https://thirdweb.com",
-          "x": "thirdweb"
+          "x": "thirdweb",
+          "docs": "https://portal.thirdweb.com",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1856,7 +2055,11 @@
             "account-abstraction",
             "sdk",
             "developer"
-          ]
+          ],
+          "url": "https://www.openfort.io",
+          "x": "openfortxyz",
+          "docs": "https://www.openfort.io/docs",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1869,7 +2072,11 @@
             "sdk",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://world.org",
+          "x": "worldcoin",
+          "docs": "https://docs.world.org/agents/agent-kit",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1882,7 +2089,11 @@
             "mpc",
             "api-native",
             "developer"
-          ]
+          ],
+          "url": "https://www.turnkey.com",
+          "x": "turnkeyhq",
+          "docs": "https://docs.turnkey.com",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1907,7 +2118,11 @@
               "event": "acquired",
               "acquirer": "Stripe"
             }
-          ]
+          ],
+          "url": "https://www.privy.io",
+          "x": "privy_io",
+          "docs": "https://docs.privy.io",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1932,7 +2147,11 @@
               "event": "acquired",
               "acquirer": "Fireblocks"
             }
-          ]
+          ],
+          "url": "https://www.dynamic.xyz",
+          "x": "dynamic_xyz",
+          "docs": "https://docs.dynamic.xyz",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -1952,7 +2171,11 @@
             "last_commit": "2026-02",
             "license": "MIT",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://www.litprotocol.com",
+          "x": "LitProtocol",
+          "docs": "https://developer.litprotocol.com",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2000,7 +2223,8 @@
             "thirdweb",
             "fireblocks",
             "elizaos"
-          ]
+          ],
+          "docs": "https://docs.safe.global"
         },
         {
           "layer": "L1",
@@ -2032,7 +2256,11 @@
             "last_commit": "2025-10",
             "license": "MIT",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://zerodev.app",
+          "x": "zerodev_app",
+          "docs": "https://docs.zerodev.app",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2053,7 +2281,11 @@
             "last_commit": "2026-02",
             "license": "MIT",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://www.biconomy.io",
+          "x": "biconomy",
+          "docs": "https://docs.biconomy.io",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2070,7 +2302,9 @@
             "permissioned"
           ],
           "url": "https://fireblocks.com",
-          "x": "FireblocksHQ"
+          "x": "FireblocksHQ",
+          "docs": "https://developers.fireblocks.com",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2083,7 +2317,11 @@
             "api-native",
             "sdk",
             "developer"
-          ]
+          ],
+          "url": "https://www.alchemy.com",
+          "x": "AlchemyPlatform",
+          "docs": "https://docs.alchemy.com",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2100,7 +2338,10 @@
             "Solana",
             "Ethereum",
             "Base"
-          ]
+          ],
+          "url": "https://phantom.com",
+          "x": "phantom",
+          "docs": "https://docs.phantom.com"
         },
         {
           "layer": "L1",
@@ -2114,7 +2355,10 @@
             "open-source",
             "sdk",
             "developer"
-          ]
+          ],
+          "x": "WalletConnect",
+          "docs": "https://docs.walletconnect.network",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2129,7 +2373,10 @@
             "enterprise",
             "b2b",
             "permissioned"
-          ]
+          ],
+          "x": "dfnsHQ",
+          "docs": "https://docs.dfns.co",
+          "chain": "multi"
         },
         {
           "layer": "L1",
@@ -2178,7 +2425,11 @@
               "event": "launched",
               "note": "Mainnet launch"
             }
-          ]
+          ],
+          "url": "https://base.org",
+          "x": "base",
+          "docs": "https://docs.base.org",
+          "chain": "Base"
         },
         {
           "layer": "L0",
@@ -2192,7 +2443,11 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://solana.com",
+          "x": "solana",
+          "docs": "https://solana.com/docs",
+          "chain": "Solana"
         },
         {
           "layer": "L0",
@@ -2205,7 +2460,11 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://ethereum.org",
+          "x": "ethereum",
+          "docs": "https://ethereum.org/developers/docs",
+          "chain": "Ethereum"
         },
         {
           "layer": "L0",
@@ -2219,7 +2478,10 @@
             "api-native",
             "developer",
             "offchain"
-          ]
+          ],
+          "url": "https://tempo.xyz",
+          "x": "tempo",
+          "docs": "https://docs.tempo.xyz"
         },
         {
           "layer": "L0",
@@ -2232,7 +2494,11 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://arbitrum.io",
+          "x": "arbitrum",
+          "docs": "https://docs.arbitrum.io",
+          "chain": "Arbitrum"
         },
         {
           "layer": "L0",
@@ -2245,7 +2511,10 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://sui.io",
+          "x": "SuiNetwork",
+          "docs": "https://docs.sui.io"
         },
         {
           "layer": "L0",
@@ -2258,7 +2527,10 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://polygon.technology",
+          "x": "0xPolygon",
+          "docs": "https://docs.polygon.technology"
         },
         {
           "layer": "L0",
@@ -2270,7 +2542,10 @@
           "tags": [
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://www.bnbchain.org",
+          "x": "BNBCHAIN",
+          "docs": "https://docs.bnbchain.org"
         },
         {
           "layer": "L0",
@@ -2283,7 +2558,10 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://www.gnosis.io",
+          "x": "gnosischain",
+          "docs": "https://docs.gnosischain.com"
         },
         {
           "layer": "L0",
@@ -2296,7 +2574,10 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://near.org",
+          "x": "NEARProtocol",
+          "docs": "https://docs.near.org"
         },
         {
           "layer": "L0",
@@ -2309,7 +2590,10 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "url": "https://www.avax.network",
+          "x": "avax",
+          "docs": "https://docs.avax.network"
         },
         {
           "layer": "L0",
@@ -2322,7 +2606,9 @@
           "tags": [
             "developer",
             "onchain"
-          ]
+          ],
+          "x": "GoKiteAI",
+          "docs": "https://docs.gokite.ai"
         },
         {
           "layer": "L0",
@@ -2336,7 +2622,10 @@
             "open-source",
             "onchain",
             "developer"
-          ]
+          ],
+          "x": "SkaleNetwork",
+          "docs": "https://docs.skale.network",
+          "chain": "Ethereum"
         }
       ]
     }

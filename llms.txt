@@ -27,7 +27,7 @@ Individual project profiles: /[slug] (e.g. /x402)
 - 98.6% of agent payment volume settles in USDC
 - $43M volume in 9 months, ~$600M annualized
 - x402 handles 75M transactions / 30 days on Base
-- 7 major acquisitions in 2025-2026 (Brex $5.15B, BVNK $1.8B, Bridge $1.1B)
+- 8 major acquisitions in 2025-2026 (Brex $5.15B, BVNK $1.8B, Bridge $1.1B, Brahma.fi by Polymarket)
 - Coinbase and Stripe are vertically integrated across 5 of 6 layers
 
 ## Who made this
