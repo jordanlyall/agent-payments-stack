@@ -217,6 +217,75 @@
   /* Not found */
   .not-found { text-align: center; padding: 80px 0; color: var(--muted); }
   .not-found a { color: var(--secondary); }
+
+  /* Favicon / logo */
+  .prof-logo {
+    position: relative;
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--faint);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-bottom: 14px;
+  }
+  .prof-logo img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 8px;
+  }
+  .prof-logo-letter {
+    font-size: 18px; font-weight: 700;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Links row */
+  .links-row {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 20px;
+  }
+  .link-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 12px;
+    border: 1px solid var(--faint);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .link-btn:hover { border-color: var(--secondary); color: var(--text); }
+  .link-btn-label { opacity: 0.45; margin-right: 2px; }
+
+  /* Siblings */
+  .siblings {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--faint);
+  }
+  .siblings-title {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 14px;
+  }
+  .siblings-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sibling-chip {
+    display: inline-block;
+    padding: 5px 12px;
+    background: var(--faint);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--secondary);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .sibling-chip:hover { background: #222; color: var(--text); }
 </style>
 </head>
 <body>
@@ -279,7 +348,21 @@ document.addEventListener('DOMContentLoaded', function () {
       '</div>';
   }
 
-  function renderProfile(p) {
+  function getDomain(url) {
+    if (!url) return null;
+    try { return new URL(url).hostname.replace(/^www\./, ''); } catch(e) { return null; }
+  }
+
+  function getSiblings(layers, currentId, currentLayer, limit) {
+    for (var i = 0; i < layers.length; i++) {
+      if (layers[i].id === currentLayer) {
+        return layers[i].projects.filter(function(p) { return p.id !== currentId; }).slice(0, limit);
+      }
+    }
+    return [];
+  }
+
+  function renderProfile(p, layers) {
     document.title = esc(p.name) + ' — Agent Payments Stack';
 
     var layerLabel = p.layer
@@ -294,9 +377,17 @@ document.addEventListener('DOMContentLoaded', function () {
       '<span>' + esc(p.name) + '</span>' +
       '</div>';
 
+    var domain = getDomain(p.url);
+    var logoHtml =
+      '<div class="prof-logo">' +
+      '<span class="prof-logo-letter">' + esc(p.name.charAt(0)) + '</span>' +
+      (domain ? '<img src="https://www.google.com/s2/favicons?domain=' + esc(domain) + '&sz=64" alt="" data-favicon="1">' : '') +
+      '</div>';
+
     var hdr =
       '<div class="prof-hdr">' +
       '<div>' +
+      logoHtml +
       '<div class="prof-name">' + esc(p.name) + '</div>' +
       (layerLabel ? '<div class="prof-layer">' + layerLabel + '</div>' : '') +
       (p.description ? '<p class="prof-desc">' + esc(p.description) + '</p>' : '') +
@@ -336,19 +427,30 @@ document.addEventListener('DOMContentLoaded', function () {
         '</div>'
       : '';
 
-    // GitHub
+    // Links row (website, x, docs, github)
+    var linkBtns = [];
+    if (p.url && domain) {
+      linkBtns.push('<a class="link-btn" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="link-btn-label">web</span>' + esc(domain) + ' &rarr;</a>');
+    }
+    if (p.x) {
+      var handle = p.x.replace(/^@/, '');
+      linkBtns.push('<a class="link-btn" href="https://x.com/' + esc(handle) + '" target="_blank" rel="noopener"><span class="link-btn-label">x</span>@' + esc(handle) + '</a>');
+    }
+    if (p.docs) {
+      linkBtns.push('<a class="link-btn" href="' + esc(p.docs) + '" target="_blank" rel="noopener"><span class="link-btn-label">docs</span>' + esc(getDomain(p.docs) || 'docs') + ' &rarr;</a>');
+    }
+    if (p.github && p.github.url) {
+      linkBtns.push('<a class="link-btn" href="' + esc(p.github.url) + '" target="_blank" rel="noopener"><span class="link-btn-label">gh</span>' + esc(p.github.url.replace('https://github.com/', '')) + '</a>');
+    }
+    var linksHtml = linkBtns.length ? '<div class="links-row">' + linkBtns.join('') + '</div>' : '';
+
+    // GitHub section (license / dual-license warning)
     var ghHtml = '';
-    if (p.github) {
-      var dualLicense = p.github.license && p.github.license.indexOf('LZBL') !== -1;
-      ghHtml =
-        '<div class="section">' +
-        '<div class="section-title">Open Source</div>' +
-        '<div class="gh-row">' +
-        '<a href="' + esc(p.github.url) + '" target="_blank" rel="noopener">' + esc(p.github.url) + '</a>' +
-        (p.github.license ? '<span class="gh-stat">' + esc(p.github.license) + '</span>' : '') +
-        '</div>' +
-        (dualLicense ? '<div class="license-warn">Dual-licensed: MIT (non-commercial) + LZBL-1.2. Commercial use requires a separate agreement.</div>' : '') +
-        '</div>';
+    if (p.github && p.github.license) {
+      var dualLicense = p.github.license.indexOf('LZBL') !== -1;
+      if (dualLicense) {
+        ghHtml = '<div class="section"><div class="license-warn">Dual-licensed: MIT (non-commercial) + LZBL-1.2. Commercial use requires a separate agreement.</div></div>';
+      }
     }
 
     // History
@@ -371,13 +473,30 @@ document.addEventListener('DOMContentLoaded', function () {
         '</ul></div>';
     }
 
-    // External link
-    var linkHtml = p.url
-      ? '<div class="ext-link"><a href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(p.url) + ' &rarr;</a></div>'
-      : '';
+    // Siblings
+    var siblingsHtml = '';
+    if (layers && p.layer) {
+      var siblings = getSiblings(layers, p.id, p.layer, 6);
+      if (siblings.length) {
+        siblingsHtml =
+          '<div class="siblings">' +
+          '<div class="siblings-title">Also in ' + esc(p.layer) + ' &mdash; ' + esc(LAYER_NAMES[p.layer] || '') + '</div>' +
+          '<div class="siblings-chips">' +
+          siblings.map(function(s) {
+            return '<a class="sibling-chip" href="/' + esc(s.id) + '">' + esc(s.name) + '</a>';
+          }).join('') +
+          '</div></div>';
+      }
+    }
 
     document.getElementById('root').innerHTML =
-      crumb + hdr + metaHtml + tagsHtml + ghHtml + histHtml + linkHtml;
+      crumb + hdr + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + siblingsHtml;
+
+    // Hide favicon img on load error (letter fallback remains visible)
+    var faviconImg = document.querySelector('[data-favicon]');
+    if (faviconImg) {
+      faviconImg.addEventListener('error', function() { this.style.display = 'none'; });
+    }
   }
 
   var id = getSlug();
@@ -390,7 +509,7 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       var data = JSON.parse(_raw.textContent);
       var p = findProject(data.layers, id);
-      if (p) renderProfile(p); else renderNotFound(id);
+      if (p) renderProfile(p, data.layers); else renderNotFound(id);
     } catch(e) {
       document.getElementById('root').innerHTML = '<div class="not-found"><p>Parse error: ' + e.message + '</p><p><a href="/">Back &rarr;</a></p></div>';
     }
@@ -431,7 +550,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "developer",
             "onchain",
             "b2b"
-          ]
+          ],
+          "url": "https://virtuals.io",
+          "x": "virtuals_io"
         },
         {
           "layer": "L5",
@@ -451,7 +572,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "last_commit": "2026-03",
             "license": "MIT",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://elizaos.ai",
+          "x": "elizaos"
         },
         {
           "layer": "L5",
@@ -471,7 +594,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "last_commit": "2026-03",
             "license": "Apache-2.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://olas.network",
+          "x": "autonolas"
         },
         {
           "layer": "L5",
@@ -485,7 +610,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "developer",
             "onchain",
             "consumer"
-          ]
+          ],
+          "url": "https://botto.com",
+          "x": "bottoproject"
         },
         {
           "layer": "L5",
@@ -498,7 +625,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "developer",
             "b2b",
             "onchain"
-          ]
+          ],
+          "url": "https://axiom.trade",
+          "x": "axiom"
         },
         {
           "layer": "L5",
@@ -563,7 +692,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://x402.org",
+          "x": "x402xyz"
         },
         {
           "layer": "L5",
@@ -589,7 +720,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://akash.network",
+          "x": "akashnet_"
         },
         {
           "layer": "L5",
@@ -602,7 +735,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "developer",
             "onchain",
             "consumer"
-          ]
+          ],
+          "url": "https://artblocks.io",
+          "x": "artblocks_io"
         },
         {
           "layer": "L5",
@@ -745,7 +880,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "b2b",
             "enterprise",
             "permissioned"
-          ]
+          ],
+          "url": "https://skyfire.xyz",
+          "x": "skyfire_xyz"
         },
         {
           "layer": "L4",
@@ -828,7 +965,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "enterprise",
             "b2b",
             "offchain"
-          ]
+          ],
+          "url": "https://stripe.com",
+          "x": "stripe"
         },
         {
           "layer": "L4",
@@ -1038,7 +1177,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "circle",
             "developer",
             "api-native"
-          ]
+          ],
+          "url": "https://circle.com",
+          "x": "circle"
         },
         {
           "layer": "L3",
@@ -1114,7 +1255,9 @@ document.addEventListener('DOMContentLoaded', function () {
               "event": "launched",
               "note": "Mainnet launch on Ethereum"
             }
-          ]
+          ],
+          "url": "https://superfluid.finance",
+          "x": "Superfluid_HQ"
         },
         {
           "layer": "L3",
@@ -1639,7 +1782,9 @@ document.addEventListener('DOMContentLoaded', function () {
               "event": "launched",
               "note": "v1 on Ethereum"
             }
-          ]
+          ],
+          "url": "https://uniswap.org",
+          "x": "Uniswap"
         },
         {
           "layer": "L2",
@@ -1758,7 +1903,9 @@ document.addEventListener('DOMContentLoaded', function () {
               "event": "launched",
               "note": "GA via Coinbase Developer Platform"
             }
-          ]
+          ],
+          "url": "https://coinbase.com",
+          "x": "coinbase"
         },
         {
           "layer": "L1",
@@ -1798,7 +1945,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "open-source",
             "sdk",
             "developer"
-          ]
+          ],
+          "url": "https://thirdweb.com",
+          "x": "thirdweb"
         },
         {
           "layer": "L1",
@@ -1948,7 +2097,9 @@ document.addEventListener('DOMContentLoaded', function () {
               "event": "rebranded",
               "note": "Gnosis Safe rebranded to Safe"
             }
-          ]
+          ],
+          "url": "https://safe.global",
+          "x": "safe__global"
         },
         {
           "layer": "L1",
@@ -2016,7 +2167,9 @@ document.addEventListener('DOMContentLoaded', function () {
             "b2b",
             "offchain",
             "permissioned"
-          ]
+          ],
+          "url": "https://fireblocks.com",
+          "x": "FireblocksHQ"
         },
         {
           "layer": "L1",

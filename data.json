@@ -30,7 +30,9 @@
             "developer",
             "onchain",
             "b2b"
-          ]
+          ],
+          "url": "https://virtuals.io",
+          "x": "virtuals_io"
         },
         {
           "layer": "L5",
@@ -50,7 +52,9 @@
             "last_commit": "2026-03",
             "license": "MIT",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://elizaos.ai",
+          "x": "elizaos"
         },
         {
           "layer": "L5",
@@ -70,7 +74,9 @@
             "last_commit": "2026-03",
             "license": "Apache-2.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "url": "https://olas.network",
+          "x": "autonolas"
         },
         {
           "layer": "L5",
@@ -84,7 +90,9 @@
             "developer",
             "onchain",
             "consumer"
-          ]
+          ],
+          "url": "https://botto.com",
+          "x": "bottoproject"
         },
         {
           "layer": "L5",
@@ -97,7 +105,9 @@
             "developer",
             "b2b",
             "onchain"
-          ]
+          ],
+          "url": "https://axiom.trade",
+          "x": "axiom"
         },
         {
           "layer": "L5",
@@ -162,7 +172,9 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://x402.org",
+          "x": "x402xyz"
         },
         {
           "layer": "L5",
@@ -188,7 +200,9 @@
             "open-source",
             "developer",
             "onchain"
-          ]
+          ],
+          "url": "https://akash.network",
+          "x": "akashnet_"
         },
         {
           "layer": "L5",
@@ -201,7 +215,9 @@
             "developer",
             "onchain",
             "consumer"
-          ]
+          ],
+          "url": "https://artblocks.io",
+          "x": "artblocks_io"
         },
         {
           "layer": "L5",
@@ -344,7 +360,9 @@
             "b2b",
             "enterprise",
             "permissioned"
-          ]
+          ],
+          "url": "https://skyfire.xyz",
+          "x": "skyfire_xyz"
         },
         {
           "layer": "L4",
@@ -427,7 +445,9 @@
             "enterprise",
             "b2b",
             "offchain"
-          ]
+          ],
+          "url": "https://stripe.com",
+          "x": "stripe"
         },
         {
           "layer": "L4",
@@ -637,7 +657,9 @@
             "circle",
             "developer",
             "api-native"
-          ]
+          ],
+          "url": "https://circle.com",
+          "x": "circle"
         },
         {
           "layer": "L3",
@@ -713,7 +735,9 @@
               "event": "launched",
               "note": "Mainnet launch on Ethereum"
             }
-          ]
+          ],
+          "url": "https://superfluid.finance",
+          "x": "Superfluid_HQ"
         },
         {
           "layer": "L3",
@@ -1238,7 +1262,9 @@
               "event": "launched",
               "note": "v1 on Ethereum"
             }
-          ]
+          ],
+          "url": "https://uniswap.org",
+          "x": "Uniswap"
         },
         {
           "layer": "L2",
@@ -1357,7 +1383,9 @@
               "event": "launched",
               "note": "GA via Coinbase Developer Platform"
             }
-          ]
+          ],
+          "url": "https://coinbase.com",
+          "x": "coinbase"
         },
         {
           "layer": "L1",
@@ -1397,7 +1425,9 @@
             "open-source",
             "sdk",
             "developer"
-          ]
+          ],
+          "url": "https://thirdweb.com",
+          "x": "thirdweb"
         },
         {
           "layer": "L1",
@@ -1547,7 +1577,9 @@
               "event": "rebranded",
               "note": "Gnosis Safe rebranded to Safe"
             }
-          ]
+          ],
+          "url": "https://safe.global",
+          "x": "safe__global"
         },
         {
           "layer": "L1",
@@ -1615,7 +1647,9 @@
             "b2b",
             "offchain",
             "permissioned"
-          ]
+          ],
+          "url": "https://fireblocks.com",
+          "x": "FireblocksHQ"
         },
         {
           "layer": "L1",
