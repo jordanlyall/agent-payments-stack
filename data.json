@@ -299,6 +299,66 @@
             "developer",
             "b2b"
           ]
+        },
+        {
+          "id": "kraken-cli",
+          "name": "Kraken CLI",
+          "status": "live",
+          "url": "https://blog.kraken.com/news/industry-news/announcing-the-kraken-cli",
+          "description": "Exchange CLI with built-in MCP server. 134 commands. First exchange natively compatible with Claude Code.",
+          "tags": [
+            "api-native",
+            "developer",
+            "b2b"
+          ]
+        },
+        {
+          "id": "monitor",
+          "name": "Monitor",
+          "status": "early",
+          "url": "https://github.com/wschwab/monitor",
+          "description": "Agent swarm dispatcher with budget assignment and live ops",
+          "tags": [
+            "open-source",
+            "developer",
+            "b2b"
+          ]
+        },
+        {
+          "id": "payload-exchange",
+          "name": "Payload Exchange",
+          "status": "early",
+          "url": "https://payload-exchange.fly.dev",
+          "description": "Intent orderbook where agents post wants, solvers compete",
+          "tags": [
+            "onchain",
+            "b2b",
+            "developer"
+          ]
+        },
+        {
+          "id": "solver-as-a-service",
+          "name": "Solver as a Service",
+          "status": "early",
+          "url": "https://solverasaservice-production.up.railway.app",
+          "description": "Cross-chain Polymarket trading for agents",
+          "tags": [
+            "onchain",
+            "b2b",
+            "cross-border"
+          ]
+        },
+        {
+          "id": "agentresearch",
+          "name": "AgentResearch",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/agentresearch-aeb3",
+          "description": "Autonomous research agent paying for every API call in USDC on Base",
+          "tags": [
+            "onchain",
+            "api-native",
+            "developer"
+          ]
         }
       ]
     },
@@ -544,6 +604,169 @@
             "open-source",
             "developer",
             "stripe"
+          ]
+        },
+        {
+          "id": "spendos",
+          "name": "SpendOS",
+          "status": "early",
+          "url": "https://spendos-tempo.vercel.app",
+          "description": "'Ramp/Mercury for AI agents' with policies and audit trails",
+          "tags": [
+            "permissioned",
+            "b2b",
+            "developer"
+          ]
+        },
+        {
+          "id": "botpolice",
+          "name": "BotPolice",
+          "status": "early",
+          "url": "https://github.com/Lor3mipsvm/BotPolice",
+          "description": "Runtime policy layer: may this agent pay this vendor?",
+          "tags": [
+            "open-source",
+            "developer",
+            "self-hosted"
+          ]
+        },
+        {
+          "id": "agent-escrow",
+          "name": "Agent Escrow",
+          "status": "early",
+          "url": "https://github.com/AdamBeaudoin/agent-escrow",
+          "description": "Three-party escrow with LLM judge evaluation",
+          "tags": [
+            "smart-contract",
+            "onchain",
+            "open-source"
+          ]
+        },
+        {
+          "id": "agent-credit-protocol",
+          "name": "Agent Credit Protocol",
+          "status": "early",
+          "url": "https://precious-prosperity-production-2f7f.up.railway.app",
+          "description": "ERC-4626 vault giving agents credit lines for paid services",
+          "tags": [
+            "smart-contract",
+            "onchain",
+            "account-abstraction"
+          ]
+        },
+        {
+          "id": "kartein",
+          "name": "Kartein",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/kartein-4c15",
+          "description": "Programmable spending firewall for autonomous agents",
+          "tags": [
+            "permissioned",
+            "developer",
+            "smart-contract"
+          ]
+        },
+        {
+          "id": "ragequit-escrow",
+          "name": "RageQuit Escrow",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/ragequit-escrow-cec5",
+          "description": "Smart-contract payment control layer queuing payouts into escrow",
+          "tags": [
+            "smart-contract",
+            "onchain"
+          ]
+        },
+        {
+          "id": "spendbound",
+          "name": "SpendBound",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/spendbound-353c",
+          "description": "Guardrail and receipt layer for agentic vendor payments on Base",
+          "tags": [
+            "permissioned",
+            "onchain",
+            "developer"
+          ]
+        },
+        {
+          "id": "agent-allowance",
+          "name": "Agent Allowance",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/agent-allowance-protocol-dc5f",
+          "description": "Agent allowance protocol: operating budgets without principal access",
+          "tags": [
+            "smart-contract",
+            "onchain",
+            "account-abstraction"
+          ]
+        },
+        {
+          "id": "delegata",
+          "name": "Delegata",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/delegata-a951",
+          "description": "OAuth for AI agents: scoped, revocable spending permissions onchain",
+          "tags": [
+            "smart-contract",
+            "onchain",
+            "permissioned"
+          ]
+        },
+        {
+          "id": "wardex",
+          "name": "Wardex",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/wardex-37e7",
+          "description": "Policy firewall and verification for DeFi transactions",
+          "tags": [
+            "permissioned",
+            "onchain",
+            "developer"
+          ]
+        },
+        {
+          "id": "agentescrow",
+          "name": "AgentEscrow",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/agentescrow-9b78",
+          "description": "Trustless task escrow between AI agents",
+          "tags": [
+            "smart-contract",
+            "onchain"
+          ]
+        },
+        {
+          "id": "lookout",
+          "name": "Lookout",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/lookout-agent-trust-protocol-a946",
+          "description": "Credit score for AI agents based on onchain behavior",
+          "tags": [
+            "onchain",
+            "developer"
+          ]
+        },
+        {
+          "id": "litcredit",
+          "name": "LitCredit",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/litcredit-2665",
+          "description": "Sealed underwriting service for stablecoin agents",
+          "tags": [
+            "permissioned",
+            "enterprise"
+          ]
+        },
+        {
+          "id": "normandy",
+          "name": "Normandy",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/normandy-1d7f",
+          "description": "Undercollateralized lending on Solana where agents borrow against reputation",
+          "tags": [
+            "onchain",
+            "smart-contract"
           ]
         }
       ]
@@ -862,6 +1085,113 @@
             "developer",
             "b2b",
             "api-native"
+          ]
+        },
+        {
+          "id": "mpp-gateway",
+          "name": "mpp-gateway",
+          "status": "early",
+          "url": "https://mpp-gateway.vercel.app",
+          "description": "Brings 43 non-MPP APIs behind one payment layer",
+          "tags": [
+            "http",
+            "api-native",
+            "developer"
+          ]
+        },
+        {
+          "id": "dossier",
+          "name": "Dossier",
+          "status": "early",
+          "url": "https://github.com/kphed/tempo-hackathon",
+          "description": "$0.01/query deep research service via MPP",
+          "tags": [
+            "micropayment",
+            "api-native",
+            "developer"
+          ]
+        },
+        {
+          "id": "mpp-dynamic-pricing",
+          "name": "MPP Dynamic Pricing",
+          "status": "early",
+          "url": "https://mpp-dynamic-pricing.0x471.workers.dev",
+          "description": "Surge pricing for AI inference endpoints",
+          "tags": [
+            "streaming",
+            "onchain",
+            "developer"
+          ]
+        },
+        {
+          "id": "private-mpp",
+          "name": "Private MPP",
+          "status": "early",
+          "url": "https://github.com/UsmannK/PMPP",
+          "description": "Privacy-preserving agent audit trail via ZK proofs",
+          "tags": [
+            "zk",
+            "onchain",
+            "open-source"
+          ]
+        },
+        {
+          "id": "human402",
+          "name": "human402",
+          "status": "early",
+          "url": "https://human402.com",
+          "description": "Agent-to-human task marketplace",
+          "tags": [
+            "micropayment",
+            "http",
+            "b2b"
+          ]
+        },
+        {
+          "id": "agentnet",
+          "name": "AgentNet",
+          "status": "early",
+          "url": "https://agentnet-7xb.pages.dev",
+          "description": "Social network where agents tip each other in USDC",
+          "tags": [
+            "onchain",
+            "consumer"
+          ]
+        },
+        {
+          "id": "parley-protocol",
+          "name": "Parley Protocol",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/parley-protocol-d246",
+          "description": "Agent-to-agent content negotiation and micropayment settlement on Base",
+          "tags": [
+            "micropayment",
+            "onchain",
+            "smart-contract"
+          ]
+        },
+        {
+          "id": "zkx402",
+          "name": "zkx402",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/zkx402-zk-verified-payment-protocol-for-ai-agents-3541",
+          "description": "ZK-verified micropayments on Celo with identity-aware pricing",
+          "tags": [
+            "zk",
+            "micropayment",
+            "onchain"
+          ]
+        },
+        {
+          "id": "shulam",
+          "name": "Shulam",
+          "status": "early",
+          "url": "https://synthesis.mandate.md/shulam-compliance-infrastructure-for-the-autonomous-agent-economy-b186",
+          "description": "Enterprise-grade x402 facilitator with compliance infrastructure",
+          "tags": [
+            "http",
+            "enterprise",
+            "permissioned"
           ]
         }
       ]
