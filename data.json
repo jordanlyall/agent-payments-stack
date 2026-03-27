@@ -40,7 +40,8 @@
             "elizaos"
           ],
           "docs": "https://whitepaper.virtuals.io",
-          "chain": "Base"
+          "chain": "Base",
+          "funding": "$16M seed/ICO"
         },
         {
           "layer": "L5",
@@ -95,7 +96,8 @@
           "url": "https://olas.network",
           "x": "autonolas",
           "docs": "https://docs.autonolas.network",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$14.35M total"
         },
         {
           "layer": "L5",
@@ -113,7 +115,8 @@
           "url": "https://botto.com",
           "x": "bottoproject",
           "docs": "https://docs.botto.com",
-          "chain": "Ethereum"
+          "chain": "Ethereum",
+          "funding": "$1.67M seed"
         },
         {
           "layer": "L5",
@@ -253,7 +256,8 @@
           "url": "https://akash.network",
           "x": "akashnet_",
           "docs": "https://akash.network/docs",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$2.8M total"
         },
         {
           "layer": "L5",
@@ -334,7 +338,8 @@
           "url": "https://oceanprotocol.com",
           "x": "oceanprotocol",
           "docs": "https://docs.oceanprotocol.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$39M total"
         },
         {
           "layer": "L5",
@@ -450,7 +455,8 @@
             "offchain"
           ],
           "url": "https://ramp.com",
-          "x": "tryramp"
+          "x": "tryramp",
+          "funding": "$2.3B total"
         },
         {
           "layer": "L4",
@@ -479,7 +485,8 @@
             }
           ],
           "url": "https://www.brex.com",
-          "x": "brex"
+          "x": "brex",
+          "funding": "$1.2B total"
         },
         {
           "layer": "L4",
@@ -503,7 +510,8 @@
             "openmatter"
           ],
           "docs": "https://docs.skyfire.xyz",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$9.5M seed"
         },
         {
           "layer": "L4",
@@ -626,7 +634,8 @@
           "url": "https://www.crossmint.com",
           "x": "crossmint",
           "docs": "https://docs.crossmint.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$23.6M total"
         },
         {
           "layer": "L4",
@@ -971,7 +980,8 @@
           "url": "https://tempo.xyz",
           "x": "tempo",
           "docs": "https://docs.tempo.xyz",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$500M Series A"
         },
         {
           "layer": "L3",
@@ -1030,7 +1040,8 @@
             "across"
           ],
           "docs": "https://developers.circle.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$1.1B pre-IPO"
         },
         {
           "layer": "L3",
@@ -1060,7 +1071,8 @@
             "onchain"
           ],
           "url": "https://circuitandchisel.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$19.2M seed"
         },
         {
           "layer": "L3",
@@ -1119,7 +1131,8 @@
             "safe",
             "coinbase-agentic-wallets"
           ],
-          "docs": "https://docs.superfluid.org"
+          "docs": "https://docs.superfluid.org",
+          "funding": "$14.1M total"
         },
         {
           "layer": "L3",
@@ -1392,7 +1405,8 @@
           "url": "https://skyfire.xyz",
           "x": "trySkyfire",
           "docs": "https://docs.skyfire.xyz",
-          "chain": "Base"
+          "chain": "Base",
+          "funding": "$9.5M seed"
         },
         {
           "layer": "L2",
@@ -1409,7 +1423,8 @@
           "url": "https://www.meshpay.com",
           "x": "meshpay",
           "docs": "https://docs.meshconnect.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$200M+ total"
         },
         {
           "layer": "L2",
@@ -1426,7 +1441,8 @@
           "url": "https://www.crossmint.com",
           "x": "crossmint",
           "docs": "https://docs.crossmint.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$23.6M total"
         },
         {
           "layer": "L2",
@@ -1476,7 +1492,8 @@
           ],
           "url": "https://bvnk.com",
           "x": "BVNKFinance",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$93M total"
         },
         {
           "layer": "L2",
@@ -1492,7 +1509,8 @@
           ],
           "url": "https://unifold.io",
           "x": "unifold_io",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$500K seed"
         },
         {
           "layer": "L2",
@@ -1532,7 +1550,8 @@
           ],
           "url": "https://www.circle.com/cross-chain-transfer-protocol",
           "x": "circle",
-          "docs": "https://developers.circle.com/cctp"
+          "docs": "https://developers.circle.com/cctp",
+          "funding": "$1.1B pre-IPO"
         },
         {
           "layer": "L2",
@@ -1569,7 +1588,8 @@
             }
           ],
           "url": "https://www.bridge.xyz",
-          "x": "Stablecoin"
+          "x": "Stablecoin",
+          "funding": "$58M pre-acquisition"
         },
         {
           "layer": "L2",
@@ -1602,7 +1622,8 @@
           "url": "https://across.to",
           "x": "AcrossProtocol",
           "docs": "https://docs.across.to",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$51M total"
         },
         {
           "layer": "L2",
@@ -1633,7 +1654,8 @@
           "url": "https://li.fi",
           "x": "lifiprotocol",
           "docs": "https://docs.li.fi",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$51.7M total"
         },
         {
           "layer": "L2",
@@ -1651,7 +1673,8 @@
           "url": "https://socket.tech",
           "x": "socketdottech",
           "docs": "https://docs.socket.tech",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$10M total"
         },
         {
           "layer": "L2",
@@ -1676,7 +1699,8 @@
           "url": "https://debridge.finance",
           "x": "deBridgeFinance",
           "docs": "https://docs.debridge.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$5.5M seed"
         },
         {
           "layer": "L2",
@@ -1715,7 +1739,8 @@
           "url": "https://wormhole.com",
           "x": "wormhole",
           "docs": "https://wormhole.com/docs",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$225M"
         },
         {
           "layer": "L2",
@@ -1754,7 +1779,8 @@
           "url": "https://layerzero.network",
           "x": "LayerZero_Labs",
           "docs": "https://docs.layerzero.network",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$263M total"
         },
         {
           "layer": "L2",
@@ -1840,7 +1866,8 @@
             "li-fi",
             "coinbase-agentic-wallets"
           ],
-          "docs": "https://docs.uniswap.org"
+          "docs": "https://docs.uniswap.org",
+          "funding": "$176M total"
         },
         {
           "layer": "L2",
@@ -1865,7 +1892,8 @@
           "url": "https://cow.fi",
           "x": "CoWSwap",
           "docs": "https://docs.cow.fi",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$23M token round"
         },
         {
           "layer": "L2",
@@ -1884,7 +1912,8 @@
           "url": "https://www.moonpay.com",
           "x": "moonpay",
           "docs": "https://dev.moonpay.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$555M Series A"
         },
         {
           "layer": "L2",
@@ -2024,7 +2053,8 @@
           "url": "https://www.crossmint.com",
           "x": "crossmint",
           "docs": "https://docs.crossmint.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$23.6M total"
         },
         {
           "layer": "L1",
@@ -2041,7 +2071,8 @@
           "url": "https://thirdweb.com",
           "x": "thirdweb",
           "docs": "https://portal.thirdweb.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$29M total"
         },
         {
           "layer": "L1",
@@ -2059,7 +2090,8 @@
           "url": "https://www.openfort.io",
           "x": "openfortxyz",
           "docs": "https://www.openfort.io/docs",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$3M seed"
         },
         {
           "layer": "L1",
@@ -2076,7 +2108,8 @@
           "url": "https://world.org",
           "x": "worldcoin",
           "docs": "https://docs.world.org/agents/agent-kit",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$250M total"
         },
         {
           "layer": "L1",
@@ -2093,7 +2126,8 @@
           "url": "https://www.turnkey.com",
           "x": "turnkeyhq",
           "docs": "https://docs.turnkey.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$50M+ total"
         },
         {
           "layer": "L1",
@@ -2122,7 +2156,8 @@
           "url": "https://www.privy.io",
           "x": "privy_io",
           "docs": "https://docs.privy.io",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$41M total"
         },
         {
           "layer": "L1",
@@ -2151,7 +2186,8 @@
           "url": "https://www.dynamic.xyz",
           "x": "dynamic_xyz",
           "docs": "https://docs.dynamic.xyz",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$21M total"
         },
         {
           "layer": "L1",
@@ -2175,7 +2211,8 @@
           "url": "https://www.litprotocol.com",
           "x": "LitProtocol",
           "docs": "https://developer.litprotocol.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$17.5M total"
         },
         {
           "layer": "L1",
@@ -2224,7 +2261,8 @@
             "fireblocks",
             "elizaos"
           ],
-          "docs": "https://docs.safe.global"
+          "docs": "https://docs.safe.global",
+          "funding": "$100M strategic"
         },
         {
           "layer": "L1",
@@ -2260,7 +2298,8 @@
           "url": "https://zerodev.app",
           "x": "zerodev_app",
           "docs": "https://docs.zerodev.app",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$1M pre-seed"
         },
         {
           "layer": "L1",
@@ -2285,7 +2324,8 @@
           "url": "https://www.biconomy.io",
           "x": "biconomy",
           "docs": "https://docs.biconomy.io",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$10.5M equity"
         },
         {
           "layer": "L1",
@@ -2304,7 +2344,8 @@
           "url": "https://fireblocks.com",
           "x": "FireblocksHQ",
           "docs": "https://developers.fireblocks.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$1B+ total"
         },
         {
           "layer": "L1",
@@ -2321,7 +2362,8 @@
           "url": "https://www.alchemy.com",
           "x": "AlchemyPlatform",
           "docs": "https://docs.alchemy.com",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$564M total"
         },
         {
           "layer": "L1",
@@ -2341,7 +2383,8 @@
           ],
           "url": "https://phantom.com",
           "x": "phantom",
-          "docs": "https://docs.phantom.com"
+          "docs": "https://docs.phantom.com",
+          "funding": "$277M total"
         },
         {
           "layer": "L1",
@@ -2376,7 +2419,8 @@
           ],
           "x": "dfnsHQ",
           "docs": "https://docs.dfns.co",
-          "chain": "multi"
+          "chain": "multi",
+          "funding": "$29.5M total"
         },
         {
           "layer": "L1",
