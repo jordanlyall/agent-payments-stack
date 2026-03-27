@@ -601,17 +601,12 @@
     text-decoration: none;
   }
   .topbar-right { display: flex; align-items: center; gap: 20px; }
-  .view-toggle { display: flex; background: rgba(255,255,255,0.04); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; }
-  .view-btn { padding: 4px 13px; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--muted); background: transparent; border: none; cursor: pointer; transition: all 0.12s; letter-spacing: 0.04em; }
-  .view-btn.active { background: rgba(255,255,255,0.08); color: var(--text); }
   .topbar-links { display: flex; gap: 18px; align-items: center; }
   .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
   .topbar-links a:hover { color: var(--secondary); }
   .topbar-links .tl-active { color: var(--text); }
 
   /* Data table view */
-  .data-view { display: none; }
-  .data-view.visible { display: block; padding-top: 24px; }
   .stack.hidden { display: none; }
   .data-table { width: 100%; border-collapse: collapse; }
   .data-table th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--faint); }
@@ -732,10 +727,6 @@
       <button class="fb" data-f="acq">Acquired</button>
     </div>
     <span class="filter-count" id="fc">134 projects</span>
-    <div class="view-toggle" style="margin-left:auto">
-      <button class="view-btn active" data-view="map">Stack</button>
-      <button class="view-btn" data-view="data">Data</button>
-    </div>
   </div>
   <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
 
@@ -936,23 +927,6 @@
     </div>
 
   </div><!-- /.stack -->
-
-  <!-- Data view (table) -->
-  <div class="data-view" id="data-view">
-    <table class="data-table" id="data-table">
-      <thead>
-        <tr>
-          <th class="dt-sort" data-col="layer">Layer</th>
-          <th class="dt-sort" data-col="name">Project</th>
-          <th>Description</th>
-          <th class="dt-sort" data-col="status">Status</th>
-          <th class="dt-sort" data-col="funding">Funding</th>
-          <th class="dt-sort" style="text-align:right" data-col="signal">Signal</th>
-        </tr>
-      </thead>
-      <tbody id="data-tbody"></tbody>
-    </table>
-  </div>
 
   <!-- Map view wrapper end -->
   <div id="map-sections-end"></div>
@@ -1242,138 +1216,6 @@ document.getElementById('sf').addEventListener('submit',async e=>{
   document.getElementById('se').value='';
 });
 
-// ── Stack / Data toggle ──
-(function() {
-  var mapSections = document.querySelector('.stack');
-  var dataView = document.getElementById('data-view');
-  var tbody = document.getElementById('data-tbody');
-  var btns = document.querySelectorAll('.view-btn');
-  var tableBuilt = false;
-  var sortCol = 'layer', sortDir = 1;
-  var LAYER_ORDER = ['L5','L4','L3','L2','L1','L0'];
-
-  function getSignal(p) {
-    if (p.npm && p.npm.weekly_downloads) {
-      var n = p.npm.weekly_downloads;
-      return { sort: n, display: (n >= 1000000 ? (n/1000000).toFixed(1)+'M' : n >= 1000 ? Math.round(n/1000)+'K' : n) + ' npm/wk' };
-    }
-    if (p.github && p.github.stars) {
-      var s = p.github.stars;
-      return { sort: s * 10, display: (s >= 1000 ? (s/1000).toFixed(1)+'K' : s) + ' \u2605' };
-    }
-    if (p.volume && p.volume.value) {
-      return { sort: p.volume.value, display: p.volume.note || String(p.volume.value) };
-    }
-    return null;
-  }
-
-  function buildTable() {
-    if (tableBuilt) return;
-    tableBuilt = true;
-
-    var raw = document.getElementById('aps-data');
-    var DATA = JSON.parse(raw.textContent);
-    var rows = [];
-
-    DATA.layers.forEach(function(layer) {
-      layer.projects.forEach(function(p) {
-        var sig = getSignal(p);
-        rows.push({
-          layer: layer.id,
-          layerOrd: LAYER_ORDER.indexOf(layer.id),
-          id: p.id,
-          name: p.name,
-          status: p.status || 'live',
-          description: p.description || '',
-          funding: p.funding || '',
-          signal: sig,
-          signalSort: sig ? sig.sort : -1
-        });
-      });
-    });
-
-    function render() {
-      rows.sort(function(a, b) {
-        if (sortCol === 'layer')   return sortDir * (a.layerOrd - b.layerOrd) || a.name.localeCompare(b.name);
-        if (sortCol === 'name')    return sortDir * a.name.localeCompare(b.name);
-        if (sortCol === 'status')  return sortDir * a.status.localeCompare(b.status);
-        if (sortCol === 'funding') return sortDir * a.funding.localeCompare(b.funding);
-        if (sortCol === 'signal')  return sortDir * (b.signalSort - a.signalSort);
-        return 0;
-      });
-
-      while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
-
-      rows.forEach(function(r) {
-        var tr = document.createElement('tr');
-
-        var tdL = document.createElement('td');
-        tdL.className = 'dt-layer';
-        tdL.textContent = r.layer;
-
-        var tdN = document.createElement('td');
-        tdN.className = 'dt-name';
-        var a = document.createElement('a');
-        a.href = '/' + r.id;
-        a.textContent = r.name;
-        tdN.appendChild(a);
-
-        var tdD = document.createElement('td');
-        tdD.className = 'dt-desc';
-        var desc = r.description;
-        tdD.textContent = desc.length > 72 ? desc.slice(0, 69) + '...' : desc;
-
-        var tdS = document.createElement('td');
-        var badge = document.createElement('span');
-        var st = r.status === 'acquired' ? 'acq' : r.status === 'announced' ? 'ann' : r.status;
-        badge.className = 'dt-status ' + st;
-        badge.textContent = st;
-        tdS.appendChild(badge);
-
-        var tdF = document.createElement('td');
-        tdF.className = 'dt-funding';
-        tdF.textContent = r.funding;
-
-        var tdSig = document.createElement('td');
-        tdSig.className = 'dt-signal';
-        tdSig.textContent = r.signal ? r.signal.display : '';
-
-        tr.appendChild(tdL);
-        tr.appendChild(tdN);
-        tr.appendChild(tdD);
-        tr.appendChild(tdS);
-        tr.appendChild(tdF);
-        tr.appendChild(tdSig);
-        tbody.appendChild(tr);
-      });
-    }
-
-    render();
-
-    document.querySelectorAll('.dt-sort').forEach(function(th) {
-      th.addEventListener('click', function() {
-        var col = th.dataset.col;
-        if (sortCol === col) { sortDir *= -1; } else { sortCol = col; sortDir = 1; }
-        render();
-      });
-    });
-  }
-
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      btns.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      if (btn.dataset.view === 'data') {
-        mapSections.classList.add('hidden');
-        dataView.classList.add('visible');
-        buildTable();
-      } else {
-        mapSections.classList.remove('hidden');
-        dataView.classList.remove('visible');
-      }
-    });
-  });
-}());
 </script>
 
 
