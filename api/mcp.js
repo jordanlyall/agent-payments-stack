@@ -148,6 +148,36 @@ Returns: JSON with count, period, and array of acquisition records.`,
     }
   },
   {
+    name: 'stack_get_project',
+    description: `Get the full profile for a specific project by its id slug.
+
+Returns all available data: name, layer, status, url, description, tags, volume, github stats,
+acquisition history, and launch date.
+
+Args:
+  - id (string, required): The project id slug (e.g. 'x402', 'base', 'wormhole', 'privy')
+
+To find a project's id, use stack_search_projects first, then pass the id here.
+
+Returns: Full project profile, or an error if the id is not found.`,
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string',
+          description: 'Project id slug (e.g. x402, base, layerzero, crossmint-l2)'
+        }
+      },
+      required: ['id']
+    },
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      idempotentHint: true,
+      openWorldHint: false
+    }
+  }
+  {
     name: 'stack_get_stats',
     description: `Get headline statistics, layer summary, and vertical integration data for the Agent Payments Stack.
 
@@ -156,6 +186,7 @@ Returns:
   - Total project count and per-layer breakdown
   - Vertical integration map: which companies span multiple layers
     (Coinbase and Stripe each cover L0-L4; Circle covers L0-L3)
+  - Last updated date and version
   - Last updated date`,
     inputSchema: {
       type: 'object',
@@ -184,11 +215,13 @@ function searchProjects(query, limit = 20) {
         project.name.toLowerCase().includes(q) ||
         (project.description && project.description.toLowerCase().includes(q)) ||
         (project.metadata && project.metadata.toLowerCase().includes(q)) ||
+        (project.tags && project.tags.some(t => t.toLowerCase().includes(q))) ||
         layer.id.toLowerCase() === q ||
         layer.name.toLowerCase().includes(q);
 
       if (hit) {
         results.push({
+          id: project.id,
           name: project.name,
           layer: layer.id,
           layer_name: layer.name,
@@ -292,7 +325,19 @@ function executeTool(name, args) {
       }, null, 2);
     }
 
-    case 'stack_get_stats': {
+    case 'stack_get_project': {
+      const id = (args.id ?? '').trim().toLowerCase();
+      if (!id) throw new Error('id is required. Example: { "id": "x402" }');
+      for (const layer of data.layers) {
+        const p = layer.projects.find(p => p.id === id);
+        if (p) {
+          return JSON.stringify({ ...p, layer_name: layer.name }, null, 2);
+        }
+      }
+      throw new Error(`Project id "${id}" not found. Use stack_search_projects to find the correct id slug.`);
+    }
+
+        case 'stack_get_stats': {
       const totalProjects = data.layers.reduce((sum, l) => sum + l.projects.length, 0);
       return JSON.stringify({
         stats: data.stats,
