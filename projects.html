@@ -28,7 +28,7 @@
     font-feature-settings: 'ss01';
   }
 
-  .page { max-width: 1100px; margin: 0 auto; padding: 40px 56px 64px; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 32px 56px 64px; }
 
   /* Breadcrumb */
   .crumb {
@@ -206,6 +206,22 @@
     padding: 1px 4px; border-radius: 2px; letter-spacing: 0.04em;
   }
 
+  /* Topbar */
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+
+  /* Prev / Next */
+  .pn-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0 4px; border-top: 1px solid var(--faint); margin-top: 8px; gap: 16px; }
+  .pn-link { display: flex; flex-direction: column; gap: 3px; text-decoration: none; min-width: 0; }
+  .pn-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .pn-name { font-size: 13px; font-weight: 600; color: var(--secondary); transition: color 0.12s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pn-link:hover .pn-name { color: var(--text); }
+  .pn-next { text-align: right; }
+  .pn-spacer { flex: 1; }
+
   /* Not found */
   .not-found { text-align: center; padding: 80px 0; color: var(--muted); }
   .not-found a { color: var(--secondary); }
@@ -223,6 +239,19 @@
 </style>
 </head>
 <body>
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-links">
+    <a href="/">Stack</a>
+    <a href="/data">Data</a>
+    <a href="/rankings">Rankings</a>
+    <a href="/trace">Trace</a>
+    <a href="/hackathons">Hackathons</a>
+    <a href="/api">API</a>
+    <a href="/about">About</a>
+    <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+  </div>
+</nav>
 <div class="page">
   <div id="root"></div>
   <div class="foot">
@@ -535,6 +564,42 @@ document.addEventListener('DOMContentLoaded', function () {
         var sc = mk('div','rel-chips');
         sibs.forEach(function(s) { var chip = mkA('/'+s.id,'rel-chip'); chip.textContent = s.name; sc.appendChild(chip); });
         ss.appendChild(sc); below.appendChild(ss);
+      }
+    }
+
+    // Prev / Next within layer
+    if (layers && p.layer) {
+      for (var li = 0; li < layers.length; li++) {
+        if (layers[li].id === p.layer) {
+          var layerProjects = layers[li].projects;
+          var idx = -1;
+          for (var pi = 0; pi < layerProjects.length; pi++) {
+            if (layerProjects[pi].id === p.id) { idx = pi; break; }
+          }
+          if (idx !== -1) {
+            var prev = idx > 0 ? layerProjects[idx - 1] : null;
+            var next = idx < layerProjects.length - 1 ? layerProjects[idx + 1] : null;
+            if (prev || next) {
+              var pn = mk('div', 'pn-nav');
+              if (prev) {
+                var pa = mkA('/' + prev.id, 'pn-link');
+                var pl = mk('span', 'pn-label'); pl.textContent = '\u2190 prev';
+                var pn2 = mk('span', 'pn-name'); pn2.textContent = prev.name;
+                ap(pa, pl, pn2); pn.appendChild(pa);
+              } else {
+                pn.appendChild(mk('div', 'pn-spacer'));
+              }
+              if (next) {
+                var na = mkA('/' + next.id, 'pn-link pn-next');
+                var nl = mk('span', 'pn-label'); nl.textContent = 'next \u2192';
+                var nn = mk('span', 'pn-name'); nn.textContent = next.name;
+                ap(na, nl, nn); pn.appendChild(na);
+              }
+              below.appendChild(pn);
+            }
+          }
+          break;
+        }
       }
     }
 
