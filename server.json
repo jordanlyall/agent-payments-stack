@@ -1,7 +1,7 @@
 {
   "name": "agent-payments-stack",
-  "description": "Machine-readable landscape of every major project building payment infrastructure for AI agents. 106 projects across 6 layers (Settlement, Wallet, Routing, Protocol, Governance, Application). $43M volume, 140M transactions, 98.6% USDC.",
-  "version": "1.6.0",
+  "description": "Machine-readable landscape of every major project building payment infrastructure for AI agents. 134 projects across 6 layers (Settlement, Wallet, Routing, Protocol, Governance, Application). $43M volume, 140M transactions, 98.6% USDC.",
+  "version": "1.7.0",
   "remotes": [
     {
       "url": "https://agentpaymentsstack.com/api/mcp"

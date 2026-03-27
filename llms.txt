@@ -4,14 +4,14 @@
 
 ## What this is
 
-A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jordanlyall. 105 projects across 6 layers as of March 2026.
+A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jordanlyall. 134 projects across 6 layers as of March 2026.
 
 ## Structured data
 
 Full JSON available at: /data.json
 
-Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, volume, github, history, url.
-Individual project profiles: /projects?id=[slug] (e.g. /projects?id=x402)
+Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, volume, github, history, url, x, docs, chain, related, funding.
+Individual project profiles: /[slug] (e.g. /x402)
 
 ## The six layers
 
