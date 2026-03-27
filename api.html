@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>API — Agent Payments Stack</title>
+<meta name="description" content="Machine-readable endpoints for the Agent Payments Stack. data.json, llms.txt, and MCP server for AI agents.">
+<link rel="canonical" href="https://agentpaymentsstack.com/api">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --surface: #111110; --early: #c99e32; --acq: #d9613f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* Topbar */
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+
+  /* Page */
+  .page { max-width: 860px; padding: 40px 56px 80px; }
+
+  /* Page header */
+  .page-hdr { margin-bottom: 48px; }
+  .page-hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; margin-bottom: 8px; }
+  .page-hdr p { font-size: 13.5px; color: var(--secondary); line-height: 1.6; }
+
+  /* Endpoint cards */
+  .endpoints { display: flex; flex-direction: column; gap: 1px; border: 1px solid var(--faint); border-radius: 6px; overflow: hidden; margin-bottom: 48px; }
+  .endpoint { background: var(--surface); padding: 0; }
+  .endpoint-head { display: flex; align-items: center; gap: 14px; padding: 16px 20px; cursor: pointer; user-select: none; }
+  .endpoint-method { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.06em; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid var(--faint); border-radius: 3px; padding: 2px 7px; flex-shrink: 0; }
+  .endpoint-path { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text); }
+  .endpoint-summary { font-size: 12.5px; color: var(--muted); margin-left: auto; }
+  .endpoint-body { padding: 0 20px 20px; border-top: 1px solid var(--faint); display: none; }
+  .endpoint-body.open { display: block; }
+  .endpoint-desc { font-size: 13px; color: var(--secondary); line-height: 1.6; margin-top: 16px; margin-bottom: 16px; }
+
+  /* Code blocks */
+  pre { background: rgba(255,255,255,0.025); border: 1px solid var(--faint); border-radius: 5px; padding: 14px 16px; overflow-x: auto; margin: 12px 0; }
+  code { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text); line-height: 1.7; }
+  .code-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; margin-top: 16px; }
+  .inline-code { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; background: rgba(255,255,255,0.05); padding: 2px 6px; border-radius: 3px; }
+
+  /* Copy button */
+  .copy-btn { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); background: transparent; border: 1px solid var(--faint); border-radius: 4px; padding: 3px 9px; cursor: pointer; transition: all 0.12s; }
+  .copy-btn:hover { color: var(--secondary); border-color: rgba(255,255,255,0.18); }
+  .code-header { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; margin-bottom: 4px; }
+
+  /* Schema table */
+  .schema-table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 12px; }
+  .schema-table th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 6px 12px; border-bottom: 1px solid var(--faint); }
+  .schema-table td { padding: 7px 12px; border-bottom: 1px solid rgba(255,255,255,0.04); vertical-align: top; color: var(--secondary); }
+  .schema-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text); white-space: nowrap; }
+  .schema-table td:nth-child(2) { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); white-space: nowrap; }
+
+  /* MCP tools */
+  .tool-list { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+  .tool-item { border: 1px solid var(--faint); border-radius: 5px; padding: 12px 14px; }
+  .tool-name { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .tool-desc { font-size: 12px; color: var(--secondary); }
+
+  /* Section headers */
+  h2 { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 12px; margin-top: 48px; }
+  h2:first-child { margin-top: 0; }
+
+  /* Footer */
+  .foot { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="topbar-links">
+      <a href="/">Stack</a>
+      <a href="/data">Data</a>
+      <a href="/rankings">Rankings</a>
+      <a href="/trace">Trace</a>
+      <a href="/hackathons">Hackathons</a>
+      <a href="/api" class="tl-active">API</a>
+      <a href="/about">About</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-hdr">
+    <h1>For Agents</h1>
+    <p>The stack is machine-readable. No auth required. Three endpoints: structured JSON, plain-text for LLM context, and an MCP server for direct tool access.</p>
+  </div>
+
+  <div class="endpoints">
+
+    <!-- data.json -->
+    <div class="endpoint">
+      <div class="endpoint-head" onclick="toggleEndpoint(this)">
+        <span class="endpoint-method">GET</span>
+        <span class="endpoint-path">/data.json</span>
+        <span class="endpoint-summary">Full structured dataset</span>
+      </div>
+      <div class="endpoint-body open">
+        <p class="endpoint-desc">134 projects, 6 layers, status, URLs, descriptions, funding, npm and GitHub signal, M&amp;A events, vertical integration map. Updated weekly.</p>
+
+        <div class="code-label">Request</div>
+        <pre><code>curl https://agentpaymentsstack.com/data.json</code></pre>
+
+        <div class="code-header">
+          <div class="code-label" style="margin:0">Response schema</div>
+        </div>
+        <table class="schema-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>layers</td><td>array</td><td>Array of 6 layer objects, L5 to L0</td></tr>
+            <tr><td>layers[].id</td><td>string</td><td>L0–L5</td></tr>
+            <tr><td>layers[].name</td><td>string</td><td>Layer name</td></tr>
+            <tr><td>layers[].projects</td><td>array</td><td>Projects in this layer</td></tr>
+            <tr><td>project.id</td><td>string</td><td>Slug, used as URL path</td></tr>
+            <tr><td>project.name</td><td>string</td><td>Display name</td></tr>
+            <tr><td>project.status</td><td>string</td><td>live | early | announced | acquired</td></tr>
+            <tr><td>project.description</td><td>string</td><td>One-sentence summary</td></tr>
+            <tr><td>project.url</td><td>string?</td><td>Primary URL</td></tr>
+            <tr><td>project.tags</td><td>string[]?</td><td>Category tags</td></tr>
+            <tr><td>project.chain</td><td>string?</td><td>Primary blockchain(s)</td></tr>
+            <tr><td>project.funding</td><td>string?</td><td>Total raised or valuation</td></tr>
+            <tr><td>project.npm</td><td>object?</td><td>package, weekly_downloads</td></tr>
+            <tr><td>project.github</td><td>object?</td><td>stars, forks, contributors, last_commit</td></tr>
+            <tr><td>project.volume</td><td>object?</td><td>value (number), note (string)</td></tr>
+            <tr><td>project.editorial</td><td>string?</td><td>Curator note</td></tr>
+          </tbody>
+        </table>
+
+        <div class="code-header">
+          <div class="code-label" style="margin:0">Example — filter for live projects in L3</div>
+        </div>
+        <pre><code>curl -s https://agentpaymentsstack.com/data.json | \
+  jq '.layers[] | select(.id == "L3") | .projects[] | select(.status == "live") | .name'</code></pre>
+      </div>
+    </div>
+
+    <!-- llms.txt -->
+    <div class="endpoint" style="border-top:1px solid var(--faint)">
+      <div class="endpoint-head" onclick="toggleEndpoint(this)">
+        <span class="endpoint-method">GET</span>
+        <span class="endpoint-path">/llms.txt</span>
+        <span class="endpoint-summary">Plain-text for LLM context</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-desc">A compact, human-and-machine-readable summary of the entire stack. Designed to fit in an LLM context window. Includes key stats, layer descriptions, all project names and one-line summaries, and usage notes.</p>
+
+        <div class="code-label">Request</div>
+        <pre><code>curl https://agentpaymentsstack.com/llms.txt</code></pre>
+
+        <div class="code-label">Usage — add to Claude context</div>
+        <pre><code># In Claude Code
+mcp add --transport http https://agentpaymentsstack.com/api/mcp
+
+# Or fetch directly into context
+curl https://agentpaymentsstack.com/llms.txt | claude -p "Which L1 wallet has the highest npm downloads?"</code></pre>
+      </div>
+    </div>
+
+    <!-- MCP -->
+    <div class="endpoint" style="border-top:1px solid var(--faint)">
+      <div class="endpoint-head" onclick="toggleEndpoint(this)">
+        <span class="endpoint-method">POST</span>
+        <span class="endpoint-path">/api/mcp</span>
+        <span class="endpoint-summary">MCP server (JSON-RPC 2.0)</span>
+      </div>
+      <div class="endpoint-body">
+        <p class="endpoint-desc">A Model Context Protocol server exposing the stack as tools. Connect in Claude Code, Cursor, or any MCP-compatible client. Five tools available.</p>
+
+        <div class="code-label">Connect in Claude Code</div>
+        <pre><code>mcp add --transport http https://agentpaymentsstack.com/api/mcp</code></pre>
+
+        <div class="code-label">Available tools</div>
+        <div class="tool-list">
+          <div class="tool-item">
+            <div class="tool-name">stack_search_projects</div>
+            <div class="tool-desc">Search projects by name or description. Returns matching projects with layer, status, and URL.</div>
+          </div>
+          <div class="tool-item">
+            <div class="tool-name">stack_filter_by_layer</div>
+            <div class="tool-desc">Get all projects in a specific layer (L0–L5).</div>
+          </div>
+          <div class="tool-item">
+            <div class="tool-name">stack_filter_by_status</div>
+            <div class="tool-desc">Filter by status: live, early, announced, or acquired.</div>
+          </div>
+          <div class="tool-item">
+            <div class="tool-name">stack_get_acquisitions</div>
+            <div class="tool-desc">Return all M&amp;A events with acquirer, target, and deal value.</div>
+          </div>
+          <div class="tool-item">
+            <div class="tool-name">stack_get_stats</div>
+            <div class="tool-desc">Return top-level stats: total projects, by layer, by status, volume, USDC share.</div>
+          </div>
+        </div>
+
+        <div class="code-label">Raw JSON-RPC example</div>
+        <pre><code>curl -X POST https://agentpaymentsstack.com/api/mcp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "stack_search_projects",
+      "arguments": { "query": "x402" }
+    },
+    "id": 1
+  }'</code></pre>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>Rate limits &amp; caching</h2>
+  <p style="font-size:13px;color:var(--secondary);line-height:1.6;">No auth required. No rate limits currently enforced. <span class="inline-code">data.json</span> is served from Vercel Edge with a 1-hour CDN TTL. Updated weekly or when new projects ship. If you're building something that polls frequently, cache it on your end.</p>
+
+  <h2>License</h2>
+  <p style="font-size:13px;color:var(--secondary);line-height:1.6;margin-top:8px;">Data is available under <a href="https://creativecommons.org/licenses/by/4.0/" style="color:var(--secondary);">CC BY 4.0</a>. Attribution: <span class="inline-code">agentpaymentsstack.com / @jordanlyall</span>.</p>
+
+  <div class="foot">
+    <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
+    <div><a href="/data.json">data.json</a> &middot; <a href="/llms.txt">llms.txt</a></div>
+  </div>
+
+</div>
+
+<script>
+function toggleEndpoint(head) {
+  var body = head.nextElementSibling;
+  body.classList.toggle('open');
+}
+</script>
+</body>
+</html>

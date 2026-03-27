@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hackathons — Agent Payments Stack</title>
+<meta name="description" content="Hackathon projects building across the agent payments stack. Tempo MPP, Synthesis, and more.">
+<link rel="canonical" href="https://agentpaymentsstack.com/hackathons">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+
+  .page { max-width: 100%; padding: 40px 56px 80px; }
+
+  /* Page header */
+  .page-hdr { margin-bottom: 40px; display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; }
+  .page-hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; margin-bottom: 6px; }
+  .page-hdr p { font-size: 13px; color: var(--secondary); }
+
+  /* Chips — same as index.html */
+  a.t, .t {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 13px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 450;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    border: 1px solid rgba(255,255,255,0.09);
+    transition: border-color 0.12s, background 0.12s;
+  }
+  a.t:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.08); }
+  .t.early { color: var(--early); border-color: rgba(201,158,50,0.25); background: rgba(201,158,50,0.06); }
+  .t.acq { color: var(--acq); border-color: rgba(217,97,63,0.22); background: rgba(217,97,63,0.07); }
+  .t .fav { width: 12px; height: 12px; border-radius: 2px; display: block; filter: grayscale(1); opacity: 0.6; }
+
+  /* Hackathon groups */
+  .hack-group { margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--faint); }
+  .hack-group:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .hack-group-hdr { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; gap: 16px; }
+  .hack-group-name { font-size: 17px; font-weight: 700; letter-spacing: -0.4px; }
+  .hack-group-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+  .hack-group-link { font-size: 11.5px; color: var(--muted); text-decoration: none; }
+  .hack-group-link:hover { color: var(--secondary); text-decoration: underline; }
+
+  .hack-desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+  .hack-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  /* Stats bar */
+  .hack-stats { display: flex; gap: 24px; margin-bottom: 36px; padding-bottom: 24px; border-bottom: 1px solid var(--faint); }
+  .hack-stat { }
+  .hack-stat-n { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
+  .hack-stat-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 4px; }
+
+  /* Submit strip */
+  .submit-strip { margin-top: 40px; padding: 16px 20px; border: 1px solid var(--faint); border-radius: 5px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .submit-strip a { color: var(--secondary); text-decoration: none; }
+  .submit-strip a:hover { text-decoration: underline; }
+
+  .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="topbar-links">
+      <a href="/">Stack</a>
+      <a href="/data">Data</a>
+      <a href="/rankings">Rankings</a>
+      <a href="/trace">Trace</a>
+      <a href="/hackathons" class="tl-active">Hackathons</a>
+      <a href="/api">API</a>
+      <a href="/about">About</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-hdr">
+    <div>
+      <h1>Building right now</h1>
+      <p>Hackathon projects shipping across the agent payments stack.</p>
+    </div>
+  </div>
+
+  <div class="hack-stats">
+    <div class="hack-stat">
+      <div class="hack-stat-n">380+</div>
+      <div class="hack-stat-l">Projects submitted</div>
+    </div>
+    <div class="hack-stat">
+      <div class="hack-stat-n">2</div>
+      <div class="hack-stat-l">Active hackathons</div>
+    </div>
+    <div class="hack-stat">
+      <div class="hack-stat-n">$100K+</div>
+      <div class="hack-stat-l">Prize pools</div>
+    </div>
+  </div>
+
+  <!-- Tempo MPP Hackathon -->
+  <div class="hack-group">
+    <div class="hack-group-hdr">
+      <div>
+        <div class="hack-group-name">Tempo MPP Hackathon</div>
+        <div class="hack-group-meta">March 2026 &middot; 42 projects</div>
+      </div>
+      <a class="hack-group-link" href="https://tempo-hackathon-projects.vercel.app/" target="_blank">View all 42 →</a>
+    </div>
+    <p class="hack-desc">Multi-rail payment sessions across stablecoins, cards, and Bitcoin. Selected projects building on the MPP standard.</p>
+    <div class="hack-tags">
+      <a class="t early" href="/spendos" data-id="spendos" data-url="https://spendos-tempo.vercel.app">SpendOS</a>
+      <a class="t early" href="/botpolice" data-id="botpolice" data-url="https://github.com/Lor3mipsvm/BotPolice">BotPolice</a>
+      <a class="t early" href="/agent-escrow" data-id="agent-escrow" data-url="https://github.com/AdamBeaudoin/agent-escrow">Agent Escrow</a>
+      <a class="t early" href="/payload-exchange" data-id="payload-exchange" data-url="https://payload-exchange.fly.dev">Payload Exchange</a>
+      <a class="t early" href="/mpp-gateway" data-id="mpp-gateway" data-url="https://mpp-gateway.vercel.app">mpp-gateway</a>
+      <a class="t early" href="/dossier" data-id="dossier" data-url="https://github.com/kphed/tempo-hackathon">Dossier</a>
+      <a class="t early" href="/agent-credit-protocol" data-id="agent-credit-protocol" data-url="https://precious-prosperity-production-2f7f.up.railway.app">Agent Credit Protocol</a>
+      <a class="t early" href="/monitor" data-id="monitor" data-url="https://github.com/wschwab/monitor">Monitor</a>
+      <a class="t early" href="/mpp-dynamic-pricing" data-id="mpp-dynamic-pricing" data-url="https://mpp-dynamic-pricing.0x471.workers.dev">MPP Dynamic Pricing</a>
+      <a class="t early" href="/private-mpp" data-id="private-mpp" data-url="https://github.com/UsmannK/PMPP">Private MPP</a>
+      <a class="t early" href="/human402" data-id="human402" data-url="https://human402.com">human402</a>
+      <a class="t early" href="/agentnet" data-id="agentnet" data-url="https://agentnet-7xb.pages.dev">AgentNet</a>
+      <a class="t early" href="/solver-as-a-service" data-id="solver-as-a-service" data-url="https://solverasaservice-production.up.railway.app">Solver as a Service</a>
+    </div>
+  </div>
+
+  <!-- Synthesis Hackathon -->
+  <div class="hack-group">
+    <div class="hack-group-hdr">
+      <div>
+        <div class="hack-group-name">Synthesis Hackathon</div>
+        <div class="hack-group-meta">March 2026 &middot; 338 projects</div>
+      </div>
+      <a class="hack-group-link" href="https://synthesis.mandate.md/" target="_blank">View all 338 →</a>
+    </div>
+    <p class="hack-desc">AI-native commerce and payments. Selected projects from the agent payments categories.</p>
+    <div class="hack-tags">
+      <a class="t" href="/agentpay-l4" data-id="agentpay-l4" data-url="https://agent.tech">AgentPay</a>
+      <a class="t early" href="/agentescrow" data-id="agentescrow" data-url="https://synthesis.mandate.md/agentescrow-9b78">AgentEscrow</a>
+      <a class="t early" href="/kartein" data-id="kartein" data-url="https://synthesis.mandate.md/kartein-4c15">Kartein</a>
+      <a class="t early" href="/ragequit-escrow" data-id="ragequit-escrow" data-url="https://synthesis.mandate.md/ragequit-escrow-cec5">RageQuit Escrow</a>
+      <a class="t early" href="/spendbound" data-id="spendbound" data-url="https://synthesis.mandate.md/spendbound-353c">SpendBound</a>
+      <a class="t early" href="/agent-allowance" data-id="agent-allowance" data-url="https://synthesis.mandate.md/agent-allowance-protocol-dc5f">Agent Allowance</a>
+      <a class="t early" href="/delegata" data-id="delegata" data-url="https://synthesis.mandate.md/delegata-a951">Delegata</a>
+      <a class="t early" href="/wardex" data-id="wardex" data-url="https://synthesis.mandate.md/wardex-37e7">Wardex</a>
+      <a class="t early" href="/zkx402" data-id="zkx402" data-url="https://synthesis.mandate.md/zkx402-zk-verified-payment-protocol-for-ai-agents-3541">zkx402</a>
+      <a class="t early" href="/shulam" data-id="shulam" data-url="https://synthesis.mandate.md/shulam-compliance-infrastructure-for-the-autonomous-agent-economy-b186">Shulam</a>
+      <a class="t early" href="/agentresearch" data-id="agentresearch" data-url="https://synthesis.mandate.md/agentresearch-aeb3">AgentResearch</a>
+      <a class="t early" href="/parley-protocol" data-id="parley-protocol" data-url="https://synthesis.mandate.md/parley-protocol-d246">Parley Protocol</a>
+      <a class="t" href="/mint-day" data-id="mint-day" data-tip="Free NFT minting for agents. Natural language to on-chain.">mint.day</a>
+      <a class="t early" href="/lookout" data-id="lookout" data-url="https://synthesis.mandate.md/lookout-agent-trust-protocol-a946">Lookout</a>
+      <a class="t early" href="/litcredit" data-id="litcredit" data-url="https://synthesis.mandate.md/litcredit-2665">LitCredit</a>
+      <a class="t early" href="/normandy" data-id="normandy" data-url="https://synthesis.mandate.md/normandy-1d7f">Normandy</a>
+    </div>
+  </div>
+
+  <div class="submit-strip">
+    <span>Building something at a hackathon? <a href="https://tally.so/r/rjVvd5">Submit your project →</a></span>
+    <span>Updated weekly</span>
+  </div>
+
+  <div class="foot">
+    <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
+    <div><a href="/data.json">data.json</a> &middot; <a href="/llms.txt">llms.txt</a></div>
+  </div>
+
+</div>
+
+<script>
+// Inject favicons
+(function() {
+  document.querySelectorAll('[data-url]').forEach(function(chip) {
+    var url = chip.getAttribute('data-url');
+    try {
+      var domain = new URL(url).hostname;
+      var img = document.createElement('img');
+      img.className = 'fav';
+      img.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=32';
+      img.alt = '';
+      img.width = 12;
+      img.height = 12;
+      chip.insertBefore(img, chip.firstChild);
+    } catch(e) {}
+  });
+}());
+</script>
+</body>
+</html>

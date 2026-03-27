@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Agent Payments Stack</title>
+<meta name="description" content="How AI agents will move $600M this year. Methodology, changelog, and embed instructions for the Agent Payments Stack.">
+<link rel="canonical" href="https://agentpaymentsstack.com/about">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --acq: #d9613f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+
+  .page { max-width: 680px; padding: 56px 56px 80px; }
+
+  /* Article styles */
+  .updated { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); margin-bottom: 28px; letter-spacing: 0.02em; }
+
+  h1 { font-size: 30px; font-weight: 700; letter-spacing: -1px; line-height: 1.15; margin-bottom: 20px; }
+
+  h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); font-family: 'JetBrains Mono', monospace; margin: 48px 0 16px; }
+  h2:first-of-type { margin-top: 0; }
+
+  h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.2px; margin: 28px 0 10px; color: var(--text); }
+
+  p { font-size: 14.5px; line-height: 1.72; color: var(--secondary); margin-bottom: 14px; }
+  p strong { color: var(--text); font-weight: 600; }
+
+  ul { list-style: none; margin-bottom: 14px; }
+  ul li { font-size: 14px; line-height: 1.65; color: var(--secondary); padding-left: 14px; position: relative; margin-bottom: 5px; }
+  ul li::before { content: ''; position: absolute; left: 0; top: 9px; width: 3px; height: 3px; border-radius: 1px; background: var(--muted); opacity: 0.7; }
+  ul li strong { color: var(--text); font-weight: 550; }
+
+  .divider { border: none; border-top: 1px solid var(--faint); margin: 40px 0; }
+
+  /* Changelog */
+  .changelog ul { list-style: none; }
+  .changelog ul li { display: flex; gap: 16px; font-size: 13px; color: var(--secondary); padding-left: 0; margin-bottom: 8px; }
+  .changelog ul li::before { display: none; }
+  .cl-date { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); flex-shrink: 0; padding-top: 1px; min-width: 36px; }
+
+  /* Embed */
+  .embed-code { position: relative; background: rgba(255,255,255,0.04); border: 1px solid var(--faint); border-radius: 7px; padding: 12px 44px 12px 14px; cursor: pointer; transition: border-color 0.12s; margin: 4px 0 16px; }
+  .embed-code:hover { border-color: rgba(255,255,255,0.15); }
+  .embed-code code { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--secondary); word-break: break-all; line-height: 1.5; }
+  .embed-copy { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); background: rgba(255,255,255,0.06); border: 1px solid var(--faint); border-radius: 3px; padding: 2px 7px; pointer-events: none; }
+  .embed-label { font-size: 11.5px; color: var(--muted); margin-bottom: 4px; font-weight: 500; }
+
+  /* CTA */
+  .cta { margin-top: 40px; padding: 28px 32px; border: 1px solid var(--faint); border-radius: 5px; text-align: center; }
+  .cta p { font-size: 13.5px; color: var(--secondary); margin-bottom: 16px; line-height: 1.5; }
+  .cta a { display: inline-flex; align-items: center; gap: 8px; padding: 9px 22px; background: var(--text); color: var(--bg); border-radius: 4px; font-size: 13px; font-weight: 600; text-decoration: none; transition: opacity 0.12s; }
+  .cta a:hover { opacity: 0.82; }
+
+  .foot { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="topbar-links">
+      <a href="/">Stack</a>
+      <a href="/data">Data</a>
+      <a href="/rankings">Rankings</a>
+      <a href="/trace">Trace</a>
+      <a href="/hackathons">Hackathons</a>
+      <a href="/api">API</a>
+      <a href="/about" class="tl-active">About</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <p class="updated">Last updated: March 27, 2026</p>
+
+  <h1>How AI agents will move $600M this year</h1>
+
+  <p>AI agents settled <strong>$43 million across 140 million transactions</strong> in just nine months. Every major payment network is now racing to build the rails. The week of March 17-23, 2026 alone saw Mastercard's $1.8B acquisition of BVNK, Stripe's Tempo mainnet launch, and MoonPay's Open Wallet Standard release.</p>
+
+  <p>This is no longer speculative infrastructure. <strong>98.6% of agent payments settle in USDC</strong>, and annualized volume is approaching $600M.</p>
+
+  <h3>Five companies are trying to own the whole stack</h3>
+
+  <p><strong>Coinbase</strong> is the most vertically integrated, controlling settlement (Base), wallets (AgentKit), protocol (x402), identity (ERC-8004), and onramp/offramp. <strong>Stripe</strong> matches that span through Tempo (settlement), Privy (wallets), MPP + ACP (protocol), Bridge (routing), and SPTs (governance). <strong>Circle</strong> controls the monetary base layer: 98.6% of agent payments settle in their stablecoin. <strong>Google</strong> plays the standards layer with AP2 and A2A. <strong>MoonPay</strong> bet on open standards with OWS.</p>
+
+  <h3>Three bets shaping the stack</h3>
+
+  <p><strong>The first bet is settlement rails.</strong> Coinbase's x402 argues the future is crypto-native HTTP payments on Base and Solana. Stripe's MPP argues agents need multi-rail access settling on Tempo. These are not mutually exclusive, but they represent different visions of where value accrues.</p>
+
+  <p><strong>The second bet is identity and authorization.</strong> Google's AP2 mandates, Visa's Trusted Agent Protocol, ERC-8004's on-chain registries, and Skyfire's KYA all compete to answer "should this agent be trusted to spend?" The winner captures the governance chokepoint.</p>
+
+  <p><strong>The third bet is vertical versus horizontal.</strong> Coinbase and Stripe are building full stacks, while Skyfire, ATXP, and MoonPay bet that open standards and middleware layers will capture value between the giants.</p>
+
+  <p>The clearest near-term signal is consolidation. Five acquisitions exceeding $100M occurred in the past year. The convergence of traditional payments (Visa, Mastercard, Stripe) with crypto-native infrastructure (Coinbase, Circle, Cloudflare) is compressing timelines. The rails being laid today will determine who collects tolls on agentic commerce for the next decade.</p>
+
+  <hr class="divider">
+
+  <h2>About</h2>
+
+  <p>The Agent Payments Stack is an independent research project mapping every company building infrastructure for AI agent payments. It is maintained by Jordan Lyall, CPO at Art Blocks and builder of mint.day.</p>
+  <p>This is not affiliated with or sponsored by any project listed. Inclusion is based on shipping product, not paying for placement.</p>
+
+  <hr class="divider">
+
+  <h2>Methodology</h2>
+
+  <ul>
+    <li>Projects are included if they have shipped a product, protocol, or standard that directly enables AI agents to hold, move, or authorize money.</li>
+    <li><strong>Live</strong> means demonstrated transaction volume or production users. <strong>Early</strong> means product shipped but limited volume data. <strong>Announced</strong> means spec published or funding secured but no production deployment.</li>
+    <li>Acquired projects are marked with the acquirer and deal value where public.</li>
+    <li>Hackathon projects are listed separately as they represent prototypes, not production infrastructure.</li>
+    <li>This landscape is updated as the space evolves. Suggest additions via the submit form.</li>
+  </ul>
+
+  <hr class="divider">
+
+  <h2>Embed</h2>
+
+  <p>Drop the stack into any blog post, Substack, or Notion page. No account needed.</p>
+
+  <div class="embed-label">Full stack</div>
+  <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+    <code>&lt;iframe src="https://agentpaymentsstack.com/embed" style="width:100%;height:520px;border:none;border-radius:8px;" loading="lazy"&gt;&lt;/iframe&gt;</code>
+    <span class="embed-copy">Copy</span>
+  </div>
+
+  <div class="embed-label">Single layer — replace L3 with L0–L5</div>
+  <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+    <code>&lt;iframe src="https://agentpaymentsstack.com/embed?layer=L3" style="width:100%;height:220px;border:none;border-radius:8px;" loading="lazy"&gt;&lt;/iframe&gt;</code>
+    <span class="embed-copy">Copy</span>
+  </div>
+
+  <hr class="divider">
+
+  <h2>Changelog</h2>
+
+  <div class="changelog">
+    <ul>
+      <li><span class="cl-date">Mar 27</span> v1.7. 134 projects (+28). Profile pages for all projects. Works with, Used by, hero metrics.</li>
+      <li><span class="cl-date">Mar 26</span> v1.4. 103 projects (+1). Added Natural.</li>
+      <li><span class="cl-date">Mar 26</span> v1.3. 99 projects (+1). Added Backpac.</li>
+      <li><span class="cl-date">Mar 26</span> v1.2. 98 projects (+7). Added GhostSpeak, Observer Protocol, Verifiable Intent, Faremeter, Masumi, Kite, SKALE.</li>
+      <li><span class="cl-date">Mar 26</span> v1.1. 91 projects (+9). Added Run402, Cascade, AgentPay, WalletConnect, Dfns, ReqCast, Dhali, x402s SCP. Submit form live.</li>
+      <li><span class="cl-date">Mar 25</span> Initial release. 88 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <p>Built by Jordan Lyall. Follow for updates on agent commerce and infrastructure.</p>
+    <a href="https://x.com/jordanlyall" target="_blank">Follow @jordanlyall on X</a>
+  </div>
+
+  <div class="foot">
+    <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
+    <div><a href="/data.json">data.json</a> &middot; <a href="/llms.txt">llms.txt</a></div>
+  </div>
+
+</div>
+
+<script>
+function copyEmbed(el) {
+  var code = el.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(function() {
+    var btn = el.querySelector('.embed-copy');
+    btn.textContent = 'Copied!';
+    setTimeout(function() { btn.textContent = 'Copy'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
