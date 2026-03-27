@@ -32,7 +32,13 @@
             "b2b"
           ],
           "url": "https://virtuals.io",
-          "x": "virtuals_io"
+          "x": "virtuals_io",
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "uniswap",
+            "elizaos"
+          ]
         },
         {
           "layer": "L5",
@@ -54,7 +60,14 @@
             "as_of": "2026-03-26"
           },
           "url": "https://elizaos.ai",
-          "x": "elizaos"
+          "x": "elizaos",
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "superfluid",
+            "skyfire-kya",
+            "tempo-mpp"
+          ]
         },
         {
           "layer": "L5",
@@ -422,7 +435,13 @@
             "permissioned"
           ],
           "url": "https://skyfire.xyz",
-          "x": "skyfire_xyz"
+          "x": "skyfire_xyz",
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "stripe-spts",
+            "openmatter"
+          ]
         },
         {
           "layer": "L4",
@@ -507,7 +526,13 @@
             "offchain"
           ],
           "url": "https://stripe.com",
-          "x": "stripe"
+          "x": "stripe",
+          "related": [
+            "coinbase-agentic-wallets",
+            "openmatter",
+            "elizaos",
+            "skyfire-kya"
+          ]
         },
         {
           "layer": "L4",
@@ -604,6 +629,11 @@
             "open-source",
             "developer",
             "stripe"
+          ],
+          "related": [
+            "stripe-spts",
+            "skyfire-kya",
+            "x402"
           ]
         },
         {
@@ -819,6 +849,13 @@
               "event": "launched",
               "note": "Public beta on Base mainnet"
             }
+          ],
+          "related": [
+            "coinbase-agentic-wallets",
+            "kibble",
+            "skyfire-kya",
+            "elizaos",
+            "reqcast"
           ]
         },
         {
@@ -835,6 +872,13 @@
             "b2b",
             "developer",
             "offchain"
+          ],
+          "related": [
+            "coinbase-agentic-wallets",
+            "elizaos",
+            "mpp-gateway",
+            "spendos",
+            "dossier"
           ]
         },
         {
@@ -882,7 +926,13 @@
             "api-native"
           ],
           "url": "https://circle.com",
-          "x": "circle"
+          "x": "circle",
+          "related": [
+            "coinbase-agentic-wallets",
+            "x402",
+            "uniswap",
+            "across"
+          ]
         },
         {
           "layer": "L3",
@@ -960,7 +1010,12 @@
             }
           ],
           "url": "https://superfluid.finance",
-          "x": "Superfluid_HQ"
+          "x": "Superfluid_HQ",
+          "related": [
+            "elizaos",
+            "safe",
+            "coinbase-agentic-wallets"
+          ]
         },
         {
           "layer": "L3",
@@ -1417,7 +1472,13 @@
             "last_commit": "2026-03-26",
             "license": "LGPL-3.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "related": [
+            "uniswap",
+            "across",
+            "kibble",
+            "coinbase-agentic-wallets"
+          ]
         },
         {
           "layer": "L2",
@@ -1594,7 +1655,13 @@
             }
           ],
           "url": "https://uniswap.org",
-          "x": "Uniswap"
+          "x": "Uniswap",
+          "related": [
+            "across",
+            "kibble",
+            "li-fi",
+            "coinbase-agentic-wallets"
+          ]
         },
         {
           "layer": "L2",
@@ -1650,6 +1717,11 @@
           ],
           "chain": [
             "Base"
+          ],
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "elizaos"
           ]
         },
         {
@@ -1664,6 +1736,12 @@
             "sdk",
             "developer",
             "open-source"
+          ],
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "li-fi",
+            "elizaos"
           ]
         },
         {
@@ -1715,7 +1793,14 @@
             }
           ],
           "url": "https://coinbase.com",
-          "x": "coinbase"
+          "x": "coinbase",
+          "related": [
+            "x402",
+            "kibble",
+            "safe",
+            "elizaos",
+            "skyfire-kya"
+          ]
         },
         {
           "layer": "L1",
@@ -1909,7 +1994,13 @@
             }
           ],
           "url": "https://safe.global",
-          "x": "safe__global"
+          "x": "safe__global",
+          "related": [
+            "coinbase-agentic-wallets",
+            "thirdweb",
+            "fireblocks",
+            "elizaos"
+          ]
         },
         {
           "layer": "L1",

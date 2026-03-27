@@ -299,6 +299,16 @@
     transition: background 0.15s, color 0.15s;
   }
   .sibling-chip:hover { background: #222; color: var(--text); }
+  .rel-chip { display: inline-flex; align-items: center; gap: 6px; }
+  .rel-layer {
+    font-size: 9px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    background: rgba(255,255,255,0.05);
+    padding: 1px 5px;
+    border-radius: 3px;
+    letter-spacing: 0.4px;
+  }
 </style>
 </head>
 <body>
@@ -529,6 +539,25 @@ document.addEventListener('DOMContentLoaded', function () {
         '</ul></div>';
     }
 
+    // Works with
+    var relatedHtml = '';
+    if (p.related && p.related.length && layers) {
+      var relProjects = p.related.map(function(rid) {
+        return findProject(layers, rid);
+      }).filter(Boolean);
+      if (relProjects.length) {
+        relatedHtml =
+          '<div class="siblings">' +
+          '<div class="siblings-title">Works with</div>' +
+          '<div class="siblings-chips">' +
+          relProjects.map(function(r) {
+            var layerTag = r.layer ? '<span class="rel-layer">' + esc(r.layer) + '</span>' : '';
+            return '<a class="sibling-chip rel-chip" href="/' + esc(r.id) + '">' + layerTag + esc(r.name) + '</a>';
+          }).join('') +
+          '</div></div>';
+      }
+    }
+
     // Siblings
     var siblingsHtml = '';
     if (layers && p.layer) {
@@ -546,7 +575,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.getElementById('root').innerHTML =
-      crumb + hdr + layerCtx + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + siblingsHtml;
+      crumb + hdr + layerCtx + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + relatedHtml + siblingsHtml;
 
     // Hide favicon img on load error (letter fallback remains visible)
     var faviconImg = document.querySelector('[data-favicon]');
@@ -608,7 +637,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "b2b"
           ],
           "url": "https://virtuals.io",
-          "x": "virtuals_io"
+          "x": "virtuals_io",
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "uniswap",
+            "elizaos"
+          ]
         },
         {
           "layer": "L5",
@@ -630,7 +665,14 @@ document.addEventListener('DOMContentLoaded', function () {
             "as_of": "2026-03-26"
           },
           "url": "https://elizaos.ai",
-          "x": "elizaos"
+          "x": "elizaos",
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "superfluid",
+            "skyfire-kya",
+            "tempo-mpp"
+          ]
         },
         {
           "layer": "L5",
@@ -998,7 +1040,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "permissioned"
           ],
           "url": "https://skyfire.xyz",
-          "x": "skyfire_xyz"
+          "x": "skyfire_xyz",
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "stripe-spts",
+            "openmatter"
+          ]
         },
         {
           "layer": "L4",
@@ -1083,7 +1131,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "offchain"
           ],
           "url": "https://stripe.com",
-          "x": "stripe"
+          "x": "stripe",
+          "related": [
+            "coinbase-agentic-wallets",
+            "openmatter",
+            "elizaos",
+            "skyfire-kya"
+          ]
         },
         {
           "layer": "L4",
@@ -1180,6 +1234,11 @@ document.addEventListener('DOMContentLoaded', function () {
             "open-source",
             "developer",
             "stripe"
+          ],
+          "related": [
+            "stripe-spts",
+            "skyfire-kya",
+            "x402"
           ]
         },
         {
@@ -1395,6 +1454,13 @@ document.addEventListener('DOMContentLoaded', function () {
               "event": "launched",
               "note": "Public beta on Base mainnet"
             }
+          ],
+          "related": [
+            "coinbase-agentic-wallets",
+            "kibble",
+            "skyfire-kya",
+            "elizaos",
+            "reqcast"
           ]
         },
         {
@@ -1411,6 +1477,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "b2b",
             "developer",
             "offchain"
+          ],
+          "related": [
+            "coinbase-agentic-wallets",
+            "elizaos",
+            "mpp-gateway",
+            "spendos",
+            "dossier"
           ]
         },
         {
@@ -1458,7 +1531,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "api-native"
           ],
           "url": "https://circle.com",
-          "x": "circle"
+          "x": "circle",
+          "related": [
+            "coinbase-agentic-wallets",
+            "x402",
+            "uniswap",
+            "across"
+          ]
         },
         {
           "layer": "L3",
@@ -1536,7 +1615,12 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           ],
           "url": "https://superfluid.finance",
-          "x": "Superfluid_HQ"
+          "x": "Superfluid_HQ",
+          "related": [
+            "elizaos",
+            "safe",
+            "coinbase-agentic-wallets"
+          ]
         },
         {
           "layer": "L3",
@@ -1993,7 +2077,13 @@ document.addEventListener('DOMContentLoaded', function () {
             "last_commit": "2026-03-26",
             "license": "LGPL-3.0",
             "as_of": "2026-03-26"
-          }
+          },
+          "related": [
+            "uniswap",
+            "across",
+            "kibble",
+            "coinbase-agentic-wallets"
+          ]
         },
         {
           "layer": "L2",
@@ -2170,7 +2260,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           ],
           "url": "https://uniswap.org",
-          "x": "Uniswap"
+          "x": "Uniswap",
+          "related": [
+            "across",
+            "kibble",
+            "li-fi",
+            "coinbase-agentic-wallets"
+          ]
         },
         {
           "layer": "L2",
@@ -2226,6 +2322,11 @@ document.addEventListener('DOMContentLoaded', function () {
           ],
           "chain": [
             "Base"
+          ],
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "elizaos"
           ]
         },
         {
@@ -2240,6 +2341,12 @@ document.addEventListener('DOMContentLoaded', function () {
             "sdk",
             "developer",
             "open-source"
+          ],
+          "related": [
+            "x402",
+            "coinbase-agentic-wallets",
+            "li-fi",
+            "elizaos"
           ]
         },
         {
@@ -2291,7 +2398,14 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           ],
           "url": "https://coinbase.com",
-          "x": "coinbase"
+          "x": "coinbase",
+          "related": [
+            "x402",
+            "kibble",
+            "safe",
+            "elizaos",
+            "skyfire-kya"
+          ]
         },
         {
           "layer": "L1",
@@ -2485,7 +2599,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           ],
           "url": "https://safe.global",
-          "x": "safe__global"
+          "x": "safe__global",
+          "related": [
+            "coinbase-agentic-wallets",
+            "thirdweb",
+            "fireblocks",
+            "elizaos"
+          ]
         },
         {
           "layer": "L1",
