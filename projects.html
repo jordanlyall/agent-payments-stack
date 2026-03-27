@@ -234,7 +234,7 @@
 
 <script>
 // All values pass through esc() before DOM insertion. Data source is static authored JSON, not user input.
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   var LAYER_NAMES = {
     L0: 'Settlement', L1: 'Wallet & Key Management',
     L2: 'Routing & Abstraction', L3: 'Payment Protocol',
@@ -395,7 +395,7 @@
       document.getElementById('root').innerHTML = '<div class="not-found"><p>Parse error: ' + e.message + '</p><p><a href="/">Back &rarr;</a></p></div>';
     }
   }
-}());
+});
 </script>
 
 <script type="application/json" id="aps-data">
