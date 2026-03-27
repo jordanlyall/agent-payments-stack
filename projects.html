@@ -95,6 +95,19 @@
   .badge-early    { background: rgba(212,168,64,0.1); color: var(--early); border: 1px solid rgba(212,168,64,0.2); }
   .badge-announced{ background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.12); }
   .badge-acquired { background: rgba(232,105,74,0.1); color: var(--acq); }
+  .badge-hack     { background: rgba(120,80,220,0.12); color: #a78bfa; border: 1px solid rgba(120,80,220,0.2); font-size: 10px; }
+
+  /* Layer context */
+  .layer-ctx {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    background: var(--faint);
+    border-radius: 6px;
+    border-left: 2px solid #333;
+  }
 
   /* Meta grid */
   .meta-grid {
@@ -310,6 +323,24 @@ document.addEventListener('DOMContentLoaded', function () {
     L4: 'Governance & Policy', L5: 'Application'
   };
 
+  var LAYER_DESC = {
+    L0: 'The chains where agent transactions settle — Base, Solana, Ethereum, Arbitrum.',
+    L1: 'Where agent keys and wallets live — MPC custody, smart wallets, key management.',
+    L2: 'Cross-chain routing, bridging, and token swaps for agent transactions.',
+    L3: 'The payment standards agents use to request and receive payment — x402, MPP, L402.',
+    L4: 'Spend controls, authorization policies, and guardrails for autonomous agents.',
+    L5: 'Applications and platforms deploying agents that spend money to get things done.'
+  };
+
+  var HACKATHON_HOSTS = ['synthesis.mandate.md'];
+
+  function isHackathon(url) {
+    if (!url) return false;
+    try {
+      return HACKATHON_HOSTS.some(function(h) { return new URL(url).hostname === h; });
+    } catch(e) { return false; }
+  }
+
   function esc(s) {
     return s == null ? '' : String(s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;')
@@ -363,6 +394,11 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function renderProfile(p, layers) {
+    // 1. Dynamic meta description
+    var metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
+    metaDesc.content = p.description ? p.name + ' — ' + p.description + ' Part of the Agent Payments Stack.' : p.name + ' — Agent Payments Stack profile.';
+
     document.title = esc(p.name) + ' — Agent Payments Stack';
 
     var layerLabel = p.layer
@@ -377,11 +413,21 @@ document.addEventListener('DOMContentLoaded', function () {
       '<span>' + esc(p.name) + '</span>' +
       '</div>';
 
-    var domain = getDomain(p.url);
+    // 2. Favicon — use url, fall back to github url for domain
+    var faviconUrl = p.url || (p.github && p.github.url);
+    var domain = getDomain(p.url) || getDomain(p.github && p.github.url);
     var logoHtml =
       '<div class="prof-logo">' +
       '<span class="prof-logo-letter">' + esc(p.name.charAt(0)) + '</span>' +
       (domain ? '<img src="https://www.google.com/s2/favicons?domain=' + esc(domain) + '&sz=64" alt="" data-favicon="1">' : '') +
+      '</div>';
+
+    // 3. Hackathon badge
+    var hackathon = isHackathon(p.url);
+    var badges =
+      '<div style="display:flex;gap:8px;align-items:center;">' +
+      '<span class="' + badgeClass(p.status) + '">' + esc(p.status || 'live') + '</span>' +
+      (hackathon ? '<span class="badge badge-hack">hackathon</span>' : '') +
       '</div>';
 
     var hdr =
@@ -392,8 +438,13 @@ document.addEventListener('DOMContentLoaded', function () {
       (layerLabel ? '<div class="prof-layer">' + layerLabel + '</div>' : '') +
       (p.description ? '<p class="prof-desc">' + esc(p.description) + '</p>' : '') +
       '</div>' +
-      '<div><span class="' + badgeClass(p.status) + '">' + esc(p.status || 'live') + '</span></div>' +
+      '<div>' + badges + '</div>' +
       '</div>';
+
+    // 4. Layer context blurb
+    var layerCtx = (p.layer && LAYER_DESC[p.layer])
+      ? '<div class="layer-ctx">' + esc(LAYER_DESC[p.layer]) + '</div>'
+      : '';
 
     // Meta cells
     var cells = [];
@@ -428,9 +479,14 @@ document.addEventListener('DOMContentLoaded', function () {
       : '';
 
     // Links row (website, x, docs, github)
+    // Web: use p.url if present; fall back to github url if no url
+    var webUrl = p.url || (p.github && p.github.url && !p.url ? p.github.url : null);
+    var webDomain = getDomain(webUrl);
     var linkBtns = [];
-    if (p.url && domain) {
-      linkBtns.push('<a class="link-btn" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="link-btn-label">web</span>' + esc(domain) + ' &rarr;</a>');
+    if (webUrl && webDomain && !p.github) {
+      linkBtns.push('<a class="link-btn" href="' + esc(webUrl) + '" target="_blank" rel="noopener"><span class="link-btn-label">web</span>' + esc(webDomain) + ' &rarr;</a>');
+    } else if (p.url && getDomain(p.url)) {
+      linkBtns.push('<a class="link-btn" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="link-btn-label">web</span>' + esc(getDomain(p.url)) + ' &rarr;</a>');
     }
     if (p.x) {
       var handle = p.x.replace(/^@/, '');
@@ -490,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.getElementById('root').innerHTML =
-      crumb + hdr + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + siblingsHtml;
+      crumb + hdr + layerCtx + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + siblingsHtml;
 
     // Hide favicon img on load error (letter fallback remains visible)
     var faviconImg = document.querySelector('[data-favicon]');
