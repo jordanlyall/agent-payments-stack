@@ -15,7 +15,9 @@ MCP tools: stack_search_projects, stack_filter_by_layer, stack_filter_by_status,
 
 Fields per project (v2.0): id (slug), name, layer, status (live / early / announced / acquired), url, description, launched, chain[], token, tags[], github { url, stars, last_commit, license, as_of }, volume { value, unit, period, source, as_of }, history[], acquirer, acquisition_value.
 
-Not all fields are present on every project. Enrichment is ongoing — high-traffic and on-chain projects are prioritized.
+Coverage as of 2026-03-26: launched + tags on 102/103 projects (ReqCast under review). GitHub stats on 18 open-source projects. Volume on 6 projects (x402, Base, Uniswap, Across, Wormhole, LayerZero).
+
+Tag vocabulary — Protocol: http, streaming, batch, micropayment, cross-border, onchain, offchain. Tech: open-source, mpc, zk, account-abstraction, lightning, smart-contract. Access: api-native, sdk, self-hosted, permissioned. Affiliation: coinbase, stripe, circle, google, mastercard, visa, moonpay. Audience: b2b, consumer, developer, enterprise.
 
 ## The six layers
 
@@ -40,13 +42,24 @@ Not all fields are present on every project. Enrichment is ongoing — high-traf
 
 - x402: 5,800★ Apache-2.0 — github.com/coinbase/x402 (last commit 2026-03-26)
 - Uniswap v4: 2,500★ BUSL-1.1 — github.com/Uniswap/v4-core (last commit 2025-10-23)
+- ElizaOS: 17,929★ MIT — github.com/elizaOS/eliza (last commit 2026-03)
+- x402: 5,800★ Apache-2.0 — github.com/coinbase/x402 (last commit 2026-03-26)
+- Uniswap v4: 2,500★ BUSL-1.1 — github.com/Uniswap/v4-core (last commit 2025-10-23)
 - Safe: 2,100★ LGPL-3.0 — github.com/safe-global/safe-smart-account (last commit 2025-07-03)
 - Wormhole: 1,900★ Apache-2.0 — github.com/wormhole-foundation/wormhole (last commit 2026-02-25)
 - Superfluid: 898★ AGPL-3.0 — github.com/superfluid-finance/protocol-monorepo (last commit 2026-02-25)
 - LayerZero v2: 769★ MIT+LZBL-1.2 — github.com/LayerZero-Labs/LayerZero-v2 (last commit 2026-02-27)
+- ZeroDev Kernel: 240★ MIT — github.com/zerodevapp/kernel (last commit 2025-10)
+- Lit Protocol: 158★ MIT — github.com/LIT-Protocol/js-sdk (last commit 2026-02)
+- CoW Protocol: 154★ GPL-3.0 — github.com/cowprotocol/contracts (last commit 2026-03)
 - Li.Fi: 199★ LGPL-3.0 — github.com/lifinance/contracts (last commit 2026-03-26)
 - Circle CCTP: 197★ Apache-2.0 — github.com/circlefin/evm-cctp-contracts (last commit 2025-10-01)
+- Interledger RFCs: 512★ CC0-1.0 — github.com/interledger/rfcs (last commit 2026-03)
 - Across: 141★ BUSL-1.1 — github.com/across-protocol/contracts (last commit 2026-03-26)
+- Olas: 119★ Apache-2.0 — github.com/valory-xyz/open-autonomy (last commit 2026-03)
+- Biconomy Nexus: 51★ MIT — github.com/bcnmy/nexus (last commit 2026-02)
+- deBridge: 57★ custom — github.com/debridge-finance/debridge-contracts-v1 (last commit 2025-09)
+- Faremeter: 61★ LGPL-3.0 — github.com/faremeter/faremeter (last commit 2026-03)
 
 ## Vertical integration
 
