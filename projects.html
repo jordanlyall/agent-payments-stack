@@ -5,18 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Protocol Profile — Agent Payments Stack</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   :root {
-    --bg: #0a0a0a;
-    --text: #f0f0f0;
-    --secondary: #999;
-    --muted: #666;
-    --faint: #1e1e1e;
-    --surface: #161616;
-    --early: #d4a840;
-    --ann: #555;
-    --acq: #e8694a;
+    --bg: #0d0c0b;
+    --text: #edebe7;
+    --secondary: #98948f;
+    --muted: #685e58;
+    --faint: #201e1b;
+    --early: #c99e32;
+    --ann: #524e49;
+    --acq: #d9613f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,354 +23,197 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
-    font-feature-settings: 'cv01','cv02','ss01';
+    font-feature-settings: 'ss01';
   }
 
-  .page { width: 1200px; margin: 0 auto; padding: 48px 56px 64px; }
+  .page { max-width: 1100px; margin: 0 auto; padding: 40px 56px 64px; }
 
   /* Breadcrumb */
   .crumb {
-    font-size: 12px;
-    color: var(--muted);
-    margin-bottom: 36px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    font-size: 11.5px; color: var(--muted); margin-bottom: 40px;
+    display: flex; align-items: center; gap: 8px; font-weight: 450;
   }
-  .crumb a { color: var(--muted); text-decoration: none; }
+  .crumb a { color: var(--muted); text-decoration: none; transition: color 0.12s; }
   .crumb a:hover { color: var(--secondary); }
-  .crumb-sep { color: var(--faint); }
+  .crumb-sep { opacity: 0.3; }
 
-  /* Profile header */
-  .prof-hdr {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 32px;
-    padding-bottom: 28px;
+  /* Two-column layout */
+  .prof-layout {
+    display: grid;
+    grid-template-columns: 1fr 248px;
+    gap: 0 52px;
+    align-items: start;
+    padding-bottom: 36px;
     border-bottom: 1px solid var(--faint);
+    margin-bottom: 0;
   }
 
-  .prof-name {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -1.5px;
-  }
-
-  .prof-layer {
-    font-size: 11px;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    margin-top: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-  }
-
-  .prof-desc {
-    font-size: 15px;
-    color: var(--secondary);
-    line-height: 1.65;
-    max-width: 580px;
-    margin-top: 14px;
-  }
-
-  /* Status badge */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .badge-live     { background: rgba(240,240,240,0.06); color: var(--text); }
-  .badge-early    { background: rgba(212,168,64,0.1); color: var(--early); border: 1px solid rgba(212,168,64,0.2); }
-  .badge-announced{ background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.12); }
-  .badge-acquired { background: rgba(232,105,74,0.1); color: var(--acq); }
-  .badge-hack     { background: rgba(120,80,220,0.12); color: #a78bfa; border: 1px solid rgba(120,80,220,0.2); font-size: 10px; }
-
-  /* Layer context */
-  .layer-ctx {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.5;
-    margin-bottom: 20px;
-    padding: 10px 14px;
+  /* Left — identity */
+  .prof-logo {
+    position: relative; width: 38px; height: 38px;
+    border-radius: 8px; overflow: hidden;
     background: var(--faint);
-    border-radius: 6px;
-    border-left: 2px solid #333;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-bottom: 16px;
   }
+  .prof-logo img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: contain; padding: 7px;
+  }
+  .prof-logo-letter { font-size: 15px; font-weight: 700; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 
-  /* Hero metric */
-  .hero-metric {
-    display: flex;
-    gap: 32px;
-    align-items: flex-end;
-    margin-bottom: 28px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--faint);
-  }
-  .hero-stat { flex-shrink: 0; }
-  .hero-val {
+  .prof-name { font-size: 50px; font-weight: 700; line-height: 1; letter-spacing: -2.5px; }
+  .prof-layer {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 48px;
-    font-weight: 700;
-    letter-spacing: -2px;
-    line-height: 1;
-    color: var(--text);
+    font-size: 10px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.1em; margin-top: 10px;
   }
-  .hero-label {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-top: 6px;
-  }
-  .hero-note { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .prof-desc { font-size: 15px; color: var(--secondary); line-height: 1.65; max-width: 500px; margin-top: 14px; }
 
-  /* Visit website CTA */
+  /* Right — sidebar */
+  .prof-aside { display: flex; flex-direction: column; padding-top: 6px; }
+
+  .aside-status-block { margin-bottom: 16px; }
+  .aside-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+
+  .badge {
+    display: inline-flex; align-items: center;
+    padding: 4px 9px; border-radius: 3px;
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em;
+  }
+  .badge-live { background: rgba(237,235,231,0.06); color: var(--secondary); }
+  .badge-early { background: rgba(201,158,50,0.1); color: var(--early); border: 1px solid rgba(201,158,50,0.2); }
+  .badge-announced { background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.12); }
+  .badge-acquired { background: rgba(217,97,63,0.1); color: var(--acq); }
+  .badge-hack { background: rgba(120,80,220,0.12); color: #a78bfa; border: 1px solid rgba(120,80,220,0.2); font-size: 9.5px; }
+
   .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 20px;
-    background: var(--text);
-    color: var(--bg);
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: opacity 0.15s;
-    white-space: nowrap;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 9px 16px; background: var(--text); color: var(--bg);
+    border-radius: 5px; font-size: 12.5px; font-weight: 600;
+    text-decoration: none; transition: opacity 0.15s; width: 100%;
   }
   .cta-btn:hover { opacity: 0.85; }
 
-  /* Chain tags */
-  .chain-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .aside-divider { height: 1px; background: var(--faint); margin: 14px 0; }
+
+  /* Metric */
+  .aside-metric-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 34px; font-weight: 600; letter-spacing: -1.5px; line-height: 1; color: var(--text);
+  }
+  .aside-metric-label {
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin-top: 5px; font-weight: 500;
+  }
+
+  /* Chains */
+  .aside-chains { display: flex; flex-wrap: wrap; gap: 5px; }
   .chain-tag {
     display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 10px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 20px;
-    font-size: 11px;
-    color: var(--secondary);
+    padding: 3px 8px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 3px; font-size: 10.5px; color: var(--secondary);
     font-family: 'JetBrains Mono', monospace;
   }
-  .chain-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    flex-shrink: 0;
+  .chain-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+
+  /* Links */
+  .aside-links { display: flex; flex-direction: column; gap: 5px; }
+  .aside-link {
+    display: flex; align-items: center; gap: 9px;
+    font-size: 11.5px; text-decoration: none; color: var(--secondary);
+    transition: color 0.12s; padding: 2px 0;
   }
-
-  /* Meta grid */
-  .meta-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1px;
-    background: var(--faint);
-    border: 1px solid var(--faint);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-bottom: 32px;
-  }
-
-  .meta-cell { background: var(--bg); padding: 18px 20px; }
-
-  .meta-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
-    font-weight: 500;
-    margin-bottom: 6px;
-  }
-
-  .meta-val {
+  .aside-link:hover { color: var(--text); }
+  .aside-link-type {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.5px;
-    line-height: 1;
+    font-size: 9px; color: var(--muted); letter-spacing: 0.06em;
+    text-transform: uppercase; width: 26px; flex-shrink: 0;
   }
 
-  .meta-note { font-size: 10px; color: var(--muted); margin-top: 4px; }
+  /* Meta rows */
+  .aside-meta { display: flex; flex-direction: column; gap: 5px; }
+  .aside-meta-row { display: flex; align-items: baseline; gap: 9px; }
+  .aside-meta-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; color: var(--muted); letter-spacing: 0.06em;
+    text-transform: uppercase; width: 52px; flex-shrink: 0;
+  }
+  .aside-meta-val { font-size: 12px; color: var(--secondary); font-weight: 500; }
 
   /* Tags */
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 32px; }
-
+  .aside-tags { display: flex; flex-wrap: wrap; gap: 4px; }
   .tag {
-    display: inline-flex;
-    padding: 3px 10px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--secondary);
+    display: inline-flex; padding: 2px 7px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 3px; font-size: 10.5px; color: var(--muted);
     font-family: 'JetBrains Mono', monospace;
   }
 
-  /* Section */
-  .section { margin-bottom: 32px; }
+  /* Below-fold */
+  .prof-below {}
 
-  .section-title {
-    font-size: 11px;
-    font-weight: 650;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--muted);
-    margin-bottom: 12px;
+  .layer-ctx {
+    font-size: 12.5px; color: var(--muted); font-style: italic;
+    padding: 20px 0; border-bottom: 1px solid var(--faint); line-height: 1.55;
   }
-
-  /* GitHub */
-  .gh-row {
-    display: flex;
-    gap: 24px;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--faint);
-  }
-  .gh-row a { font-size: 13px; color: var(--secondary); text-decoration: none; }
-  .gh-row a:hover { color: var(--text); }
-  .gh-stat { font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 
   .license-warn {
-    font-size: 12px;
-    color: var(--early);
-    background: rgba(212,168,64,0.06);
-    border: 1px solid rgba(212,168,64,0.12);
-    border-radius: 6px;
-    padding: 10px 14px;
-    margin-top: 10px;
+    font-size: 12px; color: var(--early);
+    background: rgba(201,158,50,0.06); border: 1px solid rgba(201,158,50,0.12);
+    border-radius: 4px; padding: 10px 14px; margin: 16px 0;
   }
 
   /* History */
   .history-list { list-style: none; }
-  .history-list li {
-    font-size: 13px;
-    color: var(--secondary);
-    padding: 10px 0;
-    border-bottom: 1px solid var(--faint);
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
+  .history-item {
+    font-size: 13px; color: var(--secondary);
+    padding: 10px 0; border-bottom: 1px solid var(--faint);
+    display: flex; gap: 12px; align-items: baseline;
   }
-  .history-list li:last-child { border-bottom: none; }
-  .hist-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); flex-shrink: 0; }
-  .hist-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; }
+  .history-item:last-child { border-bottom: none; }
+  .hist-date { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); flex-shrink: 0; }
+  .hist-val { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; font-weight: 600; color: var(--acq); margin-left: auto; }
 
-  /* External link */
-  .ext-link {
-    margin-top: 8px;
-    font-size: 13px;
+  /* Relations */
+  .rel-section { padding: 22px 0; border-top: 1px solid var(--faint); }
+  .rel-title {
+    font-size: 10.5px; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); margin-bottom: 13px;
   }
-  .ext-link a { color: var(--secondary); text-decoration: none; }
-  .ext-link a:hover { color: var(--text); }
-
-  /* Footer */
-  .foot {
-    margin-top: 48px;
-    padding-top: 16px;
-    border-top: 1px solid var(--faint);
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--muted);
+  .rel-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .rel-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 5px; font-size: 12.5px; color: var(--secondary);
+    text-decoration: none; transition: background 0.12s, border-color 0.12s, color 0.12s;
   }
-  .foot b { color: var(--text); font-weight: 600; }
-  .foot a { color: inherit; text-decoration: none; opacity: 0.5; }
-  .foot a:hover { opacity: 0.8; }
+  .rel-chip:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.14); color: var(--text); }
+  .rel-layer-tag {
+    font-size: 9px; font-family: 'JetBrains Mono', monospace;
+    color: var(--muted); background: rgba(255,255,255,0.05);
+    padding: 1px 4px; border-radius: 2px; letter-spacing: 0.04em;
+  }
 
   /* Not found */
   .not-found { text-align: center; padding: 80px 0; color: var(--muted); }
   .not-found a { color: var(--secondary); }
 
-  /* Favicon / logo */
-  .prof-logo {
-    position: relative;
-    width: 44px; height: 44px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: var(--faint);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-bottom: 14px;
-  }
-  .prof-logo img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: contain;
-    padding: 8px;
-  }
-  .prof-logo-letter {
-    font-size: 18px; font-weight: 700;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  /* Links row */
-  .links-row {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-top: 20px;
-  }
-  .link-btn {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 5px 12px;
-    border: 1px solid var(--faint);
-    border-radius: 6px;
-    font-size: 12px;
-    color: var(--secondary);
-    text-decoration: none;
-    transition: border-color 0.15s, color 0.15s;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .link-btn:hover { border-color: var(--secondary); color: var(--text); }
-  .link-btn-label { opacity: 0.45; margin-right: 2px; }
-
-  /* Siblings */
-  .siblings {
-    margin-top: 40px;
-    padding-top: 28px;
+  /* Footer */
+  .foot {
+    margin-top: 48px; padding-top: 16px;
     border-top: 1px solid var(--faint);
+    display: flex; justify-content: space-between;
+    font-size: 11.5px; color: var(--muted); letter-spacing: 0.01em;
   }
-  .siblings-title {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 14px;
-  }
-  .siblings-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .sibling-chip {
-    display: inline-block;
-    padding: 5px 12px;
-    background: var(--faint);
-    border-radius: 6px;
-    font-size: 12px;
-    color: var(--secondary);
-    text-decoration: none;
-    transition: background 0.15s, color 0.15s;
-  }
-  .sibling-chip:hover { background: #222; color: var(--text); }
-  .rel-chip { display: inline-flex; align-items: center; gap: 6px; }
-  .rel-layer {
-    font-size: 9px;
-    font-family: 'JetBrains Mono', monospace;
-    color: var(--muted);
-    background: rgba(255,255,255,0.05);
-    padding: 1px 5px;
-    border-radius: 3px;
-    letter-spacing: 0.4px;
-  }
+  .foot b { color: var(--text); font-weight: 600; }
+  .foot a { color: inherit; text-decoration: none; opacity: 0.5; }
+  .foot a:hover { opacity: 0.8; }
 </style>
 </head>
 <body>
@@ -466,230 +308,209 @@ document.addEventListener('DOMContentLoaded', function () {
     return [];
   }
 
+  var CHAIN_COLORS = { Base:'#0052ff', Solana:'#9945ff', Ethereum:'#627eea', Arbitrum:'#12aaff', Polygon:'#8247e5', Avalanche:'#e84142', multi:'#685e58' };
+
+  function mk(tag, cls) { var e = document.createElement(tag); if (cls) e.className = cls; return e; }
+  function mkA(href, cls, blank) { var a = mk('a', cls); a.href = href; if (blank) { a.target = '_blank'; a.rel = 'noopener'; } return a; }
+  function ap(p) { for (var i=1;i<arguments.length;i++) { var c=arguments[i]; if (c!=null) { if (typeof c==='string') p.appendChild(document.createTextNode(c)); else p.appendChild(c); } } return p; }
+  function clr(el) { while(el.firstChild) el.removeChild(el.firstChild); }
+
   function renderProfile(p, layers) {
-    // 1. Dynamic meta description
+    document.title = p.name + ' \u2014 Agent Payments Stack';
     var metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) { metaDesc = document.createElement('meta'); metaDesc.name = 'description'; document.head.appendChild(metaDesc); }
-    metaDesc.content = p.description ? p.name + ' — ' + p.description + ' Part of the Agent Payments Stack.' : p.name + ' — Agent Payments Stack profile.';
+    metaDesc.content = p.description ? p.name + ' \u2014 ' + p.description : p.name + ' \u2014 Agent Payments Stack.';
 
-    document.title = esc(p.name) + ' — Agent Payments Stack';
+    var root = document.getElementById('root');
+    clr(root);
 
-    var layerLabel = p.layer
-      ? esc(p.layer) + ' &mdash; ' + esc(LAYER_NAMES[p.layer] || '')
-      : '';
+    // Breadcrumb
+    var crumb = mk('div', 'crumb');
+    var homeA = mkA('/'); homeA.textContent = 'Agent Payments Stack'; crumb.appendChild(homeA);
+    if (p.layer) {
+      ap(crumb, mk('span','crumb-sep'), document.createTextNode('/'));
+      var ls = mk('span'); ls.textContent = LAYER_NAMES[p.layer] || p.layer; crumb.appendChild(ls);
+    }
+    ap(crumb, mk('span','crumb-sep'), document.createTextNode('/'));
+    var ns = mk('span'); ns.textContent = p.name; crumb.appendChild(ns);
+    root.appendChild(crumb);
 
-    var crumb =
-      '<div class="crumb">' +
-      '<a href="/">Agent Payments Stack</a>' +
-      '<span class="crumb-sep">/</span>' +
-      (p.layer ? '<span>' + esc(LAYER_NAMES[p.layer] || p.layer) + '</span><span class="crumb-sep">/</span>' : '') +
-      '<span>' + esc(p.name) + '</span>' +
-      '</div>';
+    // Two-column layout wrapper
+    var layout = mk('div', 'prof-layout');
+    root.appendChild(layout);
 
-    // 2. Favicon — use url, fall back to github url for domain
-    var faviconUrl = p.url || (p.github && p.github.url);
+    // ── LEFT: identity ──
+    var left = mk('div', 'prof-left');
+    layout.appendChild(left);
+
+    // Logo / favicon
     var domain = getDomain(p.url) || getDomain(p.github && p.github.url);
-    var logoHtml =
-      '<div class="prof-logo">' +
-      '<span class="prof-logo-letter">' + esc(p.name.charAt(0)) + '</span>' +
-      (domain ? '<img src="https://www.google.com/s2/favicons?domain=' + esc(domain) + '&sz=64" alt="" data-favicon="1">' : '') +
-      '</div>';
+    var logo = mk('div', 'prof-logo');
+    var letter = mk('span', 'prof-logo-letter'); letter.textContent = p.name.charAt(0); logo.appendChild(letter);
+    if (domain) {
+      var img = document.createElement('img');
+      img.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=64';
+      img.alt = ''; img.setAttribute('data-favicon','1'); logo.appendChild(img);
+    }
+    left.appendChild(logo);
 
-    // Hackathon badge
-    var hackathon = isHackathon(p.url);
-    var badges =
-      '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">' +
-      '<span class="' + badgeClass(p.status) + '">' + esc(p.status || 'live') + '</span>' +
-      (hackathon ? '<span class="badge badge-hack">hackathon</span>' : '') +
-      '</div>';
+    var nameEl = mk('div', 'prof-name'); nameEl.textContent = p.name; left.appendChild(nameEl);
+    if (p.layer) { var layEl = mk('div','prof-layer'); layEl.textContent = p.layer + ' \u2014 ' + (LAYER_NAMES[p.layer]||''); left.appendChild(layEl); }
+    if (p.description) { var descEl = mk('p','prof-desc'); descEl.textContent = p.description; left.appendChild(descEl); }
 
-    // Visit website CTA
+    // ── RIGHT: sidebar ──
+    var aside = mk('div', 'prof-aside');
+    layout.appendChild(aside);
+
+    // Status + CTA
+    var statusBlock = mk('div', 'aside-status-block');
+    var badgesDiv = mk('div', 'aside-badges');
+    var b = mk('span', badgeClass(p.status)); b.textContent = p.status || 'live'; badgesDiv.appendChild(b);
+    if (isHackathon(p.url)) { var hb = mk('span','badge badge-hack'); hb.textContent = 'hackathon'; badgesDiv.appendChild(hb); }
+    statusBlock.appendChild(badgesDiv);
     var ctaUrl = p.url || (p.github && p.github.url);
-    var ctaHtml = ctaUrl
-      ? '<a class="cta-btn" href="' + esc(ctaUrl) + '" target="_blank" rel="noopener">Visit website &rarr;</a>'
-      : '';
+    if (ctaUrl) { var cta = mkA(ctaUrl, 'cta-btn', true); cta.textContent = 'Visit website \u2192'; statusBlock.appendChild(cta); }
+    aside.appendChild(statusBlock);
 
-    var hdr =
-      '<div class="prof-hdr">' +
-      '<div>' +
-      logoHtml +
-      '<div class="prof-name">' + esc(p.name) + '</div>' +
-      (layerLabel ? '<div class="prof-layer">' + layerLabel + '</div>' : '') +
-      (p.description ? '<p class="prof-desc">' + esc(p.description) + '</p>' : '') +
-      '</div>' +
-      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;">' +
-      badges + ctaHtml +
-      '</div>' +
-      '</div>';
-
-    // Layer context blurb
-    var layerCtx = (p.layer && LAYER_DESC[p.layer])
-      ? '<div class="layer-ctx">' + esc(LAYER_DESC[p.layer]) + '</div>'
-      : '';
-
-    // Hero metric — volume (big) or GitHub stars
-    var heroHtml = '';
+    // Hero metric
     if (p.volume && p.volume['30d'] && p.volume['30d'] !== 'tracked') {
-      heroHtml =
-        '<div class="hero-metric">' +
-        '<div class="hero-stat">' +
-        '<div class="hero-val">' + esc(p.volume['30d']) + '</div>' +
-        '<div class="hero-label">Volume (30d)</div>' +
-        (p.volume.source ? '<div class="hero-note">' + esc(p.volume.source) + '</div>' : '') +
-        '</div>' +
-        '</div>';
+      aside.appendChild(mk('div','aside-divider'));
+      var mv = mk('div','aside-metric-val'); mv.textContent = p.volume['30d'];
+      var ml = mk('div','aside-metric-label'); ml.textContent = 'Volume (30d)';
+      ap(aside, mv, ml);
     } else if (p.github && p.github.stars) {
-      heroHtml =
-        '<div class="hero-metric">' +
-        '<div class="hero-stat">' +
-        '<div class="hero-val">' + esc(p.github.stars.toLocaleString()) + '</div>' +
-        '<div class="hero-label">GitHub Stars</div>' +
-        '</div>' +
-        '</div>';
+      aside.appendChild(mk('div','aside-divider'));
+      var mv2 = mk('div','aside-metric-val'); mv2.textContent = p.github.stars.toLocaleString();
+      var ml2 = mk('div','aside-metric-label'); ml2.textContent = 'GitHub Stars';
+      ap(aside, mv2, ml2);
     }
 
-    // Chain tags
-    var CHAIN_COLORS = { Base:'#0052ff', Solana:'#9945ff', Ethereum:'#627eea', Arbitrum:'#12aaff', Celo:'#35d07f', Polygon:'#8247e5', Avalanche:'#e84142', multi:'#888' };
-    var chainHtml = '';
+    // Chains
     if (p.chain) {
-      var chains = Array.isArray(p.chain)
-        ? p.chain
-        : p.chain.split(/[,\/]/).map(function(c) { return c.trim(); });
-      chainHtml = '<div class="chain-row">' +
-        chains.map(function(c) {
-          var col = CHAIN_COLORS[c] || '#888';
-          return '<span class="chain-tag"><span class="chain-dot" style="background:' + col + '"></span>' + esc(c) + '</span>';
-        }).join('') +
-        '</div>';
+      aside.appendChild(mk('div','aside-divider'));
+      var chains = Array.isArray(p.chain) ? p.chain : p.chain.split(/[,\/]/).map(function(c){return c.trim();});
+      var cd = mk('div','aside-chains');
+      chains.forEach(function(c) {
+        var ct = mk('span','chain-tag');
+        var dot = mk('span','chain-dot'); dot.style.background = CHAIN_COLORS[c]||'#685e58';
+        ap(ct, dot, c); cd.appendChild(ct);
+      });
+      aside.appendChild(cd);
     }
 
-    // Meta cells (secondary stats — not volume/stars, those are in hero)
-    var cells = [];
-    if (p.metadata && !p.volume) cells.push({ label: 'Activity', val: p.metadata });
-    if (p.launched) cells.push({ label: 'Launched', val: p.launched });
-    if (p.funding) cells.push({ label: 'Funding', val: p.funding });
-    if (p.github && p.github.stars && !heroHtml.includes('GitHub Stars')) {
-      cells.push({ label: 'Stars', val: p.github.stars.toLocaleString() });
+    // Links (X, docs, GitHub)
+    var links = [];
+    if (p.x) { var h=p.x.replace(/^@/,''); links.push({type:'x', text:'@'+h, href:'https://x.com/'+h}); }
+    if (p.docs) { links.push({type:'docs', text:(getDomain(p.docs)||'docs')+' \u2192', href:p.docs}); }
+    if (p.github && p.github.url) { links.push({type:'gh', text:p.github.url.replace('https://github.com/',''), href:p.github.url}); }
+    if (links.length) {
+      aside.appendChild(mk('div','aside-divider'));
+      var ld = mk('div','aside-links');
+      links.forEach(function(lk) {
+        var a = mkA(lk.href, 'aside-link', true);
+        var lt = mk('span','aside-link-type'); lt.textContent = lk.type;
+        ap(a, lt, lk.text); ld.appendChild(a);
+      });
+      aside.appendChild(ld);
     }
 
-    var metaHtml = cells.length
-      ? '<div class="meta-grid">' +
-        cells.map(function(c) {
-          return '<div class="meta-cell">' +
-            '<div class="meta-label">' + esc(c.label) + '</div>' +
-            '<div class="meta-val">' + esc(c.val) + '</div>' +
-            (c.note ? '<div class="meta-note">' + esc(c.note) + '</div>' : '') +
-            '</div>';
-        }).join('') + '</div>'
-      : '';
+    // Meta (launched, funding)
+    var mrows = [];
+    if (p.launched) mrows.push({label:'launched', val:p.launched});
+    if (p.funding) mrows.push({label:'funding', val:p.funding});
+    if (mrows.length) {
+      aside.appendChild(mk('div','aside-divider'));
+      var md = mk('div','aside-meta');
+      mrows.forEach(function(r) {
+        var row = mk('div','aside-meta-row');
+        var lbl = mk('span','aside-meta-label'); lbl.textContent = r.label;
+        var val = mk('span','aside-meta-val'); val.textContent = r.val;
+        ap(row, lbl, val); md.appendChild(row);
+      });
+      aside.appendChild(md);
+    }
 
     // Tags
-    var tagsHtml = (p.tags && p.tags.length)
-      ? '<div class="tags">' +
-        p.tags.map(function(t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') +
-        '</div>'
-      : '';
+    if (p.tags && p.tags.length) {
+      aside.appendChild(mk('div','aside-divider'));
+      var td = mk('div','aside-tags');
+      p.tags.forEach(function(t) { var tg = mk('span','tag'); tg.textContent = t; td.appendChild(tg); });
+      aside.appendChild(td);
+    }
 
-    // Links row (secondary links: x, docs, github — website is now the CTA button)
-    var linkBtns = [];
-    if (p.x) {
-      var handle = p.x.replace(/^@/, '');
-      linkBtns.push('<a class="link-btn" href="https://x.com/' + esc(handle) + '" target="_blank" rel="noopener"><span class="link-btn-label">x</span>@' + esc(handle) + '</a>');
-    }
-    if (p.docs) {
-      linkBtns.push('<a class="link-btn" href="' + esc(p.docs) + '" target="_blank" rel="noopener"><span class="link-btn-label">docs</span>' + esc(getDomain(p.docs) || 'docs') + ' &rarr;</a>');
-    }
-    if (p.github && p.github.url) {
-      linkBtns.push('<a class="link-btn" href="' + esc(p.github.url) + '" target="_blank" rel="noopener"><span class="link-btn-label">gh</span>' + esc(p.github.url.replace('https://github.com/', '')) + '</a>');
-    }
-    var linksHtml = linkBtns.length ? '<div class="links-row">' + linkBtns.join('') + '</div>' : '';
+    // ── BELOW-FOLD ──
+    var below = mk('div', 'prof-below');
+    root.appendChild(below);
 
-    // GitHub license warning
-    var ghHtml = '';
+    if (p.layer && LAYER_DESC[p.layer]) {
+      var ctx = mk('div','layer-ctx'); ctx.textContent = LAYER_DESC[p.layer]; below.appendChild(ctx);
+    }
     if (p.github && p.github.license && p.github.license.indexOf('LZBL') !== -1) {
-      ghHtml = '<div class="section"><div class="license-warn">Dual-licensed: MIT (non-commercial) + LZBL-1.2. Commercial use requires a separate agreement.</div></div>';
+      var warn = mk('div','license-warn'); warn.textContent = 'Dual-licensed: MIT + LZBL-1.2. Commercial use requires a separate agreement.'; below.appendChild(warn);
     }
-
-    // History
-    var histHtml = '';
     if (p.history && p.history.length) {
-      histHtml =
-        '<div class="section">' +
-        '<div class="section-title">History</div>' +
-        '<ul class="history-list">' +
-        p.history.map(function(h) {
-          var label = h.event === 'acquired'
-            ? 'Acquired by ' + esc(h.acquirer || h.target)
-            : esc(h.event);
-          return '<li>' +
-            '<span class="hist-date">' + esc(h.date || '') + '</span>' +
-            '<span>' + label + '</span>' +
-            (h.value ? '<span class="hist-val">' + esc(h.value) + '</span>' : '') +
-            '</li>';
-        }).join('') +
-        '</ul></div>';
+      var hs = mk('div','rel-section');
+      var ht = mk('div','rel-title'); ht.textContent = 'History'; hs.appendChild(ht);
+      var hl = mk('ul','history-list');
+      p.history.forEach(function(h) {
+        var li = mk('li','history-item');
+        var dt = mk('span','hist-date'); dt.textContent = h.date||'';
+        var ev = h.event==='acquired' ? 'Acquired by '+(h.acquirer||h.target||'') : h.event;
+        ap(li, dt, ev);
+        if (h.value) { var hv = mk('span','hist-val'); hv.textContent = h.value; li.appendChild(hv); }
+        hl.appendChild(li);
+      });
+      hs.appendChild(hl); below.appendChild(hs);
     }
 
-    // Used by — reverse lookup: which projects list this one in their related[]
-    var usedByHtml = '';
+    // Used by
     if (layers) {
-      var usedBy = layers.flatMap(function(l) { return l.projects; }).filter(function(q) {
-        return q.related && q.related.indexOf(p.id) !== -1;
-      });
+      var usedBy = [];
+      layers.forEach(function(l) { l.projects.forEach(function(q) { if (q.related && q.related.indexOf(p.id)!==-1) usedBy.push(q); }); });
       if (usedBy.length) {
-        usedByHtml =
-          '<div class="siblings">' +
-          '<div class="siblings-title">Used by</div>' +
-          '<div class="siblings-chips">' +
-          usedBy.map(function(u) {
-            var layerTag = u.layer ? '<span class="rel-layer">' + esc(u.layer) + '</span>' : '';
-            return '<a class="sibling-chip rel-chip" href="/' + esc(u.id) + '">' + layerTag + esc(u.name) + '</a>';
-          }).join('') +
-          '</div></div>';
+        var us = mk('div','rel-section');
+        var ut = mk('div','rel-title'); ut.textContent = 'Used by'; us.appendChild(ut);
+        var uc = mk('div','rel-chips');
+        usedBy.forEach(function(u) {
+          var chip = mkA('/'+u.id, 'rel-chip');
+          if (u.layer) { var lt = mk('span','rel-layer-tag'); lt.textContent = u.layer; chip.appendChild(lt); }
+          chip.appendChild(document.createTextNode(u.name)); uc.appendChild(chip);
+        });
+        us.appendChild(uc); below.appendChild(us);
       }
     }
 
     // Works with
-    var relatedHtml = '';
     if (p.related && p.related.length && layers) {
-      var relProjects = p.related.map(function(rid) { return findProject(layers, rid); }).filter(Boolean);
-      if (relProjects.length) {
-        relatedHtml =
-          '<div class="siblings">' +
-          '<div class="siblings-title">Works with</div>' +
-          '<div class="siblings-chips">' +
-          relProjects.map(function(r) {
-            var layerTag = r.layer ? '<span class="rel-layer">' + esc(r.layer) + '</span>' : '';
-            return '<a class="sibling-chip rel-chip" href="/' + esc(r.id) + '">' + layerTag + esc(r.name) + '</a>';
-          }).join('') +
-          '</div></div>';
+      var rp = p.related.map(function(rid){return findProject(layers,rid);}).filter(Boolean);
+      if (rp.length) {
+        var ws = mk('div','rel-section');
+        var wt = mk('div','rel-title'); wt.textContent = 'Works with'; ws.appendChild(wt);
+        var wc = mk('div','rel-chips');
+        rp.forEach(function(r) {
+          var chip = mkA('/'+r.id, 'rel-chip');
+          if (r.layer) { var lt = mk('span','rel-layer-tag'); lt.textContent = r.layer; chip.appendChild(lt); }
+          chip.appendChild(document.createTextNode(r.name)); wc.appendChild(chip);
+        });
+        ws.appendChild(wc); below.appendChild(ws);
       }
     }
 
     // Siblings
-    var siblingsHtml = '';
     if (layers && p.layer) {
-      var siblings = getSiblings(layers, p.id, p.layer, 6);
-      if (siblings.length) {
-        siblingsHtml =
-          '<div class="siblings">' +
-          '<div class="siblings-title">Also in ' + esc(p.layer) + ' &mdash; ' + esc(LAYER_NAMES[p.layer] || '') + '</div>' +
-          '<div class="siblings-chips">' +
-          siblings.map(function(s) {
-            return '<a class="sibling-chip" href="/' + esc(s.id) + '">' + esc(s.name) + '</a>';
-          }).join('') +
-          '</div></div>';
+      var sibs = getSiblings(layers, p.id, p.layer, 6);
+      if (sibs.length) {
+        var ss = mk('div','rel-section');
+        var st = mk('div','rel-title'); st.textContent = 'Also in '+p.layer+' \u2014 '+(LAYER_NAMES[p.layer]||''); ss.appendChild(st);
+        var sc = mk('div','rel-chips');
+        sibs.forEach(function(s) { var chip = mkA('/'+s.id,'rel-chip'); chip.textContent = s.name; sc.appendChild(chip); });
+        ss.appendChild(sc); below.appendChild(ss);
       }
     }
 
-    document.getElementById('root').innerHTML =
-      crumb + hdr + layerCtx + heroHtml + chainHtml + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + usedByHtml + relatedHtml + siblingsHtml;
-
-    // Hide favicon img on load error (letter fallback remains visible)
-    var faviconImg = document.querySelector('[data-favicon]');
-    if (faviconImg) {
-      faviconImg.addEventListener('error', function() { this.style.display = 'none'; });
-    }
+    // Favicon error handler
+    var fi = document.querySelector('[data-favicon]');
+    if (fi) fi.addEventListener('error', function(){ this.style.display='none'; });
   }
 
   var id = getSlug();
