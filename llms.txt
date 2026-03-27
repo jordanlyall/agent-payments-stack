@@ -13,6 +13,16 @@ Full JSON available at: /data.json
 Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, url, x, docs, chain, related, funding, npm (package, weekly_downloads), github (url, stars, forks, contributors, last_commit, license), volume (30d, note), editorial.
 Individual project profiles: /[slug] (e.g. /x402)
 
+## Pages
+
+- / — Full stack map with all 134 projects, filterable by layer and status
+- /data — Tabular view, sortable by layer, status, funding, npm, GitHub stars
+- /rankings — Ranked view by npm downloads, GitHub stars, volume, and funding
+- /trace — Live transaction trace: x402, Tempo MPP, ACP, ERC-8004, Lightning, Stripe SPTs
+- /hackathons — 27 early-stage projects from recent agent payment hackathons
+- /api — Machine-readable endpoints: /data.json, /llms.txt, /api/mcp (MCP server)
+- /about — What this is, who made it, methodology, and submission process
+
 ## The six layers
 
 - L0 Settlement (13 projects) — where transactions land (chains: Base, Solana, Ethereum, Arbitrum, etc.)
