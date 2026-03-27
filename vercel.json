@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/:slug", "destination": "/projects.html" }
+    { "source": "/:slug([^.]+)", "destination": "/projects.html" }
   ]
 }
