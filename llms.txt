@@ -4,7 +4,7 @@
 
 ## What this is
 
-A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jordanlyall. 134 projects across 6 layers as of March 2026.
+A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jordanlyall. 142 projects across 6 layers as of March 2026.
 
 ## Structured data
 
@@ -15,7 +15,7 @@ Individual project profiles: /[slug] (e.g. /x402)
 
 ## Pages
 
-- / — Full stack map with all 134 projects, filterable by layer and status
+- / — Full stack map with all 142 projects, filterable by layer and status
 - /data — Tabular view, sortable by layer, status, funding, npm, GitHub stars
 - /rankings — Ranked view by npm downloads, GitHub stars, volume, and funding
 - /trace — Live transaction trace: x402, Tempo MPP, ACP, ERC-8004, Lightning, Stripe SPTs

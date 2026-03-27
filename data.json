@@ -3,7 +3,7 @@
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
   "updated": "2026-03-27",
-  "version": "1.7",
+  "version": "1.8",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -441,6 +441,66 @@
             "api-native",
             "developer"
           ]
+        },
+        {
+          "layer": "L5",
+          "id": "the402",
+          "name": "the402",
+          "status": "live",
+          "description": "AI agent marketplace where agents discover and purchase services via x402 protocol, paying with USDC on Base.",
+          "tags": [
+            "marketplace",
+            "x402",
+            "onchain",
+            "b2b"
+          ],
+          "url": "https://the402.ai",
+          "chain": "Base",
+          "editorial": "40 live services, escrow settlement on Base, MCP server on npm."
+        },
+        {
+          "layer": "L5",
+          "id": "remlo",
+          "name": "Remlo",
+          "status": "live",
+          "description": "Enterprise payroll API — agents trigger compliant batch payments, compliance screening, yield queries, and salary streaming via HTTP 402 on Tempo.",
+          "tags": [
+            "payroll",
+            "x402",
+            "mpp",
+            "b2b"
+          ],
+          "url": "https://remlo.xyz",
+          "editorial": "12 MPP-gated endpoints live. Listed on MPPscan, discoverable via npx agentcash. Built on Tempo with TIP-20, TIP-403 sanctions screening."
+        },
+        {
+          "layer": "L5",
+          "id": "meridian-finance",
+          "name": "Meridian Finance",
+          "status": "early",
+          "description": "Institutional yield and payment infrastructure on Arc. Merchants accept USDC/EURC via Nanopayments, funds auto-generate Treasury yield via USYC, agents manage treasury with ERC-8004 identity.",
+          "tags": [
+            "yield",
+            "usdc",
+            "erc-8004",
+            "b2b"
+          ],
+          "url": "https://themeridian.finance",
+          "chain": "Arc",
+          "editorial": "3,200+ organic users, 200K+ TVL, 15K+ transactions on Arc Testnet. First USYC on Arc. Circle MNDA in progress."
+        },
+        {
+          "layer": "L5",
+          "id": "backed",
+          "name": "Backed",
+          "status": "early",
+          "description": "Capital markets infrastructure for Agent Autonomous Organizations (AAOs) — blockchain-native entities run by AI agents with programmable governance.",
+          "tags": [
+            "aao",
+            "governance",
+            "onchain"
+          ],
+          "url": "https://backed.app"
         }
       ]
     },
@@ -903,6 +963,35 @@
             "onchain",
             "smart-contract"
           ]
+        },
+        {
+          "layer": "L4",
+          "id": "mppgate",
+          "name": "MPPGate",
+          "status": "early",
+          "description": "Per-agent spending controls built on MPP (Stripe + Tempo) — budgets, spend limits, and auto-stop for autonomous agents.",
+          "tags": [
+            "spend-controls",
+            "mpp",
+            "b2b"
+          ],
+          "url": "https://mppgate.com",
+          "editorial": "Day 1: 53 active agents, 1,037 settlements,  controlled volume. Launched March 25, 2026."
+        },
+        {
+          "layer": "L4",
+          "id": "bullet-cash",
+          "name": "Bullet Cash",
+          "status": "early",
+          "description": "Agent-native spending controls — agents get API keys and authorize USDC/BRLA payments within programmable owner-set rules with full audit trail.",
+          "tags": [
+            "spend-controls",
+            "usdc",
+            "audit",
+            "b2b"
+          ],
+          "url": "https://bullet.cash",
+          "editorial": "Supports per-transaction limits, daily/monthly caps, merchant restrictions, time windows. Idempotent APIs."
         }
       ]
     },
@@ -2034,6 +2123,21 @@
           ],
           "x": "r3vl_xyz",
           "chain": "multi"
+        },
+        {
+          "layer": "L2",
+          "id": "agoragentic",
+          "name": "Agoragentic",
+          "status": "early",
+          "description": "Autonomous agent execution gateway — agents discover, invoke, and pay for services through one API with settlement on Base.",
+          "tags": [
+            "gateway",
+            "discovery",
+            "onchain"
+          ],
+          "url": "https://agoragentic.com",
+          "chain": "Base",
+          "editorial": "20+ integrations, 200+ agents transacting with no human in the loop."
         }
       ]
     },
@@ -2560,6 +2664,19 @@
             "developer",
             "onchain"
           ]
+        },
+        {
+          "layer": "L1",
+          "id": "waap",
+          "name": "WaaP",
+          "status": "live",
+          "description": "Wallet as a Protocol — delegated capabilities for agents via programmable real-time policies without private key exposure. Millisecond signing via 2PC architecture.",
+          "tags": [
+            "delegation",
+            "policy",
+            "developer"
+          ],
+          "url": "https://waap.xyz"
         }
       ]
     },
