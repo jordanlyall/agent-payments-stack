@@ -109,6 +109,69 @@
     border-left: 2px solid #333;
   }
 
+  /* Hero metric */
+  .hero-metric {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--faint);
+  }
+  .hero-stat { flex-shrink: 0; }
+  .hero-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 1;
+    color: var(--text);
+  }
+  .hero-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 6px;
+  }
+  .hero-note { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* Visit website CTA */
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .cta-btn:hover { opacity: 0.85; }
+
+  /* Chain tags */
+  .chain-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .chain-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    font-size: 11px;
+    color: var(--secondary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .chain-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
   /* Meta grid */
   .meta-grid {
     display: grid;
@@ -432,13 +495,19 @@ document.addEventListener('DOMContentLoaded', function () {
       (domain ? '<img src="https://www.google.com/s2/favicons?domain=' + esc(domain) + '&sz=64" alt="" data-favicon="1">' : '') +
       '</div>';
 
-    // 3. Hackathon badge
+    // Hackathon badge
     var hackathon = isHackathon(p.url);
     var badges =
-      '<div style="display:flex;gap:8px;align-items:center;">' +
+      '<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">' +
       '<span class="' + badgeClass(p.status) + '">' + esc(p.status || 'live') + '</span>' +
       (hackathon ? '<span class="badge badge-hack">hackathon</span>' : '') +
       '</div>';
+
+    // Visit website CTA
+    var ctaUrl = p.url || (p.github && p.github.url);
+    var ctaHtml = ctaUrl
+      ? '<a class="cta-btn" href="' + esc(ctaUrl) + '" target="_blank" rel="noopener">Visit website &rarr;</a>'
+      : '';
 
     var hdr =
       '<div class="prof-hdr">' +
@@ -448,25 +517,56 @@ document.addEventListener('DOMContentLoaded', function () {
       (layerLabel ? '<div class="prof-layer">' + layerLabel + '</div>' : '') +
       (p.description ? '<p class="prof-desc">' + esc(p.description) + '</p>' : '') +
       '</div>' +
-      '<div>' + badges + '</div>' +
+      '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:12px;">' +
+      badges + ctaHtml +
+      '</div>' +
       '</div>';
 
-    // 4. Layer context blurb
+    // Layer context blurb
     var layerCtx = (p.layer && LAYER_DESC[p.layer])
       ? '<div class="layer-ctx">' + esc(LAYER_DESC[p.layer]) + '</div>'
       : '';
 
-    // Meta cells
-    var cells = [];
+    // Hero metric — volume (big) or GitHub stars
+    var heroHtml = '';
     if (p.volume && p.volume['30d'] && p.volume['30d'] !== 'tracked') {
-      cells.push({ label: 'Volume (30d)', val: p.volume['30d'], note: p.volume.source });
+      heroHtml =
+        '<div class="hero-metric">' +
+        '<div class="hero-stat">' +
+        '<div class="hero-val">' + esc(p.volume['30d']) + '</div>' +
+        '<div class="hero-label">Volume (30d)</div>' +
+        (p.volume.source ? '<div class="hero-note">' + esc(p.volume.source) + '</div>' : '') +
+        '</div>' +
+        '</div>';
+    } else if (p.github && p.github.stars) {
+      heroHtml =
+        '<div class="hero-metric">' +
+        '<div class="hero-stat">' +
+        '<div class="hero-val">' + esc(p.github.stars.toLocaleString()) + '</div>' +
+        '<div class="hero-label">GitHub Stars</div>' +
+        '</div>' +
+        '</div>';
     }
-    if (p.metadata && !p.volume) {
-      cells.push({ label: 'Activity', val: p.metadata });
+
+    // Chain tags
+    var CHAIN_COLORS = { Base:'#0052ff', Solana:'#9945ff', Ethereum:'#627eea', Arbitrum:'#12aaff', Celo:'#35d07f', multi:'#888' };
+    var chainHtml = '';
+    if (p.chain) {
+      var chains = p.chain.split(/[,\/]/).map(function(c) { return c.trim(); });
+      chainHtml = '<div class="chain-row">' +
+        chains.map(function(c) {
+          var col = CHAIN_COLORS[c] || '#888';
+          return '<span class="chain-tag"><span class="chain-dot" style="background:' + col + '"></span>' + esc(c) + '</span>';
+        }).join('') +
+        '</div>';
     }
-    if (p.chain) cells.push({ label: 'Chain', val: p.chain });
+
+    // Meta cells (secondary stats — not volume/stars, those are in hero)
+    var cells = [];
+    if (p.metadata && !p.volume) cells.push({ label: 'Activity', val: p.metadata });
     if (p.launched) cells.push({ label: 'Launched', val: p.launched });
-    if (p.github && p.github.stars) {
+    if (p.funding) cells.push({ label: 'Funding', val: p.funding });
+    if (p.github && p.github.stars && !heroHtml.includes('GitHub Stars')) {
       cells.push({ label: 'Stars', val: p.github.stars.toLocaleString() });
     }
 
@@ -488,16 +588,8 @@ document.addEventListener('DOMContentLoaded', function () {
         '</div>'
       : '';
 
-    // Links row (website, x, docs, github)
-    // Web: use p.url if present; fall back to github url if no url
-    var webUrl = p.url || (p.github && p.github.url && !p.url ? p.github.url : null);
-    var webDomain = getDomain(webUrl);
+    // Links row (secondary links: x, docs, github — website is now the CTA button)
     var linkBtns = [];
-    if (webUrl && webDomain && !p.github) {
-      linkBtns.push('<a class="link-btn" href="' + esc(webUrl) + '" target="_blank" rel="noopener"><span class="link-btn-label">web</span>' + esc(webDomain) + ' &rarr;</a>');
-    } else if (p.url && getDomain(p.url)) {
-      linkBtns.push('<a class="link-btn" href="' + esc(p.url) + '" target="_blank" rel="noopener"><span class="link-btn-label">web</span>' + esc(getDomain(p.url)) + ' &rarr;</a>');
-    }
     if (p.x) {
       var handle = p.x.replace(/^@/, '');
       linkBtns.push('<a class="link-btn" href="https://x.com/' + esc(handle) + '" target="_blank" rel="noopener"><span class="link-btn-label">x</span>@' + esc(handle) + '</a>');
@@ -510,13 +602,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     var linksHtml = linkBtns.length ? '<div class="links-row">' + linkBtns.join('') + '</div>' : '';
 
-    // GitHub section (license / dual-license warning)
+    // GitHub license warning
     var ghHtml = '';
-    if (p.github && p.github.license) {
-      var dualLicense = p.github.license.indexOf('LZBL') !== -1;
-      if (dualLicense) {
-        ghHtml = '<div class="section"><div class="license-warn">Dual-licensed: MIT (non-commercial) + LZBL-1.2. Commercial use requires a separate agreement.</div></div>';
-      }
+    if (p.github && p.github.license && p.github.license.indexOf('LZBL') !== -1) {
+      ghHtml = '<div class="section"><div class="license-warn">Dual-licensed: MIT (non-commercial) + LZBL-1.2. Commercial use requires a separate agreement.</div></div>';
     }
 
     // History
@@ -539,12 +628,29 @@ document.addEventListener('DOMContentLoaded', function () {
         '</ul></div>';
     }
 
+    // Used by — reverse lookup: which projects list this one in their related[]
+    var usedByHtml = '';
+    if (layers) {
+      var usedBy = layers.flatMap(function(l) { return l.projects; }).filter(function(q) {
+        return q.related && q.related.indexOf(p.id) !== -1;
+      });
+      if (usedBy.length) {
+        usedByHtml =
+          '<div class="siblings">' +
+          '<div class="siblings-title">Used by</div>' +
+          '<div class="siblings-chips">' +
+          usedBy.map(function(u) {
+            var layerTag = u.layer ? '<span class="rel-layer">' + esc(u.layer) + '</span>' : '';
+            return '<a class="sibling-chip rel-chip" href="/' + esc(u.id) + '">' + layerTag + esc(u.name) + '</a>';
+          }).join('') +
+          '</div></div>';
+      }
+    }
+
     // Works with
     var relatedHtml = '';
     if (p.related && p.related.length && layers) {
-      var relProjects = p.related.map(function(rid) {
-        return findProject(layers, rid);
-      }).filter(Boolean);
+      var relProjects = p.related.map(function(rid) { return findProject(layers, rid); }).filter(Boolean);
       if (relProjects.length) {
         relatedHtml =
           '<div class="siblings">' +
@@ -575,7 +681,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     document.getElementById('root').innerHTML =
-      crumb + hdr + layerCtx + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + relatedHtml + siblingsHtml;
+      crumb + hdr + layerCtx + heroHtml + chainHtml + linksHtml + metaHtml + tagsHtml + ghHtml + histHtml + usedByHtml + relatedHtml + siblingsHtml;
 
     // Hide favicon img on load error (letter fallback remains visible)
     var faviconImg = document.querySelector('[data-favicon]');
