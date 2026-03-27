@@ -3,22 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Agent Payments Stack</title>
+<title>The Agent Payments Stack — 100+ Projects, 6 Layers</title>
+<meta name="description" content="The definitive map of AI agent payment infrastructure. 103 projects across 6 layers: settlement, wallets, routing, protocols, governance, and applications. $43M settled, 140M transactions. Updated March 2026.">
+<meta name="keywords" content="AI agent payments, agent payment infrastructure, x402, agentic commerce, crypto payments, USDC, agent wallets, payment protocol, AI agent finance">
+
+<!-- Open Graph -->
+<meta property="og:title" content="The Agent Payments Stack — 100+ Projects, 6 Layers">
+<meta property="og:description" content="Every major payment network is building rails for AI agents. 103 projects mapped across settlement, wallets, routing, protocols, governance, and applications. 98.6% settles in USDC.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentpaymentsstack.com">
+<meta property="og:image" content="https://agentpaymentsstack.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Agent Payments Stack — 100+ Projects, 6 Layers">
+<meta name="twitter:description" content="Every major payment network is building rails for AI agents. 103 projects mapped. 98.6% settles in USDC. $43M volume, ~$600M annualized.">
+<meta name="twitter:image" content="https://agentpaymentsstack.com/og.png">
+<meta name="twitter:creator" content="@jordanlyall">
+
+<link rel="canonical" href="https://agentpaymentsstack.com">
 <link rel="alternate" type="application/json" href="/data.json" title="Agent Payments Stack — Structured Data">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "The Agent Payments Stack",
+  "description": "A curated directory of every company building infrastructure for AI agent payments. 87 projects across six layers from blockchain settlement to application.",
+  "url": "https://agentpaymentsstack.com",
+  "creator": {
+    "@type": "Person",
+    "name": "Jordan Lyall",
+    "url": "https://x.com/jordanlyall"
+  },
+  "datePublished": "2026-03-25",
+  "dateModified": "2026-03-25",
+  "keywords": ["agent payments", "x402", "AI agents", "crypto payments", "stablecoin", "USDC", "machine payments"],
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+}
+</script>
+
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   :root {
-    --bg: #0a0a0a;
-    --text: #f0f0f0;
-    --secondary: #999;
-    --muted: #666;
-    --faint: #1e1e1e;
-    --surface: #161616;
-    --live: #f0f0f0;
-    --early: #d4a840;
-    --ann: #555;
-    --acq: #e8694a;
+    --bg: #0d0c0b;
+    --text: #edebe7;
+    --secondary: #98948f;
+    --muted: #685e58;
+    --faint: #201e1b;
+    --early: #c99e32;
+    --ann: #524e49;
+    --acq: #d9613f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,2286 +65,1168 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
-    font-feature-settings: 'cv01', 'cv02', 'ss01';
+    font-feature-settings: 'ss01';
   }
 
-  .page {
-    width: 1200px;
-    margin: 0 auto;
-    padding: 48px 56px 40px;
-  }
+  .page { max-width: 1200px; margin: 0 auto; padding: 48px 56px 40px; }
 
-  .hdr {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 40px;
-  }
+  /* Header */
+  .hdr { display: flex; flex-direction: column; margin-bottom: 40px; }
+  .eyebrow { font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  h1 { font-size: 46px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
+  .deck { font-size: 15px; color: var(--secondary); line-height: 1.55; max-width: 520px; margin-top: 10px; }
+  .nums { display: flex; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--faint); align-items: flex-end; justify-content: space-between; }
+  .nums-stats { display: flex; gap: 44px; align-items: flex-end; }
+  .num-v { font-size: 26px; font-weight: 600; line-height: 1; letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
+  .num-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-top: 5px; font-weight: 500; }
 
-  h1 {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -1.5px;
-  }
+  /* Stack grid */
+  .stack { display: flex; flex-direction: column; border-top: 1px solid var(--faint); }
+  .row { display: grid; grid-template-columns: 260px 1fr; border-bottom: 1px solid var(--faint); min-height: 64px; }
+  .row-label { padding: 18px 24px 18px 0; display: flex; align-items: baseline; gap: 12px; border-right: 1px solid var(--faint); }
+  .row-n { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0.02em; }
+  .row-title { font-size: 14.5px; font-weight: 600; letter-spacing: -0.2px; }
+  .row-q { font-size: 11px; color: var(--muted); margin-top: 3px; font-weight: 400; letter-spacing: 0.01em; }
+  .row-content { padding: 14px 0 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
 
-  .deck {
-    font-size: 15px;
-    color: var(--secondary);
-    line-height: 1.5;
-    max-width: 480px;
-    margin-top: 10px;
+  /* Tags */
+  a.t, .t {
+    display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 4px;
+    font-size: 12px; font-weight: 450; white-space: nowrap;
+    background: rgba(255,255,255,0.05); color: var(--text); line-height: 1.45;
+    border: 1px solid rgba(255,255,255,0.09);
+    text-decoration: none; transition: background 0.12s, border-color 0.12s;
   }
+  a.t:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.16); }
+  .t.early, a.t.early { background: rgba(201,158,50,0.08); color: var(--early); border: 1px solid rgba(201,158,50,0.22); }
+  a.t.early:hover { background: rgba(201,158,50,0.14); border-color: rgba(201,158,50,0.34); }
+  .t.ann, a.t.ann { background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.14); }
+  a.t.ann:hover { background: rgba(255,255,255,0.04); color: var(--secondary); }
+  .t.acq, a.t.acq { background: rgba(217,97,63,0.09); color: var(--acq); border: 1px solid rgba(217,97,63,0.2); font-weight: 480; }
+  a.t.acq:hover { background: rgba(217,97,63,0.16); border-color: rgba(217,97,63,0.32); }
+  .t .sm { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; opacity: 0.45; margin-left: 4px; }
+  .sep { width: 2px; height: 2px; border-radius: 50%; background: var(--faint); margin: 0 5px; flex-shrink: 0; border: 1px solid var(--faint); }
 
-  .nums {
-    display: flex;
-    gap: 32px;
-  }
+  /* Bottom grid */
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--faint); }
+  .bot-title { font-size: 12px; font-weight: 650; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 16px; }
 
-  .num-v {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 28px;
-    font-weight: 600;
-    line-height: 1;
-    letter-spacing: -0.5px;
-  }
+  /* Vertical integration */
+  .vi-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .vi-name { font-size: 12px; font-weight: 600; width: 60px; text-align: right; flex-shrink: 0; }
+  .vi-track { flex: 1; height: 20px; background: rgba(255,255,255,0.04); border-radius: 4px; position: relative; overflow: hidden; }
+  .vi-fill { position: absolute; top: 0; height: 100%; border-radius: 4px; opacity: 0.15; }
+  .vi-dots { position: absolute; top: 0; left: 0; right: 0; height: 100%; display: grid; grid-template-columns: repeat(6, 1fr); }
+  .vi-dot { display: flex; align-items: center; justify-content: center; }
+  .vi-labels { display: grid; grid-template-columns: repeat(6, 1fr); margin-left: 72px; margin-top: 4px; }
+  .vi-labels span { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); text-align: center; }
 
-  .num-l {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: var(--muted);
-    margin-top: 4px;
-    font-weight: 500;
-  }
+  /* M&A */
+  .ma-list { list-style: none; }
+  .ma-list li { font-size: 13px; color: var(--secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-weight: 400; }
+  .ma-list .arr { color: var(--muted); }
+  .ma-list .pr { font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; font-variant-numeric: tabular-nums; }
 
-  .stack {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+
+  /* Legend */
+
+  /* Footer */
+  .foot { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); letter-spacing: 0.01em; }
+  .foot a { color: var(--secondary); font-weight: 500; text-decoration: none; }
+  .foot a:hover { color: var(--text); }
+
+  /* ── Write-up section ── */
+  .writeup {
+    max-width: 680px;
+    margin: 56px auto 0;
+    padding-top: 44px;
     border-top: 1px solid var(--faint);
   }
 
-  .row {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    border-bottom: 1px solid var(--faint);
-    min-height: 64px;
+  .writeup h2 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    margin-bottom: 20px;
+    line-height: 1.2;
   }
 
-  .row-label {
-    padding: 18px 24px 18px 0;
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    border-right: 1px solid var(--faint);
-  }
-
-  .row-n {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-  }
-
-  .row-title {
-    font-size: 15px;
+  .writeup h3 {
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: -0.2px;
-  }
-
-  .row-q {
-    font-size: 11.5px;
-    color: var(--muted);
-    margin-top: 2px;
-    font-weight: 400;
-  }
-
-  .row-content {
-    padding: 14px 0 14px 24px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .t {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 11px;
-    border-radius: 6px;
-    font-size: 12.5px;
-    font-weight: 480;
-    white-space: nowrap;
-    background: rgba(255,255,255,0.06);
+    margin: 32px 0 10px;
     color: var(--text);
-    line-height: 1.4;
   }
 
-  .t.early {
-    background: rgba(212,168,64,0.08);
-    color: var(--early);
-    border: 1px solid rgba(212,168,64,0.15);
+  .writeup p {
+    font-size: 14.5px;
+    line-height: 1.72;
+    color: var(--secondary);
+    margin-bottom: 14px;
   }
 
-  .t.ann {
-    background: transparent;
-    color: var(--ann);
-    border: 1px dashed rgba(255,255,255,0.12);
+  .writeup p strong { color: var(--text); font-weight: 600; }
+
+  .writeup ul {
+    list-style: none;
+    margin-bottom: 14px;
   }
 
-  .t.acq {
-    background: rgba(232,105,74,0.1);
-    color: var(--acq);
-    font-weight: 520;
-  }
-
-  .t .sm {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    font-weight: 500;
-    opacity: 0.5;
-    margin-left: 4px;
-  }
-
-  .bottom {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid var(--faint);
-  }
-
-  .bot-title {
-    font-size: 12px;
-    font-weight: 650;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-
-  .vi-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 8px;
-  }
-
-  .vi-name {
-    font-size: 12px;
-    font-weight: 600;
-    width: 60px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .vi-track {
-    flex: 1;
-    height: 20px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 4px;
+  .writeup ul li {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--secondary);
+    padding-left: 14px;
     position: relative;
-    overflow: hidden;
+    margin-bottom: 5px;
   }
 
-  .vi-fill {
+  .writeup ul li::before {
+    content: '';
     position: absolute;
-    top: 0;
-    height: 100%;
-    border-radius: 4px;
-    opacity: 0.15;
+    left: 0;
+    top: 9px;
+    width: 3px;
+    height: 3px;
+    border-radius: 1px;
+    background: var(--muted);
+    opacity: 0.7;
   }
 
-  .vi-dots {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 100%;
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-  }
+  .writeup ul li strong { color: var(--text); font-weight: 550; }
 
-  .vi-dot {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .vi-labels {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    margin-left: 72px;
-    margin-top: 4px;
-  }
-
-  .vi-labels span {
+  .writeup .updated {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
+    font-size: 10.5px;
     color: var(--muted);
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+
+  /* CTA */
+  .cta {
+    margin-top: 40px;
+    padding: 28px 32px;
+    border: 1px solid var(--faint);
+    border-radius: 5px;
     text-align: center;
   }
 
-  .ma-list { list-style: none; }
-
-  .ma-list li {
-    font-size: 13px;
+  .cta p {
+    font-size: 13.5px;
     color: var(--secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .cta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 22px;
+    background: var(--text);
+    color: var(--bg);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.12s;
+  }
+
+  .cta a:hover { opacity: 0.82; }
+
+  /* Hackathon section */
+  .hackathons {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--faint);
+  }
+  .hack-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+  }
+  .hack-title {
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -0.2px;
+  }
+  .hack-subtitle {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .hack-group {
+    margin-bottom: 16px;
+  }
+  .hack-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
     margin-bottom: 6px;
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-weight: 420;
+    gap: 8px;
+  }
+  .hack-label a {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 10px;
+  }
+  .hack-label a:hover { text-decoration: underline; }
+  .hack-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .hack-tags .t {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 11.5px;
+    color: var(--secondary);
   }
 
-  .ma-list .arr { color: var(--muted); }
+  /* Header meta line */
+  .hdr-meta {
+    display: flex;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+  .hdr-meta span { display: flex; align-items: center; gap: 4px; }
+  .hdr-meta span + span::before { content: '·'; margin-right: 4px; opacity: 0.4; }
 
-  .ma-list .pr {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+  /* Email capture */
+  .email-capture {
+    margin-top: 48px;
+    padding: 28px 32px;
+    border: 1px solid var(--faint);
+    border-radius: 8px;
+    text-align: center;
+  }
+  .email-capture h3 {
+    font-size: 16px;
+    font-weight: 650;
+    letter-spacing: -0.3px;
+    margin-bottom: 6px;
+  }
+  .email-capture p { font-size: 13px; color: var(--secondary); margin-bottom: 16px; }
+  .email-form {
+    display: flex;
+    gap: 8px;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .email-form input {
+    flex: 1;
+    padding: 10px 14px;
+    background: var(--faint);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .email-form input::placeholder { color: var(--muted); }
+  .email-form input:focus { border-color: rgba(255,255,255,0.2); }
+  .email-form button {
+    padding: 10px 20px;
+    background: var(--text);
+    color: var(--bg);
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--acq);
-    margin-left: auto;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
   }
+  .email-form button:hover { opacity: 0.85; }
 
-  .foot {
-    margin-top: 28px;
-    padding-top: 16px;
-    border-top: 1px solid var(--faint);
+  /* Embed code blocks */
+  .embed-code {
+    position: relative;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--faint);
+    border-radius: 7px;
+    padding: 12px 80px 12px 14px;
+    cursor: pointer;
+  }
+  .embed-code:hover { border-color: rgba(255,255,255,0.15); }
+  .embed-code code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+  }
+  .embed-copy {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--faint);
+    border-radius: 4px;
+    padding: 3px 8px;
+  }
+  .embed-code:hover .embed-copy { color: var(--text); }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0 10px;
+  }
+  .filter-search {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--faint);
+    border-radius: 5px;
+    padding: 6px 11px;
+    transition: border-color 0.12s;
+  }
+  .filter-search:focus-within { border-color: rgba(255,255,255,0.14); }
+  .filter-search svg { opacity: 0.25; flex-shrink: 0; }
+  .filter-search input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 12.5px;
+    font-family: inherit;
+  }
+  .filter-search input::placeholder { color: var(--muted); }
+  .filter-btns { display: flex; gap: 5px; flex-shrink: 0; }
+  .fb {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 450;
+    color: var(--muted);
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.12s;
+    white-space: nowrap;
+  }
+  .fb:hover { color: var(--secondary); border-color: rgba(255,255,255,0.16); }
+  .fb.on { color: var(--text); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.05); }
+  /* Early */
+  .fb[data-f="early"] { border-color: rgba(201,158,50,0.2); color: rgba(201,158,50,0.65); }
+  .fb[data-f="early"]:hover { color: var(--early); border-color: rgba(201,158,50,0.3); }
+  .fb[data-f="early"].on { background: rgba(201,158,50,0.08); border-color: rgba(201,158,50,0.35); color: var(--early); }
+  /* Announced */
+  .fb[data-f="ann"] { border: 1px dashed rgba(255,255,255,0.14); }
+  .fb[data-f="ann"].on { background: rgba(255,255,255,0.04); border-style: dashed; border-color: rgba(255,255,255,0.28); color: var(--secondary); }
+  /* Acquired */
+  .fb[data-f="acq"] { border-color: rgba(217,97,63,0.22); color: rgba(217,97,63,0.6); }
+  .fb[data-f="acq"]:hover { color: var(--acq); border-color: rgba(217,97,63,0.32); }
+  .fb[data-f="acq"].on { background: rgba(217,97,63,0.08); border-color: rgba(217,97,63,0.38); color: var(--acq); }
+
+  .filter-count { font-size: 11px; color: var(--muted); flex-shrink: 0; white-space: nowrap; opacity: 0.7; }
+  .no-results { padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); display: none; }
+
+  /* Hero subscribe form */
+  .hero-sub { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .hero-sub-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 500; }
+  .hero-sub-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .hero-sub-row input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-size: 12px;
+    font-family: inherit;
+    padding: 6px 10px;
+    width: 160px;
+  }
+  .hero-sub-row input::placeholder { color: var(--muted); }
+  .hero-sub-row button {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+    border: none;
+    border-left: 1px solid rgba(255,255,255,0.12);
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .hero-sub-row button:hover { background: rgba(255,255,255,0.14); }
+
+  /* Submit + Changelog */
+  .submit-bar {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding: 16px 0;
+    border-top: 1px solid var(--faint);
     font-size: 12px;
     color: var(--muted);
   }
+  .submit-bar a {
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s;
+  }
+  .submit-bar a:hover { color: var(--text); }
 
-  .foot b { color: var(--text); font-weight: 600; }
-  .foot a { color: inherit; text-decoration: none; opacity: 0.5; }
-  .foot a:hover { opacity: 0.8; }
-  .foot .submit-link { opacity: 0.7; }
-  .foot .submit-link:hover { opacity: 1; color: var(--text); }
-  a.t:hover { opacity: 0.75; cursor: pointer; }
+  /* Changelog */
+  .changelog { margin-top: 32px; }
+  .changelog h3 {
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .changelog ul { list-style: none; }
+  .changelog li {
+    font-size: 13px;
+    color: var(--secondary);
+    margin-bottom: 7px;
+    display: flex;
+    gap: 14px;
+    line-height: 1.5;
+  }
+  .changelog .cl-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    min-width: 72px;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  /* Tooltips */
+  a.t { position: relative; }
+  a.t[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 7px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1c1a18;
+    color: #c8c4bc;
+    border: 1px solid rgba(255,255,255,0.1);
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.45;
+    padding: 5px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  }
+
+  /* Anchor links */
+  .row[id] { scroll-margin-top: 20px; }
+  .row-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .row-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Layer count */
+  .row-count {
+    font-size: 10px;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 5px;
+    opacity: 0.7;
+  }
+
+  /* Site nav */
+  .site-nav {
+    border-bottom: 1px solid var(--faint);
+  }
+  .site-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 13px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .site-nav-logo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .site-nav-links {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  .site-nav-links a {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.12s;
+    letter-spacing: 0.01em;
+  }
+  .site-nav-links a:hover { color: var(--secondary); }
+
+  /* ── Mobile ── */
+  @media (max-width: 900px) {
+    .site-nav-links { display: none; }
+    .site-nav-inner { padding: 14px 20px; }
+    .page { padding: 28px 20px 32px; }
+    h1 { font-size: 28px; letter-spacing: -1px; }
+    .deck { font-size: 14px; max-width: 100%; }
+    .nums { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .nums-stats { gap: 20px; flex-wrap: wrap; }
+    .hero-sub { align-items: flex-start; }
+    .num-v { font-size: 20px; }
+    .row { grid-template-columns: 1fr; }
+    .row-label { border-right: none; border-bottom: 1px solid var(--faint); padding: 14px 0 10px; }
+    .row-content { padding: 10px 0 16px; }
+    a.t, .t { font-size: 11.5px; padding: 3px 9px; }
+    .t .sm { font-size: 8px; }
+    .bottom { grid-template-columns: 1fr; gap: 32px; }
+    .vi-name { width: 52px; font-size: 11px; }
+    .foot { flex-direction: column; gap: 8px; }
+    .writeup { margin-top: 40px; padding-top: 32px; }
+    .writeup h2 { font-size: 22px; }
+    .writeup h3 { font-size: 16px; }
+    .writeup p { font-size: 14px; }
+    .writeup ul li { font-size: 13px; }
+    a.t[data-tip]:hover::after { display: none; }
+  }
+
+  @media (max-width: 480px) {
+    .page { padding: 20px 16px 24px; }
+    h1 { font-size: 24px; }
+    .nums { gap: 16px; }
+    .num-v { font-size: 18px; }
+    a.t, .t { font-size: 11px; padding: 2px 7px; }
+  }
 </style>
 </head>
 <body>
+<nav class="site-nav">
+  <div class="site-nav-inner">
+    <a href="/" class="site-nav-logo">The Agent Payments Stack</a>
+    <div class="site-nav-links">
+      <a href="#about">About</a>
+      <a href="#methodology">Methodology</a>
+      <a href="#changelog">Changelog</a>
+      <a href="#api">API</a>
+      <a href="#embed">Embed</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit</a>
+    </div>
+  </div>
+</nav>
 <div class="page">
 
   <div class="hdr">
-    <div>
-      <h1>The Agent Payments Stack</h1>
-      <p class="deck" id="deck-text"></p>
+    <div class="eyebrow">Infrastructure Landscape &middot; 2026</div>
+    <h1>The Agent Payments Stack</h1>
+    <p class="deck">Every major payment network is building rails for AI agents. This is the map.</p>
+    <div class="hdr-meta">
+      <span id="hero-count">103 projects mapped</span>
+      <span>Updated Mar 26, 2026</span>
     </div>
-    <div class="nums" id="stats-container"></div>
+    <div class="nums">
+      <div class="nums-stats">
+        <div><div class="num-v">$43M</div><div class="num-l">Volume (9mo)</div></div>
+        <div><div class="num-v">140M</div><div class="num-l">Transactions</div></div>
+        <div><div class="num-v">~$600M</div><div class="num-l">Annualized</div></div>
+        <div><div class="num-v">98.6%</div><div class="num-l">USDC Share</div></div>
+      </div>
+      <div class="hero-sub">
+        <div class="hero-sub-label">Weekly updates</div>
+        <form class="hero-sub-row" id="nsf">
+          <input type="email" id="nse" placeholder="your@email.com" required>
+          <button type="submit" id="nsb">Subscribe</button>
+        </form>
+        <span id="sub-msg" style="display:none;font-size:11px;color:var(--muted)"></span>
+      </div>
+    </div>
   </div>
 
-  <div class="stack" id="stack-container"></div>
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <div class="filter-search">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input type="text" id="q" placeholder="Search 103 projects..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="filter-btns">
+      <button class="fb on" data-f="all">All</button>
+      <button class="fb" data-f="live">Live</button>
+      <button class="fb" data-f="early">Early</button>
+      <button class="fb" data-f="ann">Announced</button>
+      <button class="fb" data-f="acq">Acquired</button>
+    </div>
+    <span class="filter-count" id="fc">103 projects</span>
+  </div>
+  <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
 
+  <div class="stack">
+
+    <!-- L5 Application -->
+    <div class="row" id="application" data-layer="L5" data-layer-name="Application">
+      <div class="row-label">
+        <span class="row-n">05</span>
+        <div><div class="row-title"><a href="#application">Application</a> <span class="row-count">20</span></div><div class="row-q">What gets bought and why</div></div>
+      </div>
+      <div class="row-content">
+        <a class="t" href="https://app.virtuals.io" target="_blank" data-tip="Tokenized AI agent creation on Base">Virtuals Protocol</a>
+        <a class="t" href="https://elizaos.ai" target="_blank" data-tip="Open-source multi-agent framework, 17K GitHub stars">ElizaOS</a>
+        <a class="t" href="https://olas.network" target="_blank" data-tip="Decentralized agent services with on-chain staking">Olas</a>
+        <a class="t" href="https://botto.com" target="_blank" data-tip="Autonomous AI artist, $5M+ sales, 15K-member DAO">Botto</a>
+        <span class="sep"></span>
+        <a class="t" href="https://www.axiom.trade" target="_blank" data-tip="DeFi trading agents for memecoins, perps, yield">Axiom</a>
+        <a class="t" href="https://www.theoriq.ai" target="_blank" data-tip="AI-managed yield vault, $25M TVL">Theoriq</a>
+        <a class="t" href="https://www.gizatech.xyz" target="_blank" data-tip="Cross-protocol stablecoin yield optimization on Base">Giza ARMA</a>
+        <a class="t" href="https://www.almanak.co" target="_blank" data-tip="Non-custodial DeFi strategy automation">Almanak</a>
+        <a class="t" href="https://www.brahma.fi" target="_blank" data-tip="Agent-based DeFi console with sub-accounts">Brahma.fi</a>
+        <a class="t" href="https://blog.kraken.com/news/industry-news/announcing-the-kraken-cli" target="_blank" data-tip="Exchange CLI with built-in MCP server. 134 commands. First exchange natively compatible with Claude Code.">Kraken CLI</a>
+        <span class="sep"></span>
+        <a class="t" href="https://x402engine.app" target="_blank" data-tip="45 pay-per-call APIs via x402">x402engine</a>
+        <a class="t" href="https://www.nansen.ai" target="_blank" data-tip="On-chain analytics at $0.01/query via x402">Nansen</a>
+        <a class="t" href="https://akash.network" target="_blank" data-tip="Decentralized cloud with agent deploy">Akash</a>
+        <a class="t" href="https://www.artblocks.io" target="_blank" data-tip="Generative art platform with MCP + Universal Purchase API">Art Blocks</a>
+        <a class="t" href="https://mint.day" target="_blank" data-tip="NFT minting service for AI agents">mint.day</a>
+        <a class="t" href="https://apify.com" target="_blank" data-tip="Web scraping/automation with Skyfire payment integration">Apify</a>
+        <a class="t" href="https://rendernetwork.com" target="_blank" data-tip="GPU marketplace for compute">Render</a>
+        <a class="t" href="https://oceanprotocol.com" target="_blank" data-tip="Data marketplace, $800M/month Predictoor volume">Ocean Protocol</a>
+        <a class="t" href="https://run402.com" target="_blank" data-tip="Pay-per-call x402 agent API gateway">Run402</a>
+        <a class="t" href="https://cascade.fyi" target="_blank" data-tip="Agent payment routing and orchestration layer">Cascade</a>
+      </div>
+    </div>
+
+    <!-- L4 Governance -->
+    <div class="row" id="governance" data-layer="L4" data-layer-name="Governance &amp; Policy">
+      <div class="row-label">
+        <span class="row-n">04</span>
+        <div><div class="row-title"><a href="#governance">Governance & Policy</a> <span class="row-count">16</span></div><div class="row-q">May this agent spend</div></div>
+      </div>
+      <div class="row-content">
+        <a class="t" href="https://ramp.com" target="_blank" data-tip="Virtual Visa cards for agents with spend limits">Ramp Agent Cards</a>
+        <a class="t acq" href="https://brex.com" target="_blank" data-tip="Agent Mesh architecture. Acquired by Capital One.">Brex <span class="sm">$5.15B</span></a>
+        <a class="t" href="https://skyfire.xyz" target="_blank" data-tip="Know Your Agent protocol with per-tx caps">Skyfire KYA</a>
+        <a class="t" href="https://paysponge.com" target="_blank" data-tip="Agents onboard and pay businesses via uploaded API specs">Sponge Gateway</a>
+        <a class="t early" href="https://paymanai.net" target="_blank" data-tip="AI-to-human payments with segregated wallets">Payman AI</a>
+        <span class="sep"></span>
+        <a class="t" href="https://eips.ethereum.org/EIPS/eip-8004" target="_blank" data-tip="On-chain agent identity and reputation registries">ERC-8004</a>
+        <a class="t" href="https://openwallet.sh" target="_blank" data-tip="Pre-signing policy engine in MoonPay OWS">OWS Policies</a>
+        <a class="t" href="https://usa.visa.com" target="_blank" data-tip="Agent-initiated tokenized card transactions, 100+ partners">Visa Intelligent Commerce</a>
+        <a class="t" href="https://stripe.com" target="_blank" data-tip="Scoped, time-limited tokens for agent card payments">Stripe SPTs</a>
+        <a class="t" href="https://crossmint.com" target="_blank" data-tip="Open payment standard with Visa, Circle, Solana">Crossmint</a>
+        <span class="t" data-tip="Tokenization framework for agent-initiated transactions">Mastercard Agentic Tokens</span>
+        <a class="t" href="https://agent.tech" target="_blank" data-tip="Scoped on-chain spending permissions for AI agents">AgentPay</a>
+        <span class="sep"></span>
+        <a class="t" href="https://ghostspeak.io" target="_blank" data-tip="Trust and reputation layer for agent commerce. Ghost Score, 10K+ agents tracked.">GhostSpeak</a>
+        <a class="t early" href="https://observerprotocol.org" target="_blank" data-tip="Rail-neutral verification layer for autonomous agent transactions. Bitcoin-anchored identity.">Observer Protocol</a>
+        <a class="t" href="https://mastercard.com" target="_blank" data-tip="Mastercard + Google open standard. Cryptographic proof of agent authorization.">Verifiable Intent</a>
+      </div>
+            <a class="t early" href="https://openmatter.xyz" target="_blank" data-tip="ZK execution firewall for payment MCPs. Wraps Stripe MCP with RISC Zero zkVM — blocks malformed tool calls, API key management, PII redaction.">OpenMatter</a>
+</div>
+
+    <!-- L3 Protocol -->
+    <div class="row" id="protocol" data-layer="L3" data-layer-name="Payment Protocol">
+      <div class="row-label">
+        <span class="row-n">03</span>
+        <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">17</span></div><div class="row-q">How the payment flows</div></div>
+      </div>
+      <div class="row-content">
+        <a class="t" href="https://x402.org" target="_blank" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem.">x402 <span class="sm">75M/30d</span></a>
+        <a class="t" href="https://tempo.xyz" target="_blank" data-tip="Multi-rail sessions: stablecoins + cards + Bitcoin">Tempo MPP <span class="sm">100+ svc</span></a>
+        <a class="t ann" href="https://github.com/google-agentic-commerce/AP2" target="_blank" data-tip="Payment-agnostic authorization via signed mandates">Google AP2 <span class="sm">60+ partners</span></a>
+        <a class="t" href="https://stripe.com/blog/agentic-commerce" target="_blank" data-tip="Agentic Commerce Protocol. Checkout layer paired with MPP.">ACP <span class="sm">OpenAI + Stripe</span></a>
+        <span class="sep"></span>
+        <a class="t early" href="https://circle.com" target="_blank" data-tip="Gas-free USDC micropayments, $0.000001 minimum. Testnet.">Circle Nanopayments</a>
+        <a class="t" href="https://docs.lightning.engineering" target="_blank" data-tip="HTTP auth + Lightning micropayments since 2020">L402 / Lightning</a>
+        <a class="t early" href="https://www.circuitandchisel.com" target="_blank" data-tip="Full commerce lifecycle protocol. $19.2M seed.">ATXP</a>
+        <a class="t" href="https://fewsats.com" target="_blank" data-tip="L402-compatible SDK and API marketplace for agents">Fewsats</a>
+        <a class="t" href="https://superfluid.finance" target="_blank" data-tip="Per-second token streaming">Superfluid</a>
+        <span class="sep"></span>
+        <a class="t early" href="https://eips.ethereum.org/EIPS/eip-8183" target="_blank" data-tip="Programmable escrow for conditional agent-to-agent payments">ERC-8183</a>
+        <a class="t" href="https://interledger.org" target="_blank" data-tip="Cross-ledger value routing. TCP/IP for money.">Interledger</a>
+        <a class="t" href="https://agent.tech" target="_blank" data-tip="Scoped on-chain spending permissions for AI agents">AgentPay</a>
+        <a class="t" href="https://dhali.io" target="_blank" data-tip="Pay-per-use API micropayment infrastructure">Dhali</a>
+        <a class="t early" href="https://x402.org" target="_blank" data-tip="Signed Commerce Permissions — scoped spending authorization via x402">x402s SCP</a>
+        <a class="t" href="https://github.com/faremeter/faremeter" target="_blank" data-tip="x402 + MPP library for EVM and Solana. Frictionless agent payments.">Faremeter</a>
+        <a class="t" href="https://masumi.network" target="_blank" data-tip="Agent-to-agent payment network on Cardano. Escrow, registry, identity.">Masumi</a>
+        <a class="t early" href="https://backpac.xyz" target="_blank" data-tip="Open-source CLI for agentic payments and RPC orchestration across multiple chains.">Backpac</a>
+      </div>
+    </div>
+
+    <!-- L2 Routing -->
+    <div class="row" id="routing" data-layer="L2" data-layer-name="Routing &amp; Abstraction">
+      <div class="row-label">
+        <span class="row-n">02</span>
+        <div><div class="row-title"><a href="#routing">Routing & Abstraction</a> <span class="row-count">22</span></div><div class="row-q">Which chain, token, rail</div></div>
+      </div>
+      <div class="row-content">
+        <a class="t" href="https://skyfire.xyz" target="_blank" data-tip="'Visa for the AI economy.' KYA identity, $9.5M seed.">Skyfire</a>
+        <a class="t" href="https://meshconnect.com" target="_blank" data-tip="Routes payments across 100+ wallets/exchanges. Powers PayPal.">Mesh</a>
+        <a class="t" href="https://crossmint.com" target="_blank" data-tip="Dual-rail: Visa/Mastercard cards + stablecoin wallets">Crossmint</a>
+        <a class="t" href="https://biconomy.io" target="_blank" data-tip="Delegated auth for agents to execute on-chain on users' behalf">Biconomy DAN</a>
+        <a class="t acq" href="https://bvnk.com" target="_blank" data-tip="Enterprise stablecoin API. $30B+ volume. Acquired by Mastercard.">BVNK <span class="sm">MC $1.8B</span></a>
+        <a class="t" href="https://unifold.io" target="_blank" data-tip="Multi-chain deposits in <10 lines of code. YC W26.">Unifold</a>
+        <span class="sep"></span>
+        <a class="t" href="https://circle.com" target="_blank" data-tip="Native USDC burn-and-mint across 17 chains. $126B+ volume.">Circle CCTP</a>
+        <a class="t acq" href="https://bridge.xyz" target="_blank" data-tip="Stablecoin orchestration. Acquired by Stripe.">Bridge <span class="sm">Stripe $1.1B</span></a>
+        <a class="t" href="https://across.to" target="_blank" data-tip="Cross-chain intents. Co-authored ERC-7683.">Across</a>
+        <a class="t" href="https://li.fi" target="_blank" data-tip="Bridge/swap aggregator. 15+ bridges, 30+ DEXs.">Li.Fi</a>
+        <a class="t" href="https://socket.tech" target="_blank" data-tip="Cross-chain data and asset movement">Socket</a>
+        <a class="t" href="https://debridge.finance" target="_blank" data-tip="Zero-TVL bridge. ~2 second transfers. $18B+ processed.">deBridge</a>
+        <a class="t" href="https://wormhole.com" target="_blank" data-tip="Cross-chain messaging. $2.5B valuation.">Wormhole</a>
+        <a class="t" href="https://layerzero.network" target="_blank" data-tip="Omnichain interop. 120+ chains. $3B valuation.">LayerZero</a>
+        <span class="sep"></span>
+        <a class="t" href="https://jup.ag" target="_blank" data-tip="Solana-dominant DEX aggregator">Jupiter</a>
+        <a class="t" href="https://1inch.io" target="_blank" data-tip="400K+ tokens. Fusion gasless swaps.">1inch</a>
+        <a class="t" href="https://uniswap.org" target="_blank" data-tip="Deepest liquidity. ERC-7683 intent standard.">Uniswap</a>
+        <a class="t" href="https://cow.fi" target="_blank" data-tip="MEV protection via batch auctions">CoW Protocol</a>
+        <a class="t" href="https://moonpay.com" target="_blank" data-tip="Fiat onramp + agent products. $555M raised.">MoonPay</a>
+        <a class="t" href="https://reqcast.com" target="_blank" data-tip="Intent-based payment requests for agent commerce">ReqCast</a>
+      </div>
+            <a class="t early" href="https://github.com/0xJim/kibble" target="_blank" data-tip="Cross-chain wallet funding for agents. Bridges USDC to the right chain via LI.FI before first payment. npm install kibble-pay.">Kibble</a>
+        <a class="t" href="https://reveel.id" target="_blank" data-tip="Cross-chain stablecoin payments with human-readable Pay(ID) usernames. Receive any stablecoin, settle in preferred currency. Agent-native.">Reveel</a>
+</div>
+
+    <!-- L1 Wallet -->
+    <div class="row" id="wallets" data-layer="L1" data-layer-name="Wallet &amp; Key Management">
+      <div class="row-label">
+        <span class="row-n">01</span>
+        <div><div class="row-title"><a href="#wallets">Wallet & Key Mgmt</a> <span class="row-count">19</span></div><div class="row-q">Where the keys live</div></div>
+      </div>
+      <div class="row-content">
+        <a class="t" href="https://coinbase.com/developer-platform" target="_blank" data-tip="TEE agent wallets with spending limits, gasless on Base">Coinbase Agentic Wallets</a>
+        <a class="t" href="https://openwallet.sh" target="_blank" data-tip="Open-source wallet standard (MIT). 8 chain families. x402-native.">MoonPay OWS</a>
+        <a class="t" href="https://crossmint.com" target="_blank" data-tip="Dual-key agent wallets with stablecoin + card rails">Crossmint</a>
+        <a class="t" href="https://thirdweb.com" target="_blank" data-tip="Engine backend wallets. Deepest AI framework integrations.">Thirdweb</a>
+        <a class="t" href="https://openfort.io" target="_blank" data-tip="Open-source, self-hostable agent wallets with TEE backend">Openfort</a>
+        <a class="t" href="https://world.org" target="_blank" data-tip="Proof of human backing via World ID + ZK proofs">World AgentKit</a>
+        <span class="sep"></span>
+        <a class="t" href="https://turnkey.com" target="_blank" data-tip="Non-custodial TEE key management. 50ms signing.">Turnkey</a>
+        <a class="t acq" href="https://privy.io" target="_blank" data-tip="Server wallets with TEE + key sharding. Acquired by Stripe.">Privy <span class="sm">Stripe</span></a>
+        <a class="t acq" href="https://dynamic.xyz" target="_blank" data-tip="Embedded wallets with TSS-MPC. Acquired by Fireblocks.">Dynamic <span class="sm">Fireblocks</span></a>
+        <a class="t" href="https://litprotocol.com" target="_blank" data-tip="Decentralized threshold MPC + TEE hybrid. 25M+ requests.">Lit Protocol</a>
+        <a class="t" href="https://safe.global" target="_blank" data-tip="Battle-tested multisig. $100B+ secured. Agents as signers.">Safe</a>
+        <a class="t acq" href="https://zerodev.app" target="_blank" data-tip="ERC-7579 smart accounts. Acquired by Arbitrum.">ZeroDev <span class="sm">Arbitrum</span></a>
+        <a class="t" href="https://biconomy.io" target="_blank" data-tip="Nexus smart accounts with paymaster tooling">Biconomy</a>
+        <a class="t" href="https://fireblocks.com" target="_blank" data-tip="Enterprise MPC. $8B valuation. 1,800+ institutions.">Fireblocks</a>
+        <a class="t" href="https://alchemy.com" target="_blank" data-tip="Smart wallets with Gas Manager and Bundler">Alchemy</a>
+        <a class="t" href="https://phantom.app" target="_blank" data-tip="Consumer wallet with MCP server for agent integration">Phantom</a>
+        <a class="t" href="https://walletconnect.com" target="_blank" data-tip="Open protocol for wallet connections and agent signing">WalletConnect</a>
+        <a class="t" href="https://dfns.co" target="_blank" data-tip="Delegated MPC key management and signing APIs">Dfns</a>
+        <a class="t early" href="https://natural.co" target="_blank" data-tip="Agentic payments platform — FDIC-insured wallets, Pay, MCP integration">Natural</a>
+      </div>
+    </div>
+
+    <!-- L0 Settlement -->
+    <div class="row" id="settlement" data-layer="L0" data-layer-name="Settlement">
+      <div class="row-label">
+        <span class="row-n">00</span>
+        <div><div class="row-title"><a href="#settlement">Settlement</a> <span class="row-count">13</span></div><div class="row-q">Where transactions land</div></div>
+      </div>
+      <div class="row-content">
+        <a class="t" href="https://base.org" target="_blank" data-tip="Coinbase L2. Dominant x402 chain. Gasless paymasters.">Base <span class="sm">119M txns</span></a>
+        <a class="t" href="https://solana.com" target="_blank" data-tip="Leads in dollar volume share. Sub-second finality.">Solana <span class="sm">38.6M txns</span></a>
+        <a class="t" href="https://ethereum.org" target="_blank" data-tip="Security/settlement layer for L2 agent activity">Ethereum</a>
+        <a class="t" href="https://tempo.xyz" target="_blank" data-tip="Purpose-built payments L1 by Stripe/Paradigm">Tempo <span class="sm">$5B</span></a>
+        <a class="t" href="https://arbitrum.io" target="_blank" data-tip="$2M in AI agent grants. Acquired ZeroDev.">Arbitrum</a>
+        <a class="t" href="https://sui.io" target="_blank" data-tip="Google AP2 launch partner. Object-centric model.">Sui</a>
+        <a class="t" href="https://polygon.technology" target="_blank" data-tip="x402 facilitator support. OWS contributor.">Polygon</a>
+        <a class="t" href="https://bnbchain.org" target="_blank" data-tip="ERC-8004 deployed. BAP-578 Non-Fungible Agents standard.">BNB Chain</a>
+        <a class="t" href="https://gnosis.io" target="_blank" data-tip="Safe origin. Autonolas agents active.">Gnosis</a>
+        <a class="t early" href="https://near.org" target="_blank" data-tip="Aggressive positioning but lacks volume proof">NEAR</a>
+        <a class="t" href="https://avax.network" target="_blank" data-tip="x402 facilitator support. AI grants category.">Avalanche</a>
+        <a class="t" href="https://gokite.ai" target="_blank" data-tip="First AI payment blockchain. Purpose-built for autonomous agent transactions.">Kite</a>
+        <a class="t" href="https://skale.space" target="_blank" data-tip="Gasless x402 payments. v4 built for Internet of Agents. Zero-fee micropayments.">SKALE</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom -->
   <div class="bottom">
     <div>
       <div class="bot-title">Vertical Integration</div>
-      <div id="vi-container"></div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#0052ff">Coinbase</div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#0052ff"></div><div class="vi-dots"><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#0052ff"></div></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#635bff">Stripe</div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:17%;background:#635bff"></div><div class="vi-dots"><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#635bff"></div></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#00a868">Circle</div>
+        <div class="vi-track"><div class="vi-fill" style="left:0;right:34%;background:#00a868"></div><div class="vi-dots"><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#00a868"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#c0392b">Google</div>
+        <div class="vi-track"><div class="vi-fill" style="left:50%;right:17%;background:#c0392b"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot"></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#c0392b"></div></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-row">
+        <div class="vi-name" style="color:#7b61ff">MoonPay</div>
+        <div class="vi-track"><div class="vi-fill" style="left:17%;right:34%;background:#7b61ff"></div><div class="vi-dots"><div class="vi-dot"></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"><div style="width:8px;height:8px;border-radius:50%;background:#7b61ff"></div></div><div class="vi-dot"></div><div class="vi-dot"></div></div></div>
+      </div>
+      <div class="vi-labels"><span>L0</span><span>L1</span><span>L2</span><span>L3</span><span>L4</span><span>L5</span></div>
     </div>
     <div>
-      <div class="bot-title">2025&ndash;2026 Consolidation</div>
-      <div id="ma-container"></div>
+      <div class="bot-title">2025-2026 Consolidation</div>
+      <ul class="ma-list">
+        <li>Capital One <span class="arr">&rarr;</span> Brex <span class="pr">$5.15B</span></li>
+        <li>Mastercard <span class="arr">&rarr;</span> BVNK <span class="pr">$1.8B</span></li>
+        <li>Stripe <span class="arr">&rarr;</span> Bridge <span class="pr">$1.1B</span></li>
+        <li>LayerZero <span class="arr">&rarr;</span> Stargate <span class="pr">$120M</span></li>
+        <li>Stripe <span class="arr">&rarr;</span> Privy</li>
+        <li>Fireblocks <span class="arr">&rarr;</span> Dynamic</li>
+        <li>Arbitrum <span class="arr">&rarr;</span> ZeroDev</li>
+      </ul>
     </div>
   </div>
 
-  <div class="foot">
-    <div><b>@jordanlyall</b> &middot; <span id="updated-label"></span></div>
-    <div>
-      98.6% of agent payments settle in USDC
-      &middot; <a href="/data.json" title="Machine-readable JSON">data.json</a>
-      &middot; <a href="/llms.txt" title="Agent-readable summary">llms.txt</a>
-      &middot; <a href="https://tally.so/r/rjVvd5" class="submit-link" title="Submit your project">submit a project &rarr;</a>
+  <!-- Hackathons -->
+  <div class="hackathons" id="hackathons">
+    <div class="hack-header">
+      <div class="hack-title">Building right now</div>
+      <div class="hack-subtitle">Hackathon projects shipping across the stack</div>
     </div>
+
+    <div class="hack-group">
+      <div class="hack-label">Tempo MPP Hackathon &middot; March 2026 &middot; 42 projects <a href="https://tempo-hackathon-projects.vercel.app/" target="_blank">view all</a></div>
+      <div class="hack-tags">
+        <a class="t" href="https://spendos-tempo.vercel.app" target="_blank" data-tip="'Ramp/Mercury for AI agents' with policies and audit trails">SpendOS</a>
+        <a class="t" href="https://github.com/Lor3mipsvm/BotPolice" target="_blank" data-tip="Runtime policy layer: may this agent pay this vendor?">BotPolice</a>
+        <a class="t" href="https://github.com/AdamBeaudoin/agent-escrow" target="_blank" data-tip="Three-party escrow with LLM judge evaluation">Agent Escrow</a>
+        <a class="t" href="https://payload-exchange.fly.dev" target="_blank" data-tip="Intent orderbook where agents post wants, solvers compete">Payload Exchange</a>
+        <a class="t" href="https://mpp-gateway.vercel.app" target="_blank" data-tip="Brings 43 non-MPP APIs behind one payment layer">mpp-gateway</a>
+        <a class="t" href="https://github.com/kphed/tempo-hackathon" target="_blank" data-tip="$0.01/query deep research service via MPP">Dossier</a>
+        <a class="t" href="https://precious-prosperity-production-2f7f.up.railway.app" target="_blank" data-tip="ERC-4626 vault giving agents credit lines for paid services">Agent Credit Protocol</a>
+        <a class="t" href="https://github.com/wschwab/monitor" target="_blank" data-tip="Agent swarm dispatcher with budget assignment and live ops">Monitor</a>
+        <a class="t" href="https://mpp-dynamic-pricing.0x471.workers.dev" target="_blank" data-tip="Surge pricing for AI inference endpoints">MPP Dynamic Pricing</a>
+        <a class="t" href="https://github.com/UsmannK/PMPP" target="_blank" data-tip="Privacy-preserving agent audit trail via ZK proofs">Private MPP</a>
+        <a class="t" href="https://human402.com" target="_blank" data-tip="Agent-to-human task marketplace">human402</a>
+        <a class="t" href="https://agentnet-7xb.pages.dev" target="_blank" data-tip="Social network where agents tip each other in USDC">AgentNet</a>
+        <a class="t" href="https://solverasaservice-production.up.railway.app" target="_blank" data-tip="Cross-chain Polymarket trading for agents">Solver as a Service</a>
+      </div>
+    </div>
+
+    <div class="hack-group">
+      <div class="hack-label">Synthesis Hackathon &middot; March 2026 &middot; 338 projects <a href="https://synthesis.mandate.md/" target="_blank">view all</a></div>
+      <div class="hack-tags">
+        <a class="t" href="https://synthesis.mandate.md/agentpay-1450" target="_blank" data-tip="Scoped on-chain spending permissions for AI agents">AgentPay</a>
+        <a class="t" href="https://synthesis.mandate.md/agentescrow-9b78" target="_blank" data-tip="Trustless task escrow between AI agents">AgentEscrow</a>
+        <a class="t" href="https://synthesis.mandate.md/kartein-4c15" target="_blank" data-tip="Programmable spending firewall for autonomous agents">Kartein</a>
+        <a class="t" href="https://synthesis.mandate.md/ragequit-escrow-cec5" target="_blank" data-tip="Smart-contract payment control layer queuing payouts into escrow">RageQuit Escrow</a>
+        <a class="t" href="https://synthesis.mandate.md/spendbound-353c" target="_blank" data-tip="Guardrail and receipt layer for agentic vendor payments on Base">SpendBound</a>
+        <a class="t" href="https://synthesis.mandate.md/agent-allowance-protocol-dc5f" target="_blank" data-tip="Agent allowance protocol: operating budgets without principal access">Agent Allowance</a>
+        <a class="t" href="https://synthesis.mandate.md/delegata-a951" target="_blank" data-tip="OAuth for AI agents: scoped, revocable spending permissions onchain">Delegata</a>
+        <a class="t" href="https://synthesis.mandate.md/wardex-37e7" target="_blank" data-tip="Policy firewall and verification for DeFi transactions">Wardex</a>
+        <a class="t" href="https://synthesis.mandate.md/zkx402-zk-verified-payment-protocol-for-ai-agents-3541" target="_blank" data-tip="ZK-verified micropayments on Celo with identity-aware pricing">zkx402</a>
+        <a class="t" href="https://synthesis.mandate.md/shulam-compliance-infrastructure-for-the-autonomous-agent-economy-b186" target="_blank" data-tip="Enterprise-grade x402 facilitator with compliance infrastructure">Shulam</a>
+        <a class="t" href="https://synthesis.mandate.md/agentresearch-aeb3" target="_blank" data-tip="Autonomous research agent paying for every API call in USDC on Base">AgentResearch</a>
+        <a class="t" href="https://synthesis.mandate.md/parley-protocol-d246" target="_blank" data-tip="Agent-to-agent content negotiation and micropayment settlement on Base">Parley Protocol</a>
+        <a class="t" href="https://mint.day" target="_blank" data-tip="Free NFT minting for agents. Natural language to on-chain.">mint.day</a>
+        <a class="t" href="https://synthesis.mandate.md/lookout-agent-trust-protocol-a946" target="_blank" data-tip="Credit score for AI agents based on onchain behavior">Lookout</a>
+        <a class="t" href="https://synthesis.mandate.md/litcredit-2665" target="_blank" data-tip="Sealed underwriting service for stablecoin agents">LitCredit</a>
+        <a class="t" href="https://synthesis.mandate.md/normandy-1d7f" target="_blank" data-tip="Undercollateralized lending on Solana where agents borrow against reputation">Normandy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit -->
+  <div class="submit-bar">
+    <span>Missing a project? <a href="https://tally.so/r/rjVvd5">Submit a project</a></span>
+    <span id="footer-count">103 projects across 6 layers</span>
+  </div>
+
+  <div class="foot">
+    <div><a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a> &middot; March 2026</div>
+    <div>98.6% of agent payments settle in USDC &middot; <a href="/data.json" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Machine-readable JSON">data.json</a> &middot; <a href="/llms.txt" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="Agent-readable summary">llms.txt</a> &middot; <a href="#api" style="color:inherit;opacity:0.5;font-weight:400;text-decoration:none;" title="MCP server">mcp</a></div>
   </div>
 
 </div>
 
-<!-- Trusted data source: static JSON authored by @jordanlyall, never accepts user input.
-     All string values are escaped via esc() before DOM insertion. Not a XSS vector. -->
+<!-- Email capture -->
+<div class="page">
+  <div class="email-capture">
+    <h3>Get notified when the stack updates</h3>
+    <p>New projects, acquisitions, and protocol launches. No spam.</p>
+    <form class="email-form" id="sf">
+      <input type="email" id="se" placeholder="you@company.com" required>
+      <button type="submit" id="sb">Subscribe</button>
+    </form>
+    <p id="sm" style="display:none;font-size:12px;margin-top:8px;"></p>
+  </div>
+</div>
+
+<!-- Write-up -->
+<div class="page writeup">
+  <p class="updated">Last updated: March 26, 2026</p>
+
+  <h2>How AI agents will move $600M this year</h2>
+
+  <p>AI agents settled <strong>$43 million across 140 million transactions</strong> in just nine months. Every major payment network is now racing to build the rails. The week of March 17-23, 2026 alone saw Mastercard's $1.8B acquisition of BVNK, Stripe's Tempo mainnet launch, and MoonPay's Open Wallet Standard release.</p>
+
+  <p>This is no longer speculative infrastructure. <strong>98.6% of agent payments settle in USDC</strong>, and annualized volume is approaching $600M.</p>
+
+  <h3>Five companies are trying to own the whole stack</h3>
+
+  <p><strong>Coinbase</strong> is the most vertically integrated, controlling settlement (Base), wallets (AgentKit), protocol (x402), identity (ERC-8004), and onramp/offramp. <strong>Stripe</strong> matches that span through Tempo (settlement), Privy (wallets), MPP + ACP (protocol), Bridge (routing), and SPTs (governance). <strong>Circle</strong> controls the monetary base layer: 98.6% of agent payments settle in their stablecoin. <strong>Google</strong> plays the standards layer with AP2 and A2A. <strong>MoonPay</strong> bet on open standards with OWS.</p>
+
+  <h3>Three bets shaping the stack</h3>
+
+  <p><strong>The first bet is settlement rails.</strong> Coinbase's x402 argues the future is crypto-native HTTP payments on Base and Solana. Stripe's MPP argues agents need multi-rail access settling on Tempo. These are not mutually exclusive, but they represent different visions of where value accrues.</p>
+
+  <p><strong>The second bet is identity and authorization.</strong> Google's AP2 mandates, Visa's Trusted Agent Protocol, ERC-8004's on-chain registries, and Skyfire's KYA all compete to answer "should this agent be trusted to spend?" The winner captures the governance chokepoint.</p>
+
+  <p><strong>The third bet is vertical versus horizontal.</strong> Coinbase and Stripe are building full stacks, while Skyfire, ATXP, and MoonPay bet that open standards and middleware layers will capture value between the giants.</p>
+
+  <p>The clearest near-term signal is consolidation. Five acquisitions exceeding $100M occurred in the past year. The convergence of traditional payments (Visa, Mastercard, Stripe) with crypto-native infrastructure (Coinbase, Circle, Cloudflare) is compressing timelines. The rails being laid today will determine who collects tolls on agentic commerce for the next decade.</p>
+
+  <!-- Changelog -->
+  <div class="changelog" id="changelog">
+    <h3>Changelog</h3>
+    <ul>
+      <li><span class="cl-date">Mar 26</span> v1.4. 103 projects (+1). Added Natural.</li>
+      <li><span class="cl-date">Mar 26</span> v1.3. 99 projects (+1). Added Backpac.</li>
+      <li><span class="cl-date">Mar 26</span> v1.2. 98 projects (+7). Added GhostSpeak, Observer Protocol, Verifiable Intent, Faremeter, Masumi, Kite, SKALE.</li>
+      <li><span class="cl-date">Mar 26</span> v1.1. 91 projects (+9). Added Run402, Cascade, AgentPay, WalletConnect, Dfns, ReqCast, Dhali, x402s SCP. Submit form live.</li>
+      <li><span class="cl-date">Mar 25</span> Initial release. 88 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
+    </ul>
+  </div>
+
+  <!-- About -->
+  <div id="about">
+    <h3>About</h3>
+    <p>The Agent Payments Stack is an independent research project mapping every company building infrastructure for AI agent payments. It is maintained by Jordan Lyall, CPO at Art Blocks and builder of mint.day.</p>
+    <p>This is not affiliated with or sponsored by any project listed. Inclusion is based on shipping product, not paying for placement.</p>
+  </div>
+
+  <!-- Methodology -->
+  <div id="methodology">
+    <h3>Methodology</h3>
+    <ul>
+      <li>Projects are included if they have shipped a product, protocol, or standard that directly enables AI agents to hold, move, or authorize money.</li>
+      <li>Status classifications: Live means demonstrated transaction volume or production users. Early means product shipped but limited volume data. Announced means spec published or funding secured but no production deployment.</li>
+      <li>Acquired projects are marked with the acquirer and deal value where public.</li>
+      <li>Hackathon projects are listed separately as they represent prototypes, not production infrastructure.</li>
+      <li>This landscape is updated as the space evolves. Suggest additions via email.</li>
+    </ul>
+  </div>
+
+  <!-- API -->
+  <div id="api">
+    <h3>For Agents</h3>
+    <p>The stack is machine-readable via three endpoints. No auth required.</p>
+    <ul>
+      <li><strong><a href="/data.json" style="color:var(--text);">/data.json</a></strong> — Full structured dataset. 103 projects, status, URLs, descriptions, M&A, vertical integration.</li>
+      <li><strong><a href="/llms.txt" style="color:var(--text);">/llms.txt</a></strong> — Plain-text summary for LLM context. Key facts, layer descriptions, usage notes.</li>
+      <li><strong>/api/mcp</strong> — MCP server (JSON-RPC 2.0, POST). Five tools: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_search_projects</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_filter_by_layer</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_filter_by_status</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_get_acquisitions</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_get_stats</code>.</li>
+    </ul>
+    <p>To connect in Claude Code: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">mcp add --transport http https://agentpaymentsstack.com/api/mcp</code></p>
+  </div>
+
+  <!-- Embed -->
+  <div id="embed" style="margin-top:40px;">
+    <h3>Embed the Stack</h3>
+    <p>Drop the stack into any blog post, Substack, or Notion page. No account needed.</p>
+    <div style="margin-top:20px;display:flex;flex-direction:column;gap:20px;">
+
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;">Full stack</div>
+        <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+          <code>&lt;iframe src="https://agentpaymentsstack.com/embed" style="width:100%;height:520px;border:none;border-radius:8px;" loading="lazy"&gt;&lt;/iframe&gt;</code>
+          <span class="embed-copy">Copy</span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:500;">Single layer — replace L3 with L0–L5</div>
+        <div class="embed-code" onclick="copyEmbed(this)" title="Click to copy">
+          <code>&lt;iframe src="https://agentpaymentsstack.com/embed?layer=L3" style="width:100%;height:220px;border:none;border-radius:8px;" loading="lazy"&gt;&lt;/iframe&gt;</code>
+          <span class="embed-copy">Copy</span>
+        </div>
+      </div>
+
+    </div>
+    <p style="margin-top:16px;font-size:12px;color:var(--muted);">Preview: <a href="/embed?layer=L3" target="_blank" style="color:var(--secondary);text-decoration:none;">embed?layer=L3 →</a></p>
+  </div>
+
+  <!-- Follow -->
+  <div class="cta" style="margin-top: 32px;">
+    <p>Built by Jordan Lyall. Follow for updates on agent commerce and infrastructure.</p>
+    <a href="https://x.com/jordanlyall" target="_blank">Follow @jordanlyall on X</a>
+  </div>
+</div>
+
 <script type="application/json" id="stack-data">
 {
-  "schema_version": "2.0",
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
-  "updated": "2026-03-27",
-  "version": "1.6",
+  "updated": "2026-03-25",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
-  "stats": {
-    "volume_9mo": "$43M",
-    "transactions": "140M",
-    "annualized": "~$600M",
-    "usdc_share": "98.6%"
-  },
+  "stats": { "volume_9mo": "$43M", "transactions": "140M", "annualized": "~$600M", "usdc_share": "98.6%" },
   "layers": [
-    {
-      "id": "L5",
-      "name": "Application",
-      "question": "What gets bought and why",
-      "projects": [
-        {
-          "layer": "L5",
-          "id": "virtuals-protocol",
-          "name": "Virtuals Protocol",
-          "status": "live",
-          "description": "Launchpad for tokenized AI agents on Base. Agents earn revenue and share it with token holders.",
-          "launched": "2023-07",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "elizaos",
-          "name": "ElizaOS",
-          "status": "live",
-          "description": "Open-source multi-agent framework from ai16z. The most-forked agent runtime for deploying autonomous agents.",
-          "launched": "2024-10",
-          "tags": [
-            "open-source",
-            "developer",
-            "b2b"
-          ],
-          "github": {
-            "url": "https://github.com/elizaOS/eliza",
-            "stars": 17929,
-            "last_commit": "2026-03",
-            "license": "MIT",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L5",
-          "id": "olas",
-          "name": "Olas",
-          "status": "live",
-          "description": "Decentralized protocol for co-owned AI agents. Agents operate as autonomous services and earn from their work.",
-          "launched": "2022-03",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ],
-          "github": {
-            "url": "https://github.com/valory-xyz/open-autonomy",
-            "stars": 119,
-            "last_commit": "2026-03",
-            "license": "Apache-2.0",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L5",
-          "id": "botto",
-          "name": "Botto",
-          "status": "live",
-          "description": "Autonomous AI artist that creates and sells generative art on-chain. Governed by community token holders.",
-          "launched": "2021-10",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain",
-            "consumer"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "axiom",
-          "name": "Axiom",
-          "status": "live",
-          "description": "On-chain trading agent platform on Solana. Enables automated execution of DeFi strategies.",
-          "launched": "2024",
-          "tags": [
-            "developer",
-            "b2b",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "theoriq",
-          "name": "Theoriq",
-          "status": "live",
-          "description": "Agent marketplace and composition framework. Agents are composable building blocks that can be hired and paid.",
-          "launched": "2023",
-          "tags": [
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "giza-arma",
-          "name": "Giza ARMA",
-          "status": "live",
-          "description": "Autonomous yield-optimization agent on Base and Starknet. Manages DeFi strategies via verifiable ML models with native agent-to-agent payment primitives.",
-          "launched": "2023",
-          "tags": [
-            "open-source",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "almanak",
-          "name": "Almanak",
-          "status": "live",
-          "description": "AI agent platform for DeFi strategy simulation and execution. Backtests and deploys autonomous on-chain trading strategies.",
-          "launched": "2024",
-          "tags": [
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "brahma-fi",
-          "name": "Brahma.fi",
-          "status": "live",
-          "description": "On-chain execution environment for DeFi agents. Provides safe execution rails with programmable spending controls.",
-          "launched": "2023",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain",
-            "account-abstraction"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "x402engine",
-          "name": "x402engine",
-          "status": "live",
-          "description": "Application layer built on x402. Enables agents to pay for and consume web services via HTTP 402 payment flows.",
-          "launched": "2025",
-          "tags": [
-            "http",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "nansen",
-          "name": "Nansen",
-          "status": "live",
-          "description": "Blockchain analytics platform with agent-friendly APIs. Provides wallet intelligence and on-chain signal data for agent decision-making.",
-          "launched": "2020",
-          "tags": [
-            "b2b",
-            "developer",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "akash",
-          "name": "Akash",
-          "status": "live",
-          "description": "Decentralized cloud compute marketplace. Agents pay for GPU and CPU resources in USDC or AKT.",
-          "launched": "2019-09",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "art-blocks",
-          "name": "Art Blocks",
-          "status": "live",
-          "description": "Generative art platform on Ethereum. Primary venue for agent-purchased on-chain art; mint.day is built on its protocol.",
-          "launched": "2020-11",
-          "tags": [
-            "developer",
-            "onchain",
-            "consumer"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "mint-day",
-          "name": "mint.day",
-          "status": "live",
-          "description": "Agent-native NFT minting protocol. Lets autonomous agents mint and collect generative art on-chain.",
-          "launched": "2025",
-          "tags": [
-            "developer",
-            "onchain",
-            "consumer"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "apify",
-          "name": "Apify",
-          "status": "live",
-          "description": "Web scraping and automation platform. Agents pay per actor run via Apify's API marketplace.",
-          "launched": "2015",
-          "tags": [
-            "api-native",
-            "developer",
-            "b2b",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "render",
-          "name": "Render",
-          "status": "live",
-          "description": "Decentralized GPU rendering network. Agents pay for compute in RNDR or USDC for inference and rendering workloads.",
-          "launched": "2020",
-          "tags": [
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "ocean-protocol",
-          "name": "Ocean Protocol",
-          "status": "live",
-          "description": "Data marketplace and monetization protocol. Agents buy and sell datasets using OCEAN tokens.",
-          "launched": "2019",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "run402",
-          "name": "Run402",
-          "status": "live",
-          "url": "https://run402.com",
-          "description": "x402 application demonstrating pay-per-request API access. Reference implementation for HTTP 402 agent payment flows.",
-          "launched": "2025",
-          "tags": [
-            "http",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L5",
-          "id": "cascade",
-          "name": "Cascade",
-          "status": "live",
-          "url": "https://cascade.fyi",
-          "description": "Solana agent infrastructure combining x402 payment facilitation, on-chain identity, and permissionless payment splitting for autonomous agents.",
-          "launched": "2024",
-          "tags": [
-            "http",
-            "developer",
-            "b2b"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "L4",
-      "name": "Governance & Policy",
-      "question": "May this agent spend",
-      "projects": [
-        {
-          "layer": "L4",
-          "id": "ramp-agent-cards",
-          "name": "Ramp Agent Cards",
-          "status": "live",
-          "description": "Corporate card product with AI agent spending controls. Lets enterprises set budgets and policies for autonomous agents.",
-          "launched": "2025",
-          "tags": [
-            "api-native",
-            "b2b",
-            "enterprise",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "brex",
-          "name": "Brex",
-          "status": "acquired",
-          "acquirer": "Capital One",
-          "acquisition_value": "$5.15B",
-          "description": "Corporate spend management platform. Acquired by Capital One for $5.15B; its agent card infrastructure now under Capital One.",
-          "launched": "2017",
-          "tags": [
-            "b2b",
-            "enterprise",
-            "offchain"
-          ],
-          "history": [
-            {
-              "date": "2017",
-              "event": "launched"
-            },
-            {
-              "date": "2025",
-              "event": "acquired",
-              "acquirer": "Capital One",
-              "value": "$5.15B"
-            }
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "skyfire-kya",
-          "name": "Skyfire KYA",
-          "status": "live",
-          "description": "Know-Your-Agent identity verification layer. Enables agents to prove identity and authorization before spending.",
-          "launched": "2024",
-          "tags": [
-            "api-native",
-            "b2b",
-            "enterprise",
-            "permissioned"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "sponge-gateway",
-          "name": "Sponge Gateway",
-          "status": "live",
-          "description": "API layer (YC W26) that lets businesses sell directly to AI agents. Handles autonomous onboarding and payment without human credit cards or API keys.",
-          "launched": "2025",
-          "tags": [
-            "http",
-            "open-source",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "payman-ai",
-          "name": "Payman AI",
-          "status": "early",
-          "description": "Agent authorization and spending limit infrastructure. Lets humans set budgets and approve thresholds for AI agent transactions.",
-          "launched": "2024",
-          "tags": [
-            "api-native",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "erc-8004",
-          "name": "ERC-8004",
-          "status": "live",
-          "description": "Ethereum standard establishing on-chain identity and reputation registries for AI agents. Enables verifiable trust that underpins safe autonomous payment interactions.",
-          "launched": "2024",
-          "tags": [
-            "http",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "ows-policies",
-          "name": "OWS Policies",
-          "status": "live",
-          "description": "MoonPay's open-source pre-signing policy engine. Enforces agent spending limits, contract allowlists, and time-bound authorizations before any key is touched.",
-          "launched": "2025",
-          "tags": [
-            "api-native",
-            "moonpay",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "visa-intelligent-commerce",
-          "name": "Visa Intelligent Commerce",
-          "status": "live",
-          "description": "Visa's agentic commerce framework. Extends card network rails to support autonomous agent purchases at scale.",
-          "launched": "2025",
-          "tags": [
-            "api-native",
-            "visa",
-            "enterprise",
-            "b2b",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "stripe-spts",
-          "name": "Stripe SPTs",
-          "status": "live",
-          "description": "Stripe's Stablecoin Payment Tokens standard. Enables merchants to accept USDC payments through Stripe's existing rails.",
-          "launched": "2025",
-          "tags": [
-            "api-native",
-            "stripe",
-            "enterprise",
-            "b2b",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "crossmint-l4",
-          "name": "Crossmint",
-          "status": "live",
-          "description": "Multi-chain infrastructure for wallets, minting, and payments. Provides REST APIs for agent spending policy enforcement.",
-          "launched": "2021",
-          "tags": [
-            "api-native",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "mastercard-agentic-tokens",
-          "name": "Mastercard Agentic Tokens",
-          "status": "live",
-          "description": "Mastercard's tokenized payment credentials for AI agents. Extends card tokenization standards to non-human actors.",
-          "launched": "2025",
-          "tags": [
-            "mastercard",
-            "enterprise",
-            "b2b",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "agentpay-l4",
-          "name": "AgentPay",
-          "status": "live",
-          "url": "https://agent.tech",
-          "description": "Agent-to-agent payment and authorization layer. Enables micropayments and spending policy enforcement between autonomous agents.",
-          "launched": "2024",
-          "tags": [
-            "api-native",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "ghostspeak",
-          "name": "GhostSpeak",
-          "status": "live",
-          "url": "https://ghostspeak.io",
-          "description": "Solana-based AI agent commerce protocol with on-chain reputation scoring. Provides verifiable credentials and transaction history for trusted agent-to-agent service trading.",
-          "launched": "2025",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "observer-protocol",
-          "name": "Observer Protocol",
-          "status": "early",
-          "url": "https://observerprotocol.org",
-          "description": "Cryptographically verifiable registry for agent payment history and settlement reliability. Establishes counterparty trust before delegating economic authority to agents.",
-          "launched": "2025",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L4",
-          "id": "verifiable-intent",
-          "name": "Verifiable Intent",
-          "status": "live",
-          "url": "https://mastercard.com",
-          "description": "Mastercard's framework for verifying agent purchase intent. Cryptographic proof that an agent was authorized before spending.",
-          "launched": "2025",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "id": "openmatter",
-          "layer": "L4",
-          "name": "OpenMatter",
-          "status": "early",
-          "url": "https://github.com/openmatter",
-          "description": "ZK execution firewall for payment MCPs. Wraps Stripe MCP with a RISC Zero zkVM — blocks malformed tool calls, threshold decryption for API keys, PII redaction before logs.",
-          "tags": [
-            "zk",
-            "open-source",
-            "developer",
-            "stripe"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "L3",
-      "name": "Payment Protocol",
-      "question": "How the payment flows",
-      "projects": [
-        {
-          "layer": "L3",
-          "id": "x402",
-          "name": "x402",
-          "status": "live",
-          "metadata": "75M/30d",
-          "description": "HTTP-native payment protocol for AI agents built on the 402 status code. Open-source, Coinbase-developed.",
-          "launched": "2024-11",
-          "chain": [
-            "Base",
-            "Ethereum"
-          ],
-          "token": "USDC",
-          "tags": [
-            "http",
-            "open-source",
-            "micropayment",
-            "api-native",
-            "coinbase",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/coinbase/x402",
-            "stars": 5800,
-            "last_commit": "2026-03-26",
-            "license": "Apache-2.0",
-            "as_of": "2026-03-26"
-          },
-          "volume": {
-            "value": 75000000,
-            "unit": "transactions",
-            "period": "30d",
-            "source": "on_chain",
-            "as_of": "2026-03-26",
-            "note": "Base mainnet"
-          },
-          "history": [
-            {
-              "date": "2024-11",
-              "event": "launched",
-              "note": "Public beta on Base mainnet"
-            }
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "tempo-mpp",
-          "name": "Tempo MPP",
-          "status": "live",
-          "metadata": "100+ svc",
-          "description": "Multi-party payment protocol for agent service networks. Connects 100+ services via a shared payment coordination layer.",
-          "launched": "2024",
-          "tags": [
-            "micropayment",
-            "api-native",
-            "b2b",
-            "developer",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "google-ap2",
-          "name": "Google AP2",
-          "status": "announced",
-          "metadata": "60+ partners",
-          "description": "Google's Agent-to-Agent Payment protocol. In development with 60+ partners; designed for enterprise-scale agent commerce.",
-          "launched": "2025",
-          "tags": [
-            "api-native",
-            "google",
-            "enterprise",
-            "b2b",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "acp",
-          "name": "ACP",
-          "status": "live",
-          "metadata": "OpenAI+Stripe",
-          "description": "Agentic Commerce Protocol co-developed by OpenAI and Stripe. Standardizes how agents initiate and settle purchases.",
-          "launched": "2024-11",
-          "tags": [
-            "open-source",
-            "developer",
-            "api-native",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "circle-nanopayments",
-          "name": "Circle Nanopayments",
-          "status": "early",
-          "description": "Circle's micropayment infrastructure for USDC. Optimized for high-frequency, low-value agent transactions.",
-          "launched": "2025",
-          "tags": [
-            "micropayment",
-            "circle",
-            "developer",
-            "api-native"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "l402-lightning",
-          "name": "L402 / Lightning",
-          "status": "live",
-          "description": "Lightning Network payment protocol adapted for API monetization. Agents pay per request using Bitcoin micropayments.",
-          "launched": "2021",
-          "tags": [
-            "lightning",
-            "open-source",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "atxp",
-          "name": "ATXP",
-          "status": "early",
-          "description": "HTTP-style protocol for instant, nested, delegated micropayments between AI agents. Built by Circuit & Chisel ($19.2M); integrates with Stripe's Tempo blockchain.",
-          "launched": "2025",
-          "tags": [
-            "http",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "fewsats",
-          "name": "Fewsats",
-          "status": "live",
-          "description": "L402-based payment infrastructure for agents. Enables autonomous agents to pay for APIs and services via Bitcoin Lightning.",
-          "launched": "2024",
-          "tags": [
-            "lightning",
-            "open-source",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "superfluid",
-          "name": "Superfluid",
-          "status": "live",
-          "description": "Real-time token streaming protocol on EVM chains. Enables continuous per-second payments for ongoing agent service subscriptions.",
-          "launched": "2021-02",
-          "chain": [
-            "Ethereum",
-            "Base",
-            "Polygon",
-            "Arbitrum"
-          ],
-          "token": "USDC",
-          "tags": [
-            "streaming",
-            "open-source",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/superfluid-finance/protocol-monorepo",
-            "stars": 898,
-            "last_commit": "2026-02-25",
-            "license": "AGPL-3.0",
-            "as_of": "2026-03-26"
-          },
-          "history": [
-            {
-              "date": "2021-02",
-              "event": "launched",
-              "note": "Mainnet launch on Ethereum"
-            }
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "erc-8183",
-          "name": "ERC-8183",
-          "status": "early",
-          "description": "Ethereum standard defining a three-party trustless escrow flow for autonomous agent work. Clients, providers, and evaluators settle without human intervention.",
-          "launched": "2024",
-          "tags": [
-            "http",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "interledger",
-          "name": "Interledger",
-          "status": "live",
-          "description": "Open protocol for sending payments across different ledgers and networks. Network-agnostic payment routing for agents.",
-          "launched": "2015",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/interledger/rfcs",
-            "stars": 512,
-            "last_commit": "2026-03",
-            "license": "CC0-1.0",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L3",
-          "id": "agentpay-l3",
-          "name": "AgentPay",
-          "status": "live",
-          "url": "https://agent.tech",
-          "description": "Agent-to-agent payment protocol. Handles micropayment flows between autonomous agents across services.",
-          "launched": "2024",
-          "tags": [
-            "api-native",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "dhali",
-          "name": "Dhali",
-          "status": "live",
-          "url": "https://dhali.io",
-          "description": "API monetization protocol with sub-cent micropayments. Lets developers charge per API call; agents pay automatically at runtime.",
-          "launched": "2024",
-          "tags": [
-            "http",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "x402s-scp",
-          "name": "x402s SCP",
-          "status": "early",
-          "description": "Coinbase's HTTP 402 payment protocol ported to Solana. Enables sub-cent, ~400ms agent micropayments via the x402-solana package.",
-          "launched": "2025",
-          "tags": [
-            "http",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "faremeter",
-          "name": "Faremeter",
-          "status": "live",
-          "url": "https://github.com/faremeter/faremeter",
-          "description": "Open-source framework for pay-per-use web3 payments via HTTP 402. Supports EVM and Solana wallet SDKs through standard web infrastructure.",
-          "launched": "2025",
-          "tags": [
-            "http",
-            "open-source",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/faremeter/faremeter",
-            "stars": 61,
-            "last_commit": "2026-03",
-            "license": "LGPL-3.0",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L3",
-          "id": "masumi",
-          "name": "Masumi",
-          "status": "live",
-          "url": "https://masumi.network",
-          "description": "Cardano-based agent payment and identity network. Enables agents to register, get paid, and prove provenance on Cardano.",
-          "launched": "2024",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L3",
-          "id": "backpac",
-          "name": "Backpac",
-          "status": "early",
-          "url": "https://backpac.xyz",
-          "description": "Solana RPC load balancer with x402 integration. Provides deterministic transaction routing and verifiable stablecoin settlement for agent payment flows.",
-          "launched": "2025",
-          "tags": [
-            "developer",
-            "b2b",
-            "api-native"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "L2",
-      "name": "Routing & Abstraction",
-      "question": "Which chain, token, rail",
-      "projects": [
-        {
-          "layer": "L2",
-          "id": "skyfire",
-          "name": "Skyfire",
-          "status": "live",
-          "description": "AI agent payment network. Handles wallet provisioning, identity, and payment routing for autonomous agents end-to-end.",
-          "launched": "2023",
-          "tags": [
-            "api-native",
-            "developer",
-            "b2b",
-            "enterprise"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "mesh",
-          "name": "Mesh",
-          "status": "live",
-          "description": "Crypto portfolio aggregator and payment router. Enables agents to move funds across wallets and exchanges via unified API.",
-          "launched": "2021",
-          "tags": [
-            "api-native",
-            "developer",
-            "b2b"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "crossmint-l2",
-          "name": "Crossmint",
-          "status": "live",
-          "description": "Multi-chain infrastructure for wallets, minting, and payments. Routes agent transactions across chains via REST API.",
-          "launched": "2021",
-          "tags": [
-            "api-native",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "biconomy-dan",
-          "name": "Biconomy DAN",
-          "status": "live",
-          "description": "Decentralized Authorization Network for account abstraction. Routes agent transactions across chains with gas sponsorship.",
-          "launched": "2023",
-          "tags": [
-            "account-abstraction",
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "bvnk",
-          "name": "BVNK",
-          "status": "acquired",
-          "acquirer": "Mastercard",
-          "acquisition_value": "$1.8B",
-          "description": "Crypto payment infrastructure for enterprises. Acquired by Mastercard for $1.8B; bridges fiat and crypto payment rails.",
-          "launched": "2021",
-          "tags": [
-            "cross-border",
-            "b2b",
-            "enterprise",
-            "mastercard",
-            "offchain"
-          ],
-          "history": [
-            {
-              "date": "2021",
-              "event": "launched"
-            },
-            {
-              "date": "2025",
-              "event": "acquired",
-              "acquirer": "Mastercard",
-              "value": "$1.8B"
-            }
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "unifold",
-          "name": "Unifold",
-          "status": "live",
-          "description": "Developer API (YC W26) abstracting multi-chain crypto deposits into under 10 lines of code. Enables agents to accept payments from Ethereum, Solana, Bitcoin, and more.",
-          "launched": "2025",
-          "tags": [
-            "api-native",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "circle-cctp",
-          "name": "Circle CCTP",
-          "status": "live",
-          "description": "Circle's Cross-Chain Transfer Protocol for native USDC. Burn-and-mint bridging enabling fast USDC movement across chains.",
-          "launched": "2023-04",
-          "chain": [
-            "Ethereum",
-            "Avalanche",
-            "Base",
-            "Arbitrum",
-            "Solana"
-          ],
-          "token": "USDC",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "circle",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/circlefin/evm-cctp-contracts",
-            "stars": 197,
-            "last_commit": "2025-10-01",
-            "license": "Apache-2.0",
-            "as_of": "2026-03-26"
-          },
-          "history": [
-            {
-              "date": "2023-04",
-              "event": "launched",
-              "note": "v1 on Ethereum and Avalanche"
-            }
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "bridge",
-          "name": "Bridge",
-          "status": "acquired",
-          "acquirer": "Stripe",
-          "acquisition_value": "$1.1B",
-          "description": "Stablecoin infrastructure and cross-border payment rails. Acquired by Stripe for $1.1B.",
-          "launched": "2022",
-          "chain": [
-            "Ethereum",
-            "Solana",
-            "Base"
-          ],
-          "token": "USDC",
-          "tags": [
-            "cross-border",
-            "stablecoin",
-            "b2b",
-            "stripe",
-            "offchain"
-          ],
-          "history": [
-            {
-              "date": "2022",
-              "event": "launched"
-            },
-            {
-              "date": "2024-10",
-              "event": "acquired",
-              "acquirer": "Stripe",
-              "value": "$1.1B"
-            }
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "across",
-          "name": "Across",
-          "status": "live",
-          "description": "Optimistic bridge protocol for fast cross-chain token transfers. Low-latency USDC bridging used in agent payment stacks.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/across-protocol/contracts",
-            "stars": 141,
-            "last_commit": "2026-03-26",
-            "license": "BUSL-1.1",
-            "as_of": "2026-03-26"
-          },
-          "volume": {
-            "value": 742540000,
-            "unit": "usd",
-            "period": "30d",
-            "source": "on_chain",
-            "as_of": "2026-03-26",
-            "note": "DeFi Llama bridge volume"
-          }
-        },
-        {
-          "layer": "L2",
-          "id": "li-fi",
-          "name": "Li.Fi",
-          "status": "live",
-          "description": "Cross-chain DEX aggregator and bridge router. Finds optimal routes for token swaps and bridges across 30+ chains.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/lifinance/contracts",
-            "stars": 199,
-            "last_commit": "2026-03-26",
-            "license": "LGPL-3.0",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L2",
-          "id": "socket",
-          "name": "Socket",
-          "status": "live",
-          "description": "Cross-chain interoperability protocol. Routes token transfers and messages across chains via the best available bridge.",
-          "launched": "2022",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "debridge",
-          "name": "deBridge",
-          "status": "live",
-          "description": "Cross-chain messaging and liquidity protocol. Enables agents to trigger actions and move funds across EVM-compatible chains.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/debridge-finance/debridge-contracts-v1",
-            "stars": 57,
-            "last_commit": "2025-09",
-            "license": "custom",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L2",
-          "id": "wormhole",
-          "name": "Wormhole",
-          "status": "live",
-          "description": "Cross-chain messaging protocol connecting 20+ blockchains. Core infrastructure for multi-chain agent payment routing.",
-          "launched": "2021-09",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/wormhole-foundation/wormhole",
-            "stars": 1900,
-            "last_commit": "2026-02-25",
-            "license": "Apache-2.0",
-            "as_of": "2026-03-26"
-          },
-          "volume": {
-            "value": 1232743325,
-            "unit": "usd",
-            "period": "30d",
-            "source": "wormholescan.io",
-            "as_of": "2026-03-26"
-          },
-          "history": [
-            {
-              "date": "2021-09",
-              "event": "launched",
-              "note": "Mainnet launch"
-            }
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "layerzero",
-          "name": "LayerZero",
-          "status": "live",
-          "description": "Omnichain interoperability protocol. Enables agent payment messages and token transfers across any connected chain.",
-          "launched": "2022-03",
-          "tags": [
-            "open-source",
-            "cross-border",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/LayerZero-Labs/LayerZero-v2",
-            "stars": 769,
-            "last_commit": "2026-02-27",
-            "license": "MIT",
-            "as_of": "2026-03-26"
-          },
-          "history": [
-            {
-              "date": "2022-03",
-              "event": "launched",
-              "note": "Mainnet v1 launch"
-            }
-          ],
-          "volume": {
-            "value": 8360000000,
-            "unit": "usd",
-            "period": "30d",
-            "source": "layerzeroscan.com",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L2",
-          "id": "jupiter",
-          "name": "Jupiter",
-          "status": "live",
-          "description": "Solana's primary DEX aggregator. Routes token swaps across all Solana liquidity sources for best execution.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ],
-          "chain": [
-            "Solana"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "1inch",
-          "name": "1inch",
-          "status": "live",
-          "description": "EVM DEX aggregator routing across 300+ liquidity sources. Finds best swap rates for agent token conversions on-chain.",
-          "launched": "2019",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "uniswap",
-          "name": "Uniswap",
-          "status": "live",
-          "description": "Leading EVM DEX with programmatic swap APIs. Primary on-chain liquidity source for agent token swaps.",
-          "launched": "2018-11",
-          "chain": [
-            "Ethereum",
-            "Base",
-            "Arbitrum",
-            "Polygon"
-          ],
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/Uniswap/v4-core",
-            "stars": 2500,
-            "last_commit": "2025-10-23",
-            "license": "BUSL-1.1",
-            "as_of": "2026-03-26"
-          },
-          "volume": {
-            "value": 45772000000,
-            "unit": "usd",
-            "period": "30d",
-            "source": "on_chain",
-            "as_of": "2026-03-26",
-            "note": "All versions (v2/v3/v4) via DeFi Llama"
-          },
-          "history": [
-            {
-              "date": "2018-11",
-              "event": "launched",
-              "note": "v1 on Ethereum"
-            }
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "cow-protocol",
-          "name": "CoW Protocol",
-          "status": "live",
-          "description": "Intent-based DEX on Ethereum. Batches orders for MEV protection — useful for large agent settlement transactions.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer",
-            "batch"
-          ],
-          "github": {
-            "url": "https://github.com/cowprotocol/contracts",
-            "stars": 154,
-            "last_commit": "2026-03",
-            "license": "GPL-3.0",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L2",
-          "id": "moonpay",
-          "name": "MoonPay",
-          "status": "live",
-          "description": "Fiat-to-crypto onramp and payment routing. Provides agents access to 80+ payment methods and cross-border rails.",
-          "launched": "2019",
-          "tags": [
-            "moonpay",
-            "cross-border",
-            "b2b",
-            "consumer",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L2",
-          "id": "reqcast",
-          "name": "ReqCast",
-          "status": "live",
-          "url": "https://reqcast.com",
-          "description": "x402-based payment gateway that sits between AI agents and tool developers. Agents pay per API call in USDC; developers receive 95% instantly with zero payment code required. Live on Base mainnet.",
-          "launched": "2026-03",
-          "tags": [
-            "http",
-            "micropayment",
-            "api-native",
-            "developer",
-            "onchain",
-            "coinbase"
-          ],
-          "chain": [
-            "Base"
-          ]
-        },
-        {
-          "id": "kibble",
-          "layer": "L2",
-          "name": "Kibble",
-          "status": "early",
-          "url": "https://github.com/0xJim/kibble",
-          "description": "Cross-chain wallet funding skill for agents. Solves the cold-start problem: bridges USDC to the right chain via LI.FI before first payment. npm install kibble-pay.",
-          "tags": [
-            "cross-border",
-            "sdk",
-            "developer",
-            "open-source"
-          ]
-        },
-        {
-          "id": "reveel",
-          "layer": "L2",
-          "name": "Reveel",
-          "status": "live",
-          "url": "https://reveel.id",
-          "description": "Cross-chain stablecoin payment network with human-readable Pay(ID) usernames. Receive any stablecoin on any chain, settle in preferred currency. Explicitly agent-native.",
-          "tags": [
-            "cross-border",
-            "api-native",
-            "agent-native",
-            "onchain"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "L1",
-      "name": "Wallet & Key Management",
-      "question": "Where the keys live",
-      "projects": [
-        {
-          "layer": "L1",
-          "id": "coinbase-agentic-wallets",
-          "name": "Coinbase Agentic Wallets",
-          "status": "live",
-          "description": "Server-side MPC wallets for AI agents. API-native, no seed phrase. Part of Coinbase Developer Platform.",
-          "launched": "2024-10",
-          "chain": [
-            "Base",
-            "Ethereum",
-            "Solana"
-          ],
-          "token": "USDC",
-          "tags": [
-            "mpc",
-            "api-native",
-            "coinbase",
-            "developer",
-            "onchain"
-          ],
-          "history": [
-            {
-              "date": "2024-10",
-              "event": "launched",
-              "note": "GA via Coinbase Developer Platform"
-            }
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "moonpay-ows",
-          "name": "MoonPay OWS",
-          "status": "live",
-          "description": "MoonPay's Open Wallet Standard. Interoperable wallet infrastructure letting agents operate across multiple custodians.",
-          "launched": "2024",
-          "tags": [
-            "moonpay",
-            "api-native",
-            "b2b",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "crossmint-l1",
-          "name": "Crossmint",
-          "status": "live",
-          "description": "Multi-chain wallet and NFT custody infrastructure. Provides REST APIs for agent wallet creation and asset management.",
-          "launched": "2021",
-          "tags": [
-            "api-native",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "thirdweb",
-          "name": "Thirdweb",
-          "status": "live",
-          "description": "Full-stack web3 development platform. Provides smart wallets, auth, and payment APIs for agent-integrated applications.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "sdk",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "openfort",
-          "name": "Openfort",
-          "status": "live",
-          "description": "Gaming-focused smart wallet infrastructure. Provides session keys and spending policies for agent-controlled wallets.",
-          "launched": "2023",
-          "tags": [
-            "open-source",
-            "account-abstraction",
-            "sdk",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "world-agentkit",
-          "name": "World AgentKit",
-          "status": "live",
-          "description": "World ID-verified agent wallet framework. Combines biometric identity with programmable agent spending controls.",
-          "launched": "2025",
-          "tags": [
-            "sdk",
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "turnkey",
-          "name": "Turnkey",
-          "status": "live",
-          "description": "API-first key management infrastructure. MPC signing service for secure agent transaction authorization at scale.",
-          "launched": "2022",
-          "tags": [
-            "mpc",
-            "api-native",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "privy",
-          "name": "Privy",
-          "status": "acquired",
-          "acquirer": "Stripe",
-          "description": "Embedded wallet infrastructure for consumer apps. Acquired by Stripe; now powers Stripe's wallet and auth stack.",
-          "launched": "2022",
-          "tags": [
-            "api-native",
-            "stripe",
-            "developer"
-          ],
-          "history": [
-            {
-              "date": "2022",
-              "event": "launched"
-            },
-            {
-              "date": "2025",
-              "event": "acquired",
-              "acquirer": "Stripe"
-            }
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "dynamic",
-          "name": "Dynamic",
-          "status": "acquired",
-          "acquirer": "Fireblocks",
-          "description": "Multi-chain auth and wallet SDK. Acquired by Fireblocks; brings consumer wallet UX to enterprise custody infrastructure.",
-          "launched": "2022",
-          "tags": [
-            "api-native",
-            "sdk",
-            "developer"
-          ],
-          "history": [
-            {
-              "date": "2022",
-              "event": "launched"
-            },
-            {
-              "date": "2025",
-              "event": "acquired",
-              "acquirer": "Fireblocks"
-            }
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "lit-protocol",
-          "name": "Lit Protocol",
-          "status": "live",
-          "description": "Decentralized key management and threshold cryptography. Enables programmable signing conditions for agent wallets.",
-          "launched": "2021",
-          "tags": [
-            "open-source",
-            "mpc",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/LIT-Protocol/js-sdk",
-            "stars": 158,
-            "last_commit": "2026-02",
-            "license": "MIT",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L1",
-          "id": "safe",
-          "name": "Safe",
-          "status": "live",
-          "description": "Smart account standard for EVM chains. Multi-sig and programmable spending rules; widely used in agent treasury management.",
-          "launched": "2018-02",
-          "chain": [
-            "Ethereum",
-            "Base",
-            "Arbitrum",
-            "Polygon"
-          ],
-          "tags": [
-            "open-source",
-            "smart-contract",
-            "account-abstraction",
-            "onchain",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/safe-global/safe-smart-account",
-            "stars": 2100,
-            "last_commit": "2025-07-03",
-            "license": "LGPL-3.0",
-            "as_of": "2026-03-26"
-          },
-          "history": [
-            {
-              "date": "2018-02",
-              "event": "launched",
-              "note": "Launched as Gnosis Safe"
-            },
-            {
-              "date": "2022-07",
-              "event": "rebranded",
-              "note": "Gnosis Safe rebranded to Safe"
-            }
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "zerodev",
-          "name": "ZeroDev",
-          "status": "acquired",
-          "acquirer": "Arbitrum",
-          "description": "Account abstraction SDK and smart wallet provider. Acquired by Arbitrum; provides gasless transactions and session keys for agents.",
-          "launched": "2023",
-          "tags": [
-            "account-abstraction",
-            "sdk",
-            "developer"
-          ],
-          "history": [
-            {
-              "date": "2023",
-              "event": "launched"
-            },
-            {
-              "date": "2025",
-              "event": "acquired",
-              "acquirer": "Arbitrum"
-            }
-          ],
-          "github": {
-            "url": "https://github.com/zerodevapp/kernel",
-            "stars": 240,
-            "last_commit": "2025-10",
-            "license": "MIT",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L1",
-          "id": "biconomy",
-          "name": "Biconomy",
-          "status": "live",
-          "description": "Account abstraction and smart wallet infrastructure. Gas sponsorship, batched transactions, and session keys for agent wallets.",
-          "launched": "2022",
-          "tags": [
-            "open-source",
-            "account-abstraction",
-            "sdk",
-            "developer"
-          ],
-          "github": {
-            "url": "https://github.com/bcnmy/nexus",
-            "stars": 51,
-            "last_commit": "2026-02",
-            "license": "MIT",
-            "as_of": "2026-03-26"
-          }
-        },
-        {
-          "layer": "L1",
-          "id": "fireblocks",
-          "name": "Fireblocks",
-          "status": "live",
-          "description": "Institutional MPC custody and wallet infrastructure. Industry standard for enterprise-grade key management at scale.",
-          "launched": "2019",
-          "tags": [
-            "mpc",
-            "enterprise",
-            "b2b",
-            "offchain",
-            "permissioned"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "alchemy",
-          "name": "Alchemy",
-          "status": "live",
-          "description": "EVM node infrastructure and smart wallet APIs. Provides account abstraction and transaction simulation for agent builders.",
-          "launched": "2019",
-          "tags": [
-            "api-native",
-            "sdk",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "phantom",
-          "name": "Phantom",
-          "status": "live",
-          "description": "Multi-chain wallet with Solana focus. Increasingly relevant as Solana becomes a primary agent payment settlement chain.",
-          "launched": "2021",
-          "tags": [
-            "consumer",
-            "developer"
-          ],
-          "chain": [
-            "Solana",
-            "Ethereum",
-            "Base"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "walletconnect",
-          "name": "WalletConnect",
-          "status": "live",
-          "url": "https://walletconnect.com",
-          "description": "Open protocol for wallet-to-application connections. Enables agents to interact with any WalletConnect-compatible dApp.",
-          "launched": "2018",
-          "tags": [
-            "open-source",
-            "sdk",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "dfns",
-          "name": "Dfns",
-          "status": "live",
-          "url": "https://dfns.co",
-          "description": "API-first MPC wallet infrastructure for developers. White-label key management with programmable signing policies for agents.",
-          "launched": "2020",
-          "tags": [
-            "mpc",
-            "enterprise",
-            "b2b",
-            "permissioned"
-          ]
-        },
-        {
-          "layer": "L1",
-          "id": "natural",
-          "name": "Natural",
-          "status": "early",
-          "url": "https://natural.co",
-          "description": "FDIC-insured accounts for AI agents with unified fiat and stablecoin balances ($9.8M seed). MCP integrations let agents autonomously send, receive, and manage payments.",
-          "launched": "2025",
-          "tags": [
-            "open-source",
-            "developer",
-            "onchain"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "L0",
-      "name": "Settlement",
-      "question": "Where transactions land",
-      "projects": [
-        {
-          "layer": "L0",
-          "id": "base",
-          "name": "Base",
-          "status": "live",
-          "metadata": "119M txns",
-          "description": "Coinbase's Ethereum L2. Primary settlement chain for agent payments; 119M+ monthly transactions.",
-          "launched": "2023-07",
-          "tags": [
-            "coinbase",
-            "onchain",
-            "developer"
-          ],
-          "volume": {
-            "value": 119000000,
-            "unit": "transactions",
-            "period": "30d",
-            "source": "on_chain",
-            "as_of": "2026-03-26"
-          },
-          "history": [
-            {
-              "date": "2023-07",
-              "event": "launched",
-              "note": "Mainnet launch"
-            }
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "solana",
-          "name": "Solana",
-          "status": "live",
-          "metadata": "38.6M txns",
-          "description": "High-throughput L1 blockchain. Increasingly favored for agent micropayment settlement due to speed and low fees.",
-          "launched": "2020-03",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "ethereum",
-          "name": "Ethereum",
-          "status": "live",
-          "description": "The foundational smart contract platform. Settlement layer for most DeFi protocols and agent payment infrastructure.",
-          "launched": "2015-07",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "tempo",
-          "name": "Tempo",
-          "status": "live",
-          "metadata": "$5B",
-          "description": "Regulated stablecoin payment network. $5B+ in transaction volume; focused on compliant cross-border settlement.",
-          "launched": "2023",
-          "tags": [
-            "api-native",
-            "developer",
-            "offchain"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "arbitrum",
-          "name": "Arbitrum",
-          "status": "live",
-          "description": "Ethereum L2 with the largest DeFi TVL. Low-cost settlement layer for agent transactions requiring EVM compatibility.",
-          "launched": "2021-08",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "sui",
-          "name": "Sui",
-          "status": "live",
-          "description": "High-throughput L1 with object-centric model. Emerging agent payment settlement chain with sub-second finality.",
-          "launched": "2023-05",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "polygon",
-          "name": "Polygon",
-          "status": "live",
-          "description": "Ethereum scaling network with PoS and ZK rollup options. Low-fee settlement for agent payment transactions.",
-          "launched": "2021-05",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "bnb-chain",
-          "name": "BNB Chain",
-          "status": "live",
-          "description": "Binance's EVM-compatible L1. High throughput and low fees; significant agent payment volume especially in Asia.",
-          "launched": "2020-09",
-          "tags": [
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "gnosis",
-          "name": "Gnosis",
-          "status": "live",
-          "description": "EVM chain optimized for stablecoin transactions. Home of Safe smart accounts; widely used in agent treasury setups.",
-          "launched": "2018",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "near",
-          "name": "NEAR",
-          "status": "early",
-          "description": "Layer 1 with account abstraction native to the protocol. Early-stage but architecturally well-suited for agent payment patterns.",
-          "launched": "2020-10",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "avalanche",
-          "name": "Avalanche",
-          "status": "live",
-          "description": "High-throughput EVM-compatible L1 with subnet architecture. Used for enterprise agent payment settlement.",
-          "launched": "2020-09",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "kite",
-          "name": "Kite",
-          "status": "live",
-          "url": "https://gokite.ai",
-          "description": "EVM-compatible Layer 1 purpose-built for autonomous AI agent payment settlement ($33M+, PayPal Ventures). Provides programmable spend rules and coordination infrastructure for agent commerce.",
-          "launched": "2024",
-          "tags": [
-            "developer",
-            "onchain"
-          ]
-        },
-        {
-          "layer": "L0",
-          "id": "skale",
-          "name": "SKALE",
-          "status": "live",
-          "url": "https://skale.space",
-          "description": "Gas-free Ethereum L2 network. Zero gas fees make it practical for high-frequency agent micropayment settlement.",
-          "launched": "2020",
-          "tags": [
-            "open-source",
-            "onchain",
-            "developer"
-          ]
-        }
-      ]
-    }
+    { "id": "L5", "name": "Application", "question": "What gets bought and why", "projects": [
+      { "name": "Virtuals Protocol", "status": "live", "url": "https://app.virtuals.io", "description": "Tokenized AI agent creation on Base" },
+      { "name": "ElizaOS", "status": "live", "url": "https://elizaos.ai", "description": "Open-source multi-agent framework, 17K GitHub stars" },
+      { "name": "Olas", "status": "live", "url": "https://olas.network", "description": "Decentralized agent services with on-chain staking" },
+      { "name": "Botto", "status": "live", "url": "https://botto.com", "description": "Autonomous AI artist, $5M+ sales, 15K-member DAO" },
+      { "name": "Axiom", "status": "live", "url": "https://www.axiom.trade", "description": "DeFi trading agents for memecoins, perps, yield" },
+      { "name": "Theoriq", "status": "live", "url": "https://www.theoriq.ai", "description": "AI-managed yield vault, $25M TVL" },
+      { "name": "Giza ARMA", "status": "live", "url": "https://www.gizatech.xyz", "description": "Cross-protocol stablecoin yield optimization on Base" },
+      { "name": "Almanak", "status": "live", "url": "https://www.almanak.co", "description": "Non-custodial DeFi strategy automation" },
+      { "name": "Brahma.fi", "status": "live", "url": "https://www.brahma.fi", "description": "Agent-based DeFi console with sub-accounts" },
+      { "name": "Kraken CLI", "status": "live", "url": "https://blog.kraken.com/news/industry-news/announcing-the-kraken-cli", "description": "Exchange CLI with built-in MCP server. 134 commands. First exchange natively compatible with Claude Code." },
+      { "name": "x402engine", "status": "live", "url": "https://x402engine.app", "description": "45 pay-per-call APIs via x402" },
+      { "name": "Nansen", "status": "live", "url": "https://www.nansen.ai", "description": "On-chain analytics at $0.01/query via x402" },
+      { "name": "Akash", "status": "live", "url": "https://akash.network", "description": "Decentralized cloud with agent deploy" },
+      { "name": "Art Blocks", "status": "live", "url": "https://www.artblocks.io", "description": "Generative art platform with MCP + Universal Purchase API" },
+      { "name": "mint.day", "status": "live", "url": "https://mint.day", "description": "NFT minting service for AI agents" },
+      { "name": "Apify", "status": "live", "url": "https://apify.com", "description": "Web scraping/automation with Skyfire payment integration" },
+      { "name": "Render", "status": "live", "url": "https://rendernetwork.com", "description": "GPU marketplace for compute" },
+      { "name": "Ocean Protocol", "status": "live", "url": "https://oceanprotocol.com", "description": "Data marketplace, $800M/month Predictoor volume" }
+    ]},
+    { "id": "L4", "name": "Governance & Policy", "question": "May this agent spend", "projects": [
+      { "name": "Ramp Agent Cards", "status": "live", "url": "https://ramp.com", "description": "Virtual Visa cards for agents with spend limits" },
+      { "name": "Brex", "status": "acquired", "acquirer": "Capital One", "acquisition_value": "$5.15B", "url": "https://brex.com", "description": "Agent Mesh architecture" },
+      { "name": "Skyfire KYA", "status": "live", "url": "https://skyfire.xyz", "description": "Know Your Agent protocol with per-tx caps" },
+      { "name": "Sponge Gateway", "status": "live", "url": "https://paysponge.com", "description": "Agents onboard and pay businesses via uploaded API specs" },
+      { "name": "Payman AI", "status": "early", "url": "https://paymanai.net", "description": "AI-to-human payments with segregated wallets" },
+      { "name": "ERC-8004", "status": "live", "url": "https://eips.ethereum.org/EIPS/eip-8004", "description": "On-chain agent identity and reputation registries" },
+      { "name": "OWS Policies", "status": "live", "url": "https://openwallet.sh", "description": "Pre-signing policy engine in MoonPay OWS" },
+      { "name": "Visa Intelligent Commerce", "status": "live", "url": "https://usa.visa.com", "description": "Agent-initiated tokenized card transactions, 100+ partners" },
+      { "name": "Stripe SPTs", "status": "live", "url": "https://stripe.com", "description": "Scoped, time-limited tokens for agent card payments" },
+      { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Open payment standard with Visa, Circle, Solana" },
+      { "name": "Mastercard Agentic Tokens", "status": "live", "description": "Tokenization framework for agent-initiated transactions" },
+      { "name": "GhostSpeak", "status": "live", "url": "https://ghostspeak.io", "description": "Trust and reputation layer for agent commerce. Ghost Score, 10K+ agents tracked." },
+      { "name": "Observer Protocol", "status": "early", "url": "https://observerprotocol.org", "description": "Rail-neutral verification layer for autonomous agent transactions." },
+      { "name": "Verifiable Intent", "status": "live", "url": "https://mastercard.com", "description": "Mastercard + Google open standard. Cryptographic proof of agent authorization." }
+    ]},
+    { "id": "L3", "name": "Payment Protocol", "question": "How the payment flows", "projects": [
+      { "name": "x402", "status": "live", "url": "https://x402.org", "metadata": "75M/30d", "description": "HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem." },
+      { "name": "Tempo MPP", "status": "live", "url": "https://tempo.xyz", "metadata": "100+ services", "description": "Multi-rail sessions: stablecoins + cards + Bitcoin" },
+      { "name": "Google AP2", "status": "announced", "url": "https://github.com/google-agentic-commerce/AP2", "metadata": "60+ partners", "description": "Payment-agnostic authorization via signed mandates" },
+      { "name": "ACP", "status": "live", "url": "https://stripe.com/blog/agentic-commerce", "metadata": "OpenAI + Stripe", "description": "Agentic Commerce Protocol. Checkout layer paired with MPP." },
+      { "name": "Circle Nanopayments", "status": "early", "url": "https://circle.com", "description": "Gas-free USDC micropayments, $0.000001 minimum. Testnet." },
+      { "name": "L402 / Lightning", "status": "live", "url": "https://docs.lightning.engineering", "description": "HTTP auth + Lightning micropayments since 2020" },
+      { "name": "ATXP", "status": "early", "url": "https://www.circuitandchisel.com", "description": "Full commerce lifecycle protocol. $19.2M seed." },
+      { "name": "Fewsats", "status": "live", "url": "https://fewsats.com", "description": "L402-compatible SDK and API marketplace for agents" },
+      { "name": "Superfluid", "status": "live", "url": "https://superfluid.finance", "description": "Per-second token streaming" },
+      { "name": "ERC-8183", "status": "early", "url": "https://eips.ethereum.org/EIPS/eip-8183", "description": "Programmable escrow for conditional agent-to-agent payments" },
+      { "name": "Interledger", "status": "live", "url": "https://interledger.org", "description": "Cross-ledger value routing. TCP/IP for money." },
+      { "name": "Faremeter", "status": "live", "url": "https://github.com/faremeter/faremeter", "description": "x402 + MPP library for EVM and Solana. Frictionless agent payments." },
+      { "name": "Masumi", "status": "live", "url": "https://masumi.network", "description": "Agent-to-agent payment network on Cardano. Escrow, registry, identity." }
+    ]},
+    { "id": "L2", "name": "Routing & Abstraction", "question": "Which chain, token, rail", "projects": [
+      { "name": "Skyfire", "status": "live", "url": "https://skyfire.xyz", "description": "'Visa for the AI economy.' KYA identity, $9.5M seed." },
+      { "name": "Mesh", "status": "live", "url": "https://meshconnect.com", "description": "Routes payments across 100+ wallets/exchanges. Powers PayPal." },
+      { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Dual-rail: Visa/Mastercard cards + stablecoin wallets" },
+      { "name": "Biconomy DAN", "status": "live", "url": "https://biconomy.io", "description": "Delegated auth for agents to execute on-chain on users' behalf" },
+      { "name": "BVNK", "status": "acquired", "acquirer": "Mastercard", "acquisition_value": "$1.8B", "url": "https://bvnk.com", "description": "Enterprise stablecoin API. $30B+ volume." },
+      { "name": "Unifold", "status": "live", "url": "https://unifold.io", "description": "Multi-chain deposits in <10 lines of code. YC W26." },
+      { "name": "Circle CCTP", "status": "live", "url": "https://circle.com", "description": "Native USDC burn-and-mint across 17 chains. $126B+ volume." },
+      { "name": "Bridge", "status": "acquired", "acquirer": "Stripe", "acquisition_value": "$1.1B", "url": "https://bridge.xyz", "description": "Stablecoin orchestration." },
+      { "name": "Across", "status": "live", "url": "https://across.to", "description": "Cross-chain intents. Co-authored ERC-7683." },
+      { "name": "Li.Fi", "status": "live", "url": "https://li.fi", "description": "Bridge/swap aggregator. 15+ bridges, 30+ DEXs." },
+      { "name": "Socket", "status": "live", "url": "https://socket.tech", "description": "Cross-chain data and asset movement" },
+      { "name": "deBridge", "status": "live", "url": "https://debridge.finance", "description": "Zero-TVL bridge. ~2 second transfers. $18B+ processed." },
+      { "name": "Wormhole", "status": "live", "url": "https://wormhole.com", "description": "Cross-chain messaging. $2.5B valuation." },
+      { "name": "LayerZero", "status": "live", "url": "https://layerzero.network", "description": "Omnichain interop. 120+ chains. $3B valuation." },
+      { "name": "Jupiter", "status": "live", "url": "https://jup.ag", "description": "Solana-dominant DEX aggregator" },
+      { "name": "1inch", "status": "live", "url": "https://1inch.io", "description": "400K+ tokens. Fusion gasless swaps." },
+      { "name": "Uniswap", "status": "live", "url": "https://uniswap.org", "description": "Deepest liquidity. ERC-7683 intent standard." },
+      { "name": "CoW Protocol", "status": "live", "url": "https://cow.fi", "description": "MEV protection via batch auctions" },
+      { "name": "MoonPay", "status": "live", "url": "https://moonpay.com", "description": "Fiat onramp + agent products. $555M raised." }
+    ]},
+    { "id": "L1", "name": "Wallet & Key Management", "question": "Where the keys live", "projects": [
+      { "name": "Coinbase Agentic Wallets", "status": "live", "url": "https://coinbase.com/developer-platform", "description": "TEE agent wallets with spending limits, gasless on Base" },
+      { "name": "MoonPay OWS", "status": "live", "url": "https://openwallet.sh", "description": "Open-source wallet standard (MIT). 8 chain families. x402-native." },
+      { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Dual-key agent wallets with stablecoin + card rails" },
+      { "name": "Thirdweb", "status": "live", "url": "https://thirdweb.com", "description": "Engine backend wallets. Deepest AI framework integrations." },
+      { "name": "Openfort", "status": "live", "url": "https://openfort.io", "description": "Open-source, self-hostable agent wallets with TEE backend" },
+      { "name": "World AgentKit", "status": "live", "url": "https://world.org", "description": "Proof of human backing via World ID + ZK proofs" },
+      { "name": "Turnkey", "status": "live", "url": "https://turnkey.com", "description": "Non-custodial TEE key management. 50ms signing." },
+      { "name": "Privy", "status": "acquired", "acquirer": "Stripe", "url": "https://privy.io", "description": "Server wallets with TEE + key sharding." },
+      { "name": "Dynamic", "status": "acquired", "acquirer": "Fireblocks", "url": "https://dynamic.xyz", "description": "Embedded wallets with TSS-MPC." },
+      { "name": "Lit Protocol", "status": "live", "url": "https://litprotocol.com", "description": "Decentralized threshold MPC + TEE hybrid. 25M+ requests." },
+      { "name": "Safe", "status": "live", "url": "https://safe.global", "description": "Battle-tested multisig. $100B+ secured. Agents as signers." },
+      { "name": "ZeroDev", "status": "acquired", "acquirer": "Arbitrum", "url": "https://zerodev.app", "description": "ERC-7579 smart accounts." },
+      { "name": "Biconomy", "status": "live", "url": "https://biconomy.io", "description": "Nexus smart accounts with paymaster tooling" },
+      { "name": "Fireblocks", "status": "live", "url": "https://fireblocks.com", "description": "Enterprise MPC. $8B valuation. 1,800+ institutions." },
+      { "name": "Alchemy", "status": "live", "url": "https://alchemy.com", "description": "Smart wallets with Gas Manager and Bundler" },
+      { "name": "Phantom", "status": "live", "url": "https://phantom.app", "description": "Consumer wallet with MCP server for agent integration" },
+      { "name": "Natural", "status": "early", "url": "https://natural.co", "description": "Agentic payments platform — FDIC-insured wallets, Pay, MCP integration" }
+    ]},
+    { "id": "L0", "name": "Settlement", "question": "Where transactions land", "projects": [
+      { "name": "Base", "status": "live", "url": "https://base.org", "metadata": "119M txns", "description": "Coinbase L2. Dominant x402 chain. Gasless paymasters." },
+      { "name": "Solana", "status": "live", "url": "https://solana.com", "metadata": "38.6M txns", "description": "Leads in dollar volume share. Sub-second finality." },
+      { "name": "Ethereum", "status": "live", "url": "https://ethereum.org", "description": "Security/settlement layer for L2 agent activity" },
+      { "name": "Tempo", "status": "live", "url": "https://tempo.xyz", "metadata": "$5B", "description": "Purpose-built payments L1 by Stripe/Paradigm" },
+      { "name": "Arbitrum", "status": "live", "url": "https://arbitrum.io", "description": "$2M in AI agent grants. Acquired ZeroDev." },
+      { "name": "Sui", "status": "live", "url": "https://sui.io", "description": "Google AP2 launch partner. Object-centric model." },
+      { "name": "Polygon", "status": "live", "url": "https://polygon.technology", "description": "x402 facilitator support. OWS contributor." },
+      { "name": "BNB Chain", "status": "live", "url": "https://bnbchain.org", "description": "ERC-8004 deployed. BAP-578 Non-Fungible Agents standard." },
+      { "name": "Gnosis", "status": "live", "url": "https://gnosis.io", "description": "Safe origin. Autonolas agents active." },
+      { "name": "NEAR", "status": "early", "url": "https://near.org", "description": "Aggressive positioning but lacks volume proof" },
+      { "name": "Avalanche", "status": "live", "url": "https://avax.network", "description": "x402 facilitator support. AI grants category." },
+      { "name": "Kite", "status": "live", "url": "https://gokite.ai", "description": "First AI payment blockchain. Purpose-built for autonomous agent transactions." },
+      { "name": "SKALE", "status": "live", "url": "https://skale.space", "description": "Gasless x402 payments. v4 built for Internet of Agents. Zero-fee micropayments." }
+    ]}
   ],
   "consolidation": [
-    {
-      "acquirer": "Capital One",
-      "target": "Brex",
-      "value": "$5.15B",
-      "period": "2025-2026"
-    },
-    {
-      "acquirer": "Mastercard",
-      "target": "BVNK",
-      "value": "$1.8B",
-      "period": "2025-2026"
-    },
-    {
-      "acquirer": "Stripe",
-      "target": "Bridge",
-      "value": "$1.1B",
-      "period": "2025-2026"
-    },
-    {
-      "acquirer": "LayerZero",
-      "target": "Stargate",
-      "value": "$120M",
-      "period": "2025-2026"
-    },
-    {
-      "acquirer": "Stripe",
-      "target": "Privy",
-      "period": "2025-2026"
-    },
-    {
-      "acquirer": "Fireblocks",
-      "target": "Dynamic",
-      "period": "2025-2026"
-    },
-    {
-      "acquirer": "Arbitrum",
-      "target": "ZeroDev",
-      "period": "2025-2026"
-    }
+    { "acquirer": "Capital One", "target": "Brex", "value": "$5.15B", "period": "2025-2026" },
+    { "acquirer": "Mastercard", "target": "BVNK", "value": "$1.8B", "period": "2025-2026" },
+    { "acquirer": "Stripe", "target": "Bridge", "value": "$1.1B", "period": "2025-2026" },
+    { "acquirer": "LayerZero", "target": "Stargate", "value": "$120M", "period": "2025-2026" },
+    { "acquirer": "Stripe", "target": "Privy", "period": "2025-2026" },
+    { "acquirer": "Fireblocks", "target": "Dynamic", "period": "2025-2026" },
+    { "acquirer": "Arbitrum", "target": "ZeroDev", "period": "2025-2026" }
   ],
   "vertical_integration": [
-    {
-      "name": "Coinbase",
-      "color": "#0052ff",
-      "layers": [
-        "L0",
-        "L1",
-        "L2",
-        "L3",
-        "L4"
-      ]
-    },
-    {
-      "name": "Stripe",
-      "color": "#635bff",
-      "layers": [
-        "L0",
-        "L1",
-        "L2",
-        "L3",
-        "L4"
-      ]
-    },
-    {
-      "name": "Circle",
-      "color": "#00a868",
-      "layers": [
-        "L0",
-        "L1",
-        "L2",
-        "L3"
-      ]
-    },
-    {
-      "name": "Google",
-      "color": "#c0392b",
-      "layers": [
-        "L3",
-        "L4"
-      ]
-    },
-    {
-      "name": "MoonPay",
-      "color": "#7b61ff",
-      "layers": [
-        "L1",
-        "L2",
-        "L3"
-      ]
-    }
+    { "name": "Coinbase", "layers": ["L0","L1","L2","L3","L4"] },
+    { "name": "Stripe", "layers": ["L0","L1","L2","L3","L4"] },
+    { "name": "Circle", "layers": ["L0","L1","L2","L3"] },
+    { "name": "Google", "layers": ["L3","L4"] },
+    { "name": "MoonPay", "layers": ["L1","L2","L3"] }
   ],
   "status_legend": {
     "live": "Shipped and in production",
@@ -2317,115 +1238,94 @@
 </script>
 
 <script>
-// Data source: static JSON embedded above, authored by @jordanlyall.
-// No user input reaches the DOM. All values pass through esc() before insertion.
-(function () {
-  var data = JSON.parse(document.getElementById('stack-data').textContent);
+// Filter + search
+(function(){
+  const TOTAL = document.querySelectorAll('.t').length;
+  document.getElementById('hero-count').textContent = TOTAL + ' projects mapped';
+  document.getElementById('footer-count').textContent = TOTAL + ' projects across 6 layers';
+  document.getElementById('q').placeholder = 'Search ' + TOTAL + ' projects...';
+  let activeF = 'all', q = '';
 
-  function esc(s) {
-    return s == null ? '' : String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
+  function run(){
+    let shown = 0;
+    document.querySelectorAll('.t').forEach(c=>{
+      const name = c.textContent.replace(/\s+/g,' ').trim().toLowerCase();
+      const tip = (c.getAttribute('data-tip') || '').toLowerCase();
+      const matchQ = !q || name.includes(q) || tip.includes(q);
+      let matchF = true;
+      if(activeF !== 'all'){
+        if(activeF === 'live') matchF = !c.classList.contains('early') && !c.classList.contains('ann') && !c.classList.contains('acq');
+        else matchF = c.classList.contains(activeF);
+      }
+      const vis = matchQ && matchF;
+      c.style.display = vis ? '' : 'none';
+      if(vis) shown++;
+    });
+
+    // Hide rows with no visible chips; hide orphaned seps
+    document.querySelectorAll('.row').forEach(row=>{
+      const chips = row.querySelectorAll('.t');
+      const anyVis = [...chips].some(c=>c.style.display !== 'none');
+      row.style.display = anyVis ? '' : 'none';
+      // Hide sep if no visible chip follows it before next sep/end
+      row.querySelectorAll('.sep').forEach(sep=>{
+        let next = sep.nextElementSibling;
+        let hasVis = false;
+        while(next && !next.classList.contains('sep')){
+          if(next.classList.contains('t') && next.style.display !== 'none'){ hasVis = true; break; }
+          next = next.nextElementSibling;
+        }
+        sep.style.display = hasVis ? '' : 'none';
+      });
+    });
+
+    document.getElementById('fc').textContent = shown === TOTAL ? TOTAL+' projects' : shown+' of '+TOTAL;
+    document.getElementById('nr').style.display = shown === 0 ? 'block' : 'none';
   }
 
-  // Deck
-  document.getElementById('deck-text').textContent = data.description;
-
-  // Updated label
-  var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  var d = new Date(data.updated);
-  document.getElementById('updated-label').textContent =
-    months[d.getUTCMonth()] + ' ' + d.getUTCFullYear() + ' \u2014 v' + data.version;
-
-  // Stats
-  var statsRows = [
-    { v: data.stats.volume_9mo,   l: 'Volume (9mo)' },
-    { v: data.stats.transactions, l: 'Transactions'  },
-    { v: data.stats.annualized,   l: 'Annualized'    }
-  ];
-  document.getElementById('stats-container').innerHTML = statsRows.map(function(s) {
-    return '<div><div class="num-v">' + esc(s.v) + '</div><div class="num-l">' + esc(s.l) + '</div></div>';
-  }).join('');
-
-  // Stack
-  var stackEl = document.getElementById('stack-container');
-  var layerOrder = ['L5','L4','L3','L2','L1','L0'];
-  layerOrder.forEach(function(lid) {
-    var layer = data.layers.filter(function(l) { return l.id === lid; })[0];
-    if (!layer) return;
-    var num = lid.replace('L','').replace(/^(\d)$/, '0$1');
-    var tags = layer.projects.map(function(p) {
-      var cls = 't';
-      var inner = esc(p.name);
-      if (p.status === 'early')    { cls = 't early'; }
-      else if (p.status === 'announced') { cls = 't ann'; }
-      else if (p.status === 'acquired')  {
-        cls = 't acq';
-        if (p.acquisition_value) inner += '<span class="sm">' + esc(p.acquisition_value) + '</span>';
-      }
-      if (p.metadata && p.status !== 'acquired') {
-        inner += '<span class="sm">' + esc(p.metadata) + '</span>';
-      }
-      if (p.id) {
-        return '<a href="/projects?id=' + esc(p.id) + '" class="' + cls + '" style="text-decoration:none;">' + inner + '</a>';
-      }
-      return '<span class="' + cls + '">' + inner + '</span>';
-    }).join('');
-
-    var row = document.createElement('div');
-    row.className = 'row';
-    row.setAttribute('data-layer', lid);
-    row.innerHTML =
-      '<div class="row-label">' +
-        '<span class="row-n">' + esc(num) + '</span>' +
-        '<div>' +
-          '<div class="row-title">' + esc(layer.name) + '</div>' +
-          '<div class="row-q">' + esc(layer.question) + '</div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="row-content">' + tags + '</div>';
-    stackEl.appendChild(row);
+  document.getElementById('q').addEventListener('input', e=>{ q=e.target.value.toLowerCase().trim(); run(); });
+  document.querySelectorAll('.fb').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      activeF = btn.dataset.f;
+      document.querySelectorAll('.fb').forEach(b=>b.classList.toggle('on', b===btn));
+      run();
+    });
   });
-
-  // Vertical integration
-  var allLayers = ['L0','L1','L2','L3','L4','L5'];
-  var viEl = document.getElementById('vi-container');
-  var viHtml = '';
-  data.vertical_integration.forEach(function(co) {
-    var indices = co.layers.map(function(l) { return allLayers.indexOf(l); });
-    var minI = Math.min.apply(null, indices);
-    var maxI = Math.max.apply(null, indices);
-    var leftPct  = (minI / 6 * 100).toFixed(1) + '%';
-    var rightPct = ((5 - maxI) / 6 * 100).toFixed(1) + '%';
-    var dots = allLayers.map(function(l) {
-      var active = co.layers.indexOf(l) !== -1;
-      return '<div class="vi-dot">' +
-        (active ? '<div style="width:8px;height:8px;border-radius:50%;background:' + esc(co.color) + '"></div>' : '') +
-        '</div>';
-    }).join('');
-    viHtml +=
-      '<div class="vi-row">' +
-        '<div class="vi-name" style="color:' + esc(co.color) + '">' + esc(co.name) + '</div>' +
-        '<div class="vi-track">' +
-          '<div class="vi-fill" style="left:' + leftPct + ';right:' + rightPct + ';background:' + esc(co.color) + '"></div>' +
-          '<div class="vi-dots">' + dots + '</div>' +
-        '</div>' +
-      '</div>';
-  });
-  viHtml += '<div class="vi-labels">' + allLayers.map(function(l) { return '<span>' + l + '</span>'; }).join('') + '</div>';
-  viEl.innerHTML = viHtml;
-
-  // Consolidation
-  var maEl = document.getElementById('ma-container');
-  maEl.innerHTML = '<ul class="ma-list">' +
-    data.consolidation.map(function(m) {
-      return '<li>' + esc(m.acquirer) + ' <span class="arr">&rarr;</span> ' + esc(m.target) +
-        (m.value ? ' <span class="pr">' + esc(m.value) + '</span>' : '') + '</li>';
-    }).join('') +
-    '</ul>';
 }());
+
+function copyEmbed(el){
+  const code = el.querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(()=>{
+    const btn = el.querySelector('.embed-copy');
+    btn.textContent = 'Copied!';
+    setTimeout(()=>{ btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+async function doSubscribe(email,btn,msg){
+  btn.textContent='...';btn.disabled=true;
+  try{
+    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    if(r.ok){msg.textContent='Subscribed.';msg.style.color='var(--secondary)';msg.style.display='inline';btn.style.display='none';}
+    else{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
+  }catch{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
+}
+document.getElementById('nsf').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=document.getElementById('nse').value,b=document.getElementById('nsb'),i=document.getElementById('nse');
+  b.textContent='...';b.disabled=true;
+  try{
+    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})});
+    if(r.ok){b.textContent='✓';i.value='';i.placeholder='Subscribed!';}
+    else{b.textContent='Subscribe';b.disabled=false;}
+  }catch{b.textContent='Subscribe';b.disabled=false;}
+});
+document.getElementById('sf').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const v=document.getElementById('se').value;
+  await doSubscribe(v,document.getElementById('sb'),document.getElementById('sm'));
+  document.getElementById('se').value='';
+});
 </script>
 </body>
 </html>
