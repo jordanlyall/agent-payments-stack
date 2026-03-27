@@ -2425,7 +2425,8 @@
           "npm": {
             "package": "@biconomy/abstractjs",
             "weekly_downloads": 6870
-          }
+          },
+          "editorial": "Mid-migration: biconomy-client-sdk (v4.5.7, deprecated) being replaced by @biconomy/abstractjs (v1.1.20, active). Newer package already has higher weekly downloads."
         },
         {
           "layer": "L1",
@@ -2467,7 +2468,8 @@
           "npm": {
             "package": "alchemy-sdk",
             "weekly_downloads": 53754
-          }
+          },
+          "editorial": "alchemy-sdk deprecated Jan 2026 (archived). Users directed to @account-kit/core, Viem, or Solana Web3JS. Still 54K weekly npm downloads — significant legacy drag."
         },
         {
           "layer": "L1",
@@ -2509,7 +2511,8 @@
           "npm": {
             "package": "@walletconnect/sign-client",
             "weekly_downloads": 853574
-          }
+          },
+          "editorial": "Rebranded to Reown. @walletconnect packages now under reown-npm-org. web3wallet deprecated in favor of Reown WalletKit."
         },
         {
           "layer": "L1",

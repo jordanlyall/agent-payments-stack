@@ -107,6 +107,7 @@
   .t.acq, a.t.acq { background: rgba(217,97,63,0.09); color: var(--acq); border: 1px solid rgba(217,97,63,0.2); font-weight: 480; }
   a.t.acq:hover { background: rgba(217,97,63,0.16); border-color: rgba(217,97,63,0.32); }
   .t .sm { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; opacity: 0.45; margin-left: 4px; }
+  .t .fav { width: 12px; height: 12px; border-radius: 2px; margin-right: 5px; flex-shrink: 0; opacity: 0.8; display: block; }
   .sep { width: 2px; height: 2px; border-radius: 50%; background: var(--faint); margin: 0 5px; flex-shrink: 0; border: 1px solid var(--faint); }
 
   /* Bottom grid */
@@ -866,28 +867,28 @@
         <div><div class="row-title"><a href="#application">Application</a> <span class="row-count">24</span></div><div class="row-q">What gets bought and why</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="/virtuals-protocol" data-tip="Tokenized AI agent creation on Base" data-id="virtuals-protocol">Virtuals Protocol</a>
-        <a class="t" href="/elizaos" data-tip="Open-source multi-agent framework, 17K GitHub stars" data-id="elizaos">ElizaOS</a>
-        <a class="t" href="/olas" data-tip="Decentralized agent services with on-chain staking" data-id="olas">Olas</a>
-        <a class="t" href="/botto" data-tip="Autonomous AI artist, $5M+ sales, 15K-member DAO" data-id="botto">Botto</a>
+        <a class="t" href="/virtuals-protocol" data-tip="Tokenized AI agent creation on Base" data-id="virtuals-protocol" data-url="https://virtuals.io">Virtuals Protocol</a>
+        <a class="t" href="/elizaos" data-tip="Open-source multi-agent framework, 17K GitHub stars" data-id="elizaos" data-url="https://elizaos.ai">ElizaOS</a>
+        <a class="t" href="/olas" data-tip="Decentralized agent services with on-chain staking" data-id="olas" data-url="https://olas.network">Olas</a>
+        <a class="t" href="/botto" data-tip="Autonomous AI artist, $5M+ sales, 15K-member DAO" data-id="botto" data-url="https://botto.com">Botto</a>
         <span class="sep"></span>
-        <a class="t" href="/axiom" data-tip="DeFi trading agents for memecoins, perps, yield" data-id="axiom">Axiom</a>
-        <a class="t" href="/theoriq" data-tip="AI-managed yield vault, $25M TVL" data-id="theoriq">Theoriq</a>
-        <a class="t" href="/giza-arma" data-tip="Cross-protocol stablecoin yield optimization on Base" data-id="giza-arma">Giza ARMA</a>
-        <a class="t" href="/almanak" data-tip="Non-custodial DeFi strategy automation" data-id="almanak">Almanak</a>
-        <a class="t acq" href="/brahma-fi" data-tip="Agent-based DeFi console with sub-accounts" data-id="brahma-fi">Brahma.fi</a>
-        <a class="t" href="/kraken-cli" data-id="kraken-cli" data-tip="Exchange CLI with built-in MCP server. 134 commands. First exchange natively compatible with Claude Code.">Kraken CLI</a>
+        <a class="t" href="/axiom" data-tip="DeFi trading agents for memecoins, perps, yield" data-id="axiom" data-url="https://axiom.trade">Axiom</a>
+        <a class="t" href="/theoriq" data-tip="AI-managed yield vault, $25M TVL" data-id="theoriq" data-url="https://www.theoriq.ai">Theoriq</a>
+        <a class="t" href="/giza-arma" data-tip="Cross-protocol stablecoin yield optimization on Base" data-id="giza-arma" data-url="https://www.gizatech.xyz">Giza ARMA</a>
+        <a class="t" href="/almanak" data-tip="Non-custodial DeFi strategy automation" data-id="almanak" data-url="https://almanak.co">Almanak</a>
+        <a class="t acq" href="/brahma-fi" data-tip="Agent-based DeFi console with sub-accounts" data-id="brahma-fi" data-url="https://brahma.fi">Brahma.fi</a>
+        <a class="t" href="/kraken-cli" data-id="kraken-cli" data-url="https://blog.kraken.com/news/industry-news/announcing-the-kraken-cli">Kraken CLI</a>
         <span class="sep"></span>
-        <a class="t" href="/x402engine" data-tip="45 pay-per-call APIs via x402" data-id="x402engine">x402engine</a>
-        <a class="t" href="/nansen" data-tip="On-chain analytics at $0.01/query via x402" data-id="nansen">Nansen</a>
-        <a class="t" href="/akash" data-tip="Decentralized cloud with agent deploy" data-id="akash">Akash</a>
-        <a class="t" href="/art-blocks" data-tip="Generative art platform with MCP + Universal Purchase API" data-id="art-blocks">Art Blocks</a>
+        <a class="t" href="/x402engine" data-tip="45 pay-per-call APIs via x402" data-id="x402engine" data-url="https://x402.org">x402engine</a>
+        <a class="t" href="/nansen" data-tip="On-chain analytics at $0.01/query via x402" data-id="nansen" data-url="https://www.nansen.ai">Nansen</a>
+        <a class="t" href="/akash" data-tip="Decentralized cloud with agent deploy" data-id="akash" data-url="https://akash.network">Akash</a>
+        <a class="t" href="/art-blocks" data-tip="Generative art platform with MCP + Universal Purchase API" data-id="art-blocks" data-url="https://artblocks.io">Art Blocks</a>
         <a class="t" href="/mint-day" data-tip="NFT minting service for AI agents" data-id="mint-day">mint.day</a>
-        <a class="t" href="/apify" data-tip="Web scraping/automation with Skyfire payment integration" data-id="apify">Apify</a>
-        <a class="t" href="/render" data-tip="GPU marketplace for compute" data-id="render">Render</a>
-        <a class="t" href="/ocean-protocol" data-tip="Data marketplace, $800M/month Predictoor volume" data-id="ocean-protocol">Ocean Protocol</a>
-        <a class="t" href="/run402" data-tip="Pay-per-call x402 agent API gateway" data-id="run402">Run402</a>
-        <a class="t" href="/cascade" data-tip="Agent payment routing and orchestration layer" data-id="cascade">Cascade</a>
+        <a class="t" href="/apify" data-tip="Web scraping/automation with Skyfire payment integration" data-id="apify" data-url="https://apify.com">Apify</a>
+        <a class="t" href="/render" data-tip="GPU marketplace for compute" data-id="render" data-url="https://rendernetwork.com">Render</a>
+        <a class="t" href="/ocean-protocol" data-tip="Data marketplace, $800M/month Predictoor volume" data-id="ocean-protocol" data-url="https://oceanprotocol.com">Ocean Protocol</a>
+        <a class="t" href="/run402" data-tip="Pay-per-call x402 agent API gateway" data-id="run402" data-url="https://run402.com">Run402</a>
+        <a class="t" href="/cascade" data-tip="Agent payment routing and orchestration layer" data-id="cascade" data-url="https://cascade.fyi">Cascade</a>
       </div>
     </div>
 
@@ -898,24 +899,24 @@
         <div><div class="row-title"><a href="#governance">Governance & Policy</a> <span class="row-count">30</span></div><div class="row-q">May this agent spend</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="/ramp-agent-cards" data-tip="Virtual Visa cards for agents with spend limits" data-id="ramp-agent-cards">Ramp Agent Cards</a>
-        <a class="t acq" href="https://brex.com" target="_blank" data-tip="Agent Mesh architecture. Acquired by Capital One." data-id="brex">Brex <span class="sm">$5.15B</span></a>
-        <a class="t" href="/skyfire-kya" data-tip="Know Your Agent protocol with per-tx caps" data-id="skyfire-kya">Skyfire KYA</a>
-        <a class="t" href="/sponge-gateway" data-tip="Agents onboard and pay businesses via uploaded API specs" data-id="sponge-gateway">Sponge Gateway</a>
-        <a class="t early" href="https://paymanai.net" target="_blank" data-tip="AI-to-human payments with segregated wallets" data-id="payman-ai">Payman AI</a>
+        <a class="t" href="/ramp-agent-cards" data-tip="Virtual Visa cards for agents with spend limits" data-id="ramp-agent-cards" data-url="https://ramp.com">Ramp Agent Cards</a>
+        <a class="t acq" href="https://brex.com" target="_blank" data-tip="Agent Mesh architecture. Acquired by Capital One." data-id="brex" data-url="https://www.brex.com">Brex <span class="sm">$5.15B</span></a>
+        <a class="t" href="/skyfire-kya" data-tip="Know Your Agent protocol with per-tx caps" data-id="skyfire-kya" data-url="https://skyfire.xyz">Skyfire KYA</a>
+        <a class="t" href="/sponge-gateway" data-tip="Agents onboard and pay businesses via uploaded API specs" data-id="sponge-gateway" data-url="https://paysponge.com">Sponge Gateway</a>
+        <a class="t early" href="https://paymanai.net" target="_blank" data-tip="AI-to-human payments with segregated wallets" data-id="payman-ai" data-url="https://paymanai.com">Payman AI</a>
         <span class="sep"></span>
-        <a class="t" href="/erc-8004" data-tip="On-chain agent identity and reputation registries" data-id="erc-8004">ERC-8004</a>
-        <a class="t" href="/ows-policies" data-tip="Pre-signing policy engine in MoonPay OWS" data-id="ows-policies">OWS Policies</a>
-        <a class="t" href="/visa-intelligent-commerce" data-tip="Agent-initiated tokenized card transactions, 100+ partners" data-id="visa-intelligent-commerce">Visa Intelligent Commerce</a>
-        <a class="t" href="/stripe-spts" data-tip="Scoped, time-limited tokens for agent card payments" data-id="stripe-spts">Stripe SPTs</a>
-        <a class="t" href="/crossmint-l4" data-tip="Open payment standard with Visa, Circle, Solana" data-id="crossmint-l4">Crossmint</a>
+        <a class="t" href="/erc-8004" data-tip="On-chain agent identity and reputation registries" data-id="erc-8004" data-url="https://eips.ethereum.org/EIPS/eip-8004">ERC-8004</a>
+        <a class="t" href="/ows-policies" data-tip="Pre-signing policy engine in MoonPay OWS" data-id="ows-policies" data-url="https://openwallet.sh">OWS Policies</a>
+        <a class="t" href="/visa-intelligent-commerce" data-tip="Agent-initiated tokenized card transactions, 100+ partners" data-id="visa-intelligent-commerce" data-url="https://corporate.visa.com/en/products/intelligent-commerce.html">Visa Intelligent Commerce</a>
+        <a class="t" href="/stripe-spts" data-tip="Scoped, time-limited tokens for agent card payments" data-id="stripe-spts" data-url="https://stripe.com">Stripe SPTs</a>
+        <a class="t" href="/crossmint-l4" data-tip="Open payment standard with Visa, Circle, Solana" data-id="crossmint-l4" data-url="https://www.crossmint.com">Crossmint</a>
         <span class="t" data-tip="Tokenization framework for agent-initiated transactions" data-id="mastercard-agentic-tokens">Mastercard Agentic Tokens</span>
-        <a class="t" href="/agentpay-l4" data-tip="Scoped on-chain spending permissions for AI agents" data-id="agentpay-l4">AgentPay</a>
+        <a class="t" href="/agentpay-l4" data-tip="Scoped on-chain spending permissions for AI agents" data-id="agentpay-l4" data-url="https://agent.tech">AgentPay</a>
         <span class="sep"></span>
-        <a class="t" href="/ghostspeak" data-tip="Trust and reputation layer for agent commerce. Ghost Score, 10K+ agents tracked." data-id="ghostspeak">GhostSpeak</a>
-        <a class="t early" href="https://observerprotocol.org" target="_blank" data-tip="Rail-neutral verification layer for autonomous agent transactions. Bitcoin-anchored identity." data-id="observer-protocol">Observer Protocol</a>
-        <a class="t" href="/verifiable-intent" data-tip="Mastercard + Google open standard. Cryptographic proof of agent authorization." data-id="verifiable-intent">Verifiable Intent</a>
-        <a class="t early" href="https://openmatter.xyz" target="_blank" data-tip="ZK execution firewall for payment MCPs. Wraps Stripe MCP with RISC Zero zkVM — blocks malformed tool calls, API key management, PII redaction." data-id="openmatter">OpenMatter</a>
+        <a class="t" href="/ghostspeak" data-tip="Trust and reputation layer for agent commerce. Ghost Score, 10K+ agents tracked." data-id="ghostspeak" data-url="https://ghostspeak.io">GhostSpeak</a>
+        <a class="t early" href="https://observerprotocol.org" target="_blank" data-tip="Rail-neutral verification layer for autonomous agent transactions. Bitcoin-anchored identity." data-id="observer-protocol" data-url="https://observerprotocol.org">Observer Protocol</a>
+        <a class="t" href="/verifiable-intent" data-tip="Mastercard + Google open standard. Cryptographic proof of agent authorization." data-id="verifiable-intent" data-url="https://mastercard.com">Verifiable Intent</a>
+        <a class="t early" href="https://openmatter.xyz" target="_blank" data-tip="ZK execution firewall for payment MCPs. Wraps Stripe MCP with RISC Zero zkVM — blocks malformed tool calls, API key management, PII redaction." data-id="openmatter" data-url="https://github.com/openmatter">OpenMatter</a>
       </div>
     </div>
 
@@ -926,25 +927,25 @@
         <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">26</span></div><div class="row-q">How the payment flows</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="/x402" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem." data-id="x402">x402 <span class="sm">75M/30d</span></a>
-        <a class="t" href="/tempo-mpp" data-tip="Multi-rail sessions: stablecoins + cards + Bitcoin" data-id="tempo-mpp">Tempo MPP <span class="sm">100+ svc</span></a>
-        <a class="t ann" href="https://github.com/google-agentic-commerce/AP2" target="_blank" data-tip="Payment-agnostic authorization via signed mandates" data-id="google-ap2">Google AP2 <span class="sm">60+ partners</span></a>
-        <a class="t" href="/acp" data-tip="Agentic Commerce Protocol. Checkout layer paired with MPP." data-id="acp">ACP <span class="sm">OpenAI + Stripe</span></a>
+        <a class="t" href="/x402" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem." data-id="x402" data-url="https://www.x402.org">x402 <span class="sm">75M/30d</span></a>
+        <a class="t" href="/tempo-mpp" data-tip="Multi-rail sessions: stablecoins + cards + Bitcoin" data-id="tempo-mpp" data-url="https://tempo.xyz">Tempo MPP <span class="sm">100+ svc</span></a>
+        <a class="t ann" href="https://github.com/google-agentic-commerce/AP2" target="_blank" data-tip="Payment-agnostic authorization via signed mandates" data-id="google-ap2" data-url="https://ap2-protocol.org">Google AP2 <span class="sm">60+ partners</span></a>
+        <a class="t" href="/acp" data-tip="Agentic Commerce Protocol. Checkout layer paired with MPP." data-id="acp" data-url="https://www.agenticcommerce.dev">ACP <span class="sm">OpenAI + Stripe</span></a>
         <span class="sep"></span>
-        <a class="t early" href="https://circle.com" target="_blank" data-tip="Gas-free USDC micropayments, $0.000001 minimum. Testnet." data-id="circle-nanopayments">Circle Nanopayments</a>
+        <a class="t early" href="https://circle.com" target="_blank" data-tip="Gas-free USDC micropayments, $0.000001 minimum. Testnet." data-id="circle-nanopayments" data-url="https://circle.com">Circle Nanopayments</a>
         <a class="t" href="/l402-lightning" data-tip="HTTP auth + Lightning micropayments since 2020" data-id="l402-lightning">L402 / Lightning</a>
-        <a class="t early" href="https://www.circuitandchisel.com" target="_blank" data-tip="Full commerce lifecycle protocol. $19.2M seed." data-id="atxp">ATXP</a>
-        <a class="t" href="/fewsats" data-tip="L402-compatible SDK and API marketplace for agents" data-id="fewsats">Fewsats</a>
-        <a class="t" href="/superfluid" data-tip="Per-second token streaming" data-id="superfluid">Superfluid</a>
+        <a class="t early" href="https://www.circuitandchisel.com" target="_blank" data-tip="Full commerce lifecycle protocol. $19.2M seed." data-id="atxp" data-url="https://circuitandchisel.com">ATXP</a>
+        <a class="t" href="/fewsats" data-tip="L402-compatible SDK and API marketplace for agents" data-id="fewsats" data-url="https://www.fewsats.com">Fewsats</a>
+        <a class="t" href="/superfluid" data-tip="Per-second token streaming" data-id="superfluid" data-url="https://superfluid.finance">Superfluid</a>
         <span class="sep"></span>
-        <a class="t early" href="https://eips.ethereum.org/EIPS/eip-8183" target="_blank" data-tip="Programmable escrow for conditional agent-to-agent payments" data-id="erc-8183">ERC-8183</a>
-        <a class="t" href="/interledger" data-tip="Cross-ledger value routing. TCP/IP for money." data-id="interledger">Interledger</a>
-        <a class="t" href="/agentpay-l3" data-tip="Scoped on-chain spending permissions for AI agents" data-id="agentpay-l3">AgentPay</a>
-        <a class="t" href="/dhali" data-tip="Pay-per-use API micropayment infrastructure" data-id="dhali">Dhali</a>
+        <a class="t early" href="https://eips.ethereum.org/EIPS/eip-8183" target="_blank" data-tip="Programmable escrow for conditional agent-to-agent payments" data-id="erc-8183" data-url="https://eips.ethereum.org/EIPS/eip-8183">ERC-8183</a>
+        <a class="t" href="/interledger" data-tip="Cross-ledger value routing. TCP/IP for money." data-id="interledger" data-url="https://interledger.org">Interledger</a>
+        <a class="t" href="/agentpay-l3" data-tip="Scoped on-chain spending permissions for AI agents" data-id="agentpay-l3" data-url="https://agent.tech">AgentPay</a>
+        <a class="t" href="/dhali" data-tip="Pay-per-use API micropayment infrastructure" data-id="dhali" data-url="https://dhali.io">Dhali</a>
         <a class="t early" href="https://x402.org" target="_blank" data-tip="Signed Commerce Permissions — scoped spending authorization via x402" data-id="x402s-scp">x402s SCP</a>
-        <a class="t" href="/faremeter" data-tip="x402 + MPP library for EVM and Solana. Frictionless agent payments." data-id="faremeter">Faremeter</a>
-        <a class="t" href="/masumi" data-tip="Agent-to-agent payment network on Cardano. Escrow, registry, identity." data-id="masumi">Masumi</a>
-        <a class="t early" href="https://backpac.xyz" target="_blank" data-tip="Open-source CLI for agentic payments and RPC orchestration across multiple chains." data-id="backpac">Backpac</a>
+        <a class="t" href="/faremeter" data-tip="x402 + MPP library for EVM and Solana. Frictionless agent payments." data-id="faremeter" data-url="https://github.com/faremeter/faremeter">Faremeter</a>
+        <a class="t" href="/masumi" data-tip="Agent-to-agent payment network on Cardano. Escrow, registry, identity." data-id="masumi" data-url="https://masumi.network">Masumi</a>
+        <a class="t early" href="https://backpac.xyz" target="_blank" data-tip="Open-source CLI for agentic payments and RPC orchestration across multiple chains." data-id="backpac" data-url="https://backpac.xyz">Backpac</a>
       </div>
     </div>
 
@@ -955,30 +956,30 @@
         <div><div class="row-title"><a href="#routing">Routing & Abstraction</a> <span class="row-count">22</span></div><div class="row-q">Which chain, token, rail</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="/skyfire" data-tip="'Visa for the AI economy.' KYA identity, $9.5M seed." data-id="skyfire">Skyfire</a>
-        <a class="t" href="/mesh" data-tip="Routes payments across 100+ wallets/exchanges. Powers PayPal." data-id="mesh">Mesh</a>
-        <a class="t" href="/crossmint-l2" data-tip="Dual-rail: Visa/Mastercard cards + stablecoin wallets" data-id="crossmint-l2">Crossmint</a>
-        <a class="t" href="/biconomy-dan" data-tip="Delegated auth for agents to execute on-chain on users' behalf" data-id="biconomy-dan">Biconomy DAN</a>
-        <a class="t acq" href="https://bvnk.com" target="_blank" data-tip="Enterprise stablecoin API. $30B+ volume. Acquired by Mastercard." data-id="bvnk">BVNK <span class="sm">MC $1.8B</span></a>
-        <a class="t" href="/unifold" data-tip="Multi-chain deposits in <10 lines of code. YC W26." data-id="unifold">Unifold</a>
+        <a class="t" href="/skyfire" data-tip="'Visa for the AI economy.' KYA identity, $9.5M seed." data-id="skyfire" data-url="https://skyfire.xyz">Skyfire</a>
+        <a class="t" href="/mesh" data-tip="Routes payments across 100+ wallets/exchanges. Powers PayPal." data-id="mesh" data-url="https://www.meshpay.com">Mesh</a>
+        <a class="t" href="/crossmint-l2" data-tip="Dual-rail: Visa/Mastercard cards + stablecoin wallets" data-id="crossmint-l2" data-url="https://www.crossmint.com">Crossmint</a>
+        <a class="t" href="/biconomy-dan" data-tip="Delegated auth for agents to execute on-chain on users' behalf" data-id="biconomy-dan" data-url="https://www.biconomy.io">Biconomy DAN</a>
+        <a class="t acq" href="https://bvnk.com" target="_blank" data-tip="Enterprise stablecoin API. $30B+ volume. Acquired by Mastercard." data-id="bvnk" data-url="https://bvnk.com">BVNK <span class="sm">MC $1.8B</span></a>
+        <a class="t" href="/unifold" data-tip="Multi-chain deposits in <10 lines of code. YC W26." data-id="unifold" data-url="https://unifold.io">Unifold</a>
         <span class="sep"></span>
-        <a class="t" href="/circle-cctp" data-tip="Native USDC burn-and-mint across 17 chains. $126B+ volume." data-id="circle-cctp">Circle CCTP</a>
-        <a class="t acq" href="https://bridge.xyz" target="_blank" data-tip="Stablecoin orchestration. Acquired by Stripe." data-id="bridge">Bridge <span class="sm">Stripe $1.1B</span></a>
-        <a class="t" href="/across" data-tip="Cross-chain intents. Co-authored ERC-7683." data-id="across">Across</a>
-        <a class="t" href="/li-fi" data-tip="Bridge/swap aggregator. 15+ bridges, 30+ DEXs." data-id="li-fi">Li.Fi</a>
-        <a class="t" href="/socket" data-tip="Cross-chain data and asset movement" data-id="socket">Socket</a>
-        <a class="t" href="/debridge" data-tip="Zero-TVL bridge. ~2 second transfers. $18B+ processed." data-id="debridge">deBridge</a>
-        <a class="t" href="/wormhole" data-tip="Cross-chain messaging. $2.5B valuation." data-id="wormhole">Wormhole</a>
-        <a class="t" href="/layerzero" data-tip="Omnichain interop. 120+ chains. $3B valuation." data-id="layerzero">LayerZero</a>
+        <a class="t" href="/circle-cctp" data-tip="Native USDC burn-and-mint across 17 chains. $126B+ volume." data-id="circle-cctp" data-url="https://www.circle.com/cross-chain-transfer-protocol">Circle CCTP</a>
+        <a class="t acq" href="https://bridge.xyz" target="_blank" data-tip="Stablecoin orchestration. Acquired by Stripe." data-id="bridge" data-url="https://www.bridge.xyz">Bridge <span class="sm">Stripe $1.1B</span></a>
+        <a class="t" href="/across" data-tip="Cross-chain intents. Co-authored ERC-7683." data-id="across" data-url="https://across.to">Across</a>
+        <a class="t" href="/li-fi" data-tip="Bridge/swap aggregator. 15+ bridges, 30+ DEXs." data-id="li-fi" data-url="https://li.fi">Li.Fi</a>
+        <a class="t" href="/socket" data-tip="Cross-chain data and asset movement" data-id="socket" data-url="https://socket.tech">Socket</a>
+        <a class="t" href="/debridge" data-tip="Zero-TVL bridge. ~2 second transfers. $18B+ processed." data-id="debridge" data-url="https://debridge.finance">deBridge</a>
+        <a class="t" href="/wormhole" data-tip="Cross-chain messaging. $2.5B valuation." data-id="wormhole" data-url="https://wormhole.com">Wormhole</a>
+        <a class="t" href="/layerzero" data-tip="Omnichain interop. 120+ chains. $3B valuation." data-id="layerzero" data-url="https://layerzero.network">LayerZero</a>
         <span class="sep"></span>
-        <a class="t" href="/jupiter" data-tip="Solana-dominant DEX aggregator" data-id="jupiter">Jupiter</a>
-        <a class="t" href="/1inch" data-tip="400K+ tokens. Fusion gasless swaps." data-id="1inch">1inch</a>
-        <a class="t" href="/uniswap" data-tip="Deepest liquidity. ERC-7683 intent standard." data-id="uniswap">Uniswap</a>
-        <a class="t" href="/cow-protocol" data-tip="MEV protection via batch auctions" data-id="cow-protocol">CoW Protocol</a>
-        <a class="t" href="/moonpay" data-tip="Fiat onramp + agent products. $555M raised." data-id="moonpay">MoonPay</a>
-        <a class="t" href="/reqcast" data-tip="Intent-based payment requests for agent commerce" data-id="reqcast">ReqCast</a>
-        <a class="t early" href="https://github.com/0xJim/kibble" target="_blank" data-tip="Cross-chain wallet funding for agents. Bridges USDC to the right chain via LI.FI before first payment. npm install kibble-pay." data-id="kibble">Kibble</a>
-        <a class="t" href="/reveel" data-tip="Cross-chain stablecoin payments with human-readable Pay(ID) usernames. Receive any stablecoin, settle in preferred currency. Agent-native." data-id="reveel">Reveel</a>
+        <a class="t" href="/jupiter" data-tip="Solana-dominant DEX aggregator" data-id="jupiter" data-url="https://jup.ag">Jupiter</a>
+        <a class="t" href="/1inch" data-tip="400K+ tokens. Fusion gasless swaps." data-id="1inch" data-url="https://1inch.io">1inch</a>
+        <a class="t" href="/uniswap" data-tip="Deepest liquidity. ERC-7683 intent standard." data-id="uniswap" data-url="https://uniswap.org">Uniswap</a>
+        <a class="t" href="/cow-protocol" data-tip="MEV protection via batch auctions" data-id="cow-protocol" data-url="https://cow.fi">CoW Protocol</a>
+        <a class="t" href="/moonpay" data-tip="Fiat onramp + agent products. $555M raised." data-id="moonpay" data-url="https://www.moonpay.com">MoonPay</a>
+        <a class="t" href="/reqcast" data-tip="Intent-based payment requests for agent commerce" data-id="reqcast" data-url="https://reqcast.com">ReqCast</a>
+        <a class="t early" href="https://github.com/0xJim/kibble" target="_blank" data-tip="Cross-chain wallet funding for agents. Bridges USDC to the right chain via LI.FI before first payment. npm install kibble-pay." data-id="kibble" data-url="https://github.com/0xJim/kibble">Kibble</a>
+        <a class="t" href="/reveel" data-tip="Cross-chain stablecoin payments with human-readable Pay(ID) usernames. Receive any stablecoin, settle in preferred currency. Agent-native." data-id="reveel" data-url="https://reveel.id">Reveel</a>
       </div>
     </div>
 
@@ -989,26 +990,26 @@
         <div><div class="row-title"><a href="#wallets">Wallet & Key Mgmt</a> <span class="row-count">19</span></div><div class="row-q">Where the keys live</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="/coinbase-agentic-wallets" data-tip="TEE agent wallets with spending limits, gasless on Base" data-id="coinbase-agentic-wallets">Coinbase Agentic Wallets</a>
-        <a class="t" href="/moonpay-ows" data-tip="Open-source wallet standard (MIT). 8 chain families. x402-native." data-id="moonpay-ows">MoonPay OWS</a>
-        <a class="t" href="/crossmint-l1" data-tip="Dual-key agent wallets with stablecoin + card rails" data-id="crossmint-l1">Crossmint</a>
-        <a class="t" href="/thirdweb" data-tip="Engine backend wallets. Deepest AI framework integrations." data-id="thirdweb">Thirdweb</a>
-        <a class="t" href="/openfort" data-tip="Open-source, self-hostable agent wallets with TEE backend" data-id="openfort">Openfort</a>
-        <a class="t" href="/world-agentkit" data-tip="Proof of human backing via World ID + ZK proofs" data-id="world-agentkit">World AgentKit</a>
+        <a class="t" href="/coinbase-agentic-wallets" data-tip="TEE agent wallets with spending limits, gasless on Base" data-id="coinbase-agentic-wallets" data-url="https://coinbase.com">Coinbase Agentic Wallets</a>
+        <a class="t" href="/moonpay-ows" data-tip="Open-source wallet standard (MIT). 8 chain families. x402-native." data-id="moonpay-ows" data-url="https://openwallet.sh">MoonPay OWS</a>
+        <a class="t" href="/crossmint-l1" data-tip="Dual-key agent wallets with stablecoin + card rails" data-id="crossmint-l1" data-url="https://www.crossmint.com">Crossmint</a>
+        <a class="t" href="/thirdweb" data-tip="Engine backend wallets. Deepest AI framework integrations." data-id="thirdweb" data-url="https://thirdweb.com">Thirdweb</a>
+        <a class="t" href="/openfort" data-tip="Open-source, self-hostable agent wallets with TEE backend" data-id="openfort" data-url="https://www.openfort.io">Openfort</a>
+        <a class="t" href="/world-agentkit" data-tip="Proof of human backing via World ID + ZK proofs" data-id="world-agentkit" data-url="https://world.org">World AgentKit</a>
         <span class="sep"></span>
-        <a class="t" href="/turnkey" data-tip="Non-custodial TEE key management. 50ms signing." data-id="turnkey">Turnkey</a>
-        <a class="t acq" href="https://privy.io" target="_blank" data-tip="Server wallets with TEE + key sharding. Acquired by Stripe." data-id="privy">Privy <span class="sm">Stripe</span></a>
-        <a class="t acq" href="https://dynamic.xyz" target="_blank" data-tip="Embedded wallets with TSS-MPC. Acquired by Fireblocks." data-id="dynamic">Dynamic <span class="sm">Fireblocks</span></a>
-        <a class="t" href="/lit-protocol" data-tip="Decentralized threshold MPC + TEE hybrid. 25M+ requests." data-id="lit-protocol">Lit Protocol</a>
-        <a class="t" href="/safe" data-tip="Battle-tested multisig. $100B+ secured. Agents as signers." data-id="safe">Safe</a>
-        <a class="t acq" href="https://zerodev.app" target="_blank" data-tip="ERC-7579 smart accounts. Acquired by Arbitrum." data-id="zerodev">ZeroDev <span class="sm">Arbitrum</span></a>
-        <a class="t" href="/biconomy" data-tip="Nexus smart accounts with paymaster tooling" data-id="biconomy">Biconomy</a>
-        <a class="t" href="/fireblocks" data-tip="Enterprise MPC. $8B valuation. 1,800+ institutions." data-id="fireblocks">Fireblocks</a>
-        <a class="t" href="/alchemy" data-tip="Smart wallets with Gas Manager and Bundler" data-id="alchemy">Alchemy</a>
-        <a class="t" href="/phantom" data-tip="Consumer wallet with MCP server for agent integration" data-id="phantom">Phantom</a>
-        <a class="t" href="/walletconnect" data-tip="Open protocol for wallet connections and agent signing" data-id="walletconnect">WalletConnect</a>
-        <a class="t" href="/dfns" data-tip="Delegated MPC key management and signing APIs" data-id="dfns">Dfns</a>
-        <a class="t early" href="https://natural.co" target="_blank" data-tip="Agentic payments platform — FDIC-insured wallets, Pay, MCP integration" data-id="natural">Natural</a>
+        <a class="t" href="/turnkey" data-tip="Non-custodial TEE key management. 50ms signing." data-id="turnkey" data-url="https://www.turnkey.com">Turnkey</a>
+        <a class="t acq" href="https://privy.io" target="_blank" data-tip="Server wallets with TEE + key sharding. Acquired by Stripe." data-id="privy" data-url="https://www.privy.io">Privy <span class="sm">Stripe</span></a>
+        <a class="t acq" href="https://dynamic.xyz" target="_blank" data-tip="Embedded wallets with TSS-MPC. Acquired by Fireblocks." data-id="dynamic" data-url="https://www.dynamic.xyz">Dynamic <span class="sm">Fireblocks</span></a>
+        <a class="t" href="/lit-protocol" data-tip="Decentralized threshold MPC + TEE hybrid. 25M+ requests." data-id="lit-protocol" data-url="https://www.litprotocol.com">Lit Protocol</a>
+        <a class="t" href="/safe" data-tip="Battle-tested multisig. $100B+ secured. Agents as signers." data-id="safe" data-url="https://safe.global">Safe</a>
+        <a class="t acq" href="https://zerodev.app" target="_blank" data-tip="ERC-7579 smart accounts. Acquired by Arbitrum." data-id="zerodev" data-url="https://zerodev.app">ZeroDev <span class="sm">Arbitrum</span></a>
+        <a class="t" href="/biconomy" data-tip="Nexus smart accounts with paymaster tooling" data-id="biconomy" data-url="https://www.biconomy.io">Biconomy</a>
+        <a class="t" href="/fireblocks" data-tip="Enterprise MPC. $8B valuation. 1,800+ institutions." data-id="fireblocks" data-url="https://fireblocks.com">Fireblocks</a>
+        <a class="t" href="/alchemy" data-tip="Smart wallets with Gas Manager and Bundler" data-id="alchemy" data-url="https://www.alchemy.com">Alchemy</a>
+        <a class="t" href="/phantom" data-tip="Consumer wallet with MCP server for agent integration" data-id="phantom" data-url="https://phantom.com">Phantom</a>
+        <a class="t" href="/walletconnect" data-tip="Open protocol for wallet connections and agent signing" data-id="walletconnect" data-url="https://walletconnect.com">WalletConnect</a>
+        <a class="t" href="/dfns" data-tip="Delegated MPC key management and signing APIs" data-id="dfns" data-url="https://dfns.co">Dfns</a>
+        <a class="t early" href="https://natural.co" target="_blank" data-tip="Agentic payments platform — FDIC-insured wallets, Pay, MCP integration" data-id="natural" data-url="https://natural.co">Natural</a>
       </div>
     </div>
 
@@ -1019,19 +1020,19 @@
         <div><div class="row-title"><a href="#settlement">Settlement</a> <span class="row-count">13</span></div><div class="row-q">Where transactions land</div></div>
       </div>
       <div class="row-content">
-        <a class="t" href="/base" data-tip="Coinbase L2. Dominant x402 chain. Gasless paymasters." data-id="base">Base <span class="sm">119M txns</span></a>
-        <a class="t" href="/solana" data-tip="Leads in dollar volume share. Sub-second finality." data-id="solana">Solana <span class="sm">38.6M txns</span></a>
-        <a class="t" href="/ethereum" data-tip="Security/settlement layer for L2 agent activity" data-id="ethereum">Ethereum</a>
-        <a class="t" href="/tempo" data-tip="Purpose-built payments L1 by Stripe/Paradigm" data-id="tempo">Tempo <span class="sm">$5B</span></a>
-        <a class="t" href="/arbitrum" data-tip="$2M in AI agent grants. Acquired ZeroDev." data-id="arbitrum">Arbitrum</a>
-        <a class="t" href="/sui" data-tip="Google AP2 launch partner. Object-centric model." data-id="sui">Sui</a>
-        <a class="t" href="/polygon" data-tip="x402 facilitator support. OWS contributor." data-id="polygon">Polygon</a>
-        <a class="t" href="/bnb-chain" data-tip="ERC-8004 deployed. BAP-578 Non-Fungible Agents standard." data-id="bnb-chain">BNB Chain</a>
-        <a class="t" href="/gnosis" data-tip="Safe origin. Autonolas agents active." data-id="gnosis">Gnosis</a>
-        <a class="t early" href="https://near.org" target="_blank" data-tip="Aggressive positioning but lacks volume proof" data-id="near">NEAR</a>
-        <a class="t" href="/avalanche" data-tip="x402 facilitator support. AI grants category." data-id="avalanche">Avalanche</a>
-        <a class="t" href="/kite" data-tip="First AI payment blockchain. Purpose-built for autonomous agent transactions." data-id="kite">Kite</a>
-        <a class="t" href="/skale" data-tip="Gasless x402 payments. v4 built for Internet of Agents. Zero-fee micropayments." data-id="skale">SKALE</a>
+        <a class="t" href="/base" data-tip="Coinbase L2. Dominant x402 chain. Gasless paymasters." data-id="base" data-url="https://base.org">Base <span class="sm">119M txns</span></a>
+        <a class="t" href="/solana" data-tip="Leads in dollar volume share. Sub-second finality." data-id="solana" data-url="https://solana.com">Solana <span class="sm">38.6M txns</span></a>
+        <a class="t" href="/ethereum" data-tip="Security/settlement layer for L2 agent activity" data-id="ethereum" data-url="https://ethereum.org">Ethereum</a>
+        <a class="t" href="/tempo" data-tip="Purpose-built payments L1 by Stripe/Paradigm" data-id="tempo" data-url="https://tempo.xyz">Tempo <span class="sm">$5B</span></a>
+        <a class="t" href="/arbitrum" data-tip="$2M in AI agent grants. Acquired ZeroDev." data-id="arbitrum" data-url="https://arbitrum.io">Arbitrum</a>
+        <a class="t" href="/sui" data-tip="Google AP2 launch partner. Object-centric model." data-id="sui" data-url="https://sui.io">Sui</a>
+        <a class="t" href="/polygon" data-tip="x402 facilitator support. OWS contributor." data-id="polygon" data-url="https://polygon.technology">Polygon</a>
+        <a class="t" href="/bnb-chain" data-tip="ERC-8004 deployed. BAP-578 Non-Fungible Agents standard." data-id="bnb-chain" data-url="https://www.bnbchain.org">BNB Chain</a>
+        <a class="t" href="/gnosis" data-tip="Safe origin. Autonolas agents active." data-id="gnosis" data-url="https://www.gnosis.io">Gnosis</a>
+        <a class="t early" href="https://near.org" target="_blank" data-tip="Aggressive positioning but lacks volume proof" data-id="near" data-url="https://near.org">NEAR</a>
+        <a class="t" href="/avalanche" data-tip="x402 facilitator support. AI grants category." data-id="avalanche" data-url="https://www.avax.network">Avalanche</a>
+        <a class="t" href="/kite" data-tip="First AI payment blockchain. Purpose-built for autonomous agent transactions." data-id="kite" data-url="https://gokite.ai">Kite</a>
+        <a class="t" href="/skale" data-tip="Gasless x402 payments. v4 built for Internet of Agents. Zero-fee micropayments." data-id="skale" data-url="https://skale.space">SKALE</a>
       </div>
     </div>
 
@@ -1109,41 +1110,41 @@
     <div class="hack-group">
       <div class="hack-label">Tempo MPP Hackathon &middot; March 2026 &middot; 42 projects <a href="https://tempo-hackathon-projects.vercel.app/" target="_blank">view all</a></div>
       <div class="hack-tags">
-        <a class="t early" href="/spendos" data-id="spendos" data-tip="'Ramp/Mercury for AI agents' with policies and audit trails">SpendOS</a>
-        <a class="t early" href="/botpolice" data-id="botpolice" data-tip="Runtime policy layer: may this agent pay this vendor?">BotPolice</a>
-        <a class="t early" href="/agent-escrow" data-id="agent-escrow" data-tip="Three-party escrow with LLM judge evaluation">Agent Escrow</a>
-        <a class="t early" href="/payload-exchange" data-id="payload-exchange" data-tip="Intent orderbook where agents post wants, solvers compete">Payload Exchange</a>
-        <a class="t early" href="/mpp-gateway" data-id="mpp-gateway" data-tip="Brings 43 non-MPP APIs behind one payment layer">mpp-gateway</a>
-        <a class="t early" href="/dossier" data-id="dossier" data-tip="$0.01/query deep research service via MPP">Dossier</a>
-        <a class="t early" href="/agent-credit-protocol" data-id="agent-credit-protocol" data-tip="ERC-4626 vault giving agents credit lines for paid services">Agent Credit Protocol</a>
-        <a class="t early" href="/monitor" data-id="monitor" data-tip="Agent swarm dispatcher with budget assignment and live ops">Monitor</a>
-        <a class="t early" href="/mpp-dynamic-pricing" data-id="mpp-dynamic-pricing" data-tip="Surge pricing for AI inference endpoints">MPP Dynamic Pricing</a>
-        <a class="t early" href="/private-mpp" data-id="private-mpp" data-tip="Privacy-preserving agent audit trail via ZK proofs">Private MPP</a>
-        <a class="t early" href="/human402" data-id="human402" data-tip="Agent-to-human task marketplace">human402</a>
-        <a class="t early" href="/agentnet" data-id="agentnet" data-tip="Social network where agents tip each other in USDC">AgentNet</a>
-        <a class="t early" href="/solver-as-a-service" data-id="solver-as-a-service" data-tip="Cross-chain Polymarket trading for agents">Solver as a Service</a>
+        <a class="t early" href="/spendos" data-id="spendos" data-url="https://spendos-tempo.vercel.app">SpendOS</a>
+        <a class="t early" href="/botpolice" data-id="botpolice" data-url="https://github.com/Lor3mipsvm/BotPolice">BotPolice</a>
+        <a class="t early" href="/agent-escrow" data-id="agent-escrow" data-url="https://github.com/AdamBeaudoin/agent-escrow">Agent Escrow</a>
+        <a class="t early" href="/payload-exchange" data-id="payload-exchange" data-url="https://payload-exchange.fly.dev">Payload Exchange</a>
+        <a class="t early" href="/mpp-gateway" data-id="mpp-gateway" data-url="https://mpp-gateway.vercel.app">mpp-gateway</a>
+        <a class="t early" href="/dossier" data-id="dossier" data-url="https://github.com/kphed/tempo-hackathon">Dossier</a>
+        <a class="t early" href="/agent-credit-protocol" data-id="agent-credit-protocol" data-url="https://precious-prosperity-production-2f7f.up.railway.app">Agent Credit Protocol</a>
+        <a class="t early" href="/monitor" data-id="monitor" data-url="https://github.com/wschwab/monitor">Monitor</a>
+        <a class="t early" href="/mpp-dynamic-pricing" data-id="mpp-dynamic-pricing" data-url="https://mpp-dynamic-pricing.0x471.workers.dev">MPP Dynamic Pricing</a>
+        <a class="t early" href="/private-mpp" data-id="private-mpp" data-url="https://github.com/UsmannK/PMPP">Private MPP</a>
+        <a class="t early" href="/human402" data-id="human402" data-url="https://human402.com">human402</a>
+        <a class="t early" href="/agentnet" data-id="agentnet" data-url="https://agentnet-7xb.pages.dev">AgentNet</a>
+        <a class="t early" href="/solver-as-a-service" data-id="solver-as-a-service" data-url="https://solverasaservice-production.up.railway.app">Solver as a Service</a>
       </div>
     </div>
 
     <div class="hack-group">
       <div class="hack-label">Synthesis Hackathon &middot; March 2026 &middot; 338 projects <a href="https://synthesis.mandate.md/" target="_blank">view all</a></div>
       <div class="hack-tags">
-        <a class="t" href="/agentpay-l4" data-id="agentpay-l4" data-tip="Scoped on-chain spending permissions for AI agents">AgentPay</a>
-        <a class="t early" href="/agentescrow" data-id="agentescrow" data-tip="Trustless task escrow between AI agents">AgentEscrow</a>
-        <a class="t early" href="/kartein" data-id="kartein" data-tip="Programmable spending firewall for autonomous agents">Kartein</a>
-        <a class="t early" href="/ragequit-escrow" data-id="ragequit-escrow" data-tip="Smart-contract payment control layer queuing payouts into escrow">RageQuit Escrow</a>
-        <a class="t early" href="/spendbound" data-id="spendbound" data-tip="Guardrail and receipt layer for agentic vendor payments on Base">SpendBound</a>
-        <a class="t early" href="/agent-allowance" data-id="agent-allowance" data-tip="Agent allowance protocol: operating budgets without principal access">Agent Allowance</a>
-        <a class="t early" href="/delegata" data-id="delegata" data-tip="OAuth for AI agents: scoped, revocable spending permissions onchain">Delegata</a>
-        <a class="t early" href="/wardex" data-id="wardex" data-tip="Policy firewall and verification for DeFi transactions">Wardex</a>
-        <a class="t early" href="/zkx402" data-id="zkx402" data-tip="ZK-verified micropayments on Celo with identity-aware pricing">zkx402</a>
-        <a class="t early" href="/shulam" data-id="shulam" data-tip="Enterprise-grade x402 facilitator with compliance infrastructure">Shulam</a>
-        <a class="t early" href="/agentresearch" data-id="agentresearch" data-tip="Autonomous research agent paying for every API call in USDC on Base">AgentResearch</a>
-        <a class="t early" href="/parley-protocol" data-id="parley-protocol" data-tip="Agent-to-agent content negotiation and micropayment settlement on Base">Parley Protocol</a>
+        <a class="t" href="/agentpay-l4" data-id="agentpay-l4" data-url="https://agent.tech">AgentPay</a>
+        <a class="t early" href="/agentescrow" data-id="agentescrow" data-url="https://synthesis.mandate.md/agentescrow-9b78">AgentEscrow</a>
+        <a class="t early" href="/kartein" data-id="kartein" data-url="https://synthesis.mandate.md/kartein-4c15">Kartein</a>
+        <a class="t early" href="/ragequit-escrow" data-id="ragequit-escrow" data-url="https://synthesis.mandate.md/ragequit-escrow-cec5">RageQuit Escrow</a>
+        <a class="t early" href="/spendbound" data-id="spendbound" data-url="https://synthesis.mandate.md/spendbound-353c">SpendBound</a>
+        <a class="t early" href="/agent-allowance" data-id="agent-allowance" data-url="https://synthesis.mandate.md/agent-allowance-protocol-dc5f">Agent Allowance</a>
+        <a class="t early" href="/delegata" data-id="delegata" data-url="https://synthesis.mandate.md/delegata-a951">Delegata</a>
+        <a class="t early" href="/wardex" data-id="wardex" data-url="https://synthesis.mandate.md/wardex-37e7">Wardex</a>
+        <a class="t early" href="/zkx402" data-id="zkx402" data-url="https://synthesis.mandate.md/zkx402-zk-verified-payment-protocol-for-ai-agents-3541">zkx402</a>
+        <a class="t early" href="/shulam" data-id="shulam" data-url="https://synthesis.mandate.md/shulam-compliance-infrastructure-for-the-autonomous-agent-economy-b186">Shulam</a>
+        <a class="t early" href="/agentresearch" data-id="agentresearch" data-url="https://synthesis.mandate.md/agentresearch-aeb3">AgentResearch</a>
+        <a class="t early" href="/parley-protocol" data-id="parley-protocol" data-url="https://synthesis.mandate.md/parley-protocol-d246">Parley Protocol</a>
         <a class="t" href="/mint-day" data-id="mint-day" data-tip="Free NFT minting for agents. Natural language to on-chain.">mint.day</a>
-        <a class="t early" href="/lookout" data-id="lookout" data-tip="Credit score for AI agents based on onchain behavior">Lookout</a>
-        <a class="t early" href="/litcredit" data-id="litcredit" data-tip="Sealed underwriting service for stablecoin agents">LitCredit</a>
-        <a class="t early" href="/normandy" data-id="normandy" data-tip="Undercollateralized lending on Solana where agents borrow against reputation">Normandy</a>
+        <a class="t early" href="/lookout" data-id="lookout" data-url="https://synthesis.mandate.md/lookout-agent-trust-protocol-a946">Lookout</a>
+        <a class="t early" href="/litcredit" data-id="litcredit" data-url="https://synthesis.mandate.md/litcredit-2665">LitCredit</a>
+        <a class="t early" href="/normandy" data-id="normandy" data-url="https://synthesis.mandate.md/normandy-1d7f">Normandy</a>
       </div>
     </div>
   </div>
@@ -1655,6 +1656,24 @@ document.getElementById('sf').addEventListener('submit',async e=>{
 
   renderCard();
 }());
+</script>
+
+<script>
+// Favicons: inject 12px favicon before chip text for chips with data-url
+(function() {
+  document.querySelectorAll('[data-url]').forEach(function(chip) {
+    var url = chip.getAttribute('data-url');
+    try {
+      var domain = new URL(url).hostname;
+      var img = document.createElement('img');
+      img.className = 'fav';
+      img.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=32';
+      img.alt = '';
+      img.onerror = function() { this.style.display = 'none'; };
+      chip.insertBefore(img, chip.firstChild);
+    } catch(e) {}
+  });
+})();
 </script>
 
 <script>
