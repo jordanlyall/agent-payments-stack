@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Agent Payments Stack — 91 Projects, 6 Layers</title>
-<meta name="description" content="The definitive map of AI agent payment infrastructure. 91 projects across 6 layers: settlement, wallets, routing, protocols, governance, and applications. $43M settled, 140M transactions. Updated March 2026.">
+<title>The Agent Payments Stack — 100+ Projects, 6 Layers</title>
+<meta name="description" content="The definitive map of AI agent payment infrastructure. 103 projects across 6 layers: settlement, wallets, routing, protocols, governance, and applications. $43M settled, 140M transactions. Updated March 2026.">
 <meta name="keywords" content="AI agent payments, agent payment infrastructure, x402, agentic commerce, crypto payments, USDC, agent wallets, payment protocol, AI agent finance">
 
 <!-- Open Graph -->
-<meta property="og:title" content="The Agent Payments Stack — 91 Projects, 6 Layers">
-<meta property="og:description" content="Every major payment network is building rails for AI agents. 91 projects mapped across settlement, wallets, routing, protocols, governance, and applications. 98.6% settles in USDC.">
+<meta property="og:title" content="The Agent Payments Stack — 100+ Projects, 6 Layers">
+<meta property="og:description" content="Every major payment network is building rails for AI agents. 103 projects mapped across settlement, wallets, routing, protocols, governance, and applications. 98.6% settles in USDC.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://agentpaymentsstack.com">
 <meta property="og:image" content="https://agentpaymentsstack.com/og.png">
@@ -18,8 +18,8 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Agent Payments Stack — 91 Projects, 6 Layers">
-<meta name="twitter:description" content="Every major payment network is building rails for AI agents. 91 projects mapped. 98.6% settles in USDC. $43M volume, ~$600M annualized.">
+<meta name="twitter:title" content="The Agent Payments Stack — 100+ Projects, 6 Layers">
+<meta name="twitter:description" content="Every major payment network is building rails for AI agents. 103 projects mapped. 98.6% settles in USDC. $43M volume, ~$600M annualized.">
 <meta name="twitter:image" content="https://agentpaymentsstack.com/og.png">
 <meta name="twitter:creator" content="@jordanlyall">
 
@@ -47,17 +47,17 @@
 </script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
   :root {
-    --bg: #0a0a0a;
-    --text: #f0f0f0;
-    --secondary: #999;
-    --muted: #666;
-    --faint: #1e1e1e;
-    --early: #d4a840;
-    --ann: #555;
-    --acq: #e8694a;
+    --bg: #0d0c0b;
+    --text: #edebe7;
+    --secondary: #98948f;
+    --muted: #685e58;
+    --faint: #201e1b;
+    --early: #c99e32;
+    --ann: #524e49;
+    --acq: #d9613f;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -65,46 +65,49 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
-    font-feature-settings: 'cv01', 'cv02', 'ss01';
+    font-feature-settings: 'ss01';
   }
 
   .page { max-width: 1200px; margin: 0 auto; padding: 48px 56px 40px; }
 
   /* Header */
-  .hdr { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
-  h1 { font-size: 44px; font-weight: 700; line-height: 1; letter-spacing: -1.5px; }
-  .deck { font-size: 15px; color: var(--secondary); line-height: 1.5; max-width: 480px; margin-top: 10px; }
-  .nums { display: flex; gap: 32px; }
-  .num-v { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; line-height: 1; letter-spacing: -0.5px; }
-  .num-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); margin-top: 4px; font-weight: 500; }
+  .hdr { display: flex; flex-direction: column; margin-bottom: 40px; }
+  .eyebrow { font-size: 10.5px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  h1 { font-size: 46px; font-weight: 700; line-height: 1; letter-spacing: -2px; }
+  .deck { font-size: 15px; color: var(--secondary); line-height: 1.55; max-width: 520px; margin-top: 10px; }
+  .nums { display: flex; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--faint); align-items: flex-end; justify-content: space-between; }
+  .nums-stats { display: flex; gap: 44px; align-items: flex-end; }
+  .num-v { font-size: 26px; font-weight: 600; line-height: 1; letter-spacing: -0.8px; font-variant-numeric: tabular-nums; }
+  .num-l { font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-top: 5px; font-weight: 500; }
 
   /* Stack grid */
   .stack { display: flex; flex-direction: column; border-top: 1px solid var(--faint); }
   .row { display: grid; grid-template-columns: 260px 1fr; border-bottom: 1px solid var(--faint); min-height: 64px; }
   .row-label { padding: 18px 24px 18px 0; display: flex; align-items: baseline; gap: 12px; border-right: 1px solid var(--faint); }
-  .row-n { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--muted); }
-  .row-title { font-size: 15px; font-weight: 600; letter-spacing: -0.2px; }
-  .row-q { font-size: 11.5px; color: var(--muted); margin-top: 2px; font-weight: 400; }
-  .row-content { padding: 14px 0 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .row-n { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: 0.02em; }
+  .row-title { font-size: 14.5px; font-weight: 600; letter-spacing: -0.2px; }
+  .row-q { font-size: 11px; color: var(--muted); margin-top: 3px; font-weight: 400; letter-spacing: 0.01em; }
+  .row-content { padding: 14px 0 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
 
   /* Tags */
   a.t, .t {
-    display: inline-flex; align-items: center; padding: 4px 11px; border-radius: 6px;
-    font-size: 12.5px; font-weight: 480; white-space: nowrap;
-    background: rgba(255,255,255,0.06); color: var(--text); line-height: 1.4;
-    text-decoration: none; transition: background 0.15s;
+    display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 4px;
+    font-size: 12px; font-weight: 450; white-space: nowrap;
+    background: rgba(255,255,255,0.05); color: var(--text); line-height: 1.45;
+    border: 1px solid rgba(255,255,255,0.09);
+    text-decoration: none; transition: background 0.12s, border-color 0.12s;
   }
-  a.t:hover { background: rgba(255,255,255,0.12); }
-  .t.early, a.t.early { background: rgba(212,168,64,0.08); color: var(--early); border: 1px solid rgba(212,168,64,0.15); }
-  a.t.early:hover { background: rgba(212,168,64,0.16); }
-  .t.ann, a.t.ann { background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.12); }
-  a.t.ann:hover { background: rgba(255,255,255,0.06); }
-  .t.acq, a.t.acq { background: rgba(232,105,74,0.1); color: var(--acq); font-weight: 520; }
-  a.t.acq:hover { background: rgba(232,105,74,0.18); }
-  .t .sm { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; opacity: 0.5; margin-left: 4px; }
-  .sep { width: 3px; height: 3px; border-radius: 50%; background: var(--faint); margin: 0 4px; flex-shrink: 0; }
+  a.t:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.16); }
+  .t.early, a.t.early { background: rgba(201,158,50,0.08); color: var(--early); border: 1px solid rgba(201,158,50,0.22); }
+  a.t.early:hover { background: rgba(201,158,50,0.14); border-color: rgba(201,158,50,0.34); }
+  .t.ann, a.t.ann { background: transparent; color: var(--ann); border: 1px dashed rgba(255,255,255,0.14); }
+  a.t.ann:hover { background: rgba(255,255,255,0.04); color: var(--secondary); }
+  .t.acq, a.t.acq { background: rgba(217,97,63,0.09); color: var(--acq); border: 1px solid rgba(217,97,63,0.2); font-weight: 480; }
+  a.t.acq:hover { background: rgba(217,97,63,0.16); border-color: rgba(217,97,63,0.32); }
+  .t .sm { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; opacity: 0.45; margin-left: 4px; }
+  .sep { width: 2px; height: 2px; border-radius: 50%; background: var(--faint); margin: 0 5px; flex-shrink: 0; border: 1px solid var(--faint); }
 
   /* Bottom grid */
   .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--faint); }
@@ -122,142 +125,118 @@
 
   /* M&A */
   .ma-list { list-style: none; }
-  .ma-list li { font-size: 13px; color: var(--secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-weight: 420; }
+  .ma-list li { font-size: 13px; color: var(--secondary); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-weight: 400; }
   .ma-list .arr { color: var(--muted); }
-  .ma-list .pr { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; }
+  .ma-list .pr { font-size: 12px; font-weight: 600; color: var(--acq); margin-left: auto; font-variant-numeric: tabular-nums; }
 
-  /* Anchor nav */
-  .anchor-nav {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--faint);
-    flex-wrap: wrap;
-  }
-  .anchor-nav a {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-  .anchor-nav a:hover { color: var(--secondary); }
-  .anchor-nav .nav-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--faint);
-    margin: 0 10px;
-    flex-shrink: 0;
-  }
 
   /* Legend */
 
   /* Footer */
-  .foot { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); }
-  .foot a { color: var(--text); font-weight: 600; text-decoration: none; }
-  .foot a:hover { text-decoration: underline; }
+  .foot { margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); letter-spacing: 0.01em; }
+  .foot a { color: var(--secondary); font-weight: 500; text-decoration: none; }
+  .foot a:hover { color: var(--text); }
 
   /* ── Write-up section ── */
   .writeup {
-    max-width: 720px;
-    margin: 64px auto 0;
-    padding-top: 48px;
+    max-width: 680px;
+    margin: 56px auto 0;
+    padding-top: 44px;
     border-top: 1px solid var(--faint);
   }
 
   .writeup h2 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     letter-spacing: -0.8px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     line-height: 1.2;
   }
 
   .writeup h3 {
-    font-size: 18px;
-    font-weight: 650;
-    letter-spacing: -0.3px;
-    margin: 36px 0 12px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+    margin: 32px 0 10px;
     color: var(--text);
   }
 
   .writeup p {
-    font-size: 15px;
-    line-height: 1.7;
+    font-size: 14.5px;
+    line-height: 1.72;
     color: var(--secondary);
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .writeup p strong { color: var(--text); font-weight: 600; }
 
   .writeup ul {
     list-style: none;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
   }
 
   .writeup ul li {
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--secondary);
-    padding-left: 16px;
+    padding-left: 14px;
     position: relative;
-    margin-bottom: 6px;
+    margin-bottom: 5px;
   }
 
   .writeup ul li::before {
     content: '';
     position: absolute;
     left: 0;
-    top: 10px;
-    width: 4px;
-    height: 4px;
+    top: 9px;
+    width: 3px;
+    height: 3px;
     border-radius: 1px;
     background: var(--muted);
+    opacity: 0.7;
   }
 
   .writeup ul li strong { color: var(--text); font-weight: 550; }
 
   .writeup .updated {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--muted);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
   }
 
   /* CTA */
   .cta {
-    margin-top: 48px;
-    padding: 32px;
+    margin-top: 40px;
+    padding: 28px 32px;
     border: 1px solid var(--faint);
-    border-radius: 8px;
+    border-radius: 5px;
     text-align: center;
   }
 
   .cta p {
-    font-size: 14px;
+    font-size: 13.5px;
     color: var(--secondary);
     margin-bottom: 16px;
+    line-height: 1.5;
   }
 
   .cta a {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 24px;
+    padding: 9px 22px;
     background: var(--text);
     color: var(--bg);
-    border-radius: 6px;
-    font-size: 14px;
+    border-radius: 4px;
+    font-size: 13px;
     font-weight: 600;
     text-decoration: none;
-    transition: opacity 0.15s;
+    transition: opacity 0.12s;
   }
 
-  .cta a:hover { opacity: 0.85; }
+  .cta a:hover { opacity: 0.82; }
 
   /* Hackathon section */
   .hackathons {
@@ -306,19 +285,22 @@
   }
   .hack-tags .t {
     background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.06);
-    font-size: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    font-size: 11.5px;
+    color: var(--secondary);
   }
 
   /* Header meta line */
   .hdr-meta {
     display: flex;
     gap: 16px;
-    margin-top: 8px;
+    margin-top: 10px;
     font-size: 11px;
     color: var(--muted);
+    letter-spacing: 0.02em;
   }
   .hdr-meta span { display: flex; align-items: center; gap: 4px; }
+  .hdr-meta span + span::before { content: '·'; margin-right: 4px; opacity: 0.4; }
 
   /* Email capture */
   .email-capture {
@@ -408,100 +390,98 @@
   .filter-bar {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin: 16px 0 8px;
+    gap: 10px;
+    margin: 18px 0 10px;
   }
   .filter-search {
     flex: 1;
     display: flex;
     align-items: center;
     gap: 8px;
-    background: rgba(255,255,255,0.04);
+    background: rgba(255,255,255,0.03);
     border: 1px solid var(--faint);
-    border-radius: 7px;
-    padding: 7px 12px;
+    border-radius: 5px;
+    padding: 6px 11px;
+    transition: border-color 0.12s;
   }
-  .filter-search svg { opacity: 0.3; flex-shrink: 0; }
+  .filter-search:focus-within { border-color: rgba(255,255,255,0.14); }
+  .filter-search svg { opacity: 0.25; flex-shrink: 0; }
   .filter-search input {
     flex: 1;
     background: transparent;
     border: none;
     outline: none;
     color: var(--text);
-    font-size: 13px;
+    font-size: 12.5px;
     font-family: inherit;
   }
   .filter-search input::placeholder { color: var(--muted); }
-  .filter-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .filter-btns { display: flex; gap: 5px; flex-shrink: 0; }
   .fb {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 5px;
-    padding: 4px 11px;
-    font-size: 12px;
-    font-weight: 500;
-    color: rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    font-weight: 450;
+    color: var(--muted);
     cursor: pointer;
     font-family: inherit;
     transition: all 0.12s;
     white-space: nowrap;
-    opacity: 0.6;
   }
-  .fb:hover { opacity: 1; }
-  .fb.on { opacity: 1; }
-  /* All */
-  .fb[data-f="all"] { background: rgba(255,255,255,0.04); color: var(--muted); }
-  .fb[data-f="all"].on { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: var(--text); }
-  /* Live */
-  .fb[data-f="live"] { background: rgba(255,255,255,0.04); color: var(--secondary); border-color: rgba(255,255,255,0.1); }
-  .fb[data-f="live"].on { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); color: var(--text); }
+  .fb:hover { color: var(--secondary); border-color: rgba(255,255,255,0.16); }
+  .fb.on { color: var(--text); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.05); }
   /* Early */
-  .fb[data-f="early"] { background: rgba(212,168,64,0.06); border-color: rgba(212,168,64,0.18); color: rgba(212,168,64,0.7); }
-  .fb[data-f="early"].on { background: rgba(212,168,64,0.1); border-color: rgba(212,168,64,0.35); color: rgba(212,168,64,1); }
+  .fb[data-f="early"] { border-color: rgba(201,158,50,0.2); color: rgba(201,158,50,0.65); }
+  .fb[data-f="early"]:hover { color: var(--early); border-color: rgba(201,158,50,0.3); }
+  .fb[data-f="early"].on { background: rgba(201,158,50,0.08); border-color: rgba(201,158,50,0.35); color: var(--early); }
   /* Announced */
-  .fb[data-f="ann"] { background: transparent; border: 1px dashed rgba(255,255,255,0.15); color: rgba(255,255,255,0.35); }
-  .fb[data-f="ann"].on { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.6); }
+  .fb[data-f="ann"] { border: 1px dashed rgba(255,255,255,0.14); }
+  .fb[data-f="ann"].on { background: rgba(255,255,255,0.04); border-style: dashed; border-color: rgba(255,255,255,0.28); color: var(--secondary); }
   /* Acquired */
-  .fb[data-f="acq"] { background: rgba(232,105,74,0.07); border-color: rgba(232,105,74,0.2); color: rgba(232,105,74,0.65); }
-  .fb[data-f="acq"].on { background: rgba(232,105,74,0.12); border-color: rgba(232,105,74,0.4); color: rgba(232,105,74,1); }
+  .fb[data-f="acq"] { border-color: rgba(217,97,63,0.22); color: rgba(217,97,63,0.6); }
+  .fb[data-f="acq"]:hover { color: var(--acq); border-color: rgba(217,97,63,0.32); }
+  .fb[data-f="acq"].on { background: rgba(217,97,63,0.08); border-color: rgba(217,97,63,0.38); color: var(--acq); }
 
-  .filter-count { font-size: 11px; color: var(--muted); flex-shrink: 0; white-space: nowrap; }
+  .filter-count { font-size: 11px; color: var(--muted); flex-shrink: 0; white-space: nowrap; opacity: 0.7; }
   .no-results { padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); display: none; }
 
-  /* Nav subscribe form */
-  .nav-sub {
+  /* Hero subscribe form */
+  .hero-sub { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+  .hero-sub-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); font-weight: 500; }
+  .hero-sub-row {
     display: flex;
     align-items: center;
     gap: 0;
-    margin-left: 8px;
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 6px;
     overflow: hidden;
   }
-  .nav-sub input {
+  .hero-sub-row input {
     background: transparent;
     border: none;
     outline: none;
     color: var(--text);
     font-size: 12px;
     font-family: inherit;
-    padding: 4px 8px;
-    width: 115px;
+    padding: 6px 10px;
+    width: 160px;
   }
-  .nav-sub input::placeholder { color: var(--muted); }
-  .nav-sub button {
+  .hero-sub-row input::placeholder { color: var(--muted); }
+  .hero-sub-row button {
     background: rgba(255,255,255,0.08);
     color: var(--text);
     border: none;
     border-left: 1px solid rgba(255,255,255,0.12);
-    padding: 4px 10px;
+    padding: 6px 12px;
     font-size: 12px;
     font-weight: 500;
     cursor: pointer;
     font-family: inherit;
     white-space: nowrap;
   }
-  .nav-sub button:hover { background: rgba(255,255,255,0.14); }
+  .hero-sub-row button:hover { background: rgba(255,255,255,0.14); }
 
   /* Submit + Changelog */
   .submit-bar {
@@ -525,27 +505,29 @@
   /* Changelog */
   .changelog { margin-top: 32px; }
   .changelog h3 {
-    font-size: 13px;
-    font-weight: 650;
+    font-size: 10.5px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.1em;
     color: var(--muted);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
   .changelog ul { list-style: none; }
   .changelog li {
     font-size: 13px;
     color: var(--secondary);
-    margin-bottom: 6px;
+    margin-bottom: 7px;
     display: flex;
-    gap: 12px;
+    gap: 14px;
+    line-height: 1.5;
   }
   .changelog .cl-date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 10.5px;
     color: var(--muted);
     min-width: 72px;
     flex-shrink: 0;
+    padding-top: 1px;
   }
 
   /* Tooltips */
@@ -553,23 +535,24 @@
   a.t[data-tip]:hover::after {
     content: attr(data-tip);
     position: absolute;
-    bottom: calc(100% + 8px);
+    bottom: calc(100% + 7px);
     left: 50%;
     transform: translateX(-50%);
-    background: #2a2a2a;
-    color: #ddd;
+    background: #1c1a18;
+    color: #c8c4bc;
+    border: 1px solid rgba(255,255,255,0.1);
     font-size: 11px;
     font-weight: 400;
-    line-height: 1.4;
-    padding: 6px 10px;
-    border-radius: 6px;
+    line-height: 1.45;
+    padding: 5px 9px;
+    border-radius: 4px;
     white-space: nowrap;
     max-width: 280px;
     overflow: hidden;
     text-overflow: ellipsis;
     z-index: 10;
     pointer-events: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
   }
 
   /* Anchor links */
@@ -582,11 +565,11 @@
 
   /* Layer count */
   .row-count {
-    font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
     color: var(--muted);
-    font-weight: 500;
-    margin-left: 4px;
+    font-weight: 400;
+    margin-left: 5px;
+    opacity: 0.7;
   }
 
   /* Site nav */
@@ -596,39 +579,43 @@
   .site-nav-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 14px 56px;
+    padding: 13px 56px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .site-nav-logo {
     font-size: 13px;
-    font-weight: 650;
+    font-weight: 600;
+    letter-spacing: -0.2px;
     color: var(--text);
     text-decoration: none;
   }
   .site-nav-links {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     align-items: center;
   }
   .site-nav-links a {
     font-size: 12px;
+    font-weight: 400;
     color: var(--muted);
     text-decoration: none;
-    transition: color 0.15s;
+    transition: color 0.12s;
+    letter-spacing: 0.01em;
   }
-  .site-nav-links a:hover { color: var(--text); }
+  .site-nav-links a:hover { color: var(--secondary); }
 
   /* ── Mobile ── */
   @media (max-width: 900px) {
     .site-nav-links { display: none; }
     .site-nav-inner { padding: 14px 20px; }
     .page { padding: 28px 20px 32px; }
-    .hdr { flex-direction: column; align-items: flex-start; gap: 24px; }
     h1 { font-size: 28px; letter-spacing: -1px; }
     .deck { font-size: 14px; max-width: 100%; }
-    .nums { gap: 20px; }
+    .nums { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .nums-stats { gap: 20px; flex-wrap: wrap; }
+    .hero-sub { align-items: flex-start; }
     .num-v { font-size: 20px; }
     .row { grid-template-columns: 1fr; }
     .row-label { border-right: none; border-bottom: 1px solid var(--faint); padding: 14px 0 10px; }
@@ -666,54 +653,42 @@
       <a href="#api">API</a>
       <a href="#embed">Embed</a>
       <a href="https://tally.so/r/rjVvd5" target="_blank">Submit</a>
-      <form class="nav-sub" id="nsf">
-        <input type="email" id="nse" placeholder="your@email.com" required>
-        <button type="submit" id="nsb">Subscribe</button>
-      </form>
     </div>
   </div>
 </nav>
 <div class="page">
 
   <div class="hdr">
-    <div>
-      <h1>The Agent Payments Stack</h1>
-      <p class="deck">Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.</p>
-      <div class="hdr-meta">
-        <span>91 projects mapped</span>
-        <span>Updated Mar 26, 2026</span>
-      </div>
+    <div class="eyebrow">Infrastructure Landscape &middot; 2026</div>
+    <h1>The Agent Payments Stack</h1>
+    <p class="deck">Every major payment network is building rails for AI agents. This is the map.</p>
+    <div class="hdr-meta">
+      <span id="hero-count">103 projects mapped</span>
+      <span>Updated Mar 26, 2026</span>
     </div>
     <div class="nums">
-      <div><div class="num-v">$43M</div><div class="num-l">Volume (9mo)</div></div>
-      <div><div class="num-v">140M</div><div class="num-l">Transactions</div></div>
-      <div><div class="num-v">~$600M</div><div class="num-l">Annualized</div></div>
+      <div class="nums-stats">
+        <div><div class="num-v">$43M</div><div class="num-l">Volume (9mo)</div></div>
+        <div><div class="num-v">140M</div><div class="num-l">Transactions</div></div>
+        <div><div class="num-v">~$600M</div><div class="num-l">Annualized</div></div>
+        <div><div class="num-v">98.6%</div><div class="num-l">USDC Share</div></div>
+      </div>
+      <div class="hero-sub">
+        <div class="hero-sub-label">Weekly updates</div>
+        <form class="hero-sub-row" id="nsf">
+          <input type="email" id="nse" placeholder="your@email.com" required>
+          <button type="submit" id="nsb">Subscribe</button>
+        </form>
+        <span id="sub-msg" style="display:none;font-size:11px;color:var(--muted)"></span>
+      </div>
     </div>
   </div>
-
-  <!-- Legend -->
-    <!-- Anchor nav -->
-  <nav class="anchor-nav">
-    <a href="#application">Application</a>
-    <span class="nav-dot"></span>
-    <a href="#governance">Governance</a>
-    <span class="nav-dot"></span>
-    <a href="#protocol">Protocol</a>
-    <span class="nav-dot"></span>
-    <a href="#routing">Routing</a>
-    <span class="nav-dot"></span>
-    <a href="#wallets">Wallets</a>
-    <span class="nav-dot"></span>
-    <a href="#settlement">Settlement</a>
-    <span class="nav-dot"></span>
-    <a href="#hackathons">Hackathons</a>
-  </nav>
 
   <!-- Filter bar -->
   <div class="filter-bar">
     <div class="filter-search">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      <input type="text" id="q" placeholder="Search 91 projects..." autocomplete="off" spellcheck="false">
+      <input type="text" id="q" placeholder="Search 103 projects..." autocomplete="off" spellcheck="false">
     </div>
     <div class="filter-btns">
       <button class="fb on" data-f="all">All</button>
@@ -722,7 +697,7 @@
       <button class="fb" data-f="ann">Announced</button>
       <button class="fb" data-f="acq">Acquired</button>
     </div>
-    <span class="filter-count" id="fc">91 projects</span>
+    <span class="filter-count" id="fc">103 projects</span>
   </div>
   <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
 
@@ -764,7 +739,7 @@
     <div class="row" id="governance" data-layer="L4" data-layer-name="Governance &amp; Policy">
       <div class="row-label">
         <span class="row-n">04</span>
-        <div><div class="row-title"><a href="#governance">Governance & Policy</a> <span class="row-count">12</span></div><div class="row-q">May this agent spend</div></div>
+        <div><div class="row-title"><a href="#governance">Governance & Policy</a> <span class="row-count">15</span></div><div class="row-q">May this agent spend</div></div>
       </div>
       <div class="row-content">
         <a class="t" href="https://ramp.com" target="_blank" data-tip="Virtual Visa cards for agents with spend limits">Ramp Agent Cards</a>
@@ -778,8 +753,12 @@
         <a class="t" href="https://usa.visa.com" target="_blank" data-tip="Agent-initiated tokenized card transactions, 100+ partners">Visa Intelligent Commerce</a>
         <a class="t" href="https://stripe.com" target="_blank" data-tip="Scoped, time-limited tokens for agent card payments">Stripe SPTs</a>
         <a class="t" href="https://crossmint.com" target="_blank" data-tip="Open payment standard with Visa, Circle, Solana">Crossmint</a>
-        <span class="t ann" data-tip="Tokenization framework for agent-initiated transactions">Mastercard Agentic Tokens</span>
+        <span class="t" data-tip="Tokenization framework for agent-initiated transactions">Mastercard Agentic Tokens</span>
         <a class="t" href="https://agent.tech" target="_blank" data-tip="Scoped on-chain spending permissions for AI agents">AgentPay</a>
+        <span class="sep"></span>
+        <a class="t" href="https://ghostspeak.io" target="_blank" data-tip="Trust and reputation layer for agent commerce. Ghost Score, 10K+ agents tracked.">GhostSpeak</a>
+        <a class="t early" href="https://observerprotocol.org" target="_blank" data-tip="Rail-neutral verification layer for autonomous agent transactions. Bitcoin-anchored identity.">Observer Protocol</a>
+        <a class="t" href="https://mastercard.com" target="_blank" data-tip="Mastercard + Google open standard. Cryptographic proof of agent authorization.">Verifiable Intent</a>
       </div>
     </div>
 
@@ -787,7 +766,7 @@
     <div class="row" id="protocol" data-layer="L3" data-layer-name="Payment Protocol">
       <div class="row-label">
         <span class="row-n">03</span>
-        <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">14</span></div><div class="row-q">How the payment flows</div></div>
+        <div><div class="row-title"><a href="#protocol">Payment Protocol</a> <span class="row-count">17</span></div><div class="row-q">How the payment flows</div></div>
       </div>
       <div class="row-content">
         <a class="t" href="https://x402.org" target="_blank" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem.">x402 <span class="sm">75M/30d</span></a>
@@ -806,6 +785,9 @@
         <a class="t" href="https://agent.tech" target="_blank" data-tip="Scoped on-chain spending permissions for AI agents">AgentPay</a>
         <a class="t" href="https://dhali.io" target="_blank" data-tip="Pay-per-use API micropayment infrastructure">Dhali</a>
         <a class="t early" href="https://x402.org" target="_blank" data-tip="Signed Commerce Permissions — scoped spending authorization via x402">x402s SCP</a>
+        <a class="t" href="https://github.com/faremeter/faremeter" target="_blank" data-tip="x402 + MPP library for EVM and Solana. Frictionless agent payments.">Faremeter</a>
+        <a class="t" href="https://masumi.network" target="_blank" data-tip="Agent-to-agent payment network on Cardano. Escrow, registry, identity.">Masumi</a>
+        <a class="t early" href="https://backpac.xyz" target="_blank" data-tip="Open-source CLI for agentic payments and RPC orchestration across multiple chains.">Backpac</a>
       </div>
     </div>
 
@@ -845,7 +827,7 @@
     <div class="row" id="wallets" data-layer="L1" data-layer-name="Wallet &amp; Key Management">
       <div class="row-label">
         <span class="row-n">01</span>
-        <div><div class="row-title"><a href="#wallets">Wallet & Key Mgmt</a> <span class="row-count">18</span></div><div class="row-q">Where the keys live</div></div>
+        <div><div class="row-title"><a href="#wallets">Wallet & Key Mgmt</a> <span class="row-count">19</span></div><div class="row-q">Where the keys live</div></div>
       </div>
       <div class="row-content">
         <a class="t" href="https://coinbase.com/developer-platform" target="_blank" data-tip="TEE agent wallets with spending limits, gasless on Base">Coinbase Agentic Wallets</a>
@@ -867,6 +849,7 @@
         <a class="t" href="https://phantom.app" target="_blank" data-tip="Consumer wallet with MCP server for agent integration">Phantom</a>
         <a class="t" href="https://walletconnect.com" target="_blank" data-tip="Open protocol for wallet connections and agent signing">WalletConnect</a>
         <a class="t" href="https://dfns.co" target="_blank" data-tip="Delegated MPC key management and signing APIs">Dfns</a>
+        <a class="t early" href="https://natural.co" target="_blank" data-tip="Agentic payments platform — FDIC-insured wallets, Pay, MCP integration">Natural</a>
       </div>
     </div>
 
@@ -874,7 +857,7 @@
     <div class="row" id="settlement" data-layer="L0" data-layer-name="Settlement">
       <div class="row-label">
         <span class="row-n">00</span>
-        <div><div class="row-title"><a href="#settlement">Settlement</a> <span class="row-count">11</span></div><div class="row-q">Where transactions land</div></div>
+        <div><div class="row-title"><a href="#settlement">Settlement</a> <span class="row-count">13</span></div><div class="row-q">Where transactions land</div></div>
       </div>
       <div class="row-content">
         <a class="t" href="https://base.org" target="_blank" data-tip="Coinbase L2. Dominant x402 chain. Gasless paymasters.">Base <span class="sm">119M txns</span></a>
@@ -888,6 +871,8 @@
         <a class="t" href="https://gnosis.io" target="_blank" data-tip="Safe origin. Autonolas agents active.">Gnosis</a>
         <a class="t early" href="https://near.org" target="_blank" data-tip="Aggressive positioning but lacks volume proof">NEAR</a>
         <a class="t" href="https://avax.network" target="_blank" data-tip="x402 facilitator support. AI grants category.">Avalanche</a>
+        <a class="t" href="https://gokite.ai" target="_blank" data-tip="First AI payment blockchain. Purpose-built for autonomous agent transactions.">Kite</a>
+        <a class="t" href="https://skale.space" target="_blank" data-tip="Gasless x402 payments. v4 built for Internet of Agents. Zero-fee micropayments.">SKALE</a>
       </div>
     </div>
 
@@ -985,7 +970,7 @@
   <!-- Submit -->
   <div class="submit-bar">
     <span>Missing a project? <a href="https://tally.so/r/rjVvd5">Submit a project</a></span>
-    <span>91 projects across 6 layers</span>
+    <span id="footer-count">103 projects across 6 layers</span>
   </div>
 
   <div class="foot">
@@ -1036,6 +1021,9 @@
   <div class="changelog" id="changelog">
     <h3>Changelog</h3>
     <ul>
+      <li><span class="cl-date">Mar 26</span> v1.4. 103 projects (+1). Added Natural.</li>
+      <li><span class="cl-date">Mar 26</span> v1.3. 99 projects (+1). Added Backpac.</li>
+      <li><span class="cl-date">Mar 26</span> v1.2. 98 projects (+7). Added GhostSpeak, Observer Protocol, Verifiable Intent, Faremeter, Masumi, Kite, SKALE.</li>
       <li><span class="cl-date">Mar 26</span> v1.1. 91 projects (+9). Added Run402, Cascade, AgentPay, WalletConnect, Dfns, ReqCast, Dhali, x402s SCP. Submit form live.</li>
       <li><span class="cl-date">Mar 25</span> Initial release. 88 projects across 6 layers. Added ACP (OpenAI + Stripe) to L3.</li>
     </ul>
@@ -1065,7 +1053,7 @@
     <h3>For Agents</h3>
     <p>The stack is machine-readable via three endpoints. No auth required.</p>
     <ul>
-      <li><strong><a href="/data.json" style="color:var(--text);">/data.json</a></strong> — Full structured dataset. 91 projects, status, URLs, descriptions, M&A, vertical integration.</li>
+      <li><strong><a href="/data.json" style="color:var(--text);">/data.json</a></strong> — Full structured dataset. 103 projects, status, URLs, descriptions, M&A, vertical integration.</li>
       <li><strong><a href="/llms.txt" style="color:var(--text);">/llms.txt</a></strong> — Plain-text summary for LLM context. Key facts, layer descriptions, usage notes.</li>
       <li><strong>/api/mcp</strong> — MCP server (JSON-RPC 2.0, POST). Five tools: <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_search_projects</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_filter_by_layer</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_filter_by_status</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_get_acquisitions</code>, <code style="font-family:'JetBrains Mono',monospace;font-size:12px;background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">stack_get_stats</code>.</li>
     </ul>
@@ -1145,7 +1133,10 @@
       { "name": "Visa Intelligent Commerce", "status": "live", "url": "https://usa.visa.com", "description": "Agent-initiated tokenized card transactions, 100+ partners" },
       { "name": "Stripe SPTs", "status": "live", "url": "https://stripe.com", "description": "Scoped, time-limited tokens for agent card payments" },
       { "name": "Crossmint", "status": "live", "url": "https://crossmint.com", "description": "Open payment standard with Visa, Circle, Solana" },
-      { "name": "Mastercard Agentic Tokens", "status": "announced", "description": "Tokenization framework for agent-initiated transactions" }
+      { "name": "Mastercard Agentic Tokens", "status": "live", "description": "Tokenization framework for agent-initiated transactions" },
+      { "name": "GhostSpeak", "status": "live", "url": "https://ghostspeak.io", "description": "Trust and reputation layer for agent commerce. Ghost Score, 10K+ agents tracked." },
+      { "name": "Observer Protocol", "status": "early", "url": "https://observerprotocol.org", "description": "Rail-neutral verification layer for autonomous agent transactions." },
+      { "name": "Verifiable Intent", "status": "live", "url": "https://mastercard.com", "description": "Mastercard + Google open standard. Cryptographic proof of agent authorization." }
     ]},
     { "id": "L3", "name": "Payment Protocol", "question": "How the payment flows", "projects": [
       { "name": "x402", "status": "live", "url": "https://x402.org", "metadata": "75M/30d", "description": "HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem." },
@@ -1158,7 +1149,9 @@
       { "name": "Fewsats", "status": "live", "url": "https://fewsats.com", "description": "L402-compatible SDK and API marketplace for agents" },
       { "name": "Superfluid", "status": "live", "url": "https://superfluid.finance", "description": "Per-second token streaming" },
       { "name": "ERC-8183", "status": "early", "url": "https://eips.ethereum.org/EIPS/eip-8183", "description": "Programmable escrow for conditional agent-to-agent payments" },
-      { "name": "Interledger", "status": "live", "url": "https://interledger.org", "description": "Cross-ledger value routing. TCP/IP for money." }
+      { "name": "Interledger", "status": "live", "url": "https://interledger.org", "description": "Cross-ledger value routing. TCP/IP for money." },
+      { "name": "Faremeter", "status": "live", "url": "https://github.com/faremeter/faremeter", "description": "x402 + MPP library for EVM and Solana. Frictionless agent payments." },
+      { "name": "Masumi", "status": "live", "url": "https://masumi.network", "description": "Agent-to-agent payment network on Cardano. Escrow, registry, identity." }
     ]},
     { "id": "L2", "name": "Routing & Abstraction", "question": "Which chain, token, rail", "projects": [
       { "name": "Skyfire", "status": "live", "url": "https://skyfire.xyz", "description": "'Visa for the AI economy.' KYA identity, $9.5M seed." },
@@ -1197,7 +1190,8 @@
       { "name": "Biconomy", "status": "live", "url": "https://biconomy.io", "description": "Nexus smart accounts with paymaster tooling" },
       { "name": "Fireblocks", "status": "live", "url": "https://fireblocks.com", "description": "Enterprise MPC. $8B valuation. 1,800+ institutions." },
       { "name": "Alchemy", "status": "live", "url": "https://alchemy.com", "description": "Smart wallets with Gas Manager and Bundler" },
-      { "name": "Phantom", "status": "live", "url": "https://phantom.app", "description": "Consumer wallet with MCP server for agent integration" }
+      { "name": "Phantom", "status": "live", "url": "https://phantom.app", "description": "Consumer wallet with MCP server for agent integration" },
+      { "name": "Natural", "status": "early", "url": "https://natural.co", "description": "Agentic payments platform — FDIC-insured wallets, Pay, MCP integration" }
     ]},
     { "id": "L0", "name": "Settlement", "question": "Where transactions land", "projects": [
       { "name": "Base", "status": "live", "url": "https://base.org", "metadata": "119M txns", "description": "Coinbase L2. Dominant x402 chain. Gasless paymasters." },
@@ -1210,7 +1204,9 @@
       { "name": "BNB Chain", "status": "live", "url": "https://bnbchain.org", "description": "ERC-8004 deployed. BAP-578 Non-Fungible Agents standard." },
       { "name": "Gnosis", "status": "live", "url": "https://gnosis.io", "description": "Safe origin. Autonolas agents active." },
       { "name": "NEAR", "status": "early", "url": "https://near.org", "description": "Aggressive positioning but lacks volume proof" },
-      { "name": "Avalanche", "status": "live", "url": "https://avax.network", "description": "x402 facilitator support. AI grants category." }
+      { "name": "Avalanche", "status": "live", "url": "https://avax.network", "description": "x402 facilitator support. AI grants category." },
+      { "name": "Kite", "status": "live", "url": "https://gokite.ai", "description": "First AI payment blockchain. Purpose-built for autonomous agent transactions." },
+      { "name": "SKALE", "status": "live", "url": "https://skale.space", "description": "Gasless x402 payments. v4 built for Internet of Agents. Zero-fee micropayments." }
     ]}
   ],
   "consolidation": [
@@ -1241,7 +1237,10 @@
 <script>
 // Filter + search
 (function(){
-  const TOTAL = 91;
+  const TOTAL = document.querySelectorAll('.t').length;
+  document.getElementById('hero-count').textContent = TOTAL + ' projects mapped';
+  document.getElementById('footer-count').textContent = TOTAL + ' projects across 6 layers';
+  document.getElementById('q').placeholder = 'Search ' + TOTAL + ' projects...';
   let activeF = 'all', q = '';
 
   function run(){
