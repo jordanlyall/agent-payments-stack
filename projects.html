@@ -549,10 +549,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Chain tags
-    var CHAIN_COLORS = { Base:'#0052ff', Solana:'#9945ff', Ethereum:'#627eea', Arbitrum:'#12aaff', Celo:'#35d07f', multi:'#888' };
+    var CHAIN_COLORS = { Base:'#0052ff', Solana:'#9945ff', Ethereum:'#627eea', Arbitrum:'#12aaff', Celo:'#35d07f', Polygon:'#8247e5', Avalanche:'#e84142', multi:'#888' };
     var chainHtml = '';
     if (p.chain) {
-      var chains = p.chain.split(/[,\/]/).map(function(c) { return c.trim(); });
+      var chains = Array.isArray(p.chain)
+        ? p.chain
+        : p.chain.split(/[,\/]/).map(function(c) { return c.trim(); });
       chainHtml = '<div class="chain-row">' +
         chains.map(function(c) {
           var col = CHAIN_COLORS[c] || '#888';
