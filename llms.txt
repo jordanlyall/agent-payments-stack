@@ -10,17 +10,31 @@ A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jorda
 
 Full JSON available at: /data.json
 
-Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, volume, github, history, url, x, docs, chain, related, funding.
+Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, url, x, docs, chain, related, funding, npm (package, weekly_downloads), github (url, stars, forks, contributors, last_commit, license), volume (30d, note), editorial.
 Individual project profiles: /[slug] (e.g. /x402)
 
 ## The six layers
 
-- L0 Settlement — where transactions land (chains: Base, Solana, Ethereum, Arbitrum, etc.)
-- L1 Wallet & Key Management — where agent keys live (Coinbase, Thirdweb, Safe, Fireblocks, etc.)
-- L2 Routing & Abstraction — cross-chain routing, bridging, swapping (Skyfire, Circle CCTP, Li.Fi, Uniswap, Kibble, etc.)
-- L3 Payment Protocol — the actual payment standards agents use (x402, Tempo MPP, Google AP2, ACP, L402)
-- L4 Governance & Policy — spend controls and authorization (Ramp Agent Cards, Visa, Stripe SPTs, ERC-8004, OpenMatter)
-- L5 Application — what agents buy and why (Virtuals, ElizaOS, Art Blocks, mint.day, Akash, Ocean Protocol)
+- L0 Settlement (13 projects) — where transactions land (chains: Base, Solana, Ethereum, Arbitrum, etc.)
+- L1 Wallet & Key Management (19 projects) — where agent keys live (Coinbase, Thirdweb, Safe, Fireblocks, etc.)
+- L2 Routing & Abstraction (22 projects) — cross-chain routing, bridging, swapping (Skyfire, Circle CCTP, Li.Fi, Uniswap, Kibble, etc.)
+- L3 Payment Protocol (26 projects) — the actual payment standards agents use (x402, Tempo MPP, Google AP2, ACP, L402)
+- L4 Governance & Policy (30 projects) — spend controls and authorization (Ramp Agent Cards, Visa, Stripe SPTs, ERC-8004, OpenMatter)
+- L5 Application (24 projects) — what agents buy and why (Virtuals, ElizaOS, Art Blocks, mint.day, Akash, Ocean Protocol)
+
+## Status breakdown
+
+- Live: 88 projects
+- Early: 38 projects
+- Acquired: 7 projects
+- Announced: 1 project
+
+## Data coverage (March 2026)
+
+- Funding data: 44 projects
+- npm weekly downloads: 20 projects
+- GitHub metadata (stars, forks, contributors, last_commit): 19 projects
+- Volume (30d): 6 projects
 
 ## Key facts
 
@@ -29,6 +43,16 @@ Individual project profiles: /[slug] (e.g. /x402)
 - x402 handles 75M transactions / 30 days on Base
 - 8 major acquisitions in 2025-2026 (Brex $5.15B, BVNK $1.8B, Bridge $1.1B, Brahma.fi by Polymarket)
 - Coinbase and Stripe are vertically integrated across 5 of 6 layers
+- Turnkey leads L1 npm adoption: 137K weekly downloads
+- WalletConnect (now Reown): 854K weekly downloads across @walletconnect packages
+- Privy leads auth/wallet SDKs: 128K weekly downloads
+
+## Editorial flags
+
+- alchemy-sdk: deprecated January 2026, archived. Users directed to @account-kit/core, Viem, or Solana Web3JS.
+- WalletConnect: rebranded to Reown. @walletconnect packages now under reown-npm-org.
+- Biconomy: mid-migration from biconomy-client-sdk to @biconomy/abstractjs.
+- LayerZero: dual-licensed MIT + LZBL-1.2. LZBL-1.2 is restrictive for commercial use.
 
 ## Who made this
 
