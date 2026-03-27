@@ -60,7 +60,9 @@
             "stars": 17929,
             "last_commit": "2026-03",
             "license": "MIT",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 5500,
+            "contributors": 530
           },
           "url": "https://elizaos.ai",
           "x": "elizaos",
@@ -91,7 +93,9 @@
             "stars": 119,
             "last_commit": "2026-03",
             "license": "Apache-2.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 85,
+            "contributors": 16
           },
           "url": "https://olas.network",
           "x": "autonolas",
@@ -928,7 +932,9 @@
             "stars": 5800,
             "last_commit": "2026-03-26",
             "license": "Apache-2.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 1100,
+            "contributors": 193
           },
           "volume": {
             "value": 75000000,
@@ -1115,7 +1121,9 @@
             "stars": 898,
             "last_commit": "2026-02-25",
             "license": "AGPL-3.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 263,
+            "contributors": 50
           },
           "history": [
             {
@@ -1167,7 +1175,9 @@
             "stars": 512,
             "last_commit": "2026-03",
             "license": "CC0-1.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 106,
+            "contributors": 44
           },
           "url": "https://interledger.org",
           "x": "Interledger",
@@ -1237,7 +1247,9 @@
             "stars": 61,
             "last_commit": "2026-03",
             "license": "LGPL-3.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 18,
+            "contributors": 5
           },
           "docs": "https://docs.corbits.dev/faremeter/overview",
           "chain": "multi"
@@ -1539,7 +1551,9 @@
             "stars": 197,
             "last_commit": "2025-10-01",
             "license": "Apache-2.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 124,
+            "contributors": 15
           },
           "history": [
             {
@@ -1609,7 +1623,9 @@
             "stars": 141,
             "last_commit": "2026-03-26",
             "license": "BUSL-1.1",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 79,
+            "contributors": 23
           },
           "volume": {
             "value": 742540000,
@@ -1643,7 +1659,9 @@
             "stars": 199,
             "last_commit": "2026-03-26",
             "license": "LGPL-3.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 99,
+            "contributors": 6
           },
           "related": [
             "uniswap",
@@ -1694,7 +1712,9 @@
             "stars": 57,
             "last_commit": "2025-09",
             "license": "custom",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 39,
+            "contributors": 10
           },
           "url": "https://debridge.finance",
           "x": "deBridgeFinance",
@@ -1720,7 +1740,9 @@
             "stars": 1900,
             "last_commit": "2026-02-25",
             "license": "Apache-2.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 839,
+            "contributors": 77
           },
           "volume": {
             "value": 1232743325,
@@ -1760,7 +1782,9 @@
             "stars": 769,
             "last_commit": "2026-02-27",
             "license": "MIT",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 475,
+            "contributors": 20
           },
           "history": [
             {
@@ -1841,7 +1865,9 @@
             "stars": 2500,
             "last_commit": "2025-10-23",
             "license": "BUSL-1.1",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 1300,
+            "contributors": 77
           },
           "volume": {
             "value": 45772000000,
@@ -1887,7 +1913,9 @@
             "stars": 154,
             "last_commit": "2026-03",
             "license": "GPL-3.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 53,
+            "contributors": 20
           },
           "url": "https://cow.fi",
           "x": "CoWSwap",
@@ -2206,7 +2234,9 @@
             "stars": 158,
             "last_commit": "2026-02",
             "license": "MIT",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 89,
+            "contributors": 40
           },
           "url": "https://www.litprotocol.com",
           "x": "LitProtocol",
@@ -2239,7 +2269,9 @@
             "stars": 2100,
             "last_commit": "2025-07-03",
             "license": "LGPL-3.0",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 1100,
+            "contributors": 30
           },
           "history": [
             {
@@ -2293,7 +2325,9 @@
             "stars": 240,
             "last_commit": "2025-10",
             "license": "MIT",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 44,
+            "contributors": 15
           },
           "url": "https://zerodev.app",
           "x": "zerodev_app",
@@ -2319,7 +2353,9 @@
             "stars": 51,
             "last_commit": "2026-02",
             "license": "MIT",
-            "as_of": "2026-03-26"
+            "as_of": "2026-03-26",
+            "forks": 84,
+            "contributors": 20
           },
           "url": "https://www.biconomy.io",
           "x": "biconomy",
