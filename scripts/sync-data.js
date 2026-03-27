@@ -15,7 +15,9 @@ html = html.replace(
   function(match, open, close) { return open + json + close; }
 );
 
-// Verify
+// Verify exactly one block and valid JSON
+const blocks = [...html.matchAll(/<script type="application\/json" id="aps-data">/g)];
+if (blocks.length !== 1) throw new Error('Expected 1 aps-data block, found ' + blocks.length + ' — aborting');
 const check = html.match(/<script type="application\/json" id="aps-data">([\s\S]*?)<\/script>/);
 JSON.parse(check[1]); // throws if invalid
 
