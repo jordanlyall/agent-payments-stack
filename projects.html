@@ -249,7 +249,7 @@
 
   function getSlug() {
     var path = window.location.pathname;
-    return path.replace(/^//, '').split('?')[0] || null;
+    return path.replace(/^\//, '').split('?')[0] || null;
   }
 
   function findProject(layers, id) {
