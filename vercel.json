@@ -1,10 +1,14 @@
 {
+  "redirects": [
+    { "source": "/agent-credit-protocol", "destination": "/bond", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/data",        "destination": "/data.html" },
     { "source": "/rankings",    "destination": "/rankings.html" },
     { "source": "/trace",       "destination": "/trace.html" },
     { "source": "/api",         "destination": "/api.html" },
     { "source": "/about",       "destination": "/about.html" },
+    { "source": "/acquisitions", "destination": "/acquisitions.html" },
     { "source": "/hackathons",  "destination": "/hackathons.html" },
     { "source": "/:slug([^.]+)", "destination": "/projects.html" }
   ]

@@ -31,6 +31,17 @@
   .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
   .topbar-links a:hover { color: var(--secondary); }
   .topbar-links .tl-active { color: var(--text); }
+  .mob-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text); line-height: 0; }
+  .mob-menu-btn .icon-ham { display: block; }
+  .mob-menu-btn .icon-x { display: none; }
+  .mob-menu-btn.open .icon-ham { display: none; }
+  .mob-menu-btn.open .icon-x { display: block; }
+  .mob-menu { display: none; position: fixed; top: 50px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 98; padding: 16px 0; flex-direction: column; border-top: 1px solid var(--faint); overflow-y: auto; }
+  .mob-menu.open { display: flex; }
+  .mob-menu a { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.02em; color: var(--secondary); text-decoration: none; padding: 16px 24px; border-bottom: 1px solid var(--faint); transition: color 0.1s; }
+  .mob-menu a:first-child { border-top: 1px solid var(--faint); }
+  .mob-menu a:hover { color: var(--text); }
+  .mob-menu a.tl-active { color: var(--text); }
 
   .page { max-width: 100%; padding: 40px 56px 80px; }
 
@@ -93,6 +104,7 @@
   @media (max-width: 900px) {
     .topbar { padding: 0 20px; }
     .topbar-links { display: none; }
+    .mob-menu-btn { display: flex; align-items: center; }
     .page { padding: 28px 20px 40px; }
     .foot { flex-direction: column; gap: 8px; }
   }
@@ -106,14 +118,32 @@
       <a href="/">Stack</a>
       <a href="/data">Data</a>
       <a href="/rankings">Rankings</a>
+  <a href="/acquisitions">Acquisitions</a>
+
       <a href="/trace">Trace</a>
       <a href="/hackathons" class="tl-active">Hackathons</a>
       <a href="/api">API</a>
       <a href="/about">About</a>
       <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
     </div>
+      <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu" aria-expanded="false">
+      <svg class="icon-ham" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <svg class="icon-x" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="/">Stack</a>
+  <a href="/data">Data</a>
+  <a href="/rankings">Rankings</a>
+  <a href="/acquisitions">Acquisitions</a>
+
+  <a href="/trace">Trace</a>
+  <a href="/hackathons" class="tl-active">Hackathons</a>
+  <a href="/api">API</a>
+  <a href="/about">About</a>
+  <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+</div>
 
 <div class="page">
 
@@ -223,6 +253,25 @@
       img.height = 12;
       chip.insertBefore(img, chip.firstChild);
     } catch(e) {}
+  });
+}());
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('mob-menu-btn');
+  var menu = document.getElementById('mob-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
   });
 }());
 </script>

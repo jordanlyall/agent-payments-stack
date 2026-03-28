@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acquisitions — Agent Payments Stack</title>
+<meta name="description" content="M&A activity in agent payment infrastructure. $8B+ in disclosed deals as incumbents acquire the stack.">
+<link rel="canonical" href="https://agentpaymentsstack.com/acquisitions">
+<meta property="og:title" content="Acquisitions — Agent Payments Stack">
+<meta property="og:description" content="M&A activity in agent payment infrastructure. $8B+ in disclosed deals as incumbents acquire the stack.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentpaymentsstack.com/acquisitions">
+<meta property="og:image" content="https://agentpaymentsstack.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* Topbar */
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+  .mob-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text); line-height: 0; }
+  .mob-menu-btn .icon-ham { display: block; }
+  .mob-menu-btn .icon-x { display: none; }
+  .mob-menu-btn.open .icon-ham { display: none; }
+  .mob-menu-btn.open .icon-x { display: block; }
+  .mob-menu { display: none; position: fixed; top: 50px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 98; padding: 16px 0; flex-direction: column; border-top: 1px solid var(--faint); overflow-y: auto; }
+  .mob-menu.open { display: flex; }
+  .mob-menu a { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.02em; color: var(--secondary); text-decoration: none; padding: 16px 24px; border-bottom: 1px solid var(--faint); transition: color 0.1s; }
+  .mob-menu a:first-child { border-top: 1px solid var(--faint); }
+  .mob-menu a:hover { color: var(--text); }
+  .mob-menu a.tl-active { color: var(--text); }
+
+  /* Page */
+  .page { max-width: 960px; padding: 40px 56px 80px; }
+
+  /* Page header */
+  .page-hdr { margin-bottom: 36px; }
+  .page-hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; margin-bottom: 8px; }
+  .page-hdr p { font-size: 13px; color: var(--secondary); max-width: 560px; line-height: 1.5; }
+
+  /* Stat strip */
+  .stat-strip { display: flex; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 6px; overflow: hidden; margin-bottom: 40px; }
+  .stat-cell { background: var(--bg); padding: 16px 24px; flex: 1; }
+  .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 600; color: var(--text); line-height: 1; margin-bottom: 4px; }
+  .stat-val.acq { color: var(--acq); }
+  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  /* Main table */
+  .acq-table { width: 100%; border-collapse: collapse; margin-bottom: 48px; }
+  .acq-table thead th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--faint); white-space: nowrap; }
+  .acq-table thead th.right { text-align: right; }
+  .acq-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.08s; }
+  .acq-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+  .acq-table td { padding: 12px 12px; vertical-align: middle; }
+
+  .td-name a { color: var(--acq); text-decoration: none; font-weight: 600; font-size: 13.5px; }
+  .td-name a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .td-desc { font-size: 11.5px; color: var(--secondary); margin-top: 2px; }
+  .td-layer { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); white-space: nowrap; }
+  .td-layer span { color: var(--secondary); }
+  .td-acquirer { font-size: 12.5px; font-weight: 500; color: var(--text); white-space: nowrap; }
+  .td-value { font-family: 'JetBrains Mono', monospace; font-size: 12px; text-align: right; white-space: nowrap; }
+  .td-value.disclosed { color: var(--text); font-weight: 600; }
+  .td-value.undisclosed { color: var(--faint); font-style: italic; }
+  .td-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); text-align: right; white-space: nowrap; }
+
+  /* Acquirer breakdown */
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .acquirer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 6px; overflow: hidden; }
+  .acq-card { background: var(--bg); padding: 18px 20px; }
+  .acq-card-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+  .acq-card-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .acq-card-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+  .acq-card-deal { display: flex; align-items: baseline; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .acq-card-deal:last-child { border-bottom: none; }
+  .acq-card-deal-name { font-size: 12px; color: var(--acq); }
+  .acq-card-deal-val { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--secondary); }
+
+  /* Footer */
+  .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+
+  @media (max-width: 900px) {
+    .topbar { padding: 0 20px; }
+    .topbar-links { display: none; }
+    .mob-menu-btn { display: flex; align-items: center; }
+    .page { padding: 28px 20px 60px; }
+    .stat-strip { flex-wrap: wrap; }
+    .stat-cell { flex: 0 0 calc(50% - 0.5px); }
+    .acquirer-grid { grid-template-columns: 1fr 1fr; }
+    .acq-table thead th.hide-mob { display: none; }
+    .acq-table td.hide-mob { display: none; }
+  }
+  @media (max-width: 560px) {
+    .acquirer-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="topbar-links">
+      <a href="/">Stack</a>
+      <a href="/data">Data</a>
+      <a href="/rankings">Rankings</a>
+      <a href="/acquisitions" class="tl-active">Acquisitions</a>
+      <a href="/trace">Trace</a>
+      <a href="/hackathons">Hackathons</a>
+      <a href="/api">API</a>
+      <a href="/about">About</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+    </div>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu" aria-expanded="false">
+      <svg class="icon-ham" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <svg class="icon-x" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="/">Stack</a>
+  <a href="/data">Data</a>
+  <a href="/rankings">Rankings</a>
+  <a href="/acquisitions" class="tl-active">Acquisitions</a>
+  <a href="/trace">Trace</a>
+  <a href="/hackathons">Hackathons</a>
+  <a href="/api">API</a>
+  <a href="/about">About</a>
+  <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
+</div>
+
+<div class="page">
+  <div class="page-hdr">
+    <h1>Acquisitions</h1>
+    <p>Incumbents are acquiring the agent payment stack. 7 deals since 2024, $8.05B in disclosed value. Stripe, Mastercard, and Capital One are consolidating the rails.</p>
+  </div>
+
+  <div class="stat-strip">
+    <div class="stat-cell">
+      <div class="stat-val acq">7</div>
+      <div class="stat-label">Total Deals</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">$8.05B</div>
+      <div class="stat-label">Disclosed Value</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">Stripe</div>
+      <div class="stat-label">Most Active Acquirer</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val">L1</div>
+      <div class="stat-label">Most Targeted Layer</div>
+    </div>
+  </div>
+
+  <table class="acq-table">
+    <thead>
+      <tr>
+        <th>Project</th>
+        <th class="hide-mob">Layer</th>
+        <th>Acquirer</th>
+        <th class="right">Value</th>
+        <th class="right">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-name">
+          <a href="https://brahma.fi" target="_blank">Brahma.fi</a>
+          <div class="td-desc">On-chain execution environment for DeFi agents with programmable spending controls.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L5</span> Application</td>
+        <td class="td-acquirer">Polymarket</td>
+        <td class="td-value undisclosed">undisclosed</td>
+        <td class="td-date">2026-03</td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <a href="https://www.brex.com" target="_blank">Brex</a>
+          <div class="td-desc">Corporate spend management with agent card infrastructure.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L4</span> Governance &amp; Policy</td>
+        <td class="td-acquirer">Capital One</td>
+        <td class="td-value disclosed">$5.15B</td>
+        <td class="td-date">2025</td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <a href="https://bvnk.com" target="_blank">BVNK</a>
+          <div class="td-desc">Crypto payment infrastructure bridging fiat and stablecoin rails for enterprises.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L2</span> Routing &amp; Abstraction</td>
+        <td class="td-acquirer">Mastercard</td>
+        <td class="td-value disclosed">$1.8B</td>
+        <td class="td-date">2025</td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <a href="https://www.privy.io" target="_blank">Privy</a>
+          <div class="td-desc">Embedded wallet infrastructure for consumer apps. Now powers Stripe's wallet and auth stack.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L1</span> Wallet &amp; Key Mgmt</td>
+        <td class="td-acquirer">Stripe</td>
+        <td class="td-value undisclosed">undisclosed</td>
+        <td class="td-date">2025</td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <a href="https://www.dynamic.xyz" target="_blank">Dynamic</a>
+          <div class="td-desc">Multi-chain auth and wallet SDK. Brings consumer wallet UX to Fireblocks enterprise custody.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L1</span> Wallet &amp; Key Mgmt</td>
+        <td class="td-acquirer">Fireblocks</td>
+        <td class="td-value undisclosed">undisclosed</td>
+        <td class="td-date">2025</td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <a href="https://zerodev.app" target="_blank">ZeroDev</a>
+          <div class="td-desc">Account abstraction SDK and smart wallet provider. Gasless transactions and session keys for agents.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L1</span> Wallet &amp; Key Mgmt</td>
+        <td class="td-acquirer">Arbitrum</td>
+        <td class="td-value undisclosed">undisclosed</td>
+        <td class="td-date">2025</td>
+      </tr>
+      <tr>
+        <td class="td-name">
+          <a href="https://www.bridge.xyz" target="_blank">Bridge</a>
+          <div class="td-desc">Stablecoin infrastructure and cross-border payment rails.</div>
+        </td>
+        <td class="td-layer hide-mob"><span>L2</span> Routing &amp; Abstraction</td>
+        <td class="td-acquirer">Stripe</td>
+        <td class="td-value disclosed">$1.1B</td>
+        <td class="td-date">2024-10</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="section-label">By Acquirer</div>
+  <div class="acquirer-grid">
+    <div class="acq-card">
+      <div class="acq-card-head">
+        <div class="acq-card-name">Stripe</div>
+        <div class="acq-card-count">2 deals</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">Bridge</div>
+        <div class="acq-card-deal-val">$1.1B</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">Privy</div>
+        <div class="acq-card-deal-val">undisclosed</div>
+      </div>
+    </div>
+    <div class="acq-card">
+      <div class="acq-card-head">
+        <div class="acq-card-name">Capital One</div>
+        <div class="acq-card-count">1 deal</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">Brex</div>
+        <div class="acq-card-deal-val">$5.15B</div>
+      </div>
+    </div>
+    <div class="acq-card">
+      <div class="acq-card-head">
+        <div class="acq-card-name">Mastercard</div>
+        <div class="acq-card-count">1 deal</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">BVNK</div>
+        <div class="acq-card-deal-val">$1.8B</div>
+      </div>
+    </div>
+    <div class="acq-card">
+      <div class="acq-card-head">
+        <div class="acq-card-name">Fireblocks</div>
+        <div class="acq-card-count">1 deal</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">Dynamic</div>
+        <div class="acq-card-deal-val">undisclosed</div>
+      </div>
+    </div>
+    <div class="acq-card">
+      <div class="acq-card-head">
+        <div class="acq-card-name">Arbitrum</div>
+        <div class="acq-card-count">1 deal</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">ZeroDev</div>
+        <div class="acq-card-deal-val">undisclosed</div>
+      </div>
+    </div>
+    <div class="acq-card">
+      <div class="acq-card-head">
+        <div class="acq-card-name">Polymarket</div>
+        <div class="acq-card-count">1 deal</div>
+      </div>
+      <div class="acq-card-deal">
+        <div class="acq-card-deal-name">Brahma.fi</div>
+        <div class="acq-card-deal-val">undisclosed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
+    <div><a href="/data.json">data.json</a> &middot; <a href="/llms.txt">llms.txt</a></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('mob-menu-btn');
+  var menu = document.getElementById('mob-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}());
+</script>
+</body>
+</html>
