@@ -73,25 +73,21 @@
   .page { max-width: 100%; padding: 48px 56px 40px; }
 
   /* Header */
-  .hdr { display: grid; grid-template-columns: 1fr 260px; gap: 40px; align-items: start; margin-bottom: 24px; }
-  .hdr-left { display: flex; flex-direction: column; }
+  .hdr { margin-bottom: 24px; }
   .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
   h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.2; }
-  .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 520px; margin-top: 10px; }
-  .hero-pills { display: flex; align-items: center; gap: 6px; margin-top: 16px; flex-wrap: wrap; }
-  .hero-pill { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 3px; padding: 2px 8px; }
-  .hdr-cards { display: flex; flex-direction: column; gap: 8px; }
-  .hdr-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 14px 16px; }
-  .hdr-card.acq { border-color: rgba(217,97,63,0.2); background: rgba(217,97,63,0.04); }
-  .hdr-card-label { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 5px; }
-  .hdr-card.acq .hdr-card-label { color: rgba(217,97,63,0.6); }
-  .hdr-card-val { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 600; letter-spacing: -1px; line-height: 1; color: var(--text); margin-bottom: 3px; }
-  .hdr-card.acq .hdr-card-val { color: var(--acq); }
-  .hdr-card-sub { font-size: 11px; color: var(--secondary); }
-  .hdr-card-link { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--acq); display: block; margin-top: 7px; text-decoration: none; opacity: 0.8; }
-  .hdr-card-link:hover { opacity: 1; }
-  .hero-newsletter { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-top: 1px solid var(--faint); margin-bottom: 0; }
-  .hero-nl-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); flex-shrink: 0; }
+  .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
+  .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 18px; }
+  .hdr-stat { background: var(--bg); padding: 12px 20px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .hdr-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); line-height: 1; }
+  .hdr-stat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .hdr-stat-link { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--acq); opacity: 0.8; margin-top: 3px; text-decoration: none; display: block; }
+  .hdr-stat-link:hover { opacity: 1; }
+  .hero-newsletter { display: none; }
+  .hero-nl-label { display: none; }
+  .filter-sub { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
+  .filter-sub-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); flex-shrink: 0; }
   .data-strip-sep { color: var(--muted); opacity: 0.3; margin: 0 10px; font-size: 10px; }
   /* keep old class names for mobile compat */
   .nums { display: none; }
@@ -728,12 +724,12 @@
     .filter-btns { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
     .filter-btns::-webkit-scrollbar { display: none; }
     .filter-count { display: none; }
+    .filter-sub { display: none; }
     .page { padding: 28px 20px 32px; }
     h1 { font-size: 28px; letter-spacing: -1px; }
     .deck { font-size: 13px; max-width: 100%; }
-    .hdr { grid-template-columns: 1fr; gap: 20px; }
-    .hdr-cards { flex-direction: row; flex-wrap: wrap; }
-    .hdr-card { flex: 1; min-width: 140px; }
+    .hdr-strip { flex-wrap: wrap; }
+    .hdr-stat { flex: 1; min-width: 140px; }
     .nums-stats { gap: 20px; flex-wrap: wrap; }
     .hero-sub { align-items: flex-start; }
     .num-v { font-size: 20px; }
@@ -805,28 +801,30 @@
 <div class="page">
 
   <div class="hdr">
-    <div class="hdr-left">
-      <div class="hero-eyebrow">Agent Payments Infrastructure</div>
-      <h1>The canonical map of<br>AI agent payment rails</h1>
-      <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
-      <div class="hero-pills">
-        <span class="hero-pill"><span id="hero-count">162</span> projects</span>
-        <span class="hero-pill">6 layers</span>
-        <span class="hero-pill">98.6% USDC</span>
-        <span class="hero-pill">Updated Mar 2026</span>
+    <div class="hero-eyebrow">Agent Payments Infrastructure</div>
+    <h1>The canonical map of AI agent payment rails</h1>
+    <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
+    <div class="hdr-strip">
+      <div class="hdr-stat">
+        <div class="hdr-stat-label">Tracked volume · 9mo</div>
+        <div class="hdr-stat-val">$43M</div>
+        <div class="hdr-stat-sub">~$600M annualized · 140M txns</div>
       </div>
-    </div>
-    <div class="hdr-cards">
-      <div class="hdr-card">
-        <div class="hdr-card-label">Tracked volume · 9mo</div>
-        <div class="hdr-card-val">$43M</div>
-        <div class="hdr-card-sub">~$600M annualized · 140M txns</div>
+      <div class="hdr-stat">
+        <div class="hdr-stat-label">M&amp;A activity · 18mo</div>
+        <div class="hdr-stat-val">$8.05B</div>
+        <div class="hdr-stat-sub">7 deals · Stripe, Capital One, Mastercard</div>
+        <a href="/acquisitions" class="hdr-stat-link">View all acquisitions →</a>
       </div>
-      <div class="hdr-card acq">
-        <div class="hdr-card-label">M&amp;A activity · 18mo</div>
-        <div class="hdr-card-val">$8.05B</div>
-        <div class="hdr-card-sub">7 deals · Stripe, Capital One, Mastercard</div>
-        <a href="/acquisitions" class="hdr-card-link">View all acquisitions →</a>
+      <div class="hdr-stat">
+        <div class="hdr-stat-label">Projects tracked</div>
+        <div class="hdr-stat-val"><span id="hero-count">162</span></div>
+        <div class="hdr-stat-sub">6 layers · 98.6% USDC</div>
+      </div>
+      <div class="hdr-stat">
+        <div class="hdr-stat-label">Transactions</div>
+        <div class="hdr-stat-val">140M</div>
+        <div class="hdr-stat-sub">Updated Mar 2026</div>
       </div>
     </div>
   </div>
@@ -845,14 +843,14 @@
       <button class="fb" data-f="acq">Acquired</button>
     </div>
     <span class="filter-count" id="fc">134 projects</span>
-  </div>
-  <div class="hero-newsletter">
-    <span class="hero-nl-label">Weekly updates</span>
-    <form class="hero-sub-row" id="nsf">
-      <input type="email" id="nse" placeholder="your@email.com" required>
-      <button type="submit" id="nsb">Subscribe</button>
-    </form>
-    <span id="sub-msg" style="display:none;font-size:11px;color:var(--muted)"></span>
+    <div class="filter-sub">
+      <span class="filter-sub-label">Weekly updates</span>
+      <form class="hero-sub-row" id="nsf">
+        <input type="email" id="nse" placeholder="your@email.com" required>
+        <button type="submit" id="nsb">Subscribe</button>
+      </form>
+      <span id="sub-msg" style="display:none;font-size:11px;color:var(--muted)"></span>
+    </div>
   </div>
   <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
   <div class="new-strip" id="new-strip" style="display:none">
