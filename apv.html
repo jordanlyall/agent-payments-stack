@@ -353,6 +353,27 @@
       ctx.font       = '9px monospace';
       ctx.textAlign  = 'center';
       ctx.fillText(weekly[m].week.slice(5), dotX, H - PAD_BOT + 14);
+
+      // coverage annotation: first week ACP appears
+      var prevAcp = m > 0 ? (weekly[m - 1].acp_usd || 0) : 0;
+      if ((weekly[m].acp_usd || 0) > 0 && prevAcp === 0) {
+        var annX = dotX;
+        var annY = dotY - 22;
+        // tick line up from dot
+        ctx.strokeStyle = '#c99e32';
+        ctx.lineWidth   = 1;
+        ctx.setLineDash([2, 2]);
+        ctx.beginPath();
+        ctx.moveTo(annX, dotY - 5);
+        ctx.lineTo(annX, annY + 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        // label
+        ctx.fillStyle  = '#c99e32';
+        ctx.font       = '8px monospace';
+        ctx.textAlign  = 'center';
+        ctx.fillText('+ ACP tracking', annX, annY - 2);
+      }
     }
   }
 
