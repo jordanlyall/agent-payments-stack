@@ -79,7 +79,10 @@
   .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
   .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 18px; }
   .hdr-stat { background: var(--bg); padding: 12px 20px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .hdr-stat--apv { flex: 2; padding: 16px 24px; border-right: 1px solid var(--faint); }
+  .hdr-stat--apv { flex: 2; padding: 16px 24px; border-right: 1px solid var(--faint); flex-direction: row; align-items: center; gap: 0; }
+  .apv-tile-left { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+  .apv-spark { display: block; flex-shrink: 0; opacity: 0.85; align-self: center; }
+  @media (max-width: 600px) { .apv-spark { display: none; } }
   .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
   .hdr-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); line-height: 1; }
   .hdr-stat--apv .hdr-stat-val { font-size: 32px; letter-spacing: -1px; color: #e8ebe4; }
@@ -844,10 +847,13 @@
     <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
     <div class="hdr-strip">
       <div class="hdr-stat hdr-stat--apv">
-        <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume · 30d</div>
-        <div class="hdr-stat-val loading" id="live-vol">—</div>
-        <div class="hdr-stat-sub" id="live-sub">fetching...</div>
-        <a href="/apv" class="hdr-stat-link">Methodology + breakdown →</a>
+        <div class="apv-tile-left">
+          <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume · 30d</div>
+          <div class="hdr-stat-val loading" id="live-vol">—</div>
+          <div class="hdr-stat-sub" id="live-sub">fetching...</div>
+          <a href="/apv" class="hdr-stat-link">Methodology + breakdown →</a>
+        </div>
+        <canvas id="apv-spark" class="apv-spark" width="140" height="52"></canvas>
       </div>
       <div class="hdr-stat">
         <div class="hdr-stat-label">Tracked volume · 9mo</div>
@@ -1468,6 +1474,65 @@ function showFlowDetail(idx) {
       var subEl = document.getElementById('live-sub');
       if (subEl) subEl.textContent = 'data unavailable';
     });
+
+  // Sparkline
+  fetch('/data/apv-history.json')
+    .then(function(r) { return r.json(); })
+    .then(function(h) {
+      var canvas = document.getElementById('apv-spark');
+      if (!canvas || !canvas.getContext || !h || !h.weekly || h.weekly.length < 2) return;
+      var weekly = h.weekly;
+      var ctx    = canvas.getContext('2d');
+      var dpr    = window.devicePixelRatio || 1;
+      var W = 140, H = 52;
+      canvas.width        = W * dpr;
+      canvas.height       = H * dpr;
+      canvas.style.width  = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.scale(dpr, dpr);
+
+      var PAD = 6;
+      var cW  = W - PAD * 2;
+      var cH  = H - PAD * 2;
+      var n   = weekly.length;
+
+      var vals = weekly.map(function(w) {
+        return (w.x402_usd || 0) + (w.acp_usd || 0);
+      });
+      var maxV = Math.max.apply(null, vals) * 1.1;
+      if (maxV === 0) return;
+
+      function cx(i) { return PAD + i * cW / (n - 1); }
+      function cy(v) { return PAD + cH - (v / maxV) * cH; }
+
+      // Filled area
+      var grad = ctx.createLinearGradient(0, PAD, 0, PAD + cH);
+      grad.addColorStop(0,   'rgba(61,158,95,0.28)');
+      grad.addColorStop(1,   'rgba(61,158,95,0.02)');
+      ctx.beginPath();
+      ctx.moveTo(cx(0), cy(vals[0]));
+      for (var i = 1; i < n; i++) ctx.lineTo(cx(i), cy(vals[i]));
+      ctx.lineTo(cx(n - 1), PAD + cH);
+      ctx.lineTo(cx(0),     PAD + cH);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Line
+      ctx.beginPath();
+      ctx.moveTo(cx(0), cy(vals[0]));
+      for (var j = 1; j < n; j++) ctx.lineTo(cx(j), cy(vals[j]));
+      ctx.strokeStyle = '#3d9e5f';
+      ctx.lineWidth   = 1.5;
+      ctx.stroke();
+
+      // End dot
+      ctx.beginPath();
+      ctx.arc(cx(n - 1), cy(vals[n - 1]), 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#3d9e5f';
+      ctx.fill();
+    })
+    .catch(function() { /* sparkline stays blank */ });
 }());
 </script>
 </body>
