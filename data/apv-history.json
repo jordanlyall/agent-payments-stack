@@ -1,0 +1,33 @@
+{
+  "note": "Weekly APV snapshots. x402 figures are accurate Dune weekly aggregations. ACP figures are assigned to the launch week (v2 live 2026-03-26); weekly ACP breakdown coming when per-week Blockscout filtering is added.",
+  "weekly": [
+    {
+      "week": "2026-03-02",
+      "x402_usd": 71816.16,
+      "x402_tx": 254867,
+      "acp_usd": 0,
+      "acp_tx": 0
+    },
+    {
+      "week": "2026-03-09",
+      "x402_usd": 138282.36,
+      "x402_tx": 243210,
+      "acp_usd": 0,
+      "acp_tx": 0
+    },
+    {
+      "week": "2026-03-16",
+      "x402_usd": 80709.81,
+      "x402_tx": 201544,
+      "acp_usd": 0,
+      "acp_tx": 0
+    },
+    {
+      "week": "2026-03-23",
+      "x402_usd": 12058.33,
+      "x402_tx": 71163,
+      "acp_usd": 90264.43,
+      "acp_tx": 5241
+    }
+  ]
+}

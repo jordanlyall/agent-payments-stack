@@ -84,12 +84,11 @@
   .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
   .tag-live { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 6px; border-radius: 3px; background: rgba(61,158,95,0.12); color: var(--green); }
 
-  .weekly-chart { margin: 20px 0; }
-  .chart-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-  .chart-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); width: 80px; flex-shrink: 0; }
-  .chart-bar-wrap { flex: 1; background: var(--faint); border-radius: 2px; height: 8px; overflow: hidden; }
-  .chart-bar { height: 100%; background: #3d9e5f; border-radius: 2px; }
-  .chart-val { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--secondary); width: 72px; text-align: right; flex-shrink: 0; }
+  .history-wrap { margin: 24px 0 8px; position: relative; }
+  #history-canvas { display: block; width: 100%; cursor: default; }
+  .chart-legend { display: flex; gap: 20px; margin-top: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); }
+  .legend-swatch { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
 
   .not-included { font-size: 14px; color: var(--secondary); line-height: 1.8; padding-left: 20px; margin-bottom: 14px; }
   .not-included li { margin-bottom: 4px; }
@@ -144,10 +143,14 @@
 
   <hr>
 
-  <h2>Weekly breakdown</h2>
-  <p>x402 volume by week, last 4 weeks. ACP v2 launched March 26 — prior weeks show x402 only.</p>
-  <div class="weekly-chart" id="weekly-chart">
-    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted);">loading...</div>
+  <h2>APV over time</h2>
+  <p>Weekly agent payment volume since tracking began. x402 data via Dune; ACP v2 launched March 26, 2026.</p>
+  <div class="history-wrap">
+    <canvas id="history-canvas" height="200"></canvas>
+    <div class="chart-legend">
+      <div class="legend-item"><div class="legend-swatch" style="background:#3d9e5f"></div>x402</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#c99e32"></div>Virtuals ACP</div>
+    </div>
   </div>
 
   <hr>
@@ -239,60 +242,86 @@
     return Math.floor(minutes / 1440) + 'd ago';
   }
 
-  function buildWeeklyChart(weekly) {
-    var chart = document.getElementById('weekly-chart');
-    if (!weekly || !weekly.length) return;
-    var maxVol = 0;
-    for (var i = 0; i < weekly.length; i++) {
-      if (weekly[i].volume_usd > maxVol) maxVol = weekly[i].volume_usd;
+  function buildHistoryChart(weekly) {
+    var canvas = document.getElementById('history-canvas');
+    if (!canvas || !canvas.getContext || !weekly || !weekly.length) return;
+    var ctx = canvas.getContext('2d');
+
+    var dpr = window.devicePixelRatio || 1;
+    var W = canvas.parentElement.offsetWidth || 680;
+    var H = 200;
+    canvas.width  = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.scale(dpr, dpr);
+
+    var PAD_TOP = 28;
+    var PAD_BOT = 32;
+    var PAD_L   = 8;
+    var PAD_R   = 8;
+    var chartW  = W - PAD_L - PAD_R;
+    var chartH  = H - PAD_TOP - PAD_BOT;
+    var n       = weekly.length;
+    var colW    = chartW / n;
+    var barW    = Math.max(Math.floor(colW * 0.6), 4);
+
+    var maxTotal = 0;
+    for (var k = 0; k < weekly.length; k++) {
+      var t = (weekly[k].x402_usd || 0) + (weekly[k].acp_usd || 0);
+      if (t > maxTotal) maxTotal = t;
     }
-    while (chart.firstChild) chart.removeChild(chart.firstChild);
-    for (var j = 0; j < weekly.length; j++) {
-      var w = weekly[j];
-      var pct = maxVol > 0 ? (w.volume_usd / maxVol * 100).toFixed(1) : 0;
-      var row = document.createElement('div');
-      row.className = 'chart-row';
+    if (maxTotal === 0) return;
 
-      var lbl = document.createElement('div');
-      lbl.className = 'chart-label';
-      lbl.textContent = w.week.slice(5);
+    ctx.clearRect(0, 0, W, H);
 
-      var wrap = document.createElement('div');
-      wrap.className = 'chart-bar-wrap';
-      var bar = document.createElement('div');
-      bar.className = 'chart-bar';
-      bar.style.width = pct + '%';
-      wrap.appendChild(bar);
+    for (var i = 0; i < weekly.length; i++) {
+      var w     = weekly[i];
+      var x402v = w.x402_usd || 0;
+      var acpv  = w.acp_usd  || 0;
+      var total = x402v + acpv;
 
-      var val = document.createElement('div');
-      val.className = 'chart-val';
-      val.textContent = fmtUSD(w.volume_usd);
+      var colX    = PAD_L + i * colW;
+      var barX    = colX + (colW - barW) / 2;
+      var totalPx = (total / maxTotal) * chartH;
+      var x402Px  = (x402v / maxTotal) * chartH;
+      var acpPx   = totalPx - x402Px;
+      var barTop  = PAD_TOP + chartH - totalPx;
 
-      row.appendChild(lbl);
-      row.appendChild(wrap);
-      row.appendChild(val);
-      chart.appendChild(row);
+      // ACP segment (top)
+      if (acpv > 0) {
+        ctx.fillStyle = '#c99e32';
+        ctx.fillRect(barX, barTop, barW, acpPx);
+      }
+
+      // x402 segment (bottom)
+      if (x402v > 0) {
+        ctx.fillStyle = '#3d9e5f';
+        ctx.fillRect(barX, barTop + acpPx, barW, x402Px);
+      }
+
+      // Value label above bar
+      if (total > 0) {
+        ctx.fillStyle  = '#98948f';
+        ctx.font       = '9px monospace';
+        ctx.textAlign  = 'center';
+        ctx.fillText(fmtUSD(total), barX + barW / 2, barTop - 5);
+      }
+
+      // Week label below bar
+      ctx.fillStyle  = '#685e58';
+      ctx.font       = '9px monospace';
+      ctx.textAlign  = 'center';
+      ctx.fillText(w.week.slice(5), barX + barW / 2, H - PAD_BOT + 14);
     }
   }
-
-  // Mobile menu
-  (function() {
-    var btn = document.getElementById('mob-menu-btn');
-    var menu = document.getElementById('mob-menu');
-    if (!btn || !menu) return;
-    btn.addEventListener('click', function() {
-      var open = menu.classList.toggle('open');
-      btn.classList.toggle('open', open);
-      btn.setAttribute('aria-expanded', open);
-    });
-  }());
 
   fetch('/api/live')
     .then(function(r) { return r.json(); })
     .then(function(d) {
-      var apv = d.apv;
+      var apv  = d.apv;
       var x402 = d.x402;
-      var acp = d.acp;
+      var acp  = d.acp;
 
       var totalEl = document.getElementById('apv-total');
       if (apv && apv.volume_30d_usd !== null) {
@@ -305,12 +334,9 @@
       metaEl.textContent = txStr + '30-day rolling · updated ' + fmtAge(d.cache_age_minutes);
 
       document.getElementById('apv-x402').textContent =
-        (x402 && x402.volume_30d_usd !== null) ? fmtUSD(x402.volume_30d_usd) : '—';
-
+        (x402 && x402.volume_usd !== undefined) ? fmtUSD(x402.volume_usd) : '—';
       document.getElementById('apv-acp').textContent =
-        (acp && acp.volume_30d_usd !== null) ? fmtUSD(acp.volume_30d_usd) : '—';
-
-      if (x402 && x402.weekly) buildWeeklyChart(x402.weekly);
+        (acp && acp.volume_usd !== undefined) ? fmtUSD(acp.volume_usd) : '—';
 
       if (d.updated_at) {
         var dt = new Date(d.updated_at);
@@ -322,6 +348,14 @@
       document.getElementById('apv-total').textContent = '—';
       document.getElementById('apv-meta').textContent = 'data unavailable';
     });
+
+  // Load history for chart
+  fetch('/data/apv-history.json')
+    .then(function(r) { return r.json(); })
+    .then(function(h) {
+      if (h && h.weekly) buildHistoryChart(h.weekly);
+    })
+    .catch(function() { /* chart stays blank */ });
 }());
 </script>
 </body>

@@ -178,12 +178,42 @@ async function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2));
 
+  // ── Update history file ────────────────────────────────────────────────
+  const histPath = path.join(__dirname, '..', 'data', 'apv-history.json');
+  let history = { note: '', weekly: [] };
+  try {
+    history = JSON.parse(fs.readFileSync(histPath, 'utf-8'));
+  } catch (_) { /* start fresh */ }
+
+  // Index existing history by week string
+  const byWeek = {};
+  for (const row of history.weekly) byWeek[row.week] = row;
+
+  // Upsert each Dune weekly row into history
+  const latestWeek = x402.weekly.length ? x402.weekly[0].week : null;
+  for (const w of x402.weekly) {
+    const existing = byWeek[w.week] || {};
+    // Only update ACP for the latest week (30d total assigned to most recent week)
+    const isLatest = w.week === latestWeek;
+    byWeek[w.week] = {
+      week: w.week,
+      x402_usd: w.volume_usd,
+      x402_tx: w.tx_count,
+      acp_usd: isLatest ? acp.volume_usd : (existing.acp_usd || 0),
+      acp_tx:  isLatest ? acp.tx_count   : (existing.acp_tx  || 0),
+    };
+  }
+
+  history.weekly = Object.values(byWeek).sort((a, b) => a.week.localeCompare(b.week));
+  fs.writeFileSync(histPath, JSON.stringify(history, null, 2));
+
   console.log('\n=== APV Results ===');
   console.log(`APV 30d:  $${apv_usd.toLocaleString()}`);
   console.log(`APV txns: ${apv_tx.toLocaleString()}`);
   console.log(`x402:     $${x402.volume_usd.toLocaleString()} (${x402.tx_count.toLocaleString()} txns)`);
   console.log(`ACP:      $${acp.volume_usd.toLocaleString()} (${acp.tx_count.toLocaleString()} inflows)`);
   console.log(`Sources:  ${sources.join(' + ')}`);
+  console.log(`History:  ${history.weekly.length} weeks`);
   console.log(`\nSaved to: ${outPath}`);
 }
 
