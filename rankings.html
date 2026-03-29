@@ -117,6 +117,43 @@
   .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
   .foot a { color: inherit; text-decoration: none; }
   .foot a:hover { color: var(--secondary); }
+
+  /* View tabs */
+  .view-tabs { display: flex; gap: 1px; margin-bottom: 28px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; width: fit-content; }
+  .vt-btn { background: var(--bg); padding: 7px 18px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: none; cursor: pointer; transition: all 0.12s; }
+  .vt-btn.on { color: var(--text); background: rgba(255,255,255,0.06); }
+  .vt-btn:hover:not(.on) { color: var(--secondary); }
+  .vt-section { display: none; }
+  .vt-section.on { display: block; }
+
+  /* Stack Score */
+  .score-formula { background: rgba(255,255,255,0.03); border: 1px solid var(--faint); border-radius: 5px; padding: 18px 22px; margin-bottom: 32px; }
+  .score-formula-title { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .score-formula-eq { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--text); letter-spacing: -0.3px; margin-bottom: 14px; }
+  .score-formula-eq .sf-w { color: var(--early); }
+  .score-formula-factors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 14px; padding-top: 16px; border-top: 1px solid var(--faint); }
+  .sff-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--early); margin-bottom: 6px; }
+  .sff-items { font-size: 11px; color: var(--muted); line-height: 1.7; }
+  .score-table { width: 100%; border-collapse: collapse; }
+  .score-table thead th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 8px 12px; border-bottom: 1px solid var(--faint); white-space: nowrap; }
+  .score-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.08s; }
+  .score-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+  .score-table td { padding: 8px 12px; font-size: 12.5px; vertical-align: middle; }
+  .sc-rank { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--faint); width: 28px; }
+  .sc-layer { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); }
+  .sc-name a { color: var(--text); text-decoration: none; font-weight: 500; }
+  .sc-name a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .sc-name.is-early a { color: var(--early); }
+  .sc-name.is-acq a { color: var(--acq); }
+  .sc-score { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; }
+  .sc-bar-wrap { width: 90px; }
+  .sc-bar-bg { height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+  .sc-bar-fill { height: 100%; background: var(--early); border-radius: 2px; }
+  .sc-top { font-size: 11px; color: var(--muted); font-style: italic; }
+  @media (max-width: 900px) {
+    .score-formula-factors { grid-template-columns: repeat(2, 1fr); }
+    .sc-bar-wrap, .sc-top { display: none; }
+  }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -165,6 +202,13 @@
     </div>
   </div>
 
+  <div class="view-tabs">
+    <button class="vt-btn on" data-view="rankings">Rankings</button>
+    <button class="vt-btn" data-view="score">Stack Score</button>
+    <button class="vt-btn" data-view="history" onclick="window.location='/history'">History</button>
+  </div>
+
+  <div id="view-rankings" class="vt-section on">
   <div class="signal-filter">
     <span class="signal-label">Signal</span>
     <button class="sf-btn on" data-sig="all">All</button>
@@ -190,6 +234,45 @@
     </thead>
     <tbody id="combined-tbody"></tbody>
   </table>
+  </div><!-- /view-rankings -->
+
+  <div id="view-score" class="vt-section">
+    <div class="score-formula">
+      <div class="score-formula-title">Stack Score Formula</div>
+      <div class="score-formula-eq"><span class="sf-w">0.30</span>&times;Live &nbsp;+&nbsp; <span class="sf-w">0.25</span>&times;Signal &nbsp;+&nbsp; <span class="sf-w">0.25</span>&times;Open &nbsp;+&nbsp; <span class="sf-w">0.20</span>&times;Info</div>
+      <div class="score-formula-factors">
+        <div class="sff">
+          <div class="sff-label">Live (30%)</div>
+          <div class="sff-items">Deployed &amp; live &rarr; 80<br>Has on-chain volume &rarr; +20<br>Early-stage &rarr; 50<br>Acquired &rarr; 40<br>Announced &rarr; 15</div>
+        </div>
+        <div class="sff">
+          <div class="sff-label">Signal (25%)</div>
+          <div class="sff-items">GitHub stars (max 50pts)<br>npm downloads (max 35pts)<br>Contributors (max 15pts)</div>
+        </div>
+        <div class="sff">
+          <div class="sff-label">Open (25%)</div>
+          <div class="sff-items">GitHub repo &rarr; 40<br>Open-source license &rarr; 35<br>Public docs &rarr; 25</div>
+        </div>
+        <div class="sff">
+          <div class="sff-label">Info (20%)</div>
+          <div class="sff-items">Launch date known &rarr; 35<br>Funding disclosed &rarr; 35<br>Has description &rarr; 30</div>
+        </div>
+      </div>
+    </div>
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Layer</th>
+          <th>Project</th>
+          <th>Score</th>
+          <th></th>
+          <th>Top Factor</th>
+        </tr>
+      </thead>
+      <tbody id="score-tbody"></tbody>
+    </table>
+  </div><!-- /view-score -->
 
   <div class="foot">
     <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
@@ -424,6 +507,80 @@
   });
 
   render();
+
+  // Stack Score
+  function stackScore(p) {
+    var liveness = { live: 80, early: 50, acquired: 40, announced: 15 }[p.status] || 15;
+    if (p.volume && p.volume.value) liveness = Math.min(100, liveness + 20);
+
+    var stars = (p.github && p.github.stars) ? Math.min(50, p.github.stars / 400) : 0;
+    var npm = (p.npm && p.npm.weekly_downloads) ? Math.min(35, p.npm.weekly_downloads / 286) : 0;
+    var contrib = (p.github && p.github.contributors) ? Math.min(15, p.github.contributors / 13.3) : 0;
+    var signal = stars + npm + contrib;
+
+    var openness = 0;
+    if (p.github && p.github.url) openness += 40;
+    if (p.tags && p.tags.indexOf('open-source') >= 0) openness += 35;
+    if (p.docs) openness += 25;
+
+    var info = 0;
+    if (p.launched) info += 35;
+    if (p.funding) info += 35;
+    if (p.description && p.description.length > 30) info += 30;
+
+    var score = 0.30 * liveness + 0.25 * signal + 0.25 * openness + 0.20 * info;
+    var factors = [
+      { name: 'Liveness', val: liveness * 0.30 },
+      { name: 'Signal', val: signal * 0.25 },
+      { name: 'Openness', val: openness * 0.25 },
+      { name: 'Info', val: info * 0.20 }
+    ];
+    factors.sort(function(a, b) { return b.val - a.val; });
+    return { score: Math.round(score), top: factors[0].name };
+  }
+
+  function buildScoreLeaderboard() {
+    var tbody = document.getElementById('score-tbody');
+    while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+    var all = [];
+    DATA.layers.forEach(function(layer) {
+      layer.projects.forEach(function(p) {
+        var sc = stackScore(p);
+        all.push({ layer: layer.id, p: p, score: sc.score, top: sc.top });
+      });
+    });
+    all.sort(function(a, b) { return b.score - a.score; });
+    all.slice(0, 30).forEach(function(item, i) {
+      var p = item.p;
+      var tr = document.createElement('tr');
+
+      var tdRank = document.createElement('td'); tdRank.className = 'sc-rank'; tdRank.textContent = String(i + 1); tr.appendChild(tdRank);
+      var tdLayer = document.createElement('td'); tdLayer.className = 'sc-layer'; tdLayer.textContent = item.layer; tr.appendChild(tdLayer);
+      var tdName = document.createElement('td'); tdName.className = 'sc-name ' + statusClass(p);
+      var a = document.createElement('a'); a.href = '/' + p.id; a.textContent = p.name; tdName.appendChild(a); tr.appendChild(tdName);
+      var tdScore = document.createElement('td'); tdScore.className = 'sc-score'; tdScore.textContent = item.score + ' /100'; tr.appendChild(tdScore);
+      var tdBar = document.createElement('td'); tdBar.className = 'sc-bar-wrap';
+      var bg = document.createElement('div'); bg.className = 'sc-bar-bg';
+      var fill = document.createElement('div'); fill.className = 'sc-bar-fill'; fill.style.width = item.score + '%'; bg.appendChild(fill); tdBar.appendChild(bg); tr.appendChild(tdBar);
+      var tdTop = document.createElement('td'); tdTop.className = 'sc-top'; tdTop.textContent = item.top; tr.appendChild(tdTop);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  buildScoreLeaderboard();
+
+  // Tab switching
+  document.querySelectorAll('.vt-btn[data-view]').forEach(function(btn) {
+    if (btn.getAttribute('data-view') === 'history') return; // handled by onclick
+    btn.addEventListener('click', function() {
+      var view = btn.getAttribute('data-view');
+      document.querySelectorAll('.vt-btn').forEach(function(b) { b.classList.toggle('on', b === btn); });
+      document.querySelectorAll('.vt-section').forEach(function(s) { s.classList.remove('on'); });
+      var el = document.getElementById('view-' + view);
+      if (el) el.classList.add('on');
+    });
+  });
 }());
 </script>
 <script>

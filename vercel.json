@@ -11,6 +11,7 @@
     { "source": "/acquisitions", "destination": "/acquisitions.html" },
     { "source": "/hackathons",  "destination": "/hackathons.html" },
     { "source": "/graph",       "destination": "/graph.html" },
+    { "source": "/history",     "destination": "/history.html" },
     { "source": "/:slug([^.]+)", "destination": "/projects.html" }
   ]
 }

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack History — Agent Payments Stack</title>
+<meta name="description" content="Key milestones in the emergence of AI agent payment infrastructure. From early autonomous agents to the first HTTP-native payment protocol.">
+<link rel="canonical" href="https://agentpaymentsstack.com/history">
+<meta property="og:title" content="Stack History — Agent Payments Stack">
+<meta property="og:description" content="Key milestones in the emergence of AI agent payment infrastructure.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentpaymentsstack.com/history">
+<meta property="og:image" content="https://agentpaymentsstack.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+    --live: #3d9e5f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* Topbar */
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+  .mob-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text); line-height: 0; }
+  .mob-menu-btn .icon-ham { display: block; }
+  .mob-menu-btn .icon-x { display: none; }
+  .mob-menu-btn.open .icon-ham { display: none; }
+  .mob-menu-btn.open .icon-x { display: block; }
+  .mob-menu { display: none; position: fixed; top: 50px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 98; padding: 16px 0; flex-direction: column; border-top: 1px solid var(--faint); overflow-y: auto; }
+  .mob-menu.open { display: flex; }
+  .mob-menu a { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.02em; color: var(--secondary); text-decoration: none; padding: 16px 24px; border-bottom: 1px solid var(--faint); }
+  .mob-menu a.tl-active { color: var(--text); }
+
+  /* Page */
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 56px 80px; }
+
+  /* Header */
+  .page-hdr { margin-bottom: 48px; }
+  .page-hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; margin-bottom: 8px; }
+  .page-hdr p { font-size: 13px; color: var(--secondary); max-width: 560px; line-height: 1.6; }
+  .page-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 10px; }
+
+  /* Era label */
+  .era-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 48px 0 20px; padding-bottom: 10px; border-bottom: 1px solid var(--faint); display: flex; align-items: center; gap: 10px; }
+  .era-label:first-of-type { margin-top: 0; }
+
+  /* Timeline */
+  .timeline { position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 110px; top: 0; bottom: 0; width: 1px; background: var(--faint); }
+
+  .milestone { display: grid; grid-template-columns: 110px 1fr; gap: 0; margin-bottom: 2px; position: relative; }
+  .milestone:last-child { margin-bottom: 0; }
+
+  .ms-date { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); padding: 18px 20px 18px 0; text-align: right; line-height: 1.3; padding-top: 22px; }
+
+  .ms-body { padding: 16px 0 16px 28px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .milestone:last-child .ms-body { border-bottom: none; }
+
+  .ms-dot { position: absolute; left: -4px; top: 24px; width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--faint); background: var(--bg); flex-shrink: 0; }
+  .ms-dot.type-launch { border-color: var(--live); background: var(--live); }
+  .ms-dot.type-acq { border-color: var(--acq); background: var(--acq); }
+  .ms-dot.type-proto { border-color: var(--early); background: var(--early); }
+  .ms-dot.type-vol { border-color: var(--secondary); }
+  .ms-dot.type-aps { border-color: var(--text); background: rgba(237,235,231,0.15); }
+
+  .ms-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 5px; }
+  .ms-tag.type-launch { color: var(--live); }
+  .ms-tag.type-acq { color: var(--acq); }
+  .ms-tag.type-proto { color: var(--early); }
+  .ms-tag.type-vol { color: var(--secondary); }
+  .ms-tag.type-aps { color: var(--muted); }
+
+  .ms-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
+  .ms-desc { font-size: 13px; color: var(--secondary); line-height: 1.6; max-width: 580px; }
+
+  /* Stats strip */
+  .stats-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-bottom: 48px; }
+  .stat-cell { background: var(--bg); padding: 14px 18px; }
+  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+  .stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); line-height: 1; }
+  .stat-sub { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+  /* Footer */
+  .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+
+  @media (max-width: 900px) {
+    .topbar { padding: 0 20px; }
+    .topbar-links { display: none; }
+    .mob-menu-btn { display: flex; align-items: center; }
+    .page { padding: 28px 20px 60px; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .timeline::before { left: 80px; }
+    .milestone { grid-template-columns: 80px 1fr; }
+    .ms-date { font-size: 9px; padding-right: 14px; }
+  }
+</style>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="topbar-links">
+      <a href="/">Stack</a>
+      <a href="/data">Data</a>
+      <a href="/rankings">Rankings</a>
+      <a href="/acquisitions">Acquisitions</a>
+      <a href="/graph">Graph</a>
+      <a href="/history" class="tl-active">History</a>
+      <a href="/api">API</a>
+      <a href="/about">About</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit &#8599;</a>
+    </div>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu" aria-expanded="false">
+      <svg class="icon-ham" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <svg class="icon-x" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="/">Stack</a>
+  <a href="/data">Data</a>
+  <a href="/rankings">Rankings</a>
+  <a href="/acquisitions">Acquisitions</a>
+  <a href="/graph">Graph</a>
+  <a href="/history" class="tl-active">History</a>
+  <a href="/api">API</a>
+  <a href="/about">About</a>
+  <a href="https://tally.so/r/rjVvd5" target="_blank">Submit &#8599;</a>
+</div>
+
+<div class="page">
+
+  <div class="page-hdr">
+    <h1>Stack History</h1>
+    <p>Key moments in the emergence of AI agent payment infrastructure. From the first autonomous agents earning on-chain to the first HTTP-native payment protocol.</p>
+    <div class="page-meta">162 projects &middot; 6 layers &middot; $43M verified volume &middot; Updated March 2026</div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-cell">
+      <div class="stat-label">Days Since x402 Launch</div>
+      <div class="stat-val" id="stat-days">—</div>
+      <div class="stat-sub">Nov 2024 &rarr; today</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Projects Mapped</div>
+      <div class="stat-val">162</div>
+      <div class="stat-sub">across 6 layers</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">Acquisitions Tracked</div>
+      <div class="stat-val">7</div>
+      <div class="stat-sub">since 2024</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-label">On-chain Volume (30d)</div>
+      <div class="stat-val">$43M</div>
+      <div class="stat-sub">98.6% USDC</div>
+    </div>
+  </div>
+
+  <div class="era-label">Before the Stack &mdash; 2021&ndash;2023</div>
+
+  <div class="timeline">
+    <div class="milestone">
+      <div class="ms-date">Oct 2021</div>
+      <div class="ms-body">
+        <div class="ms-dot type-launch"></div>
+        <div class="ms-tag type-launch">Launch</div>
+        <div class="ms-title">Botto launches &mdash; first autonomous agent earning on-chain revenue</div>
+        <div class="ms-desc">An autonomous AI artist that creates generative art and sells it on-chain, governed by community token holders. The earliest live example of an agent with its own economic loop: create, sell, earn.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Mar 2022</div>
+      <div class="ms-body">
+        <div class="ms-dot type-launch"></div>
+        <div class="ms-tag type-launch">Launch</div>
+        <div class="ms-title">Olas (Autonolas) launches &mdash; co-owned autonomous agent services</div>
+        <div class="ms-desc">Decentralized protocol for agents that operate as autonomous services and earn from their work. First formal attempt at agent ownership and revenue-sharing as a protocol primitive.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Jul 2023</div>
+      <div class="ms-body">
+        <div class="ms-dot type-launch"></div>
+        <div class="ms-tag type-launch">Launch</div>
+        <div class="ms-title">Virtuals Protocol launches on Base &mdash; tokenized agent launchpad</div>
+        <div class="ms-desc">Launchpad for tokenized AI agents on Base. Agents earn revenue and share it with token holders &mdash; proving that agent economic models could attract significant capital and developer interest.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-label">The Stack Forms &mdash; 2024</div>
+
+  <div class="timeline">
+    <div class="milestone">
+      <div class="ms-date">Oct 2024</div>
+      <div class="ms-body">
+        <div class="ms-dot type-launch"></div>
+        <div class="ms-tag type-launch">Launch</div>
+        <div class="ms-title">ElizaOS open-sourced &mdash; most-forked agent framework</div>
+        <div class="ms-desc">Multi-agent framework from ai16z becomes the default runtime for autonomous agent deployments. 17,000+ GitHub stars, 5,500+ forks, 530 contributors. The x402 and Coinbase AgentKit SDKs both ship ElizaOS plugins, anchoring it as the application layer standard.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Nov 2024</div>
+      <div class="ms-body">
+        <div class="ms-dot type-proto"></div>
+        <div class="ms-tag type-proto">Protocol</div>
+        <div class="ms-title">x402 launches on Base mainnet &mdash; HTTP-native agent payments</div>
+        <div class="ms-desc">Coinbase publishes x402: an open protocol using the HTTP 402 status code so agents can discover, negotiate, and pay for services in a single round-trip. Open-source, deployed via CREATE2 at the same address on every EVM chain. The first protocol designed specifically for machine-to-machine payments at API call granularity.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="era-label">The Race &mdash; 2025&ndash;2026</div>
+
+  <div class="timeline">
+    <div class="milestone">
+      <div class="ms-date">Mar 12, 2026</div>
+      <div class="ms-body">
+        <div class="ms-dot type-proto"></div>
+        <div class="ms-tag type-proto">Standard</div>
+        <div class="ms-title">ERC-8004 published &mdash; first formal agent spending policy spec</div>
+        <div class="ms-desc">The first formal Ethereum standard for agent spending policy: budget limits, per-merchant allow-lists, time-boxed spend windows, and human approval thresholds. Whoever controls this layer controls the rules for autonomous commerce. No implementation has won yet.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Mar 18, 2026</div>
+      <div class="ms-body">
+        <div class="ms-dot type-vol"></div>
+        <div class="ms-tag type-vol">Volume</div>
+        <div class="ms-title">x402 crosses 75M transactions in 30 days</div>
+        <div class="ms-desc">The reference implementation's 30-day transaction count reaches 75 million &mdash; an order of magnitude more than any competing agent payment protocol. Base remains the dominant settlement chain; USDC accounts for 98.6% of tracked volume across the full stack.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Mar 21, 2026</div>
+      <div class="ms-body">
+        <div class="ms-dot type-acq"></div>
+        <div class="ms-tag type-acq">Acquisition</div>
+        <div class="ms-title">Fireblocks acquires Dynamic &mdash; custody meets wallet identity</div>
+        <div class="ms-desc">The most significant M&amp;A move tracked so far. Institutional custody buying wallet identity signals that the stack is collapsing from six layers into fewer, larger players. Fireblocks moves from pure custody into agent identity infrastructure, positioning for the role of institutional gateway to agentic commerce.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Mar 25, 2026</div>
+      <div class="ms-body">
+        <div class="ms-dot type-aps"></div>
+        <div class="ms-tag type-aps">APS</div>
+        <div class="ms-title">Agent Payments Stack launches &mdash; 88 projects, 24K+ tweet views</div>
+        <div class="ms-desc">The first public map of the agent payments infrastructure landscape. 88 projects across 6 layers on launch day. 24,000+ tweet impressions in the first 24 hours. Inbound project submissions begin within hours.</div>
+      </div>
+    </div>
+    <div class="milestone">
+      <div class="ms-date">Mar 27, 2026</div>
+      <div class="ms-body">
+        <div class="ms-dot type-aps"></div>
+        <div class="ms-tag type-aps">APS</div>
+        <div class="ms-title">v2.0 &mdash; 162 projects, x402 ecosystem expansion, graph view</div>
+        <div class="ms-desc">Full x402 ecosystem mapped: Stellar, Agently, Kobaru, Cloudflare, FluxA, and 14 more added. Force-directed graph view launches showing 6 layer hubs and 45 cross-layer connections. LinkedIn post surfaces Bond.credit within an hour via founder inbound. Funding, chain, and launch date enrichment on 18 projects.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
+    <div><a href="/data.json">data.json</a> &middot; <a href="/llms.txt">llms.txt</a></div>
+  </div>
+
+</div>
+
+<script>
+// Days since x402 launch (Nov 1, 2024)
+(function() {
+  var launch = new Date('2024-11-01');
+  var now = new Date();
+  var days = Math.floor((now - launch) / (1000 * 60 * 60 * 24));
+  var el = document.getElementById('stat-days');
+  if (el) el.textContent = days.toLocaleString();
+}());
+
+// Mobile menu
+(function() {
+  var btn = document.getElementById('mob-menu-btn');
+  var menu = document.getElementById('mob-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function() {
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}());
+</script>
+</body>
+</html>
