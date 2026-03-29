@@ -79,10 +79,17 @@
   .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
   .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 18px; }
   .hdr-stat { background: var(--bg); padding: 12px 20px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .hdr-stat--apv { flex: 2; padding: 16px 24px; border-right: 1px solid var(--faint); flex-direction: row; align-items: center; gap: 0; }
-  .apv-tile-left { display: flex; flex-direction: column; gap: 2px; flex: 1; }
-  .apv-spark { display: block; flex-shrink: 0; opacity: 0.85; align-self: center; }
-  @media (max-width: 600px) { .apv-spark { display: none; } }
+  .hdr-stat--apv { flex: 2; padding: 16px 24px; border-right: 1px solid var(--faint); flex-direction: row; align-items: stretch; gap: 20px; text-decoration: none; cursor: pointer; transition: background 0.12s; }
+  .hdr-stat--apv:hover { background: #111010; }
+  .apv-tile-left { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; justify-content: center; }
+  .apv-sources { display: flex; gap: 14px; margin-top: 6px; }
+  .apv-src { display: flex; flex-direction: column; gap: 1px; }
+  .apv-src-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--text); }
+  .apv-src-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .apv-tile-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; flex-shrink: 0; padding: 2px 0; }
+  .apv-spark { display: block; }
+  .apv-tile-desc { font-size: 9px; color: var(--muted); text-align: right; line-height: 1.4; max-width: 130px; }
+  @media (max-width: 600px) { .apv-tile-right { display: none; } }
   .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
   .hdr-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); line-height: 1; }
   .hdr-stat--apv .hdr-stat-val { font-size: 32px; letter-spacing: -1px; color: #e8ebe4; }
@@ -846,15 +853,27 @@
     <h1>The canonical map of AI agent payment rails</h1>
     <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
     <div class="hdr-strip">
-      <div class="hdr-stat hdr-stat--apv">
+      <a href="/apv" class="hdr-stat hdr-stat--apv">
         <div class="apv-tile-left">
           <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume · 30d</div>
           <div class="hdr-stat-val loading" id="live-vol">—</div>
+          <div class="apv-sources" id="apv-sources" style="display:none">
+            <div class="apv-src">
+              <div class="apv-src-val" id="live-x402">—</div>
+              <div class="apv-src-lbl">x402</div>
+            </div>
+            <div class="apv-src">
+              <div class="apv-src-val" id="live-acp">—</div>
+              <div class="apv-src-lbl">ACP</div>
+            </div>
+          </div>
           <div class="hdr-stat-sub" id="live-sub">fetching...</div>
-          <a href="/apv" class="hdr-stat-link">Methodology + breakdown →</a>
         </div>
-        <canvas id="apv-spark" class="apv-spark" width="140" height="52"></canvas>
-      </div>
+        <div class="apv-tile-right">
+          <canvas id="apv-spark" class="apv-spark" width="160" height="56"></canvas>
+          <div class="apv-tile-desc">USDC settled by AI agents across tracked protocols</div>
+        </div>
+      </a>
       <div class="hdr-stat">
         <div class="hdr-stat-label">Tracked volume · 9mo</div>
         <div class="hdr-stat-val">$43M</div>
@@ -1468,7 +1487,17 @@ function showFlowDetail(idx) {
         volEl.classList.remove('loading');
       }
 
-      subEl.textContent = sources + ' · 30d · ' + age;
+      // Protocol breakdown
+      var srcRow = document.getElementById('apv-sources');
+      var x402El = document.getElementById('live-x402');
+      var acpEl  = document.getElementById('live-acp');
+      if (srcRow && d.x402 && d.acp) {
+        if (x402El) x402El.textContent = fmtUSD(d.x402.volume_usd || 0);
+        if (acpEl)  acpEl.textContent  = fmtUSD(d.acp.volume_usd  || 0);
+        srcRow.style.display = 'flex';
+      }
+
+      subEl.textContent = age + ' · updated daily';
     })
     .catch(function() {
       var subEl = document.getElementById('live-sub');
@@ -1484,7 +1513,7 @@ function showFlowDetail(idx) {
       var weekly = h.weekly;
       var ctx    = canvas.getContext('2d');
       var dpr    = window.devicePixelRatio || 1;
-      var W = 140, H = 52;
+      var W = 160, H = 56;
       canvas.width        = W * dpr;
       canvas.height       = H * dpr;
       canvas.style.width  = W + 'px';
