@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search Options — Lofi</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0d0c0b; --surface: #141312; --border: #222; --faint: #201e1b;
+  --muted: #685e58; --sub: #98948f; --text: #edebe7; --early: #c99e32; --acq: #d9613f;
+}
+body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 14px; }
+
+.label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 32px 40px 10px; }
+.variant { border-bottom: 1px solid var(--faint); padding-bottom: 0; }
+
+/* Shared topbar */
+.topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: var(--bg); }
+.topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+.topbar-right { display: flex; align-items: center; gap: 16px; }
+.view-toggle { display: flex; background: rgba(255,255,255,0.04); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; }
+.view-btn { padding: 4px 13px; font-size: 11px; font-family: 'JetBrains Mono', monospace; font-weight: 500; color: var(--muted); background: transparent; border: none; cursor: pointer; letter-spacing: 0.04em; }
+.view-btn.active { background: rgba(255,255,255,0.08); color: var(--text); }
+
+/* Shared filter pieces */
+.filter-bar { display: flex; align-items: center; gap: 8px; padding: 14px 40px; }
+.search-box { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.03); border: 1px solid var(--faint); border-radius: 5px; padding: 6px 11px; }
+.search-box svg { opacity: 0.25; flex-shrink: 0; }
+.search-box input { background: transparent; border: none; outline: none; color: var(--text); font-size: 12.5px; font-family: inherit; width: 100%; }
+.search-box input::placeholder { color: var(--muted); }
+.filter-btns { display: flex; gap: 5px; flex-shrink: 0; }
+.fb { background: transparent; border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 4px 10px; font-size: 11.5px; color: var(--muted); cursor: pointer; font-family: inherit; white-space: nowrap; }
+.fb.on { color: var(--text); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.05); }
+.fb.early { border-color: rgba(201,158,50,0.2); color: rgba(201,158,50,0.65); }
+.fb.acq { border-color: rgba(217,97,63,0.22); color: rgba(217,97,63,0.6); }
+.count { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); flex-shrink: 0; }
+
+/* A: fixed-width search */
+.search-fixed { width: 280px; flex-shrink: 0; }
+
+/* B: topbar search */
+.topbar-search { display: flex; align-items: center; gap: 7px; background: rgba(255,255,255,0.03); border: 1px solid var(--faint); border-radius: 5px; padding: 5px 10px; width: 200px; }
+.topbar-search input { background: transparent; border: none; outline: none; color: var(--text); font-size: 11.5px; font-family: inherit; width: 100%; }
+.topbar-search input::placeholder { color: var(--muted); }
+.topbar-search svg { opacity: 0.25; flex-shrink: 0; }
+.filter-btns-only { display: flex; align-items: center; gap: 5px; padding: 12px 40px; border-bottom: 1px solid var(--faint); }
+
+/* C: no search, just filter pills */
+/* D: icon expand */
+.search-icon-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--faint); border-radius: 5px; background: transparent; cursor: pointer; flex-shrink: 0; opacity: 0.6; }
+.search-expanding { display: flex; align-items: center; gap: 8px; }
+.search-expand-input { background: rgba(255,255,255,0.03); border: 1px solid var(--faint); border-radius: 5px; padding: 5px 10px; font-size: 12px; font-family: inherit; color: var(--text); outline: none; width: 0; overflow: hidden; opacity: 0; transition: width 0.2s, opacity 0.2s; }
+.search-expand-input.open { width: 180px; opacity: 1; }
+.search-expand-input::placeholder { color: var(--muted); }
+
+/* chip preview */
+.chip-preview { padding: 16px 40px 24px; display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { display: inline-flex; align-items: center; padding: 5px 13px; border-radius: 5px; font-size: 13px; font-weight: 450; white-space: nowrap; background: rgba(255,255,255,0.05); color: var(--text); border: 1px solid rgba(255,255,255,0.09); }
+.chip.early { color: var(--early); border-color: rgba(201,158,50,0.22); background: rgba(201,158,50,0.08); }
+.chip.acq { color: var(--acq); border-color: rgba(217,97,63,0.2); background: rgba(217,97,63,0.09); }
+</style>
+</head>
+<body>
+
+<!-- ── A: Fixed-width search ── -->
+<div class="variant">
+  <div class="label">A — Fixed width · 280px search</div>
+  <nav class="topbar">
+    <span class="topbar-logo">AGENT PAYMENTS STACK</span>
+    <div class="topbar-right">
+      <div class="view-toggle">
+        <button class="view-btn active">Map</button>
+        <button class="view-btn">Data</button>
+      </div>
+    </div>
+  </nav>
+  <div class="filter-bar">
+    <div class="search-box search-fixed">
+      <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      <input type="text" placeholder="Search 134 projects...">
+    </div>
+    <div class="filter-btns">
+      <button class="fb on">All</button>
+      <button class="fb">Live</button>
+      <button class="fb early">Early</button>
+      <button class="fb">Announced</button>
+      <button class="fb acq">Acquired</button>
+    </div>
+    <span class="count">134 projects</span>
+  </div>
+  <div class="chip-preview">
+    <span class="chip">x402</span><span class="chip">Skyfire</span><span class="chip early">Kibble</span><span class="chip">Coinbase</span><span class="chip acq">Privy</span><span class="chip">Turnkey</span><span class="chip">Stripe</span>
+  </div>
+</div>
+
+<!-- ── B: Search in topbar ── -->
+<div class="variant">
+  <div class="label">B — Search in topbar</div>
+  <nav class="topbar">
+    <span class="topbar-logo">AGENT PAYMENTS STACK</span>
+    <div class="topbar-right">
+      <div class="topbar-search">
+        <svg width="12" height="12" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Search...">
+      </div>
+      <div class="view-toggle">
+        <button class="view-btn active">Map</button>
+        <button class="view-btn">Data</button>
+      </div>
+    </div>
+  </nav>
+  <div class="filter-btns-only">
+    <button class="fb on">All</button>
+    <button class="fb">Live</button>
+    <button class="fb early">Early</button>
+    <button class="fb">Announced</button>
+    <button class="fb acq">Acquired</button>
+    <span class="count" style="margin-left:8px">134 projects</span>
+  </div>
+  <div class="chip-preview">
+    <span class="chip">x402</span><span class="chip">Skyfire</span><span class="chip early">Kibble</span><span class="chip">Coinbase</span><span class="chip acq">Privy</span><span class="chip">Turnkey</span><span class="chip">Stripe</span>
+  </div>
+</div>
+
+<!-- ── C: No search, filter pills only ── -->
+<div class="variant">
+  <div class="label">C — Filter pills only, no search</div>
+  <nav class="topbar">
+    <span class="topbar-logo">AGENT PAYMENTS STACK</span>
+    <div class="topbar-right">
+      <div class="view-toggle">
+        <button class="view-btn active">Map</button>
+        <button class="view-btn">Data</button>
+      </div>
+    </div>
+  </nav>
+  <div class="filter-btns-only">
+    <button class="fb on">All</button>
+    <button class="fb">Live</button>
+    <button class="fb early">Early</button>
+    <button class="fb">Announced</button>
+    <button class="fb acq">Acquired</button>
+    <span class="count" style="margin-left:8px">134 projects</span>
+  </div>
+  <div class="chip-preview">
+    <span class="chip">x402</span><span class="chip">Skyfire</span><span class="chip early">Kibble</span><span class="chip">Coinbase</span><span class="chip acq">Privy</span><span class="chip">Turnkey</span><span class="chip">Stripe</span>
+  </div>
+</div>
+
+<!-- ── D: Expand-on-click icon ── -->
+<div class="variant">
+  <div class="label">D — Icon that expands on click</div>
+  <nav class="topbar">
+    <span class="topbar-logo">AGENT PAYMENTS STACK</span>
+    <div class="topbar-right">
+      <div class="view-toggle">
+        <button class="view-btn active">Map</button>
+        <button class="view-btn">Data</button>
+      </div>
+    </div>
+  </nav>
+  <div class="filter-btns-only">
+    <div class="search-expanding">
+      <button class="search-icon-btn" id="expand-btn" onclick="toggleSearch()">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      </button>
+      <input class="search-expand-input" id="expand-input" type="text" placeholder="Search 134 projects...">
+    </div>
+    <button class="fb on">All</button>
+    <button class="fb">Live</button>
+    <button class="fb early">Early</button>
+    <button class="fb">Announced</button>
+    <button class="fb acq">Acquired</button>
+    <span class="count" style="margin-left:8px">134 projects</span>
+  </div>
+  <div class="chip-preview">
+    <span class="chip">x402</span><span class="chip">Skyfire</span><span class="chip early">Kibble</span><span class="chip">Coinbase</span><span class="chip acq">Privy</span><span class="chip">Turnkey</span><span class="chip">Stripe</span>
+  </div>
+</div>
+
+<script>
+function toggleSearch() {
+  var input = document.getElementById('expand-input');
+  input.classList.toggle('open');
+  if (input.classList.contains('open')) input.focus();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "superfluid",
+    "metric": "Cumulative streams started (Optimism + Base combined), with $280M combined volume on those two chains. Protocol TVL ~$12.6M across all chains.",
+    "value": 693978,
+    "unit": "streams",
+    "period": "all-time",
+    "source": "self_reported",
+    "source_url": "https://atlas.optimism.io/project/0x3ecbf66c1b21342b26acb0f7d4c6b8bbbef168ffafff3f425de3503fd8dfa535",
+    "as_of": "2025-12-31",
+    "note": "49,394 streams on Optimism + 644,584 on Base = 693,978 combined. $280M combined volume on those two chains only. Protocol TVL $12.6M per DeFi Llama. No published total-value-streamed all-chain figure found. TVL represents SuperTokens in circulation, NOT cumulative streamed value.",
+    "confidence": "low"
+  },
+  {
+    "id": "uniswap",
+    "metric": "DEX swap volume, 30-day rolling",
+    "value": 45772000000,
+    "unit": "usd",
+    "period": "30d",
+    "source": "on_chain",
+    "source_url": "https://defillama.com/dexs/uniswap",
+    "as_of": "2026-03-26",
+    "note": "$45.77B 30-day volume across all Uniswap versions (v2, v3, v4). DeFi Llama is the source; live page was not directly fetchable but the figure was surfaced by DeFi Llama's indexed data in search results.",
+    "confidence": "medium"
+  },
+  {
+    "id": "layerzero",
+    "metric": "Cumulative cross-chain messages sent (all-time)",
+    "value": 130000000,
+    "unit": "messages",
+    "period": "all-time",
+    "source": "on_chain",
+    "source_url": "https://layerzeroscan.com/analytics/overview",
+    "as_of": "2025-03-01",
+    "note": "130M+ messages confirmed as of March 2025. 2025 year-end blog cites 173% OFT growth and cross-chain leadership (70% of all cross-chain messages) but does not publish an updated cumulative message count in indexed text. Live figure on layerzeroscan.com/analytics/overview not fetchable. True current number likely higher but unconfirmed.",
+    "confidence": "low"
+  },
+  {
+    "id": "wormhole",
+    "metric": "All-time transfer volume (token bridge)",
+    "value": 68000000000,
+    "unit": "usd",
+    "period": "all-time",
+    "source": "self_reported",
+    "source_url": "https://wormhole.com/",
+    "as_of": "2026-03-01",
+    "note": "$68B all-time transfer volume shown on wormhole.com homepage. 1B+ messages all-time (milestone passed by mid-2024, still cited in 2025-2026 content). $2.17B/month via Portal bridge (Q1 2026 estimate, sourced from third-party). No confirmed standalone 30-day figure found from wormholescan.io directly.",
+    "confidence": "medium"
+  },
+  {
+    "id": "across",
+    "metric": "Bridge volume, 30-day rolling",
+    "value": 742540000,
+    "unit": "usd",
+    "period": "30d",
+    "source": "on_chain",
+    "source_url": "https://defillama.com/bridge/across",
+    "as_of": "2026-03-26",
+    "note": "$742.54M 30-day volume per DeFi Llama. Cumulative lifetime volume $28.6B–$35B (range from two separate sources; DeFi Llama says $28.6B cumulative, protocol/third-party marketing says $35B). 54% of daily active bridge users as of Jan 2026.",
+    "confidence": "medium"
+  },
+  {
+    "id": "lifi",
+    "metric": "Bridge + DEX aggregation volume, monthly",
+    "value": 8000000000,
+    "unit": "usd",
+    "period": "30d",
+    "source": "self_reported",
+    "source_url": "https://li.fi/knowledge-hub/li-fi-update-october-2025/",
+    "as_of": "2025-10-31",
+    "note": "$8B in October 2025 (peak monthly, per LI.FI's own update). $5.2B in November 2025. Lifetime volume surpassed $60B as of December 2025. No March 2026 monthly figure found. October 2025 is the most recent specific number available. Use with caution as current-month figure.",
+    "confidence": "low"
+  }
+]

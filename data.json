@@ -12,6 +12,40 @@
     "annualized": "~$600M",
     "usdc_share": "98.6%"
   },
+  "rail": {
+    "activity": [
+      {
+        "date": "2026-03-26",
+        "type": "added",
+        "text": "OpenMatter and Kibble added — governance layer grows to 32 projects"
+      },
+      {
+        "date": "2026-03-21",
+        "type": "acq",
+        "text": "Fireblocks acquires Dynamic — custody meets wallet identity"
+      },
+      {
+        "date": "2026-03-18",
+        "type": "vol",
+        "text": "x402 crosses 75M transactions in 30 days"
+      },
+      {
+        "date": "2026-03-12",
+        "type": "proto",
+        "text": "ERC-8004 draft published — first formal agent spending policy spec"
+      },
+      {
+        "date": "2026-03-05",
+        "type": "added",
+        "text": "15 new projects added this month — Neynar, Agently, SlinkyLayer among them"
+      }
+    ],
+    "editorial": {
+      "text": "The Fireblocks / Dynamic deal is the most interesting move of the month. Custody buying identity means the institutional stack is collapsing into fewer players faster than expected.",
+      "byline": "@jordanlyall",
+      "date": "2026-03-28"
+    }
+  },
   "layers": [
     {
       "id": "L5",
@@ -465,7 +499,7 @@
           "id": "remlo",
           "name": "Remlo",
           "status": "live",
-          "description": "Enterprise payroll API \u2014 agents trigger compliant batch payments, compliance screening, yield queries, and salary streaming via HTTP 402 on Tempo.",
+          "description": "Enterprise payroll API — agents trigger compliant batch payments, compliance screening, yield queries, and salary streaming via HTTP 402 on Tempo.",
           "tags": [
             "payroll",
             "x402",
@@ -496,7 +530,7 @@
           "id": "backed",
           "name": "Backed",
           "status": "early",
-          "description": "Capital markets infrastructure for Agent Autonomous Organizations (AAOs) \u2014 blockchain-native entities run by AI agents with programmable governance.",
+          "description": "Capital markets infrastructure for Agent Autonomous Organizations (AAOs) — blockchain-native entities run by AI agents with programmable governance.",
           "tags": [
             "aao",
             "governance",
@@ -517,7 +551,7 @@
             "b2b",
             "api-native"
           ],
-          "editorial": "Largest cloud provider adopting x402. Machine-to-machine payment infrastructure at enterprise scale. AWS + Cloudflare adoption gives x402 serious enterprise distribution \u2014 two of the three largest CDN/cloud providers.",
+          "editorial": "Largest cloud provider adopting x402. Machine-to-machine payment infrastructure at enterprise scale. AWS + Cloudflare adoption gives x402 serious enterprise distribution — two of the three largest CDN/cloud providers.",
           "launched": "2006",
           "added": "2026-03-27"
         },
@@ -589,7 +623,7 @@
             "developer",
             "b2b"
           ],
-          "editorial": "One of the most-used AI developer tools now accessible via x402. Agents can scrape and parse any website without API keys \u2014 pay per crawl in USDC on Base. Strong signal for x402 in the AI dev toolchain.",
+          "editorial": "One of the most-used AI developer tools now accessible via x402. Agents can scrape and parse any website without API keys — pay per crawl in USDC on Base. Strong signal for x402 in the AI dev toolchain.",
           "funding": "$16.2M",
           "launched": "2024",
           "added": "2026-03-27"
@@ -607,7 +641,7 @@
             "developer",
             "onchain"
           ],
-          "editorial": "Leading IPFS pinning service integrating x402 for keyless access. Agents can store and retrieve files on IPFS without accounts \u2014 just USDC on Base. Key infrastructure for agents that need to publish data.",
+          "editorial": "Leading IPFS pinning service integrating x402 for keyless access. Agents can store and retrieve files on IPFS without accounts — just USDC on Base. Key infrastructure for agents that need to publish data.",
           "funding": "$21.5M",
           "launched": "2018",
           "added": "2026-03-27"
@@ -644,7 +678,7 @@
             "consumer",
             "b2b"
           ],
-          "editorial": "100M+ user creative platform integrating x402 for API access. Agents can generate images and access design assets without subscriptions \u2014 pay per call in USDC.",
+          "editorial": "100M+ user creative platform integrating x402 for API access. Agents can generate images and access design assets without subscriptions — pay per call in USDC.",
           "launched": "2010",
           "added": "2026-03-27"
         },
@@ -653,7 +687,7 @@
           "id": "browserbase",
           "name": "Browserbase",
           "status": "live",
-          "description": "Cloud headless browser infrastructure for AI agents. Agents pay for browser sessions using stablecoins via x402 \u2014 no accounts needed.",
+          "description": "Cloud headless browser infrastructure for AI agents. Agents pay for browser sessions using stablecoins via x402 — no accounts needed.",
           "url": "https://browserbase.com",
           "x": "browserbasehq",
           "tags": [
@@ -661,7 +695,7 @@
             "developer",
             "b2b"
           ],
-          "editorial": "Headless browser-as-a-service, x402-gated. As agents increasingly need to browse the web, Browserbase provides the infrastructure \u2014 pay-per-session in USDC.",
+          "editorial": "Headless browser-as-a-service, x402-gated. As agents increasingly need to browse the web, Browserbase provides the infrastructure — pay-per-session in USDC.",
           "funding": "$67.5M",
           "launched": "2024",
           "added": "2026-03-27"
@@ -967,7 +1001,7 @@
           "name": "OpenMatter",
           "status": "early",
           "url": "https://github.com/openmatter",
-          "description": "ZK execution firewall for payment MCPs. Wraps Stripe MCP with a RISC Zero zkVM \u2014 blocks malformed tool calls, threshold decryption for API keys, PII redaction before logs.",
+          "description": "ZK execution firewall for payment MCPs. Wraps Stripe MCP with a RISC Zero zkVM — blocks malformed tool calls, threshold decryption for API keys, PII redaction before logs.",
           "tags": [
             "zk",
             "open-source",
@@ -1152,7 +1186,7 @@
           "id": "mppgate",
           "name": "MPPGate",
           "status": "early",
-          "description": "Per-agent spending controls built on MPP (Stripe + Tempo) \u2014 budgets, spend limits, and auto-stop for autonomous agents.",
+          "description": "Per-agent spending controls built on MPP (Stripe + Tempo) — budgets, spend limits, and auto-stop for autonomous agents.",
           "tags": [
             "spend-controls",
             "mpp",
@@ -1166,7 +1200,7 @@
           "id": "bullet-cash",
           "name": "Bullet Cash",
           "status": "early",
-          "description": "Agent-native spending controls \u2014 agents get API keys and authorize USDC/BRLA payments within programmable owner-set rules with full audit trail.",
+          "description": "Agent-native spending controls — agents get API keys and authorize USDC/BRLA payments within programmable owner-set rules with full audit trail.",
           "tags": [
             "spend-controls",
             "usdc",
@@ -1200,7 +1234,7 @@
           "id": "slinkylayer",
           "name": "SlinkyLayer",
           "status": "early",
-          "description": "Open market for APIs \u2014 turns any API into an on-chain x402 pay-per-use resource with ERC-8004 portable reputation. Reputation travels with the API across platforms.",
+          "description": "Open market for APIs — turns any API into an on-chain x402 pay-per-use resource with ERC-8004 portable reputation. Reputation travels with the API across platforms.",
           "url": "https://slinkylayer.ai",
           "chain": "Base",
           "tags": [
@@ -1255,7 +1289,7 @@
             "period": "30d",
             "source": "on_chain",
             "as_of": "2026-03-27",
-            "note": "x402ExactPermit2Proxy on Base (0x402085...0001). 47 txs. Early-stage \u2014 additional facilitator contracts may add volume.",
+            "note": "x402ExactPermit2Proxy on Base (0x402085...0001). 47 txs. Early-stage — additional facilitator contracts may add volume.",
             "tx_count_30d": 47,
             "snapshots": [
               {
@@ -1280,7 +1314,7 @@
           ],
           "url": "https://www.x402.org",
           "docs": "https://docs.cdp.coinbase.com/x402/welcome",
-          "editorial": "The de facto standard for agent micropayments. Coinbase, Anthropic, and Stripe all building around it. Open spec deployed via CREATE2 at the same address on every EVM chain. Live on Base: $61.80 volume, 47 transactions (30d) via the reference proxy. Early-stage \u2014 production facilitators and CDP integrations are ramping."
+          "editorial": "The de facto standard for agent micropayments. Coinbase, Anthropic, and Stripe all building around it. Open spec deployed via CREATE2 at the same address on every EVM chain. Live on Base: $61.80 volume, 47 transactions (30d) via the reference proxy. Early-stage — production facilitators and CDP integrations are ramping."
         },
         {
           "layer": "L3",
@@ -1725,7 +1759,7 @@
           "id": "tollbooth-dpyc",
           "name": "Tollbooth-DPYC",
           "status": "early",
-          "description": "MCP monetization via Lightning \u2014 prefunded credit tranches with a pricing studio for agent-to-service billing.",
+          "description": "MCP monetization via Lightning — prefunded credit tranches with a pricing studio for agent-to-service billing.",
           "tags": [
             "lightning",
             "mcp",
@@ -1751,7 +1785,7 @@
             "b2b",
             "enterprise"
           ],
-          "editorial": "Co-founder of the x402 Foundation alongside Coinbase. Workers integration means any x402 service deployed at the edge gets payment flows natively. Significant distribution advantage \u2014 Workers powers millions of APIs.",
+          "editorial": "Co-founder of the x402 Foundation alongside Coinbase. Workers integration means any x402 service deployed at the edge gets payment flows natively. Significant distribution advantage — Workers powers millions of APIs.",
           "launched": "2009",
           "added": "2026-03-27"
         },
@@ -2262,7 +2296,7 @@
           "docs": "https://docs.layerzero.network",
           "chain": "multi",
           "funding": "$263M total",
-          "editorial": "Widest chain coverage (100+) for agent payment routing. Note: dual-licensed MIT + LZBL-1.2 \u2014 the commercial license is restrictive. Review before building a product on top."
+          "editorial": "Widest chain coverage (100+) for agent payment routing. Note: dual-licensed MIT + LZBL-1.2 — the commercial license is restrictive. Review before building a product on top."
         },
         {
           "layer": "L2",
@@ -2392,7 +2426,7 @@
           "id": "cow-protocol",
           "name": "CoW Protocol",
           "status": "live",
-          "description": "Intent-based DEX on Ethereum. Batches orders for MEV protection \u2014 useful for large agent settlement transactions.",
+          "description": "Intent-based DEX on Ethereum. Batches orders for MEV protection — useful for large agent settlement transactions.",
           "launched": "2021",
           "tags": [
             "open-source",
@@ -2527,7 +2561,7 @@
           "id": "agoragentic",
           "name": "Agoragentic",
           "status": "early",
-          "description": "Autonomous agent execution gateway \u2014 agents discover, invoke, and pay for services through one API with settlement on Base.",
+          "description": "Autonomous agent execution gateway — agents discover, invoke, and pay for services through one API with settlement on Base.",
           "tags": [
             "gateway",
             "discovery",
@@ -2565,7 +2599,7 @@
             "api-native",
             "b2b"
           ],
-          "editorial": "Built by payment veterans. Retrofits x402 onto any existing API via reverse proxy \u2014 no code changes required. Unique dual settlement: crypto and fiat from the same layer.",
+          "editorial": "Built by payment veterans. Retrofits x402 onto any existing API via reverse proxy — no code changes required. Unique dual settlement: crypto and fiat from the same layer.",
           "added": "2026-03-27"
         },
         {
@@ -2756,7 +2790,7 @@
             "package": "@turnkey/sdk-server",
             "weekly_downloads": 137506
           },
-          "editorial": "Leading L1 by npm adoption \u2014 137K weekly downloads. API-first MPC signing is the developer-preferred approach for agent key management. No seed phrases, no HSMs required."
+          "editorial": "Leading L1 by npm adoption — 137K weekly downloads. API-first MPC signing is the developer-preferred approach for agent key management. No seed phrases, no HSMs required."
         },
         {
           "layer": "L1",
@@ -2859,7 +2893,7 @@
             "package": "@lit-protocol/lit-node-client",
             "weekly_downloads": 5478
           },
-          "editorial": "Enables programmable signing conditions \u2014 agents can execute transactions only when specified conditions are met. Threshold cryptography without a central key custodian."
+          "editorial": "Enables programmable signing conditions — agents can execute transactions only when specified conditions are met. Threshold cryptography without a central key custodian."
         },
         {
           "layer": "L1",
@@ -3036,7 +3070,7 @@
             "package": "alchemy-sdk",
             "weekly_downloads": 53754
           },
-          "editorial": "alchemy-sdk deprecated Jan 2026 (archived). Users directed to @account-kit/core, Viem, or Solana Web3JS. Still 54K weekly npm downloads \u2014 significant legacy drag."
+          "editorial": "alchemy-sdk deprecated Jan 2026 (archived). Users directed to @account-kit/core, Viem, or Solana Web3JS. Still 54K weekly npm downloads — significant legacy drag."
         },
         {
           "layer": "L1",
@@ -3123,7 +3157,7 @@
           "id": "waap",
           "name": "WaaP",
           "status": "live",
-          "description": "Wallet as a Protocol \u2014 delegated capabilities for agents via programmable real-time policies without private key exposure. Millisecond signing via 2PC architecture.",
+          "description": "Wallet as a Protocol — delegated capabilities for agents via programmable real-time policies without private key exposure. Millisecond signing via 2PC architecture.",
           "tags": [
             "delegation",
             "policy",
@@ -3491,6 +3525,6 @@
     "live": "Shipped and in production",
     "early": "Live but early-stage or limited access",
     "announced": "Publicly announced, not yet shipped",
-    "acquired": "Acquired \u2014 operating under parent company"
+    "acquired": "Acquired — operating under parent company"
   }
 }

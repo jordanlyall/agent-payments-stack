@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed Options</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root { --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58; --faint: #201e1b; --acq: #d9613f; --early: #c99e32; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1816; color: var(--text); font-family: 'Space Grotesk', sans-serif; padding: 32px; }
+  h2 { font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .question { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .sub { font-size: 13px; color: var(--secondary); margin-bottom: 28px; }
+  .options-grid { display: flex; flex-direction: column; gap: 20px; }
+  .option-wrap { border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: border-color 0.15s; overflow: hidden; }
+  .option-wrap:hover { border-color: rgba(255,255,255,0.15); }
+  .option-wrap.selected { border-color: #edebe7; }
+  .option-label { background: rgba(255,255,255,0.05); padding: 10px 16px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  .option-label span { color: var(--muted); flex: 1; }
+  .letter { background: rgba(255,255,255,0.1); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text); font-weight: 700; flex-shrink: 0; }
+  .selected-badge { display: none; background: #edebe7; color: #0d0c0b; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+  .option-wrap.selected .selected-badge { display: inline-block; }
+  .mock-shell { background: var(--bg); border-top: 1px solid var(--faint); }
+  .mock-nav { height: 40px; border-bottom: 1px solid var(--faint); display: flex; align-items: center; padding: 0 32px; gap: 20px; }
+  .mock-logo { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--text); }
+  .mock-nav-link { font-size: 10px; color: var(--muted); margin-left: auto; }
+  .mock-nav-links { display: flex; gap: 14px; margin-left: auto; }
+  .mock-body { padding: 20px 32px 24px; }
+
+  /* Shared hero stub */
+  .hero-stub { margin-bottom: 14px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .headline { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); margin-bottom: 5px; }
+  .stat-strip { display: flex; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 4px; overflow: hidden; }
+  .ss { background: var(--bg); padding: 8px 14px; flex: 1; }
+  .ss-l { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .ss-v { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; letter-spacing: -0.3px; color: var(--text); }
+  .filter-stub { display: flex; gap: 6px; align-items: center; padding: 10px 0 0; border-top: 1px solid var(--faint); margin-top: 12px; }
+  .fs-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 4px 9px; font-size: 10px; color: var(--secondary); width: 140px; }
+  .fs-btn { border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 3px 8px; font-size: 9px; color: var(--secondary); background: transparent; }
+  .fs-btn.on { background: rgba(255,255,255,0.05); color: var(--text); }
+  .layer-stub { padding: 10px 0; border-bottom: 1px solid var(--faint); display: flex; align-items: center; gap: 10px; }
+  .ls-name { font-size: 12px; font-weight: 700; color: var(--text); }
+  .ls-desc { font-size: 10px; color: var(--muted); }
+  .ls-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px; }
+  .tag { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 2px 7px; font-size: 10px; color: var(--text); }
+  .tag.acq { background: rgba(217,97,63,0.08); border-color: rgba(217,97,63,0.2); color: var(--acq); }
+  .tag.early { background: rgba(201,158,50,0.08); border-color: rgba(201,158,50,0.2); color: var(--early); }
+
+  /* ── OPTION A — Activity feed strip ── */
+  .feed-strip { border-top: 1px solid var(--faint); margin-top: 16px; padding-top: 14px; }
+  .feed-strip-hdr { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .feed-dot { width: 6px; height: 6px; border-radius: 50%; background: #3d9e5f; flex-shrink: 0; }
+  .feed-list { display: flex; flex-direction: column; gap: 0; }
+  .feed-item { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--faint); }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-date { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--muted); flex-shrink: 0; width: 52px; }
+  .feed-type { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; width: 52px; }
+  .feed-type.added { color: #3d9e5f; }
+  .feed-type.acq { color: var(--acq); }
+  .feed-type.vol { color: var(--early); }
+  .feed-type.proto { color: var(--secondary); }
+  .feed-text { font-size: 11.5px; color: var(--secondary); line-height: 1.4; }
+  .feed-text strong { color: var(--text); font-weight: 500; }
+
+  /* ── OPTION B — What's moving row ── */
+  .moving-row { display: flex; gap: 8px; margin: 12px 0 4px; }
+  .moving-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 5px; padding: 10px 12px; flex: 1; min-width: 0; }
+  .mc-label { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--muted); margin-bottom: 4px; }
+  .mc-val { font-size: 12px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mc-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .mc-val.acq { color: var(--acq); }
+  .mc-val.early { color: var(--early); }
+
+  /* ── OPTION C — Split layout ── */
+  .split { display: grid; grid-template-columns: 1fr 220px; gap: 20px; align-items: start; }
+  .split-stack { min-width: 0; }
+  .split-feed { border-left: 1px solid var(--faint); padding-left: 18px; position: sticky; top: 0; }
+  .sf-hdr { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+  .sf-item { padding: 8px 0; border-bottom: 1px solid var(--faint); }
+  .sf-item:last-child { border-bottom: none; }
+  .sf-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .sf-tag { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .sf-tag.added { color: #3d9e5f; }
+  .sf-tag.acq { color: var(--acq); }
+  .sf-tag.vol { color: var(--early); }
+  .sf-date { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; color: var(--muted); margin-left: auto; }
+  .sf-text { font-size: 11px; color: var(--secondary); line-height: 1.4; }
+  .sf-text strong { color: var(--text); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h2>Feed Options</h2>
+<p class="question">How should the site signal that the space is moving?</p>
+<p class="sub">Same hero + filter bar across all three. Difference is how and where activity surfaces.</p>
+
+<div class="options-grid">
+
+  <!-- OPTION A -->
+  <div class="option-wrap" data-choice="A" onclick="pick(this)">
+    <div class="option-label">
+      <div class="letter">A</div>
+      <span>Activity feed strip — chronological log at the bottom, like a changelog</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links"><div class="mock-nav-link">Stack</div><div class="mock-nav-link">Rankings</div><div class="mock-nav-link">Acquisitions</div><div class="mock-nav-link">API</div></div>
+      </div>
+      <div class="mock-body">
+        <div class="hero-stub">
+          <div class="eyebrow">Agent Payments Infrastructure</div>
+          <div class="headline">The canonical map of AI agent payment rails</div>
+          <div class="stat-strip" style="margin-top:8px">
+            <div class="ss"><div class="ss-l">Volume · 9mo</div><div class="ss-v">$43M</div></div>
+            <div class="ss"><div class="ss-l">M&amp;A · 18mo</div><div class="ss-v">$8.05B</div></div>
+            <div class="ss"><div class="ss-l">Projects</div><div class="ss-v">162</div></div>
+            <div class="ss"><div class="ss-l">Transactions</div><div class="ss-v">140M</div></div>
+          </div>
+        </div>
+        <div class="filter-stub">
+          <div class="fs-input">🔍 Search 162 projects...</div>
+          <div class="fs-btn on">All</div><div class="fs-btn">Live</div><div class="fs-btn">Early</div><div class="fs-btn">Acquired</div>
+        </div>
+        <div class="layer-stub" style="margin-top:12px">
+          <div><div class="ls-name">Application</div><div class="ls-tags"><span class="tag">x402engine</span><span class="tag">Virtuals Protocol</span><span class="tag acq">Privy</span><span class="tag early">SpendOS</span><span class="tag">Nansen</span></div></div>
+        </div>
+        <div class="layer-stub">
+          <div><div class="ls-name">Governance & Policy</div><div class="ls-tags"><span class="tag">ERC-8004</span><span class="tag">Ramp Agent Cards</span><span class="tag acq">Stripe SPTs</span><span class="tag early">Agent Escrow</span></div></div>
+        </div>
+        <div class="feed-strip">
+          <div class="feed-strip-hdr"><span class="feed-dot"></span>Activity</div>
+          <div class="feed-list">
+            <div class="feed-item">
+              <div class="feed-date">Mar 26</div>
+              <div class="feed-type added">Added</div>
+              <div class="feed-text"><strong>OpenMatter</strong> and <strong>Kibble</strong> added — governance layer expands to 32 projects</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-date">Mar 21</div>
+              <div class="feed-type acq">M&amp;A</div>
+              <div class="feed-text"><strong>Fireblocks acquires Dynamic</strong> — custody meets wallet identity, $35M deal</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-date">Mar 18</div>
+              <div class="feed-type vol">Volume</div>
+              <div class="feed-text"><strong>x402</strong> crosses 75M transactions in 30 days — fastest growing protocol layer project</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-date">Mar 12</div>
+              <div class="feed-type proto">Protocol</div>
+              <div class="feed-text"><strong>ERC-8004</strong> draft published — first formal spec for agent spending limits and policy</div>
+            </div>
+            <div class="feed-item">
+              <div class="feed-date">Mar 5</div>
+              <div class="feed-type added">Added</div>
+              <div class="feed-text"><strong>Neynar, Agently, SlinkyLayer</strong> added — 15 new projects this month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="option-wrap" data-choice="B" onclick="pick(this)">
+    <div class="option-label">
+      <div class="letter">B</div>
+      <span>What's moving row — 4 snapshot cards between hero and the stack</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links"><div class="mock-nav-link">Stack</div><div class="mock-nav-link">Rankings</div><div class="mock-nav-link">Acquisitions</div><div class="mock-nav-link">API</div></div>
+      </div>
+      <div class="mock-body">
+        <div class="hero-stub">
+          <div class="eyebrow">Agent Payments Infrastructure</div>
+          <div class="headline">The canonical map of AI agent payment rails</div>
+          <div class="stat-strip" style="margin-top:8px">
+            <div class="ss"><div class="ss-l">Volume · 9mo</div><div class="ss-v">$43M</div></div>
+            <div class="ss"><div class="ss-l">M&amp;A · 18mo</div><div class="ss-v">$8.05B</div></div>
+            <div class="ss"><div class="ss-l">Projects</div><div class="ss-v">162</div></div>
+            <div class="ss"><div class="ss-l">Transactions</div><div class="ss-v">140M</div></div>
+          </div>
+        </div>
+        <div class="moving-row">
+          <div class="moving-card">
+            <div class="mc-label">Just added</div>
+            <div class="mc-val">OpenMatter</div>
+            <div class="mc-sub">Governance layer · Mar 26</div>
+          </div>
+          <div class="moving-card">
+            <div class="mc-label">Latest acquisition</div>
+            <div class="mc-val acq">Dynamic → Fireblocks</div>
+            <div class="mc-sub">$35M · Wallet identity</div>
+          </div>
+          <div class="moving-card">
+            <div class="mc-label">Top volume · 30d</div>
+            <div class="mc-val">x402</div>
+            <div class="mc-sub">75M txns · Protocol layer</div>
+          </div>
+          <div class="moving-card">
+            <div class="mc-label">Most integrated</div>
+            <div class="mc-val early">USDC</div>
+            <div class="mc-sub">98.6% of tracked volume</div>
+          </div>
+        </div>
+        <div class="filter-stub">
+          <div class="fs-input">🔍 Search 162 projects...</div>
+          <div class="fs-btn on">All</div><div class="fs-btn">Live</div><div class="fs-btn">Early</div><div class="fs-btn">Acquired</div>
+        </div>
+        <div class="layer-stub" style="margin-top:10px">
+          <div><div class="ls-name">Application</div><div class="ls-tags"><span class="tag">x402engine</span><span class="tag">Virtuals Protocol</span><span class="tag acq">Privy</span><span class="tag early">SpendOS</span><span class="tag">Nansen</span></div></div>
+        </div>
+        <div class="layer-stub">
+          <div><div class="ls-name">Governance & Policy</div><div class="ls-tags"><span class="tag">ERC-8004</span><span class="tag">Ramp Agent Cards</span><span class="tag acq">Stripe SPTs</span><span class="tag early">Agent Escrow</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="option-wrap" data-choice="C" onclick="pick(this)">
+    <div class="option-label">
+      <div class="letter">C</div>
+      <span>Split layout — persistent feed column alongside the stack as you scroll</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links"><div class="mock-nav-link">Stack</div><div class="mock-nav-link">Rankings</div><div class="mock-nav-link">Acquisitions</div><div class="mock-nav-link">API</div></div>
+      </div>
+      <div class="mock-body">
+        <div class="hero-stub">
+          <div class="eyebrow">Agent Payments Infrastructure</div>
+          <div class="headline">The canonical map of AI agent payment rails</div>
+          <div class="stat-strip" style="margin-top:8px">
+            <div class="ss"><div class="ss-l">Volume · 9mo</div><div class="ss-v">$43M</div></div>
+            <div class="ss"><div class="ss-l">M&amp;A · 18mo</div><div class="ss-v">$8.05B</div></div>
+            <div class="ss"><div class="ss-l">Projects</div><div class="ss-v">162</div></div>
+            <div class="ss"><div class="ss-l">Transactions</div><div class="ss-v">140M</div></div>
+          </div>
+        </div>
+        <div class="filter-stub">
+          <div class="fs-input">🔍 Search 162 projects...</div>
+          <div class="fs-btn on">All</div><div class="fs-btn">Live</div><div class="fs-btn">Early</div><div class="fs-btn">Acquired</div>
+        </div>
+        <div class="split" style="margin-top:14px">
+          <div class="split-stack">
+            <div class="layer-stub">
+              <div><div class="ls-name">Application</div><div class="ls-tags"><span class="tag">x402engine</span><span class="tag">Virtuals Protocol</span><span class="tag acq">Privy</span><span class="tag early">SpendOS</span><span class="tag">Nansen</span></div></div>
+            </div>
+            <div class="layer-stub">
+              <div><div class="ls-name">Governance & Policy</div><div class="ls-tags"><span class="tag">ERC-8004</span><span class="tag">Ramp Agent Cards</span><span class="tag acq">Stripe SPTs</span><span class="tag early">Agent Escrow</span></div></div>
+            </div>
+            <div class="layer-stub">
+              <div><div class="ls-name">Payment Protocol</div><div class="ls-tags"><span class="tag">x402</span><span class="tag">MPP</span><span class="tag">L402</span><span class="tag early">ACP</span></div></div>
+            </div>
+          </div>
+          <div class="split-feed">
+            <div class="sf-hdr"><span class="feed-dot"></span>Activity</div>
+            <div class="sf-item">
+              <div class="sf-meta"><span class="sf-tag added">Added</span><span class="sf-date">Mar 26</span></div>
+              <div class="sf-text"><strong>OpenMatter</strong> added to governance layer</div>
+            </div>
+            <div class="sf-item">
+              <div class="sf-meta"><span class="sf-tag acq">M&amp;A</span><span class="sf-date">Mar 21</span></div>
+              <div class="sf-text"><strong>Fireblocks</strong> acquires <strong>Dynamic</strong> for $35M</div>
+            </div>
+            <div class="sf-item">
+              <div class="sf-meta"><span class="sf-tag vol">Volume</span><span class="sf-date">Mar 18</span></div>
+              <div class="sf-text"><strong>x402</strong> crosses 75M txns in 30 days</div>
+            </div>
+            <div class="sf-item">
+              <div class="sf-meta"><span class="sf-tag added">Added</span><span class="sf-date">Mar 12</span></div>
+              <div class="sf-text"><strong>Kibble, Neynar</strong> added · 15 new this month</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function pick(el) {
+  document.querySelectorAll('.option-wrap').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  fetch('/event',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'click',choice:el.dataset.choice,timestamp:Date.now()})}).catch(function(){});
+}
+</script>
+</body>
+</html>

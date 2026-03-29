@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Split</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root { --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58; --faint: #201e1b; --acq: #d9613f; --early: #c99e32; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .topbar { height: 40px; border-bottom: 1px solid var(--faint); display: flex; align-items: center; padding: 0 40px; }
+  .mock-logo { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--text); letter-spacing: 0.04em; }
+  .mock-nav-links { display: flex; gap: 16px; margin-left: auto; }
+  .mock-nav-link { font-size: 10px; color: var(--muted); }
+
+  /* Full-height split from nav down */
+  .page-split { display: grid; grid-template-columns: 1fr 360px; min-height: calc(100vh - 40px); }
+
+  /* Left column */
+  .left-col { padding: 32px 40px 60px; border-right: 1px solid var(--faint); min-width: 0; }
+
+  /* Hero */
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.7px; line-height: 1.2; margin-bottom: 10px; }
+  .deck { font-size: 12.5px; color: var(--secondary); line-height: 1.65; margin-bottom: 16px; }
+
+  .stat-strip { display: flex; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-bottom: 16px; }
+  .ss { background: var(--bg); padding: 10px 16px; flex: 1; }
+  .ss-l { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 2px; }
+  .ss-v { font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 600; letter-spacing: -0.4px; color: var(--text); }
+  .ss-s { font-size: 9.5px; color: var(--muted); margin-top: 1px; }
+  .ss-a { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: var(--acq); opacity: 0.8; margin-top: 2px; display: block; }
+
+  .filter-bar { display: flex; gap: 8px; align-items: center; padding: 10px 0; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); margin-bottom: 0; }
+  .fs-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 5px 10px; font-size: 11px; color: var(--secondary); width: 160px; }
+  .fs-btn { border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 3px 9px; font-size: 9.5px; color: var(--secondary); background: transparent; }
+  .fs-btn.on { background: rgba(255,255,255,0.05); color: var(--text); }
+
+  /* Stack layers */
+  .layer { padding: 18px 0; border-bottom: 1px solid var(--faint); }
+  .layer:last-child { border-bottom: none; }
+  .layer-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .layer-badge { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); opacity: 0.6; }
+  .layer-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .layer-desc { font-size: 11px; color: var(--muted); }
+  .layer-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-left: auto; }
+  .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 5px; padding: 4px 11px; font-size: 12px; color: var(--text); }
+  .tag.acq { background: rgba(217,97,63,0.08); border-color: rgba(217,97,63,0.2); color: var(--acq); }
+  .tag.early { background: rgba(201,158,50,0.08); border-color: rgba(201,158,50,0.2); color: var(--early); }
+
+  /* Right rail — full height */
+  .right-rail { padding: 32px 32px 60px; display: flex; flex-direction: column; gap: 0; background: rgba(255,255,255,0.01); }
+
+  .rail-module { border-bottom: 1px solid var(--faint); padding: 16px 0; }
+  .rail-module:first-child { padding-top: 0; }
+  .rail-module:last-child { border-bottom: none; }
+  .rail-mod-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #3d9e5f; flex-shrink: 0; }
+
+  .feed-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+  .feed-type { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .feed-type.added { color: #3d9e5f; }
+  .feed-type.acq { color: var(--acq); }
+  .feed-type.vol { color: var(--early); }
+  .feed-type.proto { color: var(--secondary); }
+  .feed-date { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); margin-left: auto; }
+  .feed-text { font-size: 13px; color: var(--secondary); line-height: 1.45; }
+
+  .editorial-text { font-size: 13px; color: var(--secondary); line-height: 1.6; }
+  .editorial-byline { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="mock-logo">AGENT PAYMENTS STACK</div>
+  <div class="mock-nav-links">
+    <div class="mock-nav-link">Stack</div>
+    <div class="mock-nav-link">Rankings</div>
+    <div class="mock-nav-link">Acquisitions</div>
+    <div class="mock-nav-link">API</div>
+    <div class="mock-nav-link">About</div>
+  </div>
+</div>
+
+<div class="page-split">
+
+  <!-- Left: hero + stack -->
+  <div class="left-col">
+    <div class="eyebrow">Agent Payments Infrastructure</div>
+    <h1>The canonical map of AI agent payment rails</h1>
+    <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
+
+    <div class="stat-strip">
+      <div class="ss">
+        <div class="ss-l">Tracked volume · 9mo</div>
+        <div class="ss-v">$43M</div>
+        <div class="ss-s">~$600M annualized · 140M txns</div>
+      </div>
+      <div class="ss">
+        <div class="ss-l">M&amp;A activity · 18mo</div>
+        <div class="ss-v">$8.05B</div>
+        <div class="ss-s">7 deals · Stripe, Capital One, Mastercard</div>
+        <a class="ss-a" href="#">View all acquisitions →</a>
+      </div>
+      <div class="ss">
+        <div class="ss-l">Projects tracked</div>
+        <div class="ss-v">162</div>
+        <div class="ss-s">6 layers · 98.6% USDC</div>
+      </div>
+      <div class="ss">
+        <div class="ss-l">Transactions</div>
+        <div class="ss-v">140M</div>
+        <div class="ss-s">Updated Mar 2026</div>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="fs-input">🔍 Search 162 projects...</div>
+      <div class="fs-btn on">All</div>
+      <div class="fs-btn">Live</div>
+      <div class="fs-btn">Early</div>
+      <div class="fs-btn">Announced</div>
+      <div class="fs-btn">Acquired</div>
+    </div>
+
+    <div class="layer">
+      <div class="layer-hdr">
+        <span class="layer-badge">L5</span>
+        <span class="layer-name">Application</span>
+        <span class="layer-desc">What gets bought and why</span>
+        <span class="layer-count">28 projects</span>
+      </div>
+      <div class="tags">
+        <span class="tag">Virtuals Protocol</span><span class="tag">ElizaOS</span><span class="tag">Olas</span><span class="tag">Botto</span><span class="tag">Axiom</span><span class="tag acq">Privy</span><span class="tag">x402engine</span><span class="tag">Nansen</span><span class="tag early">SpendOS</span><span class="tag">Akash</span><span class="tag">Art Blocks</span><span class="tag">Browserbase</span><span class="tag">Freepik</span>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-hdr">
+        <span class="layer-badge">L4</span>
+        <span class="layer-name">Governance & Policy</span>
+        <span class="layer-desc">May this agent spend</span>
+        <span class="layer-count">32 projects</span>
+      </div>
+      <div class="tags">
+        <span class="tag">ERC-8004</span><span class="tag">Ramp Agent Cards</span><span class="tag acq">Stripe SPTs</span><span class="tag early">Agent Escrow</span><span class="tag">OWS Policies</span><span class="tag">OpenMatter</span><span class="tag early">Kibble</span><span class="tag">Delegata</span>
+      </div>
+    </div>
+    <div class="layer">
+      <div class="layer-hdr">
+        <span class="layer-badge">L3</span>
+        <span class="layer-name">Payment Protocol</span>
+        <span class="layer-desc">How the payment flows</span>
+        <span class="layer-count">23 projects</span>
+      </div>
+      <div class="tags">
+        <span class="tag">x402</span><span class="tag">Tempo MPP</span><span class="tag">L402 / Lightning</span><span class="tag early">ACP</span><span class="tag">Circle Nanopayments</span><span class="tag">ERC-8183</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: full-height rail -->
+  <div class="right-rail">
+
+    <div class="rail-module">
+      <div class="rail-mod-label"><span class="live-dot"></span>Activity</div>
+      <div class="feed-item">
+        <div class="feed-meta"><span class="feed-type added">Added</span><span class="feed-date">Mar 26</span></div>
+        <div class="feed-text">OpenMatter and Kibble added — governance layer grows to 32 projects</div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-meta"><span class="feed-type acq">M&amp;A</span><span class="feed-date">Mar 21</span></div>
+        <div class="feed-text">Fireblocks acquires Dynamic — custody meets wallet identity</div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-meta"><span class="feed-type vol">Volume</span><span class="feed-date">Mar 18</span></div>
+        <div class="feed-text">x402 crosses 75M transactions in 30 days</div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-meta"><span class="feed-type proto">Protocol</span><span class="feed-date">Mar 12</span></div>
+        <div class="feed-text">ERC-8004 draft published — first formal agent spending policy spec</div>
+      </div>
+      <div class="feed-item">
+        <div class="feed-meta"><span class="feed-type added">Added</span><span class="feed-date">Mar 5</span></div>
+        <div class="feed-text">15 new projects added this month — Neynar, Agently, SlinkyLayer among them</div>
+      </div>
+    </div>
+
+    <div class="rail-module">
+      <div class="rail-mod-label">This week</div>
+      <div class="editorial-text">The Fireblocks / Dynamic deal is the most interesting move of the month. Custody buying identity means the institutional stack is collapsing into fewer players faster than expected.</div>
+      <div class="editorial-byline">@jordanlyall · Mar 28</div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

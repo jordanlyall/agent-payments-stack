@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Final — Headline</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root { --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58; --faint: #201e1b; --acq: #d9613f; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1816; color: var(--text); font-family: 'Space Grotesk', sans-serif; padding: 32px; }
+  h2 { font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .question { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .sub { font-size: 13px; color: var(--secondary); margin-bottom: 28px; }
+
+  .options-grid { display: flex; flex-direction: column; gap: 16px; }
+  .option-wrap { border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: border-color 0.15s; overflow: hidden; }
+  .option-wrap:hover { border-color: rgba(255,255,255,0.15); }
+  .option-wrap.selected { border-color: #edebe7; }
+  .option-label { background: rgba(255,255,255,0.05); padding: 10px 16px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+  .option-label span { color: var(--muted); flex: 1; }
+  .letter { background: rgba(255,255,255,0.1); width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--text); font-weight: 700; flex-shrink: 0; }
+  .selected-badge { display: none; background: #edebe7; color: #0d0c0b; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; }
+  .option-wrap.selected .selected-badge { display: inline-block; }
+
+  .mock-shell { background: var(--bg); border-top: 1px solid var(--faint); }
+  .mock-nav { height: 44px; border-bottom: 1px solid var(--faint); display: flex; align-items: center; padding: 0 40px; }
+  .mock-logo { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--text); letter-spacing: 0.04em; }
+  .mock-nav-links { display: flex; gap: 16px; margin-left: auto; }
+  .mock-nav-link { font-size: 10px; color: var(--muted); }
+  .mock-body { padding: 28px 40px 24px; }
+
+  .hero { display: grid; grid-template-columns: 1fr 280px; gap: 32px; align-items: start; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--secondary); opacity: 0.6; margin-bottom: 10px; }
+  .headline { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+  .deck { font-size: 12.5px; color: var(--secondary); line-height: 1.65; margin-bottom: 16px; }
+  .pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .pill { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 3px; padding: 2px 8px; }
+
+  .cards { display: flex; flex-direction: column; gap: 8px; }
+  .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 14px 16px; }
+  .card.acq { border-color: rgba(217,97,63,0.2); background: rgba(217,97,63,0.04); }
+  .card-label { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 5px; }
+  .card.acq .card-label { color: rgba(217,97,63,0.6); }
+  .card-val { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 600; letter-spacing: -1px; line-height: 1; color: var(--text); margin-bottom: 3px; }
+  .card.acq .card-val { color: var(--acq); }
+  .card-sub { font-size: 11px; color: var(--secondary); }
+  .card-link { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--acq); opacity: 0.7; margin-top: 6px; display: block; }
+
+  .mock-filter { display: flex; gap: 8px; align-items: center; padding: 12px 0; border-top: 1px solid var(--faint); margin-top: 18px; }
+  .mf-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 5px 10px; font-size: 10px; color: var(--secondary); width: 160px; }
+  .mf-btn { background: transparent; border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 4px 10px; font-size: 9.5px; color: var(--secondary); }
+  .mf-btn.on { background: rgba(255,255,255,0.05); color: var(--text); }
+  .mf-count { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); margin-left: auto; }
+
+  em { font-style: normal; color: var(--text); font-weight: 500; }
+  .note { font-size: 11px; color: var(--muted); margin-top: 6px; font-style: italic; }
+</style>
+</head>
+<body>
+
+<h2>Hero Final</h2>
+<p class="question">Which headline serves developers and analysts equally?</p>
+<p class="sub">Same layout. M&A stays as a stat card, not the editorial thesis. Right side is identical in both.</p>
+
+<div class="options-grid">
+
+  <!-- OPTION A -->
+  <div class="option-wrap" data-choice="A" onclick="pick(this)">
+    <div class="option-label">
+      <div class="letter">A</div>
+      <span>Reference framing — positions it as the canonical resource</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links"><div class="mock-nav-link">Stack</div><div class="mock-nav-link">Rankings</div><div class="mock-nav-link">Acquisitions</div><div class="mock-nav-link">API</div></div>
+      </div>
+      <div class="mock-body">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Agent Payments Infrastructure</div>
+            <div class="headline">The canonical map of<br>AI agent payment rails</div>
+            <div class="deck">Every major payment network is building infrastructure for AI agents. 162 projects across 6 layers — from settlement to application. Tracked, curated, and updated as the space moves.</div>
+            <div class="pills">
+              <div class="pill">162 projects</div>
+              <div class="pill">6 layers</div>
+              <div class="pill">98.6% USDC</div>
+              <div class="pill">Updated Mar 2026</div>
+            </div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-label">Tracked volume · 9mo</div>
+              <div class="card-val">$43M</div>
+              <div class="card-sub">~$600M annualized · 140M txns</div>
+            </div>
+            <div class="card acq">
+              <div class="card-label">M&amp;A activity · 18mo</div>
+              <div class="card-val">$8.05B</div>
+              <div class="card-sub">7 deals · Stripe, Capital One, Mastercard</div>
+              <div class="card-link">View all acquisitions →</div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-filter"><div class="mf-input">🔍 Search 162 projects...</div><div class="mf-btn on">All</div><div class="mf-btn">Live</div><div class="mf-btn">Early</div><div class="mf-btn">Acquired</div><div class="mf-count">162 projects</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="option-wrap" data-choice="B" onclick="pick(this)">
+    <div class="option-label">
+      <div class="letter">B</div>
+      <span>Motion framing — signals urgency, the space is moving fast</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links"><div class="mock-nav-link">Stack</div><div class="mock-nav-link">Rankings</div><div class="mock-nav-link">Acquisitions</div><div class="mock-nav-link">API</div></div>
+      </div>
+      <div class="mock-body">
+        <div class="hero">
+          <div>
+            <div class="eyebrow">Agent Payments Infrastructure</div>
+            <div class="headline">Every major payment network<br>is building for AI agents</div>
+            <div class="deck">The rails for agentic commerce are being built right now. 162 projects across 6 layers — wallets, protocols, routing, governance, and applications. <em>$8B in acquisitions in 18 months.</em> This is the map.</div>
+            <div class="pills">
+              <div class="pill">162 projects</div>
+              <div class="pill">6 layers</div>
+              <div class="pill">98.6% USDC</div>
+              <div class="pill">Updated Mar 2026</div>
+            </div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <div class="card-label">Tracked volume · 9mo</div>
+              <div class="card-val">$43M</div>
+              <div class="card-sub">~$600M annualized · 140M txns</div>
+            </div>
+            <div class="card acq">
+              <div class="card-label">M&amp;A activity · 18mo</div>
+              <div class="card-val">$8.05B</div>
+              <div class="card-sub">7 deals · Stripe, Capital One, Mastercard</div>
+              <div class="card-link">View all acquisitions →</div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-filter"><div class="mf-input">🔍 Search 162 projects...</div><div class="mf-btn on">All</div><div class="mf-btn">Live</div><div class="mf-btn">Early</div><div class="mf-btn">Acquired</div><div class="mf-count">162 projects</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="note">Note: "View all acquisitions →" on the M&amp;A card links to /acquisitions. Keeps the investor signal available without it being the editorial thesis.</p>
+
+<script>
+function pick(el) {
+  document.querySelectorAll('.option-wrap').forEach(function(o){ o.classList.remove('selected'); });
+  el.classList.add('selected');
+  fetch('/event',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'click',choice:el.dataset.choice,text:'Final '+el.dataset.choice,timestamp:Date.now()})}).catch(function(){});
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Split Rail</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+  :root { --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58; --faint: #201e1b; --acq: #d9613f; --early: #c99e32; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1816; color: var(--text); font-family: 'Space Grotesk', sans-serif; padding: 32px; }
+  h2 { font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .question { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .sub { font-size: 13px; color: var(--secondary); margin-bottom: 24px; }
+
+  .mock-shell { background: var(--bg); border-radius: 8px; overflow: hidden; border: 1px solid var(--faint); }
+  .mock-nav { height: 40px; border-bottom: 1px solid var(--faint); display: flex; align-items: center; padding: 0 32px; }
+  .mock-logo { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--text); }
+  .mock-nav-links { display: flex; gap: 14px; margin-left: auto; }
+  .mock-nav-link { font-size: 10px; color: var(--muted); }
+  .mock-body { padding: 20px 32px 28px; }
+
+  /* Hero */
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .headline { font-size: 18px; font-weight: 700; letter-spacing: -0.5px; color: var(--text); margin-bottom: 8px; }
+  .stat-strip { display: flex; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 4px; overflow: hidden; margin-bottom: 12px; }
+  .ss { background: var(--bg); padding: 8px 14px; flex: 1; }
+  .ss-l { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .ss-v { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600; color: var(--text); }
+  .filter-stub { display: flex; gap: 6px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--faint); }
+  .fs-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 4px 9px; font-size: 10px; color: var(--secondary); width: 140px; }
+  .fs-btn { border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 3px 8px; font-size: 9px; color: var(--secondary); background: transparent; }
+  .fs-btn.on { background: rgba(255,255,255,0.05); color: var(--text); }
+
+  /* Split */
+  .split { display: grid; grid-template-columns: 1fr 220px; gap: 0; align-items: start; }
+  .split-stack { padding-right: 24px; border-right: 1px solid var(--faint); }
+  .split-rail { padding-left: 20px; display: flex; flex-direction: column; gap: 0; }
+
+  /* Stack layers */
+  .layer { padding: 10px 0; border-bottom: 1px solid var(--faint); }
+  .layer-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+  .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tag { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 2px 7px; font-size: 10px; color: var(--text); }
+  .tag.acq { background: rgba(217,97,63,0.08); border-color: rgba(217,97,63,0.2); color: var(--acq); }
+  .tag.early { background: rgba(201,158,50,0.08); border-color: rgba(201,158,50,0.2); color: var(--early); }
+
+  /* Rail modules */
+  .module { border-bottom: 1px solid var(--faint); padding: 12px 0; }
+  .module:last-child { border-bottom: none; }
+  .mod-label { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: #3d9e5f; flex-shrink: 0; }
+
+  /* Activity feed */
+  .feed-item { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-meta { display: flex; align-items: center; gap: 5px; margin-bottom: 2px; }
+  .feed-type { font-family: 'JetBrains Mono', monospace; font-size: 7px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+  .feed-type.added { color: #3d9e5f; }
+  .feed-type.acq { color: var(--acq); }
+  .feed-type.vol { color: var(--early); }
+  .feed-date { font-family: 'JetBrains Mono', monospace; font-size: 7px; color: var(--muted); margin-left: auto; }
+  .feed-text { font-size: 10.5px; color: var(--secondary); line-height: 1.4; }
+  .feed-text strong { color: var(--text); font-weight: 500; }
+
+  /* Featured */
+  .featured-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 5px; padding: 10px 11px; }
+  .fc-name { font-size: 13px; font-weight: 650; color: var(--text); margin-bottom: 3px; }
+  .fc-layer { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 6px; }
+  .fc-desc { font-size: 10.5px; color: var(--secondary); line-height: 1.45; }
+  .fc-stat { display: flex; gap: 10px; margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--faint); }
+  .fc-stat-item { display: flex; flex-direction: column; gap: 1px; }
+  .fc-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--text); }
+  .fc-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 7px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+  /* Editorial */
+  .editorial-text { font-size: 11px; color: var(--secondary); line-height: 1.55; }
+  .editorial-text strong { color: var(--text); font-weight: 500; }
+  .editorial-byline { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; color: var(--muted); margin-top: 7px; }
+
+  /* Ad slot */
+  .ad-slot { background: rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); border-radius: 5px; padding: 12px; text-align: center; }
+  .ad-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+  .ad-desc { font-size: 10px; color: var(--muted); margin-bottom: 8px; line-height: 1.4; }
+  .ad-cta { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--secondary); border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; padding: 4px 10px; display: inline-block; }
+  .ad-label { font-family: 'JetBrains Mono', monospace; font-size: 7px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); opacity: 0.5; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<h2>Split Rail — Full Module Stack</h2>
+<p class="question">Right column with all module types: feed, featured, editorial, ad</p>
+<p class="sub">Each module is a slot. You control what's in each one and in what order.</p>
+
+<div class="mock-shell">
+  <div class="mock-nav">
+    <div class="mock-logo">AGENT PAYMENTS STACK</div>
+    <div class="mock-nav-links">
+      <div class="mock-nav-link">Stack</div>
+      <div class="mock-nav-link">Rankings</div>
+      <div class="mock-nav-link">Acquisitions</div>
+      <div class="mock-nav-link">API</div>
+    </div>
+  </div>
+  <div class="mock-body">
+    <div class="eyebrow">Agent Payments Infrastructure</div>
+    <div class="headline">The canonical map of AI agent payment rails</div>
+    <div class="stat-strip">
+      <div class="ss"><div class="ss-l">Volume · 9mo</div><div class="ss-v">$43M</div></div>
+      <div class="ss"><div class="ss-l">M&amp;A · 18mo</div><div class="ss-v">$8.05B</div></div>
+      <div class="ss"><div class="ss-l">Projects</div><div class="ss-v">162</div></div>
+      <div class="ss"><div class="ss-l">Transactions</div><div class="ss-v">140M</div></div>
+    </div>
+    <div class="filter-stub">
+      <div class="fs-input">🔍 Search 162 projects...</div>
+      <div class="fs-btn on">All</div><div class="fs-btn">Live</div><div class="fs-btn">Early</div><div class="fs-btn">Acquired</div>
+    </div>
+
+    <div class="split" style="margin-top:16px">
+
+      <!-- Stack -->
+      <div class="split-stack">
+        <div class="layer">
+          <div class="layer-name">Application</div>
+          <div class="tags"><span class="tag">x402engine</span><span class="tag">Virtuals Protocol</span><span class="tag acq">Privy</span><span class="tag early">SpendOS</span><span class="tag">Nansen</span><span class="tag">Browserbase</span></div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">Governance & Policy</div>
+          <div class="tags"><span class="tag">ERC-8004</span><span class="tag">Ramp Agent Cards</span><span class="tag acq">Stripe SPTs</span><span class="tag early">Agent Escrow</span><span class="tag">OWS Policies</span></div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">Payment Protocol</div>
+          <div class="tags"><span class="tag">x402</span><span class="tag">MPP</span><span class="tag">L402</span><span class="tag early">ACP</span><span class="tag">Circle Nanopayments</span></div>
+        </div>
+        <div class="layer">
+          <div class="layer-name">Wallet & Identity</div>
+          <div class="tags"><span class="tag acq">Dynamic</span><span class="tag">Capsule</span><span class="tag early">AgentKit</span><span class="tag">Turnkey</span></div>
+        </div>
+      </div>
+
+      <!-- Rail -->
+      <div class="split-rail">
+
+        <!-- Activity feed -->
+        <div class="module">
+          <div class="mod-label"><span class="live-dot"></span>Activity</div>
+          <div class="feed-item">
+            <div class="feed-meta"><span class="feed-type added">Added</span><span class="feed-date">Mar 26</span></div>
+            <div class="feed-text"><strong>OpenMatter</strong> + <strong>Kibble</strong> added</div>
+          </div>
+          <div class="feed-item">
+            <div class="feed-meta"><span class="feed-type acq">M&amp;A</span><span class="feed-date">Mar 21</span></div>
+            <div class="feed-text"><strong>Fireblocks</strong> acquires <strong>Dynamic</strong></div>
+          </div>
+          <div class="feed-item">
+            <div class="feed-meta"><span class="feed-type vol">Volume</span><span class="feed-date">Mar 18</span></div>
+            <div class="feed-text"><strong>x402</strong> crosses 75M txns / 30d</div>
+          </div>
+          <div class="feed-item">
+            <div class="feed-meta"><span class="feed-type added">Added</span><span class="feed-date">Mar 5</span></div>
+            <div class="feed-text"><strong>15 new projects</strong> this month</div>
+          </div>
+        </div>
+
+        <!-- Featured -->
+        <div class="module">
+          <div class="mod-label">Featured</div>
+          <div class="featured-card">
+            <div class="fc-layer">Protocol layer</div>
+            <div class="fc-name">x402</div>
+            <div class="fc-desc">HTTP-native micropayments for AI agents. Pay-per-call without subscriptions or API keys.</div>
+            <div class="fc-stat">
+              <div class="fc-stat-item">
+                <div class="fc-stat-val">75M</div>
+                <div class="fc-stat-label">Txns / 30d</div>
+              </div>
+              <div class="fc-stat-item">
+                <div class="fc-stat-val">$0.001</div>
+                <div class="fc-stat-label">Avg tx</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Editorial -->
+        <div class="module">
+          <div class="mod-label">This week</div>
+          <div class="editorial-text">The Fireblocks / Dynamic deal is the most interesting move of the month. <strong>Custody buying identity</strong> means the institutional stack is collapsing into fewer players faster than expected.</div>
+          <div class="editorial-byline">@jordanlyall · Mar 28</div>
+        </div>
+
+        <!-- Ad -->
+        <div class="module">
+          <div class="mod-label" style="justify-content:space-between">Sponsor <span style="opacity:0.4;font-size:7px">advertise</span></div>
+          <div class="ad-slot">
+            <div class="ad-name">Tempo MPP</div>
+            <div class="ad-desc">The fastest path to accepting agent payments. 138+ active agents, live today.</div>
+            <div class="ad-cta">tempo.finance →</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

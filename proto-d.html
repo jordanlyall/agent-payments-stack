@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Payments Stack — Proto D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --border: #222;
+    --faint: #2a2a2a;
+    --muted: #555;
+    --sub: #777;
+    --text: #e8e8e8;
+    --accent: #f0f0f0;
+    --secondary: #9b9b9b;
+    --live: #e8e8e8;
+    --early: #8b8b6b;
+    --acq: #6b8b7a;
+    --ann: #7a7aaa;
+    --layer-dot: #444;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100;
+  }
+
+  .wordmark {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .view-toggle {
+    display: flex;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .view-btn {
+    padding: 5px 14px;
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--sub);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.12s;
+    letter-spacing: 0.04em;
+  }
+
+  .view-btn.active {
+    background: var(--faint);
+    color: var(--text);
+  }
+
+  .topbar-stat {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+  }
+
+  /* ── Main container ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px 80px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    padding: 52px 0 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    color: var(--accent);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--sub);
+    max-width: 540px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    align-items: center;
+  }
+
+  .hero-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .hero-stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .hero-stat-label {
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  .hero-stat-div {
+    width: 1px;
+    height: 20px;
+    background: var(--faint);
+  }
+
+  /* ── Layer sections ── */
+  .layers {
+    margin-top: 0;
+  }
+
+  .layer-section {
+    padding: 32px 0 28px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .layer-section:last-child {
+    border-bottom: none;
+  }
+
+  .layer-hdr {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+
+  .layer-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--faint);
+    border-radius: 4px;
+    padding: 3px 7px;
+    letter-spacing: 0.06em;
+    flex-shrink: 0;
+    margin-right: 16px;
+  }
+
+  .layer-name {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .layer-sep {
+    width: 1px;
+    height: 16px;
+    background: var(--faint);
+    margin: 0 16px;
+    flex-shrink: 0;
+  }
+
+  .layer-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .layer-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--faint);
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  /* ── Chips ── */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 12.5px;
+    font-weight: 450;
+    color: var(--text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.1s, background 0.1s;
+    white-space: nowrap;
+  }
+
+  .chip:hover {
+    border-color: var(--muted);
+    background: var(--faint);
+  }
+
+  .chip.early { color: var(--early); border-color: rgba(139,139,107,0.25); }
+  .chip.acq   { color: var(--acq);   border-color: rgba(107,139,122,0.25); }
+  .chip.ann   { color: var(--ann);   border-color: rgba(122,122,170,0.25); }
+
+  .chip .fav {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    object-fit: contain;
+    opacity: 0.8;
+  }
+
+  .chip .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--layer-dot);
+    flex-shrink: 0;
+  }
+
+  .chip.early .dot { background: var(--early); opacity: 0.6; }
+  .chip.acq   .dot { background: var(--acq);   opacity: 0.6; }
+  .chip.ann   .dot { background: var(--ann);   opacity: 0.6; }
+
+  /* ── Data view (table) ── */
+  .data-view { display: none; }
+  .data-view.visible { display: block; }
+  .map-view.hidden { display: none; }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+  }
+
+  .data-table th {
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--faint);
+    font-size: 12.5px;
+    vertical-align: middle;
+  }
+
+  .data-table tr:last-child td { border-bottom: none; }
+
+  .data-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .dt-layer {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  .dt-name {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .dt-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .dt-name a:hover { text-decoration: underline; }
+
+  .dt-desc {
+    color: var(--sub);
+    font-size: 12px;
+    max-width: 360px;
+  }
+
+  .dt-status {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  .dt-status.live   { color: var(--sub); background: var(--surface); }
+  .dt-status.early  { color: var(--early); background: rgba(139,139,107,0.1); }
+  .dt-status.acq    { color: var(--acq);   background: rgba(107,139,122,0.1); }
+  .dt-status.ann    { color: var(--ann);   background: rgba(122,122,170,0.1); }
+
+  .dt-signal {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--secondary);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* ── Legend / bottom ── */
+  .bottom {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    color: var(--sub);
+  }
+
+  .legend-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .legend-dot.live  { background: var(--muted); }
+  .legend-dot.early { background: var(--early); }
+  .legend-dot.acq   { background: var(--acq); }
+  .legend-dot.ann   { background: var(--ann); }
+
+  .bottom-right {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 760px) {
+    .topbar { padding: 0 20px; }
+    .container { padding: 0 20px 60px; }
+    .hero { padding: 36px 0 28px; }
+    .hero-title { font-size: 26px; }
+    .hero-stats { gap: 16px; flex-wrap: wrap; }
+    .layer-desc { display: none; }
+    .layer-sep { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="wordmark" href="/">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="view-toggle">
+      <button class="view-btn active" data-view="map">Map</button>
+      <button class="view-btn" data-view="data">Data</button>
+    </div>
+    <span class="topbar-stat" id="stat-line">134 projects · 6 layers</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <div class="hero-eyebrow">Infrastructure Landscape · March 2026</div>
+    <h1 class="hero-title">The Agent Payments Stack</h1>
+    <p class="hero-sub">Every major project building payment infrastructure for AI agents. Curated layer by layer — from settlement chains to agentic applications.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="stat-total">134</span>
+        <span class="hero-stat-label">projects</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="stat-live">88</span>
+        <span class="hero-stat-label">live</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num" id="stat-layers">6</span>
+        <span class="hero-stat-label">layers</span>
+      </div>
+      <div class="hero-stat-div"></div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">$43M</span>
+        <span class="hero-stat-label">agent volume, 9 months</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="map-view" id="map-view">
+    <div class="layers" id="layers-root"></div>
+  </div>
+
+  <div class="data-view" id="data-view">
+    <table class="data-table" id="data-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>Project</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th style="text-align:right">Signal</th>
+        </tr>
+      </thead>
+      <tbody id="data-tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="bottom">
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot live"></div> Live</div>
+      <div class="legend-item"><div class="legend-dot early"></div> Early</div>
+      <div class="legend-item"><div class="legend-dot acq"></div> Acquired</div>
+      <div class="legend-item"><div class="legend-dot ann"></div> Announced</div>
+    </div>
+    <div class="bottom-right">agentpaymentsstack.com · @jordanlyall</div>
+  </div>
+
+</div>
+
+<script type="application/json" id="aps-data-proto">
+{
+  "layers": [
+    {
+      "id": "L5", "name": "Application", "desc": "What agents buy and why — the use cases driving payment demand",
+      "projects": [
+        {"id":"virtuals","name":"Virtuals Protocol","status":"live","url":"https://virtuals.io"},
+        {"id":"elizaos","name":"ElizaOS","status":"live","url":"https://elizaos.ai"},
+        {"id":"artblocks","name":"Art Blocks","status":"live","url":"https://artblocks.io"},
+        {"id":"mintday","name":"mint.day","status":"live","url":"https://mint.day"},
+        {"id":"akash","name":"Akash Network","status":"live","url":"https://akash.network","github":{"stars":4100}},
+        {"id":"ocean","name":"Ocean Protocol","status":"live","url":"https://oceanprotocol.com","github":{"stars":890}},
+        {"id":"fetch","name":"Fetch.ai","status":"live","url":"https://fetch.ai"},
+        {"id":"autonolas","name":"Autonolas","status":"live","url":"https://olas.network"},
+        {"id":"theoriq","name":"Theoriq","status":"early","url":"https://theoriq.ai"},
+        {"id":"agent-marketplace","name":"Agent Marketplace","status":"early"},
+        {"id":"myshell","name":"MyShell","status":"live","url":"https://myshell.ai"},
+        {"id":"galadriel","name":"Galadriel","status":"early","url":"https://galadriel.com"},
+        {"id":"bittensor","name":"Bittensor","status":"live","url":"https://bittensor.com","github":{"stars":2200}},
+        {"id":"agentlayer","name":"AgentLayer","status":"early"},
+        {"id":"swarms","name":"Swarms","status":"live","url":"https://swarms.ai","npm":{"package":"swarms-ts","weekly_downloads":3200}},
+        {"id":"olas-predict","name":"Olas Predict","status":"live"},
+        {"id":"autonome","name":"Autonome","status":"early","url":"https://autonome.fi"},
+        {"id":"sensay","name":"Sensay","status":"live","url":"https://sensay.io"},
+        {"id":"sleepagent","name":"Sleep Agent","status":"early"},
+        {"id":"humans-ai","name":"Humans.ai","status":"live","url":"https://humans.ai"},
+        {"id":"agentfi","name":"AgentFi","status":"early"},
+        {"id":"zerebro","name":"Zerebro","status":"live"},
+        {"id":"aixbt","name":"AIXBT","status":"live"},
+        {"id":"arc","name":"ARC","status":"early"}
+      ]
+    },
+    {
+      "id": "L4", "name": "Governance & Policy", "desc": "Spend controls, authorization rails, and compliance for agent transactions",
+      "projects": [
+        {"id":"ramp-agent","name":"Ramp Agent Cards","status":"live","url":"https://ramp.com"},
+        {"id":"visa-agent","name":"Visa Agent Commerce","status":"announced"},
+        {"id":"stripe-spt","name":"Stripe SPTs","status":"early","url":"https://stripe.com"},
+        {"id":"erc-8004","name":"ERC-8004","status":"early"},
+        {"id":"openmatter","name":"OpenMatter","status":"early","url":"https://openmatter.xyz"},
+        {"id":"allow","name":"Allow","status":"early"},
+        {"id":"kubelt","name":"Kubelt","status":"live"},
+        {"id":"agent-keys","name":"Agent Keys","status":"early"},
+        {"id":"brex-ai","name":"Brex AI","status":"live","url":"https://brex.com","funding":"$5.15B acq (JPMC)"},
+        {"id":"mercury-ai","name":"Mercury AI","status":"live","url":"https://mercury.com"},
+        {"id":"lithic","name":"Lithic","status":"live","url":"https://lithic.com"},
+        {"id":"highnote","name":"Highnote","status":"live","url":"https://highnote.com"},
+        {"id":"marqeta","name":"Marqeta","status":"live","url":"https://marqeta.com"},
+        {"id":"spend-permissions","name":"Spend Permissions","status":"live"},
+        {"id":"session-keys","name":"Session Keys","status":"live"},
+        {"id":"delegate","name":"Delegate.xyz","status":"live","url":"https://delegate.xyz"},
+        {"id":"openfort","name":"Openfort","status":"live","url":"https://openfort.xyz"},
+        {"id":"zerodev","name":"ZeroDev","status":"live","url":"https://zerodev.app","npm":{"package":"@zerodev/sdk","weekly_downloads":41000}},
+        {"id":"pimlico","name":"Pimlico","status":"live","url":"https://pimlico.io","npm":{"package":"permissionless","weekly_downloads":62000}},
+        {"id":"biconomy","name":"Biconomy","status":"live","url":"https://biconomy.io","npm":{"package":"@biconomy/abstractjs","weekly_downloads":14000}},
+        {"id":"alchemy-aa","name":"Alchemy AA","status":"live","url":"https://alchemy.com","npm":{"package":"@account-kit/core","weekly_downloads":28000}},
+        {"id":"rhinestone","name":"Rhinestone","status":"live","url":"https://rhinestone.wtf","github":{"stars":380}},
+        {"id":"erc-7715","name":"ERC-7715","status":"early"},
+        {"id":"erc-7710","name":"ERC-7710","status":"early"},
+        {"id":"erc-7821","name":"ERC-7821","status":"early"},
+        {"id":"tokenbound","name":"Tokenbound","status":"live","url":"https://tokenbound.org"},
+        {"id":"coinbase-mpc","name":"Coinbase MPC","status":"live","url":"https://coinbase.com"},
+        {"id":"fordefi","name":"Fordefi","status":"live","url":"https://fordefi.com"},
+        {"id":"anchorage","name":"Anchorage Digital","status":"live","url":"https://anchorage.com"},
+        {"id":"copper","name":"Copper","status":"live","url":"https://copper.co"}
+      ]
+    },
+    {
+      "id": "L3", "name": "Payment Protocol", "desc": "The actual payment standards and APIs agents use to transact",
+      "projects": [
+        {"id":"x402","name":"x402","status":"live","url":"https://x402.org","github":{"stars":5800}},
+        {"id":"tempo-mpp","name":"Tempo MPP","status":"live","url":"https://tempo.finance"},
+        {"id":"google-ap2","name":"Google AP2","status":"announced"},
+        {"id":"acp","name":"ACP","status":"live"},
+        {"id":"l402","name":"L402","status":"live"},
+        {"id":"erc-8183","name":"ERC-8183","status":"early"},
+        {"id":"blink","name":"Solana Blinks","status":"live"},
+        {"id":"actions-api","name":"Coinbase Actions API","status":"live","url":"https://coinbase.com"},
+        {"id":"stripe-agents","name":"Stripe Agent Toolkit","status":"live","url":"https://stripe.com","npm":{"package":"@stripe/agent-toolkit","weekly_downloads":18000}},
+        {"id":"openai-payments","name":"OpenAI Payments","status":"early"},
+        {"id":"request-network","name":"Request Network","status":"live","url":"https://request.network","github":{"stars":1100}},
+        {"id":"superfluid","name":"Superfluid","status":"live","url":"https://superfluid.finance","github":{"stars":820}},
+        {"id":"sablier","name":"Sablier","status":"live","url":"https://sablier.com","github":{"stars":730}},
+        {"id":"llamapay","name":"LlamaPay","status":"live","url":"https://llamapay.io","github":{"stars":510}},
+        {"id":"drips","name":"Drips","status":"live","url":"https://drips.network","github":{"stars":310}},
+        {"id":"zebec","name":"Zebec","status":"live","url":"https://zebec.io"},
+        {"id":"streamflow","name":"Streamflow","status":"live","url":"https://streamflow.finance"},
+        {"id":"paymagic","name":"Paymagic","status":"live"},
+        {"id":"splits","name":"0xSplits","status":"live","url":"https://splits.org","github":{"stars":480}},
+        {"id":"coinbase-commerce","name":"Coinbase Commerce","status":"live","url":"https://commerce.coinbase.com"},
+        {"id":"moonpay","name":"MoonPay","status":"live","url":"https://moonpay.com"},
+        {"id":"transak","name":"Transak","status":"live","url":"https://transak.com"},
+        {"id":"wyre","name":"Wyre","status":"acq"},
+        {"id":"reqcast","name":"ReqCast","status":"live"},
+        {"id":"skyfire-protocol","name":"Skyfire Protocol","status":"live","url":"https://skyfire.xyz"},
+        {"id":"payto","name":"PayTo","status":"live"}
+      ]
+    },
+    {
+      "id": "L2", "name": "Routing & Abstraction", "desc": "Cross-chain routing, bridging, swapping, and payment abstraction",
+      "projects": [
+        {"id":"skyfire","name":"Skyfire","status":"live","url":"https://skyfire.xyz"},
+        {"id":"circle-cctp","name":"Circle CCTP","status":"live","url":"https://circle.com","github":{"stars":420}},
+        {"id":"lifi","name":"Li.Fi","status":"live","url":"https://li.fi","github":{"stars":1900}},
+        {"id":"uniswap","name":"Uniswap","status":"live","url":"https://uniswap.org","npm":{"package":"@uniswap/sdk-core","weekly_downloads":310000}},
+        {"id":"kibble","name":"Kibble","status":"early","url":"https://kibble.exchange"},
+        {"id":"relay","name":"Relay","status":"live","url":"https://relay.link"},
+        {"id":"socket","name":"Socket","status":"live","url":"https://socket.tech","github":{"stars":760}},
+        {"id":"squid","name":"Squid Router","status":"live","url":"https://squidrouter.com","github":{"stars":290}},
+        {"id":"debridge","name":"deBridge","status":"live","url":"https://debridge.finance","github":{"stars":380}},
+        {"id":"hop","name":"Hop Protocol","status":"live","url":"https://hop.exchange","github":{"stars":520}},
+        {"id":"across","name":"Across","status":"live","url":"https://across.to","github":{"stars":610}},
+        {"id":"stargate","name":"Stargate","status":"live","url":"https://stargate.finance","github":{"stars":880}},
+        {"id":"synapse","name":"Synapse","status":"live","url":"https://synapseprotocol.com","github":{"stars":560}},
+        {"id":"celer","name":"Celer cBridge","status":"live","url":"https://cbridge.celer.network"},
+        {"id":"rainbow-kit","name":"RainbowKit","status":"live","url":"https://rainbowkit.com","npm":{"package":"@rainbow-me/rainbowkit","weekly_downloads":89000}},
+        {"id":"wagmi","name":"wagmi","status":"live","url":"https://wagmi.sh","npm":{"package":"wagmi","weekly_downloads":520000}},
+        {"id":"viem","name":"viem","status":"live","url":"https://viem.sh","npm":{"package":"viem","weekly_downloads":1400000}},
+        {"id":"ethers","name":"ethers.js","status":"live","url":"https://ethers.org","npm":{"package":"ethers","weekly_downloads":2800000}},
+        {"id":"web3js","name":"web3.js","status":"live","url":"https://web3js.org","npm":{"package":"web3","weekly_downloads":890000}},
+        {"id":"alchemy-sdk","name":"Alchemy SDK","status":"acq","url":"https://alchemy.com","npm":{"package":"alchemy-sdk","weekly_downloads":140000}},
+        {"id":"ankr","name":"Ankr","status":"live","url":"https://ankr.com"},
+        {"id":"quicknode","name":"QuickNode","status":"live","url":"https://quicknode.com"}
+      ]
+    },
+    {
+      "id": "L1", "name": "Wallet & Key Management", "desc": "Where agent keys live — embedded wallets, MPC, and key infrastructure",
+      "projects": [
+        {"id":"coinbase-wallet","name":"Coinbase Wallet","status":"live","url":"https://wallet.coinbase.com"},
+        {"id":"thirdweb","name":"Thirdweb","status":"live","url":"https://thirdweb.com","npm":{"package":"thirdweb","weekly_downloads":96000}},
+        {"id":"safe","name":"Safe","status":"live","url":"https://safe.global","github":{"stars":2100}},
+        {"id":"fireblocks","name":"Fireblocks","status":"live","url":"https://fireblocks.com","funding":"$310M Series E"},
+        {"id":"turnkey","name":"Turnkey","status":"live","url":"https://turnkey.com","npm":{"package":"@turnkey/sdk-browser","weekly_downloads":137000}},
+        {"id":"privy","name":"Privy","status":"live","url":"https://privy.io","npm":{"package":"@privy-io/react-auth","weekly_downloads":128000}},
+        {"id":"walletconnect","name":"WalletConnect","status":"live","url":"https://reown.com","npm":{"package":"@walletconnect/web3-provider","weekly_downloads":854000}},
+        {"id":"dynamic","name":"Dynamic","status":"live","url":"https://dynamic.xyz","npm":{"package":"@dynamic-labs/sdk-react-core","weekly_downloads":24000}},
+        {"id":"magic","name":"Magic","status":"live","url":"https://magic.link","npm":{"package":"magic-sdk","weekly_downloads":47000}},
+        {"id":"web3auth","name":"Web3Auth","status":"live","url":"https://web3auth.io","npm":{"package":"@web3auth/web3auth-wagmi-connector","weekly_downloads":19000}},
+        {"id":"particle","name":"Particle Network","status":"live","url":"https://particle.network","github":{"stars":580}},
+        {"id":"crossmint","name":"Crossmint","status":"live","url":"https://crossmint.com"},
+        {"id":"bvnk","name":"BVNK","status":"acq","url":"https://bvnk.com","funding":"$1.8B acq"},
+        {"id":"bridge","name":"Bridge","status":"acq","url":"https://bridge.xyz","funding":"$1.1B acq (Stripe)"},
+        {"id":"dfns","name":"Dfns","status":"live","url":"https://dfns.co","github":{"stars":290}},
+        {"id":"capsule","name":"Capsule","status":"live","url":"https://usecapsule.com"},
+        {"id":"lit","name":"Lit Protocol","status":"live","url":"https://litprotocol.com","github":{"stars":680}},
+        {"id":"arcana","name":"Arcana Network","status":"live","url":"https://arcana.network"},
+        {"id":"brahma","name":"Brahma.fi","status":"acq","url":"https://brahma.fi","funding":"Acq by Polymarket"}
+      ]
+    },
+    {
+      "id": "L0", "name": "Settlement", "desc": "Where transactions land — the base chains and networks",
+      "projects": [
+        {"id":"base","name":"Base","status":"live","url":"https://base.org","volume":{"value":75000000,"note":"75M txns/30d"}},
+        {"id":"solana","name":"Solana","status":"live","url":"https://solana.com","github":{"stars":13200}},
+        {"id":"ethereum","name":"Ethereum","status":"live","url":"https://ethereum.org","github":{"stars":46000}},
+        {"id":"arbitrum","name":"Arbitrum","status":"live","url":"https://arbitrum.io","github":{"stars":3400}},
+        {"id":"optimism","name":"Optimism","status":"live","url":"https://optimism.io","github":{"stars":5700}},
+        {"id":"polygon","name":"Polygon","status":"live","url":"https://polygon.technology","github":{"stars":3100}},
+        {"id":"avalanche","name":"Avalanche","status":"live","url":"https://avax.network"},
+        {"id":"layerzero","name":"LayerZero","status":"live","url":"https://layerzero.network","github":{"stars":1800},"volume":{"value":8360000000,"note":"$8.36B bridged/30d"}},
+        {"id":"wormhole","name":"Wormhole","status":"live","url":"https://wormhole.com","github":{"stars":1100},"volume":{"value":1230000000,"note":"$1.23B bridged/30d"}},
+        {"id":"usdc","name":"USDC (Circle)","status":"live","url":"https://circle.com"},
+        {"id":"lightning","name":"Lightning Network","status":"live","url":"https://lightning.network"},
+        {"id":"stellar","name":"Stellar","status":"live","url":"https://stellar.org","github":{"stars":7100}},
+        {"id":"near","name":"NEAR Protocol","status":"live","url":"https://near.org","github":{"stars":2300}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function() {
+  var raw = document.getElementById('aps-data-proto');
+  var DATA = JSON.parse(raw.textContent);
+
+  var LAYER_DESC = {
+    L5: 'What agents buy and why',
+    L4: 'Spend controls and authorization',
+    L3: 'Payment standards agents use',
+    L2: 'Cross-chain routing and bridging',
+    L1: 'Where agent keys live',
+    L0: 'Where transactions settle'
+  };
+
+  function getSignal(p) {
+    if (p.npm && p.npm.weekly_downloads) return { score: p.npm.weekly_downloads, signal: 'npm', raw: p.npm.weekly_downloads };
+    if (p.github && p.github.stars) return { score: p.github.stars * 10, signal: 'stars', raw: p.github.stars };
+    if (p.github && p.github.forks) return { score: p.github.forks * 20, signal: 'forks', raw: p.github.forks };
+    if (p.volume && p.volume.value) return { score: p.volume.value, signal: 'volume', raw: p.volume.value };
+    return null;
+  }
+
+  function fmtSignal(signal, raw) {
+    if (signal === 'npm') {
+      if (raw >= 1000000) return (raw / 1000000).toFixed(1) + 'M /wk';
+      if (raw >= 1000) return Math.round(raw / 1000) + 'K /wk';
+      return raw + ' /wk';
+    }
+    if (signal === 'stars') {
+      if (raw >= 1000) return (raw / 1000).toFixed(1) + 'K \u2605';
+      return raw + ' \u2605';
+    }
+    if (signal === 'volume') {
+      if (raw >= 1000000000) return (raw / 1000000000).toFixed(1) + 'B txns';
+      if (raw >= 1000000) return Math.round(raw / 1000000) + 'M txns';
+      return raw.toLocaleString();
+    }
+    return String(raw);
+  }
+
+  // Build map view
+  var layersRoot = document.getElementById('layers-root');
+
+  DATA.layers.forEach(function(layer) {
+    var section = document.createElement('div');
+    section.className = 'layer-section';
+
+    // Header
+    var hdr = document.createElement('div');
+    hdr.className = 'layer-hdr';
+
+    var badge = document.createElement('span');
+    badge.className = 'layer-badge';
+    badge.textContent = layer.id;
+
+    var name = document.createElement('span');
+    name.className = 'layer-name';
+    name.textContent = layer.name;
+
+    var sep = document.createElement('span');
+    sep.className = 'layer-sep';
+
+    var desc = document.createElement('span');
+    desc.className = 'layer-desc';
+    desc.textContent = LAYER_DESC[layer.id] || layer.desc || '';
+
+    var count = document.createElement('span');
+    count.className = 'layer-count';
+    count.textContent = layer.projects.length + ' projects';
+
+    hdr.appendChild(badge);
+    hdr.appendChild(name);
+    hdr.appendChild(sep);
+    hdr.appendChild(desc);
+    hdr.appendChild(count);
+
+    // Chips
+    var chips = document.createElement('div');
+    chips.className = 'chips';
+
+    layer.projects.forEach(function(p) {
+      var chip = document.createElement('a');
+      chip.className = 'chip';
+      if (p.status === 'early') chip.classList.add('early');
+      if (p.status === 'acq' || p.status === 'acquired') chip.classList.add('acq');
+      if (p.status === 'announced') chip.classList.add('ann');
+      chip.href = '/' + p.id;
+
+      // Favicon
+      if (p.url) {
+        try {
+          var domain = new URL(p.url).hostname;
+          var fav = document.createElement('img');
+          fav.className = 'fav';
+          fav.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=32';
+          fav.alt = '';
+          fav.onerror = function() { this.style.display = 'none'; };
+          chip.appendChild(fav);
+        } catch(e) {}
+      }
+
+      var nameSpan = document.createElement('span');
+      nameSpan.textContent = p.name;
+      chip.appendChild(nameSpan);
+
+      chips.appendChild(chip);
+    });
+
+    section.appendChild(hdr);
+    section.appendChild(chips);
+    layersRoot.appendChild(section);
+  });
+
+  // Build data table
+  var tbody = document.getElementById('data-tbody');
+  var allProjects = [];
+  DATA.layers.forEach(function(layer) {
+    layer.projects.forEach(function(p) {
+      allProjects.push({ layer: layer.id, p: p });
+    });
+  });
+
+  // Sort by layer order then by signal desc
+  var ORDER = ['L1','L2','L3','L4','L5','L0'];
+  allProjects.sort(function(a, b) {
+    var li = ORDER.indexOf(a.layer), lj = ORDER.indexOf(b.layer);
+    if (li !== lj) return li - lj;
+    var si = getSignal(a.p), sj = getSignal(b.p);
+    var sv = (si ? si.score : 0) - (sj ? sj.score : 0);
+    return -sv;
+  });
+
+  allProjects.forEach(function(item) {
+    var p = item.p;
+    var tr = document.createElement('tr');
+
+    var tdLayer = document.createElement('td');
+    tdLayer.className = 'dt-layer';
+    tdLayer.textContent = item.layer;
+
+    var tdName = document.createElement('td');
+    tdName.className = 'dt-name';
+    var nameEl = document.createElement('a');
+    nameEl.href = '/' + p.id;
+    nameEl.textContent = p.name;
+    tdName.appendChild(nameEl);
+
+    var tdDesc = document.createElement('td');
+    tdDesc.className = 'dt-desc';
+    tdDesc.textContent = p.description || '';
+
+    var tdStatus = document.createElement('td');
+    var statusBadge = document.createElement('span');
+    var st = p.status || 'live';
+    statusBadge.className = 'dt-status ' + (st === 'acquired' ? 'acq' : st === 'announced' ? 'ann' : st);
+    statusBadge.textContent = st === 'acquired' ? 'acq' : st;
+    tdStatus.appendChild(statusBadge);
+
+    var tdSignal = document.createElement('td');
+    tdSignal.className = 'dt-signal';
+    var sig = getSignal(p);
+    if (sig) tdSignal.textContent = fmtSignal(sig.signal, sig.raw);
+
+    tr.appendChild(tdLayer);
+    tr.appendChild(tdName);
+    tr.appendChild(tdDesc);
+    tr.appendChild(tdStatus);
+    tr.appendChild(tdSignal);
+    tbody.appendChild(tr);
+  });
+
+  // Update stats
+  var total = allProjects.length;
+  var live = allProjects.filter(function(x) { return x.p.status === 'live'; }).length;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-live').textContent = live;
+  document.getElementById('stat-line').textContent = total + ' projects \u00b7 6 layers';
+
+  // View toggle
+  var mapView = document.getElementById('map-view');
+  var dataView = document.getElementById('data-view');
+  var btns = document.querySelectorAll('.view-btn');
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var v = btn.getAttribute('data-view');
+      if (v === 'map') {
+        mapView.classList.remove('hidden');
+        dataView.classList.remove('visible');
+      } else {
+        mapView.classList.add('hidden');
+        dataView.classList.add('visible');
+      }
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

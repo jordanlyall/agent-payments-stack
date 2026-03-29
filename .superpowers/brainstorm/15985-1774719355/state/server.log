@@ -1,0 +1,5 @@
+{"type":"server-started","port":60455,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:60455","screen_dir":"/Users/jordanlyall/Projects/agent-payments-stack/.superpowers/brainstorm/15985-1774719355/content","state_dir":"/Users/jordanlyall/Projects/agent-payments-stack/.superpowers/brainstorm/15985-1774719355/state"}
+{"type":"screen-added","file":"/Users/jordanlyall/Projects/agent-payments-stack/.superpowers/brainstorm/15985-1774719355/content/hero-options.html"}
+{"type":"screen-added","file":"/Users/jordanlyall/Projects/agent-payments-stack/.superpowers/brainstorm/15985-1774719355/content/hero-b-deck.html"}
+{"type":"screen-added","file":"/Users/jordanlyall/Projects/agent-payments-stack/.superpowers/brainstorm/15985-1774719355/content/hero-final.html"}
+{"type":"server-stopped","reason":"idle timeout"}

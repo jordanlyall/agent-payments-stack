@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Front Page Hero Options</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --acq: #d9613f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1a1816; color: var(--text); font-family: 'Space Grotesk', sans-serif; padding: 32px; }
+
+  h2 { font-size: 13px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .question { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .sub { font-size: 13px; color: var(--secondary); margin-bottom: 32px; }
+
+  .options-grid { display: flex; flex-direction: column; gap: 20px; }
+
+  .option-wrap {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+    overflow: hidden;
+  }
+  .option-wrap:hover { border-color: rgba(255,255,255,0.15); }
+  .option-wrap.selected { border-color: #edebe7; }
+
+  .option-label {
+    background: rgba(255,255,255,0.05);
+    padding: 10px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .option-label span { color: var(--muted); flex: 1; }
+  .option-label .letter {
+    background: rgba(255,255,255,0.1);
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: var(--text); font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* Mockup shell */
+  .mock-shell {
+    background: var(--bg);
+    border-top: 1px solid var(--faint);
+  }
+  .mock-nav {
+    height: 44px;
+    border-bottom: 1px solid var(--faint);
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    gap: 20px;
+  }
+  .mock-logo { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--text); letter-spacing: 0.04em; }
+  .mock-nav-links { display: flex; gap: 16px; margin-left: auto; }
+  .mock-nav-link { font-size: 10px; color: var(--muted); }
+  .mock-nav-link.active { color: var(--text); }
+
+  .mock-body { padding: 32px 40px 28px; }
+
+  /* === OPTION A: "The Number" === */
+  .a-hero { display: flex; flex-direction: column; gap: 0; }
+  .a-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .a-stat { font-size: 72px; font-weight: 700; letter-spacing: -3px; line-height: 1; color: var(--text); margin-bottom: 4px; }
+  .a-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--secondary); letter-spacing: 0.06em; margin-bottom: 20px; }
+  .a-desc { font-size: 13.5px; color: var(--secondary); line-height: 1.5; max-width: 520px; margin-bottom: 20px; }
+  .a-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .a-pill { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 3px; padding: 3px 9px; }
+  .a-pill.hot { color: var(--acq); border-color: rgba(217,97,63,0.25); background: rgba(217,97,63,0.06); }
+
+  /* === OPTION B: "The Story" === */
+  .b-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: start; }
+  .b-left {}
+  .b-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--acq); margin-bottom: 10px; }
+  .b-headline { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.2; color: var(--text); margin-bottom: 12px; }
+  .b-deck { font-size: 12.5px; color: var(--secondary); line-height: 1.6; margin-bottom: 18px; }
+  .b-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+  .b-pill { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 3px; padding: 2px 8px; }
+  .b-right { display: flex; flex-direction: column; gap: 10px; }
+  .b-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 6px;
+    padding: 14px 16px;
+  }
+  .b-card.acq { border-color: rgba(217,97,63,0.2); background: rgba(217,97,63,0.04); }
+  .b-card-label { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
+  .b-card.acq .b-card-label { color: var(--acq); opacity: 0.7; }
+  .b-card-val { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; letter-spacing: -1px; line-height: 1; color: var(--text); margin-bottom: 3px; }
+  .b-card.acq .b-card-val { color: var(--acq); }
+  .b-card-sub { font-size: 11px; color: var(--secondary); }
+
+  /* === OPTION C: "The Ticker" === */
+  .c-ticker {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 5px;
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .c-tick-item {
+    flex: 1;
+    padding: 12px 18px;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .c-tick-item:last-child { border-right: none; }
+  .c-tick-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .c-tick-val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); }
+  .c-tick-val.acq { color: var(--acq); }
+  .c-tick-sub { font-size: 9.5px; color: var(--muted); }
+  .c-hero-bottom { display: flex; gap: 24px; align-items: start; }
+  .c-left { flex: 1; }
+  .c-title { font-size: 22px; font-weight: 700; letter-spacing: -0.6px; line-height: 1.2; color: var(--text); margin-bottom: 8px; }
+  .c-deck { font-size: 12.5px; color: var(--secondary); line-height: 1.55; }
+  .c-right { flex-shrink: 0; }
+  .c-callout {
+    background: rgba(217,97,63,0.07);
+    border: 1px solid rgba(217,97,63,0.2);
+    border-radius: 5px;
+    padding: 12px 16px;
+    max-width: 220px;
+  }
+  .c-callout-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--acq); opacity: 0.7; margin-bottom: 4px; }
+  .c-callout-val { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--acq); line-height: 1; margin-bottom: 4px; }
+  .c-callout-text { font-size: 11px; color: var(--secondary); line-height: 1.4; }
+
+  /* Filter stub */
+  .mock-filter {
+    display: flex; gap: 8px; align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--faint);
+    border-bottom: 1px solid var(--faint);
+    margin-top: 20px;
+  }
+  .mf-input { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 5px 10px; font-size: 10px; color: var(--secondary); width: 160px; }
+  .mf-btn { background: transparent; border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 4px 10px; font-size: 9.5px; color: var(--secondary); }
+  .mf-btn.on { background: rgba(255,255,255,0.05); color: var(--text); }
+  .mf-count { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); margin-left: auto; }
+
+  /* Selected indicator */
+  .selected-badge { display: none; background: #edebe7; color: #0d0c0b; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 3px; letter-spacing: 0.04em; }
+  .option-wrap.selected .selected-badge { display: inline-block; }
+</style>
+</head>
+<body>
+
+<h2>Front Page Redesign</h2>
+<p class="question">Which hero approach feels like "the hub"?</p>
+<p class="sub">Same page below the hero — filter bar and stack layers. Click to select.</p>
+
+<div class="options-grid">
+
+  <!-- OPTION A -->
+  <div class="option-wrap" data-choice="A" onclick="select(this)">
+    <div class="option-label">
+      <div class="letter">A</div>
+      <span>"The Number" — dominant stat leads, pills for context</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links">
+          <div class="mock-nav-link active">Stack</div>
+          <div class="mock-nav-link">Data</div>
+          <div class="mock-nav-link">Rankings</div>
+          <div class="mock-nav-link">Acquisitions</div>
+          <div class="mock-nav-link">API</div>
+        </div>
+      </div>
+      <div class="mock-body">
+        <div class="a-hero">
+          <div class="a-eyebrow">Agent Payment Volume · 9 months</div>
+          <div class="a-stat">$43M</div>
+          <div class="a-stat-label">SETTLING AT ~$600M ANNUALIZED · 140M TRANSACTIONS · 98.6% USDC</div>
+          <div class="a-desc">Every major payment network is building rails for AI agents. 162 projects across 6 layers — from settlement to application.</div>
+          <div class="a-pills">
+            <div class="a-pill">162 projects</div>
+            <div class="a-pill">6 layers</div>
+            <div class="a-pill hot">$8.05B in acquisitions</div>
+            <div class="a-pill">Updated Mar 2026</div>
+          </div>
+        </div>
+        <div class="mock-filter">
+          <div class="mf-input">🔍  Search 162 projects...</div>
+          <div class="mf-btn on">All</div>
+          <div class="mf-btn">Live</div>
+          <div class="mf-btn">Early</div>
+          <div class="mf-btn">Acquired</div>
+          <div class="mf-count">162 projects</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="option-wrap" data-choice="B" onclick="select(this)">
+    <div class="option-label">
+      <div class="letter">B</div>
+      <span>"The Story" — editorial headline left, stat cards right</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links">
+          <div class="mock-nav-link active">Stack</div>
+          <div class="mock-nav-link">Data</div>
+          <div class="mock-nav-link">Rankings</div>
+          <div class="mock-nav-link">Acquisitions</div>
+          <div class="mock-nav-link">API</div>
+        </div>
+      </div>
+      <div class="mock-body">
+        <div class="b-hero">
+          <div class="b-left">
+            <div class="b-tag">Intelligence</div>
+            <div class="b-headline">The infrastructure layer<br>for agentic commerce</div>
+            <div class="b-deck">Stripe acquired Bridge for $1.1B. Capital One took Brex for $5.15B. Mastercard bought BVNK for $1.8B. The incumbents are consolidating the stack. 162 projects, 6 layers, $43M in tracked volume.</div>
+            <div class="b-pills">
+              <div class="b-pill">162 projects</div>
+              <div class="b-pill">6 layers</div>
+              <div class="b-pill">Updated Mar 2026</div>
+            </div>
+          </div>
+          <div class="b-right">
+            <div class="b-card">
+              <div class="b-card-label">Tracked volume · 9mo</div>
+              <div class="b-card-val">$43M</div>
+              <div class="b-card-sub">~$600M annualized · 140M txns</div>
+            </div>
+            <div class="b-card acq">
+              <div class="b-card-label">M&amp;A activity · 18mo</div>
+              <div class="b-card-val">$8.05B</div>
+              <div class="b-card-sub">7 deals · Stripe, Capital One, Mastercard</div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-filter">
+          <div class="mf-input">🔍  Search 162 projects...</div>
+          <div class="mf-btn on">All</div>
+          <div class="mf-btn">Live</div>
+          <div class="mf-btn">Early</div>
+          <div class="mf-btn">Acquired</div>
+          <div class="mf-count">162 projects</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="option-wrap" data-choice="C" onclick="select(this)">
+    <div class="option-label">
+      <div class="letter">C</div>
+      <span>"The Ticker" — live stats strip above, callout to the right</span>
+      <div class="selected-badge">SELECTED</div>
+    </div>
+    <div class="mock-shell">
+      <div class="mock-nav">
+        <div class="mock-logo">AGENT PAYMENTS STACK</div>
+        <div class="mock-nav-links">
+          <div class="mock-nav-link active">Stack</div>
+          <div class="mock-nav-link">Data</div>
+          <div class="mock-nav-link">Rankings</div>
+          <div class="mock-nav-link">Acquisitions</div>
+          <div class="mock-nav-link">API</div>
+        </div>
+      </div>
+      <div class="mock-body">
+        <div class="c-ticker">
+          <div class="c-tick-item">
+            <div class="c-tick-label">Volume · 9mo</div>
+            <div class="c-tick-val">$43M</div>
+            <div class="c-tick-sub">~$600M annualized</div>
+          </div>
+          <div class="c-tick-item">
+            <div class="c-tick-label">Transactions</div>
+            <div class="c-tick-val">140M</div>
+            <div class="c-tick-sub">98.6% USDC</div>
+          </div>
+          <div class="c-tick-item">
+            <div class="c-tick-label">Projects</div>
+            <div class="c-tick-val">162</div>
+            <div class="c-tick-sub">6 layers</div>
+          </div>
+          <div class="c-tick-item">
+            <div class="c-tick-label">M&amp;A · 18mo</div>
+            <div class="c-tick-val acq">$8.05B</div>
+            <div class="c-tick-sub">7 deals</div>
+          </div>
+        </div>
+        <div class="c-hero-bottom">
+          <div class="c-left">
+            <div class="c-title">The Agent Payments Stack</div>
+            <div class="c-deck">Every major payment network is building rails for AI agents. 162 projects tracked across 6 layers — from L0 settlement to L5 application.</div>
+          </div>
+          <div class="c-right">
+            <div class="c-callout">
+              <div class="c-callout-label">M&amp;A signal</div>
+              <div class="c-callout-val">$8B+</div>
+              <div class="c-callout-text">7 acquisitions in 18 months. Incumbents are consolidating the stack. → <span style="color:var(--acq);text-decoration:underline">View deals</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="mock-filter">
+          <div class="mf-input">🔍  Search 162 projects...</div>
+          <div class="mf-btn on">All</div>
+          <div class="mf-btn">Live</div>
+          <div class="mf-btn">Early</div>
+          <div class="mf-btn">Acquired</div>
+          <div class="mf-count">162 projects</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function select(el) {
+  document.querySelectorAll('.option-wrap').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+  // record
+  var choice = el.dataset.choice;
+  fetch('/event', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type:'click',choice:choice,text:'Option '+choice,timestamp:Date.now()})}).catch(function(){});
+}
+</script>
+</body>
+</html>
