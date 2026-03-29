@@ -436,6 +436,7 @@ function draw(){
 function loop(){
   tick();
   draw();
+  checkStats();
   frame_id = requestAnimationFrame(loop);
 }
 loop();
