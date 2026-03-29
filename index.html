@@ -79,7 +79,7 @@
   .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
   .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 18px; }
   .hdr-stat { background: var(--bg); padding: 12px 20px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .hdr-stat--apv { flex: 2; padding: 16px 24px; border-right: 1px solid var(--faint); flex-direction: row; align-items: stretch; gap: 20px; text-decoration: none; cursor: pointer; transition: background 0.12s; }
+  .hdr-stat--apv { flex: 1.4; padding: 16px 24px; border-right: 1px solid var(--faint); flex-direction: row; align-items: stretch; gap: 16px; text-decoration: none; cursor: pointer; transition: background 0.12s; }
   .hdr-stat--apv:hover { background: #111010; }
   .apv-tile-left { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; justify-content: center; }
   .apv-sources { display: flex; gap: 14px; margin-top: 6px; }
@@ -1492,8 +1492,8 @@ function showFlowDetail(idx) {
       var x402El = document.getElementById('live-x402');
       var acpEl  = document.getElementById('live-acp');
       if (srcRow && d.x402 && d.acp) {
-        if (x402El) x402El.textContent = fmtUSD(d.x402.volume_usd || 0);
-        if (acpEl)  acpEl.textContent  = fmtUSD(d.acp.volume_usd  || 0);
+        if (x402El) x402El.textContent = fmtUSD(d.x402.volume_30d_usd || 0);
+        if (acpEl)  acpEl.textContent  = fmtUSD(d.acp.volume_30d_usd  || 0);
         srcRow.style.display = 'flex';
       }
 
