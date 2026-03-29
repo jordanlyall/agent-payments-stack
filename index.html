@@ -440,6 +440,30 @@
   }
   .embed-code:hover .embed-copy { color: var(--text); }
 
+  /* How a payment flows */
+  .hiw-trigger { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 10px 0; border-top: 1px solid var(--faint); border-bottom: 1px solid var(--faint); user-select: none; margin-top: 16px; }
+  .hiw-trigger-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .hiw-trigger-sub { font-size: 12px; color: var(--muted); }
+  .hiw-caret { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-left: auto; transition: transform 0.2s; }
+  .hiw-trigger.open .hiw-caret { transform: rotate(180deg); }
+  .hiw-body { display: none; padding: 20px 0 16px; border-bottom: 1px solid var(--faint); }
+  .hiw-body.open { display: block; }
+  .flow-narrative { font-size: 12px; color: var(--muted); margin-bottom: 16px; line-height: 1.65; max-width: 680px; }
+  .flow { display: flex; align-items: stretch; }
+  .flow-node { flex: 1; min-width: 100px; background: rgba(255,255,255,0.02); border: 1px solid var(--faint); border-radius: 6px; padding: 13px 12px 11px; cursor: pointer; transition: border-color 0.15s, background 0.15s; }
+  .flow-node:hover { border-color: rgba(255,255,255,0.14); background: rgba(255,255,255,0.04); }
+  .flow-node.fn-active { border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.05); }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; width: 22px; flex-shrink: 0; color: var(--muted); font-size: 12px; opacity: 0.35; }
+  .fn-step { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 5px; }
+  .fn-name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; line-height: 1.2; }
+  .fn-desc { font-size: 10px; color: var(--secondary); line-height: 1.4; margin-bottom: 7px; }
+  .fn-examples { display: flex; flex-wrap: wrap; gap: 3px; }
+  .fn-ex { font-family: 'JetBrains Mono', monospace; font-size: 7.5px; color: var(--muted); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 3px; padding: 1px 5px; }
+  .flow-detail { margin-top: 12px; background: rgba(255,255,255,0.02); border: 1px solid var(--faint); border-radius: 6px; padding: 14px 18px; display: none; }
+  .flow-detail.open { display: block; }
+  .fd-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 5px; }
+  .fd-body { font-size: 12px; color: var(--secondary); line-height: 1.65; }
+
   /* Filter bar */
   .filter-bar {
     display: flex;
@@ -558,24 +582,7 @@
   }
   .submit-bar a:hover { color: var(--text); }
 
-  /* Changelog */
-  /* Recently Added strip */
-  .new-strip { padding: 14px 0 16px; border-bottom: 1px solid var(--faint); margin-bottom: 0; }
-  .new-strip-hdr { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .new-strip-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
-  .new-strip-date { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); opacity: 0.5; }
-  .new-dot { width: 6px; height: 6px; border-radius: 50%; background: #4ade80; flex-shrink: 0; box-shadow: 0 0 4px rgba(74,222,128,0.5); }
-  .new-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
-  .new-chips::-webkit-scrollbar { display: none; }
-  .new-chip {
-    display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
-    padding: 4px 10px; border: 1px solid rgba(255,255,255,0.08);
-    background: rgba(255,255,255,0.03);
-    border-radius: 4px; font-size: 12px; color: var(--secondary);
-    text-decoration: none; transition: background 0.12s, color 0.12s;
-  }
-  .new-chip:hover { background: rgba(255,255,255,0.07); color: var(--text); }
-  .new-chip-layer { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--muted); letter-spacing: 0.04em; }
+
 
   .changelog { margin-top: 32px; }
   .changelog h3 {
@@ -855,6 +862,33 @@
     </div>
   </div>
 
+  <!-- How a payment flows -->
+  <div class="hiw-trigger" id="hiw-trigger" onclick="toggleHiw()">
+    <span class="hiw-trigger-label">How a payment flows</span>
+    <span class="hiw-trigger-sub">From agent intent to settlement &mdash; 6 layers, one transaction</span>
+    <span class="hiw-caret">&#9662;</span>
+  </div>
+  <div class="hiw-body" id="hiw-body">
+    <p class="flow-narrative">An AI agent decides to pay for something. In under a second, its request passes through governance (is this spend allowed?), protocol (how does it route?), wallet (who is signing?), and settlement (where does value move?). Click any step to go deeper.</p>
+    <div class="flow">
+      <div class="flow-node" onclick="showFlowDetail(0)"><div class="fn-step">1 &middot; L5</div><div class="fn-name">Application</div><div class="fn-desc">Agent decides to buy &mdash; API call, compute, data, or a digital asset</div><div class="fn-examples"><span class="fn-ex">x402engine</span><span class="fn-ex">ElizaOS</span><span class="fn-ex">Akash</span></div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node" onclick="showFlowDetail(1)"><div class="fn-step">2 &middot; L4</div><div class="fn-name">Governance</div><div class="fn-desc">Spend policy checked &mdash; budget limits, allow-lists, approval thresholds</div><div class="fn-examples"><span class="fn-ex">ERC-8004</span><span class="fn-ex">Ramp Agent Cards</span><span class="fn-ex">Stripe SPTs</span></div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node" onclick="showFlowDetail(2)"><div class="fn-step">3 &middot; L3</div><div class="fn-name">Protocol</div><div class="fn-desc">Payment formatted and routed &mdash; x402 header, MPP message, or L402 invoice</div><div class="fn-examples"><span class="fn-ex">x402</span><span class="fn-ex">Tempo MPP</span><span class="fn-ex">L402</span></div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node" onclick="showFlowDetail(3)"><div class="fn-step">4 &middot; L2</div><div class="fn-name">Wallet</div><div class="fn-desc">Agent signs the transaction &mdash; embedded wallet, MPC key, or smart account</div><div class="fn-examples"><span class="fn-ex">AgentKit</span><span class="fn-ex">Turnkey</span><span class="fn-ex">Capsule</span></div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node" onclick="showFlowDetail(4)"><div class="fn-step">5 &middot; Routing</div><div class="fn-name">Routing</div><div class="fn-desc">Best chain and token selected &mdash; almost always Base, always USDC</div><div class="fn-examples"><span class="fn-ex">Circle CCTP</span><span class="fn-ex">LI.FI</span><span class="fn-ex">deBridge</span></div></div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-node" onclick="showFlowDetail(5)"><div class="fn-step">6 &middot; L1</div><div class="fn-name">Settlement</div><div class="fn-desc">Value moves &mdash; 98.6% USDC, Base or Ethereum, under 2 seconds</div><div class="fn-examples"><span class="fn-ex">USDC</span><span class="fn-ex">Base</span><span class="fn-ex">Ethereum</span></div></div>
+    </div>
+    <div class="flow-detail" id="flow-detail">
+      <div class="fd-title" id="fd-title"></div>
+      <div class="fd-body" id="fd-body"></div>
+    </div>
+  </div>
+
   <!-- Filter bar -->
   <div class="filter-bar">
     <div class="filter-search">
@@ -882,14 +916,6 @@
 
   <div class="split-layout">
   <div class="split-main">
-  <div class="new-strip" id="new-strip" style="display:none">
-    <div class="new-strip-hdr">
-      <span class="new-dot"></span>
-      <span class="new-strip-label">Recently Added</span>
-      <span class="new-strip-date" id="new-strip-date"></span>
-    </div>
-    <div class="new-chips" id="new-chips"></div>
-  </div>
 
   <div class="stack">
 
@@ -1294,9 +1320,6 @@
 
     document.getElementById('fc').textContent = shown === TOTAL ? TOTAL+' projects' : shown+' of '+TOTAL;
     document.getElementById('nr').style.display = shown === 0 ? 'block' : 'none';
-    // Hide recently-added strip when filtering
-    var ns = document.getElementById('new-strip');
-    if (ns && ns.querySelector('.new-chip')) ns.style.display = (activeF === 'all' && !q) ? '' : 'none';
   }
 
   document.getElementById('q').addEventListener('input', e=>{ q=e.target.value.toLowerCase().trim(); run(); });
@@ -1310,43 +1333,6 @@
   run();
 }());
 
-// Recently Added strip
-(function(){
-  var raw = document.getElementById('stack-data');
-  if (!raw) return;
-  var data;
-  try { data = JSON.parse(raw.textContent); } catch(e) { return; }
-  var DAYS = 45;
-  var cutoff = new Date(Date.now() - DAYS * 86400000);
-  var recent = [];
-  data.layers.forEach(function(l) {
-    l.projects.forEach(function(p) {
-      if (p.added && new Date(p.added) >= cutoff) recent.push(p);
-    });
-  });
-  if (!recent.length) return;
-  var strip = document.getElementById('new-strip');
-  var chipsEl = document.getElementById('new-chips');
-  var dateEl = document.getElementById('new-strip-date');
-  // Sort by added date desc, then name
-  recent.sort(function(a,b){ return (b.added||'').localeCompare(a.added||'') || a.name.localeCompare(b.name); });
-  // Date label
-  var d = new Date(recent[0].added);
-  dateEl.textContent = d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
-  // Build chips
-  recent.forEach(function(p) {
-    var a = document.createElement('a');
-    a.className = 'new-chip';
-    a.href = '/' + p.id;
-    var lbl = document.createElement('span');
-    lbl.className = 'new-chip-layer';
-    lbl.textContent = p.layer || '';
-    a.appendChild(lbl);
-    a.appendChild(document.createTextNode(p.name));
-    chipsEl.appendChild(a);
-  });
-  strip.style.display = '';
-}());
 
 // Mobile menu toggle
 (function(){
@@ -1423,6 +1409,27 @@ document.getElementById('sf').addEventListener('submit',async e=>{
 </script>
 
 <script>
+// How a payment flows
+var flowDetails = [
+  ['Application — where agent intent originates', 'The application is what the agent is trying to accomplish: scrape a page, run a compute job, query a data API. The payment is a means to that end. x402engine exposes 45 pay-per-call APIs. ElizaOS is the most-forked agent runtime with 17K GitHub stars. Akash sells GPU compute by the second. This is the most crowded layer because it is where revenue happens first.'],
+  ['Governance — the policy enforcer', 'Before an agent can spend, something has to say it can. Governance covers budget limits, per-merchant allow-lists, time-boxed spend windows, and human approval thresholds for large transactions. ERC-8004 is the first formal standard for agent spending policy. Ramp Agent Cards and Stripe SPTs implement it at the product level. No standard has won yet — whoever controls this layer controls the rules for autonomous commerce.'],
+  ['Protocol — how the payment is formatted and routed', 'The protocol is the message format that carries the payment request. x402 uses HTTP headers: a 402 Payment Required response includes everything an agent needs to pay in one round trip. MPP is a competing standard from Anthropic-adjacent teams. L402 is Lightning-native. The market will likely support two; the third will be absorbed or abandoned.'],
+  ['Wallet and Identity — who is signing', 'Every transaction needs a signer. For AI agents this means a non-custodial wallet the agent controls — an embedded wallet in the runtime, an MPC key, or a smart account with programmable rules. Coinbase AgentKit is the most integrated option with ElizaOS and x402 plugins. Turnkey and Capsule offer API-based signing. Fireblocks acquired Dynamic to move into this layer from the institutional side.'],
+  ['Routing — picking the path', 'Once signed, the transaction needs to reach its destination — which may be on a different chain or in a different token. Routing picks the cheapest, fastest path. In practice this almost always means Base settling in USDC. Circle CCTP handles native USDC burns across 17 chains. deBridge and LI.FI handle cross-chain hops when required.'],
+  ['Settlement — where value actually moves', '98.6% of tracked agent payment volume settles in USDC. That is not an accident — stablecoin settlement is programmable in ways card rails are not. You can embed policy, routing logic, and audit trails in the transaction itself. Base is the dominant chain because it is cheap enough for micropayments and fast enough for real-time interactions. The settlement layer is the most decided part of the stack: USDC won, Base is leading, and the fight has moved up to protocol and governance.']
+];
+function toggleHiw() {
+  document.getElementById('hiw-trigger').classList.toggle('open');
+  document.getElementById('hiw-body').classList.toggle('open');
+}
+function showFlowDetail(idx) {
+  document.querySelectorAll('.flow-node').forEach(function(n, i) { n.classList.toggle('fn-active', i === idx); });
+  document.getElementById('fd-title').textContent = flowDetails[idx][0];
+  document.getElementById('fd-body').textContent = flowDetails[idx][1];
+  document.getElementById('flow-detail').classList.add('open');
+}
+
+
 // Profile page navigation: click chip = profile, Ctrl/Cmd+click = external URL
 (function() {
   document.addEventListener('click', function(e) {
