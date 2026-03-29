@@ -223,11 +223,14 @@ var ctx = canvas.getContext('2d');
 var W, H;
 
 function resize(){
-  W = canvas.offsetWidth;
-  H = canvas.offsetHeight;
-  canvas.width = W * (window.devicePixelRatio||1);
-  canvas.height = H * (window.devicePixelRatio||1);
-  ctx.scale(window.devicePixelRatio||1, window.devicePixelRatio||1);
+  var dpr = window.devicePixelRatio || 1;
+  W = window.innerWidth;
+  H = window.innerHeight - 40;
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   initPositions();
 }
 
