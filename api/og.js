@@ -35,10 +35,11 @@ export default async function handler(req) {
   const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
   const layerName   = LAYER_LABELS[layer] || '';
 
-  // Load fonts
+  // Load fonts from own domain (edge can't use fs)
+  const base = new URL(req.url).origin;
   const [serifFont, monoFont] = await Promise.all([
-    fetch('https://fonts.gstatic.com/s/dmseriftext/v12/FeVQS0BTqb0h60ACL5la2bxii28wYQ.woff').then(r => r.arrayBuffer()),
-    fetch('https://fonts.gstatic.com/s/jetbrainsmono/v20/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjOVmNeaAL.woff').then(r => r.arrayBuffer()),
+    fetch(`${base}/public/fonts/DMSerifDisplay.ttf`).then(r => r.arrayBuffer()),
+    fetch(`${base}/public/fonts/JetBrainsMono-SemiBold.ttf`).then(r => r.arrayBuffer()),
   ]);
 
   const truncDesc = desc.length > 110 ? desc.slice(0, 107) + '...' : desc;
