@@ -53,6 +53,7 @@ syncFile(path.join(__dirname, '..', 'index.html'));
 syncFile(path.join(__dirname, '..', 'data.html'));
 syncFile(path.join(__dirname, '..', 'rankings.html'));
 syncFile(path.join(__dirname, '..', 'trace.html'));
+syncFile(path.join(__dirname, '..', 'graph.html'));
 
 // Also sync the stack-data block in index.html (used by the filter + recently-added strip)
 (function() {
