@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Payment Volume (APV) — agentpaymentsstack.com</title>
+<meta name="description" content="APV is the canonical on-chain metric for AI agent payment activity. Tracks USDC volume settled by x402 and Virtuals ACP on Base. Updated daily.">
+<meta property="og:title" content="Agent Payment Volume (APV)">
+<meta property="og:description" content="The TVL equivalent for AI agent payments. Live on-chain volume tracked across x402 and Virtuals ACP on Base.">
+<meta property="og:url" content="https://agentpaymentsstack.com/apv">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://agentpaymentsstack.com/apv">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --bg: #0d0c0b;
+    --text: #edebe7;
+    --secondary: #98948f;
+    --muted: #685e58;
+    --faint: #201e1b;
+    --acq: #d9613f;
+    --green: #3d9e5f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: 'ss01';
+  }
+
+  nav { display: flex; align-items: center; gap: 20px; padding: 14px 56px; border-bottom: 1px solid var(--faint); font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+  nav a { color: var(--secondary); text-decoration: none; }
+  nav a:hover { color: var(--text); }
+  nav a.home { color: var(--text); font-weight: 600; margin-right: 8px; }
+
+  .page { max-width: 760px; margin: 0 auto; padding: 56px 40px 80px; }
+
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+  .live-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); animation: livepulse 2s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes livepulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  h1 { font-size: 42px; font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 12px; }
+  .hero-sub { font-size: 15px; color: var(--secondary); line-height: 1.6; max-width: 580px; margin-bottom: 40px; }
+
+  .apv-hero { background: var(--faint); border: 1px solid #2a2825; border-radius: 8px; padding: 32px 36px; margin-bottom: 40px; display: flex; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+  .apv-hero-main { flex: 1; min-width: 200px; }
+  .apv-hero-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 8px; }
+  .apv-hero-val { font-family: 'JetBrains Mono', monospace; font-size: 52px; font-weight: 600; letter-spacing: -2px; color: #e8ebe4; line-height: 1; }
+  .apv-hero-val.loading { font-size: 28px; color: var(--muted); }
+  .apv-hero-meta { font-size: 13px; color: var(--muted); margin-top: 10px; }
+  .apv-hero-side { display: flex; flex-direction: column; gap: 12px; padding-bottom: 4px; }
+  .apv-split { text-align: right; }
+  .apv-split-val { font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 600; color: var(--text); }
+  .apv-split-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 2px; }
+
+  hr { border: none; border-top: 1px solid var(--faint); margin: 40px 0; }
+  h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 12px; }
+  p { font-size: 14px; color: var(--secondary); line-height: 1.7; margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  .source-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+  .source-table th { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--faint); }
+  .source-table td { padding: 10px 12px; border-bottom: 1px solid var(--faint); color: var(--secondary); vertical-align: top; }
+  .source-table tr:last-child td { border-bottom: none; }
+  .source-table td:first-child { color: var(--text); font-weight: 500; white-space: nowrap; }
+  .mono { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .tag-live { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 6px; border-radius: 3px; background: rgba(61,158,95,0.12); color: var(--green); }
+
+  .weekly-chart { margin: 20px 0; }
+  .chart-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .chart-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); width: 80px; flex-shrink: 0; }
+  .chart-bar-wrap { flex: 1; background: var(--faint); border-radius: 2px; height: 8px; overflow: hidden; }
+  .chart-bar { height: 100%; background: #3d9e5f; border-radius: 2px; }
+  .chart-val { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--secondary); width: 72px; text-align: right; flex-shrink: 0; }
+
+  .not-included { font-size: 14px; color: var(--secondary); line-height: 1.8; padding-left: 20px; margin-bottom: 14px; }
+  .not-included li { margin-bottom: 4px; }
+  .not-included strong { color: var(--text); }
+
+  .footer { margin-top: 60px; padding-top: 24px; border-top: 1px solid var(--faint); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .footer-note { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); }
+  .footer-links { display: flex; gap: 16px; }
+  .footer-links a { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); text-decoration: none; }
+  .footer-links a:hover { color: var(--secondary); }
+
+  @media (max-width: 600px) {
+    nav { padding: 14px 20px; gap: 14px; }
+    .page { padding: 36px 20px 60px; }
+    h1 { font-size: 30px; }
+    .apv-hero { padding: 24px 20px; }
+    .apv-hero-val { font-size: 38px; }
+    .apv-hero-side { flex-direction: row; flex-wrap: wrap; }
+    .apv-split { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="home">Agent Payments Stack</a>
+  <a href="/compare">Compare</a>
+  <a href="/acquisitions">M&amp;A</a>
+  <a href="/graph">Graph</a>
+  <a href="/history">History</a>
+</nav>
+
+<div class="page">
+
+  <div class="eyebrow"><span class="live-dot"></span>Live metric</div>
+  <h1>Agent Payment Volume</h1>
+  <p class="hero-sub">APV is the canonical on-chain metric for AI agent payment activity — the TVL equivalent for agentic commerce. Tracks USDC volume settled by AI agent payment protocols over a rolling 30-day window.</p>
+
+  <div class="apv-hero">
+    <div class="apv-hero-main">
+      <div class="apv-hero-label">APV · 30-day rolling</div>
+      <div class="apv-hero-val loading" id="apv-total">—</div>
+      <div class="apv-hero-meta" id="apv-meta">loading...</div>
+    </div>
+    <div class="apv-hero-side">
+      <div class="apv-split">
+        <div class="apv-split-val" id="apv-x402">—</div>
+        <div class="apv-split-label">x402</div>
+      </div>
+      <div class="apv-split">
+        <div class="apv-split-val" id="apv-acp">—</div>
+        <div class="apv-split-label">Virtuals ACP</div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <h2>Weekly breakdown</h2>
+  <p>x402 volume by week, last 4 weeks. ACP v2 launched March 26 — prior weeks show x402 only.</p>
+  <div class="weekly-chart" id="weekly-chart">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted);">loading...</div>
+  </div>
+
+  <hr>
+
+  <h2>What is APV?</h2>
+  <p>APV measures the total value of payments settled by AI agents through on-chain payment protocols in a given period. It is the closest equivalent to DeFi's Total Value Locked (TVL) for the emerging agent payments layer — a single number that captures the real economic activity flowing through agent-native payment infrastructure.</p>
+  <p>APV is not a price or market cap metric. It tracks actual payment flow: USDC moving between agents and services in exchange for compute, data, and work completed. A higher APV means more agents are transacting, more services are being consumed, and the machine-to-machine economy is growing.</p>
+
+  <hr>
+
+  <h2>Sources</h2>
+  <p>APV currently aggregates two protocols with meaningful on-chain USDC volume:</p>
+
+  <table class="source-table">
+    <thead>
+      <tr>
+        <th>Protocol</th>
+        <th>Contract</th>
+        <th>Chain</th>
+        <th>Data source</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>x402</td>
+        <td><span class="mono">0x402085c2...20001</span></td>
+        <td>Base</td>
+        <td>Dune Analytics (query 5236154)</td>
+        <td><span class="tag-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Virtuals ACP v1</td>
+        <td><span class="mono">0x6a1FE26D...0A4A</span></td>
+        <td>Base</td>
+        <td>Blockscout token transfers</td>
+        <td><span class="tag-live">live</span></td>
+      </tr>
+      <tr>
+        <td>Virtuals ACP v2</td>
+        <td><span class="mono">0xa6C9BA86...9df0</span></td>
+        <td>Base</td>
+        <td>Blockscout token transfers</td>
+        <td><span class="tag-live">live</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>We track USDC inflows only — payments entering the protocol — to avoid double-counting escrow settlement. x402 volume comes from the Dune weekly aggregation query; ACP volume is computed by paginating USDC token transfers to the v1 and v2 contract addresses.</p>
+
+  <hr>
+
+  <h2>What is not included (yet)</h2>
+  <p>The following protocols have on-chain components but are not yet included in APV:</p>
+  <ul class="not-included">
+    <li><strong>Tempo MPP</strong> — launched March 18, 2026. Too new for meaningful 30d data.</li>
+    <li><strong>Superfluid</strong> — streaming payments on Base/Optimism. No native agent tagging; requires address allowlist.</li>
+    <li><strong>L402 / Aperture</strong> — Lightning Network only, no EVM contracts.</li>
+    <li><strong>Nevermined</strong> — per-publisher contract model, no central index.</li>
+  </ul>
+
+  <hr>
+
+  <h2>Update cadence</h2>
+  <p>APV data is refreshed daily at 6am PT via a scheduled GitHub Actions job. The figure shown reflects the most recent daily snapshot. The 30-day window rolls forward each day.</p>
+
+  <div class="footer">
+    <div class="footer-note" id="footer-updated">Last updated: loading...</div>
+    <div class="footer-links">
+      <a href="/">← Back to stack</a>
+      <a href="https://github.com/jordanlyall/agent-payments-stack" target="_blank">GitHub ↗</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  function fmtUSD(n) {
+    if (n >= 1e6) return '$' + (n / 1e6).toFixed(2) + 'M';
+    if (n >= 1e3) return '$' + (n / 1e3).toFixed(1) + 'K';
+    return '$' + n.toFixed(2);
+  }
+
+  function fmtAge(minutes) {
+    if (minutes === null) return 'just now';
+    if (minutes < 60) return minutes + 'm ago';
+    if (minutes < 1440) return Math.floor(minutes / 60) + 'h ago';
+    return Math.floor(minutes / 1440) + 'd ago';
+  }
+
+  function buildWeeklyChart(weekly) {
+    var chart = document.getElementById('weekly-chart');
+    if (!weekly || !weekly.length) return;
+    var maxVol = 0;
+    for (var i = 0; i < weekly.length; i++) {
+      if (weekly[i].volume_usd > maxVol) maxVol = weekly[i].volume_usd;
+    }
+    while (chart.firstChild) chart.removeChild(chart.firstChild);
+    for (var j = 0; j < weekly.length; j++) {
+      var w = weekly[j];
+      var pct = maxVol > 0 ? (w.volume_usd / maxVol * 100).toFixed(1) : 0;
+      var row = document.createElement('div');
+      row.className = 'chart-row';
+
+      var lbl = document.createElement('div');
+      lbl.className = 'chart-label';
+      lbl.textContent = w.week.slice(5);
+
+      var wrap = document.createElement('div');
+      wrap.className = 'chart-bar-wrap';
+      var bar = document.createElement('div');
+      bar.className = 'chart-bar';
+      bar.style.width = pct + '%';
+      wrap.appendChild(bar);
+
+      var val = document.createElement('div');
+      val.className = 'chart-val';
+      val.textContent = fmtUSD(w.volume_usd);
+
+      row.appendChild(lbl);
+      row.appendChild(wrap);
+      row.appendChild(val);
+      chart.appendChild(row);
+    }
+  }
+
+  fetch('/api/live')
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      var apv = d.apv;
+      var x402 = d.x402;
+      var acp = d.acp;
+
+      var totalEl = document.getElementById('apv-total');
+      if (apv && apv.volume_30d_usd !== null) {
+        totalEl.textContent = fmtUSD(apv.volume_30d_usd);
+        totalEl.classList.remove('loading');
+      }
+
+      var metaEl = document.getElementById('apv-meta');
+      var txStr = (apv && apv.tx_count_30d) ? apv.tx_count_30d.toLocaleString() + ' transactions · ' : '';
+      metaEl.textContent = txStr + '30-day rolling · updated ' + fmtAge(d.cache_age_minutes);
+
+      document.getElementById('apv-x402').textContent =
+        (x402 && x402.volume_30d_usd !== null) ? fmtUSD(x402.volume_30d_usd) : '—';
+
+      document.getElementById('apv-acp').textContent =
+        (acp && acp.volume_30d_usd !== null) ? fmtUSD(acp.volume_30d_usd) : '—';
+
+      if (x402 && x402.weekly) buildWeeklyChart(x402.weekly);
+
+      if (d.updated_at) {
+        var dt = new Date(d.updated_at);
+        document.getElementById('footer-updated').textContent =
+          'Last updated: ' + dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      }
+    })
+    .catch(function() {
+      document.getElementById('apv-total').textContent = '—';
+      document.getElementById('apv-meta').textContent = 'data unavailable';
+    });
+}());
+</script>
+</body>
+</html>

@@ -79,8 +79,11 @@
   .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
   .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 18px; }
   .hdr-stat { background: var(--bg); padding: 12px 20px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
+  .hdr-stat--apv { flex: 2; padding: 16px 24px; border-right: 1px solid var(--faint); }
   .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
   .hdr-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); line-height: 1; }
+  .hdr-stat--apv .hdr-stat-val { font-size: 32px; letter-spacing: -1px; color: #e8ebe4; }
+  .hdr-stat--apv .hdr-stat-val.loading { font-size: 20px; }
   .hdr-stat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
   .hdr-stat-link { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--acq); opacity: 0.8; margin-top: 3px; text-decoration: none; display: block; }
   .hdr-stat-link:hover { opacity: 1; }
@@ -793,6 +796,7 @@
     .deck { font-size: 13px; max-width: 100%; }
     .hdr-strip { flex-wrap: wrap; }
     .hdr-stat { flex: 1; min-width: 140px; }
+    .hdr-stat--apv { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--faint); }
     .split-layout { grid-template-columns: 1fr; }
     .split-main { border-right: none; padding-right: 0; }
     .split-rail { display: none; }
@@ -883,6 +887,12 @@
     <h1>The canonical map of AI agent payment rails</h1>
     <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
     <div class="hdr-strip">
+      <div class="hdr-stat hdr-stat--apv">
+        <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume · 30d</div>
+        <div class="hdr-stat-val loading" id="live-vol">—</div>
+        <div class="hdr-stat-sub" id="live-sub">fetching...</div>
+        <a href="/apv" class="hdr-stat-link">Methodology + breakdown →</a>
+      </div>
       <div class="hdr-stat">
         <div class="hdr-stat-label">Tracked volume · 9mo</div>
         <div class="hdr-stat-val">$43M</div>
@@ -898,11 +908,6 @@
         <div class="hdr-stat-label">Projects tracked</div>
         <div class="hdr-stat-val"><span id="hero-count">162</span></div>
         <div class="hdr-stat-sub">6 layers · 98.6% USDC</div>
-      </div>
-      <div class="hdr-stat">
-        <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume</div>
-        <div class="hdr-stat-val loading" id="live-vol">—</div>
-        <div class="hdr-stat-sub" id="live-sub">fetching...</div>
       </div>
     </div>
   </div>
