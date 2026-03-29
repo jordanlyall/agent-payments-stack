@@ -1,7 +1,7 @@
 /**
- * /api/og — Dynamic OG image generator for project pages
- * Edge runtime. Accepts query params: name, layer, status, desc, slug
- * Returns a 1200x630 PNG styled to match the APS aesthetic.
+ * /api/og — Dynamic OG image generator
+ * Matches the APS project page aesthetic exactly.
+ * Edge runtime. Params: name, layer, status, desc
  */
 
 import { ImageResponse } from '@vercel/og';
@@ -9,9 +9,9 @@ import { ImageResponse } from '@vercel/og';
 export const config = { runtime: 'edge' };
 
 const STATUS_COLOR = {
-  live:      '#4ade80',
+  live:      '#3d9e5f',
   early:     '#c99e32',
-  announced: '#685e58',
+  announced: '#524e49',
   acquired:  '#d9613f',
 };
 
@@ -24,7 +24,7 @@ const LAYER_LABELS = {
   L5: 'Application',
 };
 
-export default function handler(req) {
+export default async function handler(req) {
   const { searchParams } = new URL(req.url);
   const name   = searchParams.get('name')   || 'Unknown Project';
   const layer  = searchParams.get('layer')  || '';
@@ -32,8 +32,17 @@ export default function handler(req) {
   const desc   = searchParams.get('desc')   || '';
 
   const statusColor = STATUS_COLOR[status] || STATUS_COLOR.announced;
-  const layerLabel  = layer ? `${layer} · ${LAYER_LABELS[layer] || ''}` : '';
   const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
+  const layerName   = LAYER_LABELS[layer] || '';
+
+  // Load fonts
+  const [serifFont, monoFont] = await Promise.all([
+    fetch('https://fonts.gstatic.com/s/dmseriftext/v12/FeVQS0BTqb0h60ACL5la2bxii28wYQ.woff').then(r => r.arrayBuffer()),
+    fetch('https://fonts.gstatic.com/s/jetbrainsmono/v20/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKxjOVmNeaAL.woff').then(r => r.arrayBuffer()),
+  ]);
+
+  const truncDesc = desc.length > 110 ? desc.slice(0, 107) + '...' : desc;
+  const fontSize  = name.length > 22 ? 72 : name.length > 14 ? 86 : 100;
 
   return new ImageResponse(
     {
@@ -46,38 +55,29 @@ export default function handler(req) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          padding: '72px 80px',
-          fontFamily: 'monospace',
+          padding: '64px 80px 56px',
           position: 'relative',
         },
         children: [
-          // Top: eyebrow + status
+
+          // Top row: APS wordmark + status badge
           {
             type: 'div',
             props: {
-              style: { display: 'flex', alignItems: 'center', gap: '16px' },
+              style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
               children: [
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '13px',
-                      fontWeight: 700,
-                      letterSpacing: '0.14em',
+                      fontFamily: '"JetBrains Mono"',
+                      fontSize: '11px',
+                      fontWeight: 600,
+                      letterSpacing: '0.16em',
                       textTransform: 'uppercase',
                       color: '#685e58',
                     },
-                    children: 'AGENT PAYMENTS STACK',
-                  },
-                },
-                {
-                  type: 'div',
-                  props: {
-                    style: {
-                      width: '1px',
-                      height: '14px',
-                      background: '#201e1b',
-                    },
+                    children: 'Agent Payments Stack',
                   },
                 },
                 {
@@ -86,17 +86,22 @@ export default function handler(req) {
                     style: {
                       display: 'flex',
                       alignItems: 'center',
-                      gap: '6px',
+                      gap: '7px',
+                      background: '#201e1b',
+                      border: `1px solid ${statusColor}33`,
+                      borderRadius: '4px',
+                      padding: '5px 12px',
                     },
                     children: [
                       {
                         type: 'div',
                         props: {
                           style: {
-                            width: '7px',
-                            height: '7px',
+                            width: '6px',
+                            height: '6px',
                             borderRadius: '50%',
                             background: statusColor,
+                            flexShrink: 0,
                           },
                         },
                       },
@@ -104,7 +109,8 @@ export default function handler(req) {
                         type: 'div',
                         props: {
                           style: {
-                            fontSize: '13px',
+                            fontFamily: '"JetBrains Mono"',
+                            fontSize: '11px',
                             fontWeight: 600,
                             letterSpacing: '0.1em',
                             textTransform: 'uppercase',
@@ -124,32 +130,34 @@ export default function handler(req) {
           {
             type: 'div',
             props: {
-              style: { display: 'flex', flexDirection: 'column', gap: '18px' },
+              style: { display: 'flex', flexDirection: 'column', gap: '16px' },
               children: [
                 {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: name.length > 20 ? '64px' : '80px',
-                      fontWeight: 700,
-                      letterSpacing: '-1px',
+                      fontFamily: '"DM Serif Display"',
+                      fontSize: `${fontSize}px`,
+                      fontWeight: 400,
+                      letterSpacing: '-1.5px',
                       color: '#edebe7',
                       lineHeight: 1.0,
                     },
                     children: name,
                   },
                 },
-                desc
+                truncDesc
                   ? {
                       type: 'div',
                       props: {
                         style: {
-                          fontSize: '22px',
+                          fontSize: '20px',
                           color: '#98948f',
-                          lineHeight: 1.45,
-                          maxWidth: '860px',
+                          lineHeight: 1.5,
+                          maxWidth: '820px',
+                          fontFamily: 'sans-serif',
                         },
-                        children: desc.length > 120 ? desc.slice(0, 117) + '...' : desc,
+                        children: truncDesc,
                       },
                     }
                   : null,
@@ -157,31 +165,36 @@ export default function handler(req) {
             },
           },
 
-          // Bottom: layer badge + URL
+          // Bottom: layer strip + URL
           {
             type: 'div',
             props: {
-              style: {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              },
+              style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
               children: [
-                layerLabel
+                layer
                   ? {
                       type: 'div',
                       props: {
-                        style: {
-                          fontSize: '13px',
-                          fontWeight: 600,
-                          letterSpacing: '0.1em',
-                          textTransform: 'uppercase',
-                          color: '#685e58',
-                          background: '#201e1b',
-                          padding: '6px 14px',
-                          borderRadius: '4px',
-                        },
-                        children: layerLabel,
+                        style: { display: 'flex', alignItems: 'stretch' },
+                        children: ['L0','L1','L2','L3','L4','L5'].map((l) => ({
+                          type: 'div',
+                          props: {
+                            style: {
+                              fontFamily: '"JetBrains Mono"',
+                              fontSize: '9px',
+                              fontWeight: 600,
+                              textTransform: 'uppercase',
+                              letterSpacing: '0.05em',
+                              color: l === layer ? '#edebe7' : '#685e58',
+                              background: l === layer ? 'rgba(255,255,255,0.06)' : 'transparent',
+                              border: `1px solid ${l === layer ? 'rgba(255,255,255,0.14)' : '#201e1b'}`,
+                              borderRight: l === 'L5' ? `1px solid ${l === layer ? 'rgba(255,255,255,0.14)' : '#201e1b'}` : 'none',
+                              padding: '5px 10px',
+                              whiteSpace: 'nowrap',
+                            },
+                            children: l === layer ? `${l} · ${layerName}` : l,
+                          },
+                        })),
                       },
                     }
                   : { type: 'div', props: {} },
@@ -189,7 +202,8 @@ export default function handler(req) {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '14px',
+                      fontFamily: '"JetBrains Mono"',
+                      fontSize: '12px',
                       color: '#524e49',
                       letterSpacing: '0.04em',
                     },
@@ -199,9 +213,17 @@ export default function handler(req) {
               ],
             },
           },
+
         ],
       },
     },
-    { width: 1200, height: 630 }
+    {
+      width: 1200,
+      height: 630,
+      fonts: [
+        { name: 'DM Serif Display', data: serifFont, weight: 400, style: 'normal' },
+        { name: 'JetBrains Mono',   data: monoFont,  weight: 600, style: 'normal' },
+      ],
+    }
   );
 }
