@@ -240,8 +240,8 @@ function initPositions(){
     if (n.type==='layer'){
       n.x = W/2; n.y = LAYERS[n.id].yf * H;
     } else {
-      n.x = W/2 + (Math.random()-0.5)*200;
-      n.y = (LAYERS[n.layer]||{yf:0.5}).yf * H + (Math.random()-0.5)*80;
+      n.x = W/2 + (Math.random()-0.5)*400;
+      n.y = (LAYERS[n.layer]||{yf:0.5}).yf * H + (Math.random()-0.5)*120;
     }
     n.vx=0; n.vy=0;
   });
@@ -288,8 +288,8 @@ function tick(){
   links.forEach(function(l){
     var dx = l.t.x - l.s.x, dy = l.t.y - l.s.y;
     var dist = Math.sqrt(dx*dx+dy*dy) || 1;
-    var rest = l.type==='layer' ? 100 : 160;
-    var k = l.type==='layer' ? 0.008 : 0.018;
+    var rest = l.type==='layer' ? 130 : 180;
+    var k = l.type==='layer' ? 0.006 : 0.016;
     var f = (dist - rest) * k * alpha;
     var fx = f*dx/dist, fy = f*dy/dist;
     if (!l.s.pinned){ l.s.vx+=fx; l.s.vy+=fy; }
@@ -303,8 +303,8 @@ function tick(){
       var dx=b.x-a.x, dy=b.y-a.y;
       var dist2=dx*dx+dy*dy || 1;
       var dist=Math.sqrt(dist2);
-      if (dist > 300) continue;
-      var str = (a.type==='layer'?4000:400) + (b.type==='layer'?4000:400);
+      if (dist > 420) continue;
+      var str = (a.type==='layer'?5000:700) + (b.type==='layer'?5000:700);
       var f = str/dist2 * alpha;
       var fx=f*dx/dist, fy=f*dy/dist;
       if (!a.pinned){ a.vx-=fx; a.vy-=fy; }
@@ -315,8 +315,8 @@ function tick(){
   // Layer gravity (Y) + center gravity (X)
   nodes.forEach(function(n){
     var ty = (LAYERS[n.layer||n.id]||{yf:0.5}).yf * H;
-    n.vy += (ty - n.y) * (n.type==='layer' ? 0.08 : 0.015) * alpha;
-    n.vx += (W/2 - n.x) * (n.type==='layer' ? 0.04 : 0.002) * alpha;
+    n.vy += (ty - n.y) * (n.type==='layer' ? 0.12 : 0.018) * alpha;
+    n.vx += (W/2 - n.x) * (n.type==='layer' ? 0.05 : 0.003) * alpha;
   });
 
   // Apply + damp
@@ -442,7 +442,7 @@ function loop(){
 }
 loop();
 
-// Update stats when stable
+// Update stats + auto-center when stable
 var statsUpdated = false;
 function checkStats(){
   if (!statsUpdated && alpha < 0.01){
@@ -451,6 +451,15 @@ function checkStats(){
     document.getElementById('stats').textContent =
       nodes.filter(function(n){ return n.type==='project'; }).length+' projects · '+
       nrel+' connections · hover to highlight · click to explore';
+    // Auto-center: find bounds of all nodes and pan so the graph is centered
+    var pts = nodes.filter(function(n){ return !hiddenLayers.has(n.layer||n.id); });
+    if (pts.length){
+      var minX=pts[0].x, maxX=pts[0].x, minY=pts[0].y, maxY=pts[0].y;
+      pts.forEach(function(n){ minX=Math.min(minX,n.x); maxX=Math.max(maxX,n.x); minY=Math.min(minY,n.y); maxY=Math.max(maxY,n.y); });
+      var cx=(minX+maxX)/2, cy=(minY+maxY)/2;
+      pan.x = W/2 - cx*zoom;
+      pan.y = H/2 - cy*zoom;
+    }
   }
 }
 
