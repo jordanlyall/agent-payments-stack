@@ -73,7 +73,7 @@
   .page { max-width: 100%; padding: 48px 56px 40px; }
 
   /* Header */
-  .hdr { margin-bottom: 24px; }
+  .hdr { margin-bottom: 0; }
   .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
   h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.2; }
   .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
@@ -103,6 +103,11 @@
   .rail-module:last-child { border-bottom: none; }
   .rail-mod-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
   .rail-live-dot { width: 6px; height: 6px; border-radius: 50%; background: #3d9e5f; flex-shrink: 0; }
+  .rail-sub-form { display: flex; gap: 6px; }
+  .rail-sub-form input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 6px 10px; font-size: 12px; color: var(--text); font-family: 'Space Grotesk', sans-serif; outline: none; min-width: 0; }
+  .rail-sub-form input::placeholder { color: var(--muted); }
+  .rail-sub-form button { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 4px; padding: 6px 12px; font-size: 11px; color: var(--text); cursor: pointer; white-space: nowrap; font-family: 'Space Grotesk', sans-serif; }
+  .rail-sub-form button:hover { background: rgba(255,255,255,0.13); }
   .rail-feed-item { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .rail-feed-item:last-child { border-bottom: none; }
   .rail-feed-meta { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
@@ -469,7 +474,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin: 10px 0 6px;
+    margin: 16px 0 12px;
   }
   .filter-search {
     width: 280px;
@@ -493,6 +498,10 @@
     color: var(--text);
     font-size: 12.5px;
     font-family: inherit;
+    line-height: 1;
+    padding: 0;
+    margin: 0;
+    height: auto;
   }
   .filter-search input::placeholder { color: var(--muted); }
   .filter-btns { display: flex; gap: 4px; flex-shrink: 0; }
@@ -500,7 +509,7 @@
     background: transparent;
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 100px;
-    padding: 4px 12px;
+    padding: 6px 12px;
     font-size: 11px;
     font-weight: 500;
     color: var(--muted);
@@ -509,6 +518,7 @@
     transition: all 0.15s;
     white-space: nowrap;
     letter-spacing: 0.01em;
+    line-height: 1;
   }
   .fb:hover { color: var(--secondary); border-color: rgba(255,255,255,0.15); }
   .fb.on { color: var(--text); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.07); }
@@ -864,33 +874,6 @@
     </div>
   </div>
 
-  <!-- How a payment flows -->
-  <div class="hiw-trigger" id="hiw-trigger" onclick="toggleHiw()">
-    <span class="hiw-trigger-label">How a payment flows</span>
-    <span class="hiw-trigger-sub">From agent intent to settlement &mdash; 6 layers, one transaction</span>
-    <span class="hiw-caret">&#9662;</span>
-  </div>
-  <div class="hiw-body" id="hiw-body">
-    <p class="flow-narrative">An AI agent decides to pay for something. In under a second, its request passes through governance (is this spend allowed?), protocol (how does it route?), wallet (who is signing?), and settlement (where does value move?). Click any step to go deeper.</p>
-    <div class="flow">
-      <div class="flow-node" onclick="showFlowDetail(0)"><div class="fn-step">1 &middot; L5</div><div class="fn-name">Application</div><div class="fn-desc">Agent decides to buy &mdash; API call, compute, data, or a digital asset</div><div class="fn-examples"><span class="fn-ex">x402engine</span><span class="fn-ex">ElizaOS</span><span class="fn-ex">Akash</span></div></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-node" onclick="showFlowDetail(1)"><div class="fn-step">2 &middot; L4</div><div class="fn-name">Governance</div><div class="fn-desc">Spend policy checked &mdash; budget limits, allow-lists, approval thresholds</div><div class="fn-examples"><span class="fn-ex">ERC-8004</span><span class="fn-ex">Ramp Agent Cards</span><span class="fn-ex">Stripe SPTs</span></div></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-node" onclick="showFlowDetail(2)"><div class="fn-step">3 &middot; L3</div><div class="fn-name">Protocol</div><div class="fn-desc">Payment formatted and routed &mdash; x402 header, MPP message, or L402 invoice</div><div class="fn-examples"><span class="fn-ex">x402</span><span class="fn-ex">Tempo MPP</span><span class="fn-ex">L402</span></div></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-node" onclick="showFlowDetail(3)"><div class="fn-step">4 &middot; L2</div><div class="fn-name">Wallet</div><div class="fn-desc">Agent signs the transaction &mdash; embedded wallet, MPC key, or smart account</div><div class="fn-examples"><span class="fn-ex">AgentKit</span><span class="fn-ex">Turnkey</span><span class="fn-ex">Capsule</span></div></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-node" onclick="showFlowDetail(4)"><div class="fn-step">5 &middot; Routing</div><div class="fn-name">Routing</div><div class="fn-desc">Best chain and token selected &mdash; almost always Base, always USDC</div><div class="fn-examples"><span class="fn-ex">Circle CCTP</span><span class="fn-ex">LI.FI</span><span class="fn-ex">deBridge</span></div></div>
-      <div class="flow-arrow">&rarr;</div>
-      <div class="flow-node" onclick="showFlowDetail(5)"><div class="fn-step">6 &middot; L1</div><div class="fn-name">Settlement</div><div class="fn-desc">Value moves &mdash; 98.6% USDC, Base or Ethereum, under 2 seconds</div><div class="fn-examples"><span class="fn-ex">USDC</span><span class="fn-ex">Base</span><span class="fn-ex">Ethereum</span></div></div>
-    </div>
-    <div class="flow-detail" id="flow-detail">
-      <div class="fd-title" id="fd-title"></div>
-      <div class="fd-body" id="fd-body"></div>
-    </div>
-  </div>
-
   <!-- Filter bar -->
   <div class="filter-bar">
     <div class="filter-search">
@@ -905,14 +888,6 @@
       <button class="fb" data-f="acq">Acquired</button>
     </div>
     <span class="filter-count" id="fc">134 projects</span>
-    <div class="filter-sub">
-      <span class="filter-sub-label">Weekly updates</span>
-      <form class="hero-sub-row" id="nsf">
-        <input type="email" id="nse" placeholder="your@email.com" required>
-        <button type="submit" id="nsb">Subscribe</button>
-      </form>
-      <span id="sub-msg" style="display:none;font-size:11px;color:var(--muted)"></span>
-    </div>
   </div>
   <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
 
@@ -1259,6 +1234,34 @@
       html += '</div>';
     }
     container.innerHTML = html;
+
+    // Append subscribe module via DOM (no innerHTML)
+    var subMod = document.createElement('div');
+    subMod.className = 'rail-module';
+    var subLabel = document.createElement('div');
+    subLabel.className = 'rail-mod-label';
+    subLabel.textContent = 'Weekly updates';
+    var subForm = document.createElement('form');
+    subForm.id = 'nsf';
+    subForm.className = 'rail-sub-form';
+    var subInput = document.createElement('input');
+    subInput.type = 'email';
+    subInput.id = 'nse';
+    subInput.placeholder = 'your@email.com';
+    subInput.required = true;
+    var subBtn = document.createElement('button');
+    subBtn.type = 'submit';
+    subBtn.id = 'nsb';
+    subBtn.textContent = 'Subscribe';
+    var subMsg = document.createElement('span');
+    subMsg.id = 'sub-msg';
+    subMsg.style.cssText = 'display:none;font-size:11px;color:var(--muted)';
+    subForm.appendChild(subInput);
+    subForm.appendChild(subBtn);
+    subMod.appendChild(subLabel);
+    subMod.appendChild(subForm);
+    subMod.appendChild(subMsg);
+    container.appendChild(subMod);
   }());
   </script>
 
