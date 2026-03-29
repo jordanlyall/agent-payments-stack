@@ -1,0 +1,698 @@
+{
+  "olas": {
+    "name": "Olas",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Olas addresses a structural gap in autonomous agent design by introducing co-ownership and economic incentives at the protocol level rather than leaving tokenomics to individual builders—agents stake and earn directly rather than existing purely as service abstractions. This positions it as infrastructure for agent incentive alignment, which matters because payment flows in a multi-agent system require coordination mechanisms that wallets and settlement layers alone cannot provide. The protocol's three-year runway and multi-chain deployment suggest real developer adoption, though its success hinges entirely on whether co-ownership models actually drive better agent behavior versus simply adding governance overhead without solving the core problem of agent-to-agent economic coordination."
+  },
+  "botto": {
+    "name": "Botto",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Botto demonstrates that autonomous agents can execute full economic loops—creation, pricing, sale, and governance—entirely on-chain, though it remains a proof-of-concept rather than a sustainable revenue model at scale. Its reliance on community token voting for creative direction creates a coordination mechanism that's novel but untested against longer-term incentive misalignment, where token holders may optimize for liquidity rather than artistic merit. The project's durability as a live system since 2021 is notable given the graveyard of similar DAO experiments, but $1.67M seed funding and artist-facing positioning suggests limited institutional validation of the economic thesis. Botto's real value may be as a reference architecture for payment flows in autonomous agents rather than as a standalone consumer product."
+  },
+  "axiom": {
+    "name": "Axiom",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Axiom occupies the critical but crowded application layer for on-chain trading agents, betting that Solana's throughput and cost structure can sustain a developer-facing platform for DeFi strategy automation at scale. The project's viability hinges on whether it can differentiate beyond execution speed—most competitors offer similar primitives, and the real moat lies in either proprietary strategy IP, superior MEV handling, or developer network effects that remain unproven at launch. Worth monitoring for whether it becomes infrastructure (acquired for its execution layer) or gets absorbed into larger agent ecosystems; the 2024 launch timing puts it in the middle of a competitive cohort with unclear consolidation patterns."
+  },
+  "theoriq": {
+    "name": "Theoriq",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Theoriq attempts to solve agent discoverability and payment routing by treating agents as composable, hireable services on Ethereum—a reasonable layer-5 abstraction, but one that depends entirely on whether a meaningful market for agent-to-agent payments actually emerges at scale. The early launch (2023) and B2B positioning suggest the team recognized the timing problem: most agents today still operate in closed loops, making a general marketplace infrastructure premature. Worth monitoring for whether it can bootstrap liquidity between heterogeneous agents or devolves into a ghost town of prototype integrations, but the absence of visible traction or documentation raises questions about whether the market dynamics they're betting on have materialized."
+  },
+  "giza-arma": {
+    "name": "Giza ARMA",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Giza ARMA occupies a rare position: an application-layer agent that treats inter-agent settlement as a first-class concern rather than bolting it on after the fact, using verifiable ML to justify yield decisions that directly trigger payments between autonomous systems. Its choice to operate on Base (high throughput, low friction) rather than pursuing its own L1 credibility suggests a pragmatic bet that agent economics scale through volume and composability, not chain prestige. The open-source model and B2B positioning indicate confidence that the real moat is in the ML-to-execution loop, not gatekeeping—though this also means competitive replication is straightforward if the yield edge degrades. Worth monitoring as a test case for whether agent-native payment flows generate meaningfully different DeFi outcomes than human-optimized strategies, or whether they simply automate arbitrage until spreads vanish."
+  },
+  "almanak": {
+    "name": "Almanak",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Almanak operates at the application layer where agent payments actually matter—executing autonomous trading strategies that require atomic settlement, MEV handling, and continuous fund management across chains. By focusing on DeFi strategy execution rather than general-purpose agents, it's positioned to surface genuine payment infrastructure gaps (cross-chain routing, sub-second settlement, keeper economics) that broader agent platforms can ignore. The backtesting-to-deployment pipeline is notable because it creates a closed loop where payment costs directly impact strategy profitability, making infrastructure choices visible rather than abstracted. Early success here depends less on product adoption and more on whether DeFi volatility and market structure create enough recurring demand to justify the complexity of multi-chain payment orchestration."
+  },
+  "brahma-fi": {
+    "name": "Brahma.fi",
+    "layer": "L5",
+    "status": "acquired",
+    "editorial": "Brahma.fi addressed a real execution gap by building programmable spending controls and safe execution rails for autonomous DeFi agents—essentially creating guardrails so agents don't drain wallets through bugs or exploits. Its acquisition signals that DeFi agent infrastructure is moving from concept to integration, though it also suggests the market may consolidate around larger platforms rather than sustain standalone agent execution layers. The open-source positioning was tactically smart for developer adoption, but the timing of the exit (2023) means Brahma never tested whether agent-driven DeFi would actually achieve sufficient transaction volume to sustain a standalone business. What matters now is whether the acquirer (if known) folds execution controls into a broader agent stack or lets the project atrophy."
+  },
+  "x402engine": {
+    "name": "x402engine",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "x402engine operationalizes HTTP 402 payment semantics by letting agents directly settle for web services without middleware abstraction, collapsing the request-response-settlement loop into a single protocol layer. It's positioned at the application tier where agent-to-service payments actually occur, making it foundational infrastructure rather than just a payment rail—agents can't scale consumption of external APIs without atomic payment-per-call primitives. The open-source approach and Base deployment suggest ambition to commoditize the payment handshake before proprietary wrappers calcify around it, though the project's early status and sparse public documentation leave unclear whether HTTP 402's historical adoption friction will be overcome or if it's solving for a payment flow that won't actually be how agent networks route consumption."
+  },
+  "nansen": {
+    "name": "Nansen",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Nansen's shift toward agent-consumable APIs represents a practical recognition that autonomous systems need structured on-chain signal data rather than human-optimized dashboards—positioning it as infrastructure for agent decision-making rather than analyst augmentation. By operating at the application layer, Nansen can monetize agent queries directly while remaining chain-agnostic, but this also means it's competing against emerging purpose-built agent middleware rather than defending analyst moats. The early-2020 launch gives it temporal advantage in data accumulation and relationship depth, though its B2B positioning suggests margins may compress if agents standardize on cheaper or native data feeds. A strategic acquisition by a major wallet or routing layer could consolidate agent signal into settlement infrastructure, but would risk losing developer trust if data access becomes gated."
+  },
+  "akash": {
+    "name": "Akash",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Akash enables agents to programmatically purchase compute resources (GPU/CPU) on a permissionless marketplace rather than through traditional cloud providers, creating a genuine use case for onchain payments beyond speculation—but the $2.8M funding and 2019 launch suggest limited adoption relative to established cloud infrastructure, and success depends on whether agent workloads materially prefer decentralized, auction-based pricing over AWS/GCP incumbents. The application-layer positioning is correct but also reveals the core tension: Akash needs payment infrastructure to work flawlessly, yet most agents using it would likely pay in stablecoins rather than AKT, making it a consumer of settlement layers rather than a driver of payment innovation. If acquired by a major cloud or infrastructure player, it signals enterprise recognition that decentralized compute markets are inevitable; if it remains independent, persistent low utilization would indicate that cost arbitrage alone isn't sufficient to overcome vendor lock-in and operational friction."
+  },
+  "art-blocks": {
+    "name": "Art Blocks",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Art Blocks established the first scalable market structure for autonomous agent art procurement by standardizing generative contracts and curator-gated access, creating liquidity where agent-to-artist transactions previously required custom integrations. Its dominance as the L5 venue for agent mints—particularly through mint.day's dependency on its protocol—makes Art Blocks less a pure application and more critical infrastructure for agent payment flows in the creative economy, though this concentration risk means any protocol failure cascades through dependent agent systems. The platform's survival depends on whether generative art remains economically compelling for agents long-term, or whether agents optimize toward cheaper, faster output that bypasses curator-selected quality tiers. Early acquisition by a settlement or routing layer would signal that agent art spend is durable enough to warrant vertical integration, but would also reveal whether Art Blocks' value is its community credibility or merely its technical standards."
+  },
+  "mint-day": {
+    "name": "mint.day",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "mint.day occupies a narrow but revealing slice of the agent application layer: autonomous minting and collection of generative art, which treats on-chain NFT creation as a native agent behavior rather than a human-initiated action mediated through an agent. This positioning matters because it tests whether agents require financial ownership incentives and aesthetic agency to sustain engagement loops—moving beyond pure utility automation into speculative and cultural participation. The Base deployment and January 2025 timing suggest the project is betting on agent economies needing their own secondary markets and collectible mechanics before broader infrastructure maturity, which is either prescient or premature depending on whether agent-to-agent trading and curation actually emerge as meaningful activity classes. The risk is straightforward: generative art collection by agents could become pure spam and circular token washing without genuine economic scarcity or human valuation signals to anchor prices."
+  },
+  "apify": {
+    "name": "Apify",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Apify represents an early monetization model for agent-driven tasks—agents consume web scraping/automation services via API calls and pay per execution, creating a direct incentive alignment between agent capability and platform revenue. Its decade-old infrastructure positions it as one of the few application-layer services already equipped to handle agent workloads at scale, though the model remains fundamentally offchain and dependent on centralized pricing rather than protocol-native settlement. The critical question is whether Apify's pay-per-run architecture will scale competitively as agent frameworks mature and demand lower transaction overhead; acquisition would likely signal that agent infrastructure acquirers need established, high-volume task execution layers rather than building internally."
+  },
+  "render": {
+    "name": "Render",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Render sits at the application layer as a use-case-specific payment rail—agents outsource GPU compute via RNDR/USDC settlement rather than using general-purpose infrastructure, which creates tight coupling between workload type and token economics. Its Solana positioning is strategically sensible for low-friction microtransactions, but the model depends entirely on sustained demand from AI agents running inference at scale; if agents move to centralized cloud providers or develop in-house GPU clusters, the payment flow collapses. The project's longevity since 2020 (pre-dating the AI agent boom) suggests real utilization rather than speculative hype, though Render's layer-5 isolation means it captures value only when agents genuinely prefer decentralized compute—a still-unproven thesis outside niche rendering workflows."
+  },
+  "ocean-protocol": {
+    "name": "Ocean Protocol",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Ocean Protocol occupies an underexplored position in the agent payments stack by creating tokenized incentive structures for data exchange rather than just computational services, which matters because agent training and inference increasingly depend on accessing proprietary datasets at scale. The OCEAN token mechanics attempt to solve a real problem—how to price and settle micropayments for data access without centralized intermediaries—but the project's 2019 launch predates the current agent infrastructure wave, leaving ambiguity about whether its data marketplace model will integrate with emerging agent-to-agent payment rails or remain siloed. With $39M deployed over five years, Ocean has survived multiple cycles without becoming infrastructure-critical, suggesting either a genuine market timing problem or that agents' actual data acquisition patterns favor simpler alternatives (APIs, grants, synthetic data) over on-chain settlement. Watch whether Ocean gains traction as agents begin requiring verifiable, composable datasets—or whether it becomes a cautionary case of solving yesterday's liquidity problem."
+  },
+  "run402": {
+    "name": "Run402",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Run402 materializes an underexplored but critical use case: HTTP 402 payment required as a native API consumption primitive, moving beyond theoretical protocol designs into working reference implementation. By bundling Postgres, REST APIs, and storage behind x402 micropayment gates on Base, it demonstrates a viable path for application developers to monetize agent-accessible infrastructure without traditional auth walls—a structural difference from existing SaaS gating. The risk is adoption friction: HTTP 402 adoption remains marginal in production systems, and agents may default to cheaper or free alternatives rather than optimize for per-request settlement. If this pattern gains traction, it could become the template for how compute and storage layers price agent traffic, but success requires both developer adoption and agent builders treating micropayments as a feature, not a tax."
+  },
+  "cascade": {
+    "name": "Cascade",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Cascade is building a narrowly scoped but strategically positioned play: x402-native HTTP tooling that lets Solana agents invoke web services and split payments to multiple recipients without middleware. Rather than abstracting away the payment layer, it forces payment semantics into the API contract itself, which is philosophically aligned with agent-native design but creates a walled garden problem—developers only get permissionless splitting if they build within Cascade's x402 framework. The bet is that autonomous agents will eventually need this level of granularity for multi-hop tool composition (crawl → infer → execute), but execution risk is high; widespread adoption requires either critical mass of x402-compatible services or Cascade becoming the de facto standard for Solana agent tooling, neither of which is guaranteed at this stage."
+  },
+  "kraken-cli": {
+    "name": "Kraken CLI",
+    "layer": "L5",
+    "status": "live",
+    "editorial": "Kraken CLI inverts the traditional exchange API hierarchy by building Claude Code compatibility directly into a command-line tool, positioning the exchange as an application-layer primitive rather than a backend service—a strategic move that acknowledges AI agents as first-class trading clients rather than an afterthought. The 134-command depth suggests serious exchange functionality exposure, but the real test is whether MCP standardization here becomes a pattern other exchanges adopt or remains a Kraken-specific integration tax. This matters because agent payment stacks ultimately need native exchange rails; if Kraken establishes the CLI-as-agent-interface model, it could influence how settlement and routing layers design for agentic access rather than retrofitting human-first APIs."
+  },
+  "monitor": {
+    "name": "Monitor",
+    "layer": "L5",
+    "status": "early",
+    "editorial": "Monitor sits at the application layer as a dispatcher and budget allocator for agent swarms—essentially runtime infrastructure that lets developers spin up multi-agent systems without manually orchestrating spend limits and operational oversight. This is notably different from lower-stack payment primitives; Monitor assumes payments infrastructure exists and focuses instead on the operational problem of *controlling* agent behavior at scale, which becomes critical once agent systems move from single-task to coordinated workflows. The early-stage, open-source positioning suggests the team believes this layer will commoditize quickly and wants to establish developer mindshare before proprietary alternatives consolidate control over agent economics. If this pattern holds, Monitor's real value is less in the software itself and more in defining what \"budget-aware agent dispatch\" should look like—a bet that whoever owns the operational semantics, not just the settlement rails, owns the relationship with builders."
+  },
+  "payload-exchange": {
+    "name": "Payload Exchange",
+    "layer": "L5",
+    "status": "early",
+    "editorial": "Payload Exchange implements a programmatic market for agent intents—agents declare execution goals as orders, solvers bid to fulfill them—which is a cleaner abstraction than point-to-point integrations but assumes solvers will reliably materialize at application layer. The orderbook model ports proven MEV infrastructure patterns into agent coordination, though the viability depends on whether solver competition actually emerges for smaller, heterogeneous agent tasks or concentrates among a few winners. Early traction here would validate that agents will outsource execution to third parties rather than building closed loops, a foundational question for whether the payments stack becomes collaborative infrastructure or siloed integrations."
+  },
+  "solver-as-a-service": {
+    "name": "Solver as a Service",
+    "layer": "L5",
+    "status": "early",
+    "editorial": "Solver as a Service abstracts cross-chain intent settlement into a consumable primitive for agents trading on Polymarket, effectively turning fragmented liquidity across chains into a unified execution surface—a critical move if agent volume eventually overwhelms single-chain orderbook depth. The positioning at the application layer means it's betting that agent-to-agent trading becomes frequent enough to justify dedicated infrastructure, rather than relying on existing DEX aggregators or bridge protocols. Early-stage and narrow in scope (Polymarket-specific), but notable because it tests whether AI agents need their own solver stack distinct from human-oriented trading infrastructure, or whether that's premature verticalization."
+  },
+  "agentresearch": {
+    "name": "AgentResearch",
+    "layer": "L5",
+    "status": "early",
+    "editorial": "AgentResearch operationalizes per-call micropayments in stablecoins, treating API consumption as a native onchain transaction rather than a batched invoice—a structural shift that matters primarily if agent workloads scale beyond internal testing. The model assumes Base settlement latency and USDC slippage are acceptable friction costs for API atomicity, which works for research agents but may not generalize to latency-sensitive autonomous systems. Worth watching as a reference implementation of application-layer payment granularity, though the risk is that it remains a niche pattern unless infrastructure (settlement speed, gas costs, routing) improves enough to compete with traditional API key billing."
+  },
+  "backed": {
+    "name": "Backed",
+    "layer": "L5",
+    "status": "early",
+    "editorial": "Backed is betting on a specific architectural outcome: that autonomous AI agents will eventually operate as on-chain entities requiring native capital markets infrastructure rather than being deployed as services within human-controlled DAOs or companies. This is a high-conviction bet on both AI capability maturation and governance innovation—if agents remain tools or subsidiaries, the market for AAO-specific capital infrastructure collapses. The early positioning is smart (capturing mindshare before the category clarifies), but execution risk is substantial: Backed needs to prove AAOs are materially different from existing DAO treasury management or that agents will actually need programmatic governance layers rather than simple parameter controls. Worth tracking as a bellwether for whether the market genuinely believes AI agents will be autonomous principals versus sophisticated automation."
+  },
+  "ramp-agent-cards": {
+    "name": "Ramp Agent Cards",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Ramp Agent Cards operationalizes the governance layer by embedding budget and policy controls directly into corporate payment infrastructure, effectively treating autonomous agent spending as a managed expense category rather than a black box. This positions Ramp at a critical chokepoint—enterprises won't deploy high-autonomy agents at scale without hard spend limits, making API-native controls a prerequisite rather than a nice-to-have. The 2025 launch timing suggests this layer is moving from theoretical to table-stakes, though the real test is whether off-chain policy enforcement can keep pace with agents that route payments across multiple protocols and settlement venues."
+  },
+  "skyfire-kya": {
+    "name": "Skyfire KYA",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Skyfire KYA sits at the critical governance chokepoint where autonomous agent spending meets institutional risk tolerance—an identity layer that transforms agents from anonymous code executables into verifiable, auditable entities before capital moves. The enterprise positioning and API-native design suggest they're betting on compliance-first adoption rather than permissionless experimentation, which constrains their addressable market but dramatically increases defensibility if agents become material financial actors. At $9.5M seed in 2024, they're well-capitalized to become infrastructure, though the real test is whether KYC-for-agents becomes a genuine bottleneck or remains orthogonal to how most protocols actually gate agent permissions. Watch whether they move downstream into agent creation/deployment (where lock-in is natural) or stay pure-play verification (where they risk commoditization as existing identity providers add agent-specific schemas)."
+  },
+  "sponge-gateway": {
+    "name": "Sponge Gateway",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Sponge Gateway sits at a critical choke point: the governance layer's interface with actual commerce, enabling AI agents to transact autonomously without traditional identity infrastructure. By abstracting away human-centric authentication (credit cards, API keys) in favor of agent-native onboarding, it addresses a real operational bottleneck—but also centralizes trust in a single policy arbiter that will inevitably face pressure from fraud, regulatory compliance, and competing agent frameworks. The open-source approach and HTTP simplicity lower adoption friction, making this less about technical innovation and more about who captures the merchant relationship as autonomous spending scales; worth tracking whether Sponge becomes the de facto settlement gateway or gets displaced by more opinionated, chain-native alternatives as the market matures."
+  },
+  "payman-ai": {
+    "name": "Payman AI",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Payman AI addresses a critical governance gap in autonomous agent systems—the human-agent boundary layer where spending authority and approval workflows must coexist. By positioning itself as API-native infrastructure for budget enforcement and threshold management rather than building user-facing controls, it's placing a bet that the bottleneck isn't awareness but developer tooling: agents will proliferate faster than humans can manually supervise them, so the friction point becomes systematic spend governance baked into agent runtime, not dashboard override. This sits at an awkward inflection point—too early to know if this layer even consolidates (it may dissolve into agent frameworks, wallets, or payment rails) and too nascent to validate whether developers will adopt a separate governance service or demand it built-in. Worth watching primarily as a signal of how seriously early-stage AI teams are treating agent fiduciary control, not as a standalone winner."
+  },
+  "erc-8004": {
+    "name": "ERC-8004",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "ERC-8004 attempts to solve a critical upstream problem: how to establish cryptographic identity and verifiable reputation for autonomous agents before they move money at scale. By standardizing on-chain identity registries at the governance layer, it creates the trust primitives that settlement and routing layers depend on—essentially building the \"know your agent\" infrastructure that payment flows require. The 2024 launch timing is notable given the current lack of agent attribution standards, though adoption will likely hinge on whether builders prioritize reputation verification over speed-to-market in agent deployments. If this gains traction, it could become foundational plumbing; if it remains niche, payment systems may route around it entirely by relying on off-chain reputation or collateral-based trust instead."
+  },
+  "ows-policies": {
+    "name": "OWS Policies",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "OWS Policies sits at a critical choke point: the governance layer that must execute *before* cryptographic commitment, making it the practical implementation of agent spending constraints rather than their theoretical framing. By open-sourcing a pre-signing policy engine, MoonPay is standardizing what should be table-stakes infrastructure—enforcing limits, allowlists, and time windows through API guards rather than relying on post-hoc monitoring or transaction reversal. The risk is whether API-native policies can remain decoupled enough to avoid becoming a vendor lock-in layer; the opportunity is that early standardization here prevents the fragmentation that plagued custody and signing infrastructure. This is foundational plumbing disguised as developer tooling, and its adoption rate will likely determine whether agent payment governance remains composable or ossifies around a few dominant implementations."
+  },
+  "visa-intelligent-commerce": {
+    "name": "Visa Intelligent Commerce",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Visa's entry into agentic commerce governance represents a critical attempt to route autonomous spending through existing card rails rather than ceding transaction control to crypto-native or fintech alternatives. By positioning itself at the L4 governance layer—where rules around agent authorization, spend limits, and merchant eligibility get written—Visa is hedging against disintermediation while offering enterprises a compliant, legacy-integrated path for agent payments. The API-native B2B design suggests targeting enterprise procurement and supply chain workflows first, which is both smart (lower regulatory friction than consumer spending) and limiting (it cedes the more innovative, higher-velocity consumer agent markets to newer competitors). Success hinges on whether Visa can make agent authorization sufficiently flexible and real-time to compete with purpose-built protocols; failure would mean Visa's governance layer gets bypassed entirely by agents that route through settlement layers Visa doesn't control."
+  },
+  "crossmint-l4": {
+    "name": "Crossmint",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Crossmint operates at the governance layer by embedding spending policy enforcement directly into REST APIs, positioning itself as the guardrail for agent financial autonomy rather than the execution layer itself. This is strategically important because agents capable of independent wallet interaction need externally-imposed limits before they're deployed at scale—Crossmint's API-native approach lets developers set constraints without rebuilding core wallet infrastructure. The $23.6M funding and multi-chain footprint suggest conviction that policy-layer infrastructure will matter as much as settlement rails, though the risk is whether policy enforcement via API calls proves sufficiently robust against determined agents or becomes a bottleneck as transaction throughput demands increase."
+  },
+  "mastercard-agentic-tokens": {
+    "name": "Mastercard Agentic Tokens",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Mastercard's move to tokenize payment credentials for AI agents represents a critical bridge between legacy payment rails and autonomous systems—extending existing card standards rather than forcing agents onto blockchain-native infrastructure. This governance-layer play matters precisely because it sidesteps the on-chain bottleneck: agents can now settle directly through Mastercard's existing merchant and banking networks without wrapping value in tokens or managing wallet custody. The risk is path-dependency: if Mastercard's agentic token standard becomes the de facto enterprise standard, it consolidates payment authorization for autonomous systems back into a traditional rails monopoly, potentially stalling alternative settlement models. Early signal that major payment networks see agents not as a blockchain opportunity but as a user-category problem to solve with incremental extensions to their existing moat."
+  },
+  "agentpay-l4": {
+    "name": "AgentPay",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "AgentPay occupies a critical but underexplored layer: enforcing spending constraints and authorization rules between agents that transact at machine speed and scale. Rather than building wallets or settlement rails, it's essentially a policy engine that prevents agents from exceeding budgets, violating trust boundaries, or executing unauthorized payments—a problem that becomes urgent as agent-to-agent workflows move beyond simulation into production systems handling real capital. The API-native approach is well-suited to developer adoption, but success hinges on whether frameworks and orchestration platforms make AgentPay a default dependency (like error handling) versus an optional add-on teams skip under deployment pressure. Early signal to watch: whether its governance model actually constrains agent behavior in adversarial or high-stakes scenarios, or merely creates a compliance checkbox."
+  },
+  "ghostspeak": {
+    "name": "GhostSpeak",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "GhostSpeak attempts to solve a governance-layer problem that most agent infrastructure projects haven't yet articulated: how to establish persistent, verifiable trust between autonomous agents operating across multiple protocols and counterparties. By anchoring reputation scoring and credential attestation on Solana, it creates a portable identity layer for agents rather than requiring each application to bootstrap trust independently—a meaningful differentiation from siloed agent frameworks. However, the project's current deployment pause suggests either technical friction in cross-protocol credential interoperability or insufficient demand signal for on-chain agent reputation in its current form, raising questions about whether governance-layer solutions can gain traction before settlement and routing infrastructure mature enough to create meaningful agent-to-agent transaction volume."
+  },
+  "observer-protocol": {
+    "name": "Observer Protocol",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Observer Protocol tackles a concrete problem in agent delegation: before you let an AI system execute payments or settle transactions on your behalf, you need cryptographic proof of its historical reliability and settlement behavior. By maintaining an onchain registry of agent payment history, it shifts counterparty risk assessment from implicit trust or reputation systems to verifiable track records—a necessary infrastructure layer as economic authority increasingly moves to autonomous agents. The governance layer positioning is strategic; this sits upstream of routing and settlement decisions, meaning it could become a standard reference point for agent vetting across applications. The early-stage, multi-chain approach suggests the team is building for a world where agent payments fragment across multiple execution environments, though the real test is whether custody-heavy applications (wallets, DEXs, protocols) actually adopt it as a prerequisite rather than building proprietary solutions."
+  },
+  "verifiable-intent": {
+    "name": "Verifiable Intent",
+    "layer": "L4",
+    "status": "live",
+    "editorial": "Verifiable Intent addresses a critical governance problem in agent payments—proving authorization occurred before settlement—but Mastercard's involvement creates ambiguity about whether this is genuinely open infrastructure or a compliance wrapper designed to gate agent autonomy behind traditional payment rails. The framework's position at the governance layer is strategically important; cryptographic proof of intent sits upstream of all settlement decisions and could become either a neutral standard or a chokepoint for legacy financial control. As a 2025 launch from a major card network, this is worth watching for whether it becomes genuinely adopted by decentralized agent systems or remains siloed within Mastercard's ecosystem—early adoption signals will reveal whether the open-source framing reflects real protocol neutrality or marketing positioning."
+  },
+  "openmatter": {
+    "name": "OpenMatter",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "OpenMatter addresses a real governance problem at the MCP layer—payment tool calls are inherently high-risk (direct financial access, credential exposure) yet most integrations treat them like any other LLM output. By wrapping Stripe's MCP with ZK execution proofs, it enforces cryptographic guarantees that tool calls are well-formed and credentials never leak into logs, pushing verification down to the execution layer rather than relying on prompt engineering or post-hoc audits. The early-stage question is whether ZK overhead justifies the security gains for Stripe-only workflows, or if this pattern proves essential enough to become table stakes for any financial MCP. If OpenMatter gains traction as a reference implementation, it could define governance standards for payment routing at L4—but if ZK complexity fragments rather than unifies the space, it risks becoming a boutique solution for risk-averse enterprises."
+  },
+  "spendos": {
+    "name": "SpendOS",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "SpendOS occupies the unglamorous but critical governance layer—positioning itself as policy and audit infrastructure for agent spending rather than another payment processor. By bolting compliance and spend controls onto agent wallets at the platform level rather than the settlement layer, it's betting that enterprise AI deployments will demand provenance and guardrails before they'll tolerate autonomous financial agents, a thesis that hinges entirely on regulatory clarity and B2B adoption velocity. The \"ramp for agents\" framing is telling: it suggests agents need gatekeeping, not just routing, which implies either profound risk or premature product-market fit if enterprises aren't yet shipping agents with real financial authority. Worth watching for whether governance-first actually unlocks agent finance adoption or becomes an unnecessary compliance tax that gets stripped out once liability frameworks settle."
+  },
+  "botpolice": {
+    "name": "BotPolice",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "BotPolice occupies a critical but underspecified problem in the governance layer: runtime authorization of agent-to-vendor payments before execution. As an open-source, self-hosted policy engine, it sits at the enforcement boundary where agents need deterministic answers to \"am I allowed to pay this counterparty?\"—a question that scales poorly without standardized frameworks. The early-stage positioning suggests the space still lacks consensus on policy primitives (spending limits, vendor whitelists, conditional rules), which means BotPolice's architectural choices around rule expression and auditability could become canonical or obsolete depending on how agent infrastructure consolidates. This is worth watching precisely because it's unglamorous infrastructure solving a real compliance and risk problem that will only matter more as agents move real capital."
+  },
+  "agent-escrow": {
+    "name": "Agent Escrow",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Agent Escrow addresses a genuine coordination problem at the governance layer: how to enforce performance commitments between autonomous agents and their counterparties without trusted intermediaries. By embedding LLM-based dispute resolution into three-party escrow contracts, it treats the judge itself as a programmable component rather than a fixed institution—a pragmatic move that sidesteps the oracle problem for subjective claims, though it introduces new failure modes around model consistency and prompt injection. This sits at a critical inflection point where agent-to-agent transactions will require settlement guarantees, making the open-source approach valuable as foundational infrastructure before proprietary platforms lock in their own standards. The core risk is whether LLM judges can achieve the determinism and auditability that smart contract settlement actually demands, especially under adversarial conditions."
+  },
+  "bond": {
+    "name": "Bond",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Bond's ERC-4626 vault model attempts to solve agent liquidity timing by pre-funding service access through smart contract credit lines, positioning governance infrastructure as a prerequisite rather than a post-hoc layer—a reasonable bet given that agent-to-agent payments will require trust mechanisms before they scale to autonomous execution. The early-stage approach hinges on whether agents can reliably collateralize credit lines and whether service providers will accept vault-backed IOUs over immediate settlement, both open questions in a space where most infrastructure still assumes human-mediated payment flows. If this pattern validates, it could shift how subsequent agent infrastructure gets financed; if agents prove too novel/unpredictable for traditional credit modeling, Bond risks becoming overengineered for a problem that resolves through simpler routing or escrow layers instead."
+  },
+  "kartein": {
+    "name": "Kartein",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Kartein is building a spending policy layer designed to constrain agent execution—essentially a programmable allowlist for autonomous systems rather than a general-purpose wallet. This positions it as critical infrastructure for enterprise and institutional adoption, since uncontrolled agent spending is currently a blocker for deploying autonomous systems in production. The permissioned architecture and smart-contract binding suggest focus on regulated environments where auditability and policy enforcement matter more than permissionlessness, which is a pragmatic bet on how agents will actually be deployed at scale. Early-stage position in governance makes this a barometer for whether agent infrastructure evolves toward centralized policy layers or toward trust-minimized, decentralized control mechanisms."
+  },
+  "ragequit-escrow": {
+    "name": "RageQuit Escrow",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "RageQuit Escrow sits at a critical chokepoint—the governance layer that mediates between agent execution and settlement finality—by implementing smart-contract-enforced escrow queuing rather than immediate payout. This positioning matters because most agent payment infrastructure focuses on routing and wallets, leaving the policy layer underdeveloped; adding friction at settlement is typically a liability, but here it's being weaponized as a control surface for dispute resolution, agent behavior constraints, or multi-sig approval workflows. The onchain escrow model is a natural fit for adversarial agent relationships (agent-to-agent payment, principal-agent disputes) but carries execution risk—if escrow logic is complex or governance is centralized, it becomes a settlement bottleneck rather than a safety feature. Early stage, but worth tracking if it evolves beyond a single-use escrow primitive into a modular policy engine that other payment layers can plug into."
+  },
+  "spendbound": {
+    "name": "SpendBound",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "SpendBound is building permissioned spend controls at the governance layer—essentially a pre-execution filter for agent-to-vendor transactions on Base that combines budget enforcement with on-chain receipt logging. This sits in a critical but underdeveloped gap between routing logic and settlement execution: most agentic payment infrastructure today focuses on *how* to move money, not *whether* an agent should be allowed to in the first place. The permissioned model is a reasonable starting position for enterprise and DAO use cases wary of unbounded autonomous spending, though it trades flexibility for safety and may face pressure as agent capabilities outpace policy frameworks. Early moat potential exists if SpendBound can become the standard audit + guardrail layer for high-value autonomous workflows, but success requires solving the difficult problem of policy abstraction—encoding complex spend rules that remain interpretable to both developers and auditors."
+  },
+  "agent-allowance": {
+    "name": "Agent Allowance",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Agent Allowance solves a concrete governance problem: how to give autonomous agents spending authority without exposing private keys or requiring real-time principal approval—essentially mechanizing the allowance primitive from ERC-20 into agent operations. This sits at a critical enforcement point in the stack where policy constraints meet execution, making it foundational for any multi-agent or delegated system that needs audit trails and spending caps rather than binary trust. The smart-contract implementation suggests it's trying to be portable across chains, though the real test is whether governance-layer solutions can remain protocol-agnostic as agent payment patterns diverge. Early-stage projects here often fail to bridge the gap between policy (what you *want* to allow) and UX (what developers actually configure), so execution on composability and operator feedback will determine if this becomes a standard or a niche tool."
+  },
+  "delegata": {
+    "name": "Delegata",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Delegata addresses a critical gap in agent infrastructure by implementing OAuth-style permission scoping onchain, reducing the surface area of agent compromise from \"full wallet access\" to \"revocable, bounded spending limits per task.\" This governance-layer primitive is essential for enterprise adoption—agents controlling significant capital need granular delegation, not binary trust—but its success depends on achieving UX parity with traditional OAuth flows while avoiding the permission-fatigue patterns that plague Web2. Early execution here could become table stakes for production agent deployments; weak adoption suggests the space will remain constrained to applications where agents control trivial amounts or operate entirely within siloed environments."
+  },
+  "wardex": {
+    "name": "Wardex",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Wardex positions itself at the governance layer by implementing policy enforcement as a pre-execution verification gate for DeFi transactions—essentially a permissioned firewall that sits upstream of settlement. This layer choice is critical: it claims the control plane rather than the execution plane, which could make it either foundational infrastructure or architectural overhead depending on whether developers adopt it voluntarily or regulators mandate it. The \"permissioned\" designation suggests Wardex is building toward custodial-grade compliance, not decentralized consensus, which narrows its addressable market to institutionally-oriented agent payments but increases defensibility against regulatory arbitrage. Early traction here would matter less than ecosystem adoption signals—whether major wallet providers, routing layers, or protocol teams build verification hooks into their agent payment flows."
+  },
+  "agentescrow": {
+    "name": "AgentEscrow",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "AgentEscrow sits at a critical bottleneck: the governance layer where agent-to-agent transactions require atomic settlement guarantees without introducing counterparty risk. By implementing trustless escrow as a smart contract primitive on Base, the project addresses a real operational gap—agents today lack standardized mechanisms to enforce task completion before payment, forcing them into either inefficient multi-step protocols or centralized intermediaries. The early-stage execution on a high-throughput settlement layer is sensible, though the actual problem density remains unclear: it's uncertain whether this friction is genuine market friction or a solution in search of a use case, and whether Base's throughput or cost profile will matter if agent volumes don't materialize at scale."
+  },
+  "lookout": {
+    "name": "Lookout",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Lookout is building a behavioral credit system that translates onchain activity into agent reputation, essentially creating a lending and access control primitive for autonomous systems before they operate at scale. The governance layer positioning is critical—credit scores become gatekeeping infrastructure for high-stakes agent interactions (capital deployment, cross-protocol coordination, settlement) where counterparty risk is currently invisible. Early projects here are either destined to become essential rails (like Aave's isolation mode for risk) or competitive dead zones if dominant agents self-govern or the market settles on simpler collateral-only models. The real test isn't whether onchain behavior correlates with trustworthiness, but whether heterogeneous AI agents will accept a standardized scoring regime, or whether fragmentation across application-specific reputation layers renders a universal score irrelevant."
+  },
+  "litcredit": {
+    "name": "LitCredit",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "LitCredit operates at the governance layer by inserting permissioned underwriting into agent stablecoin issuance, effectively creating a gating mechanism that trades liquidity accessibility for institutional risk control. This positioning matters because most agent payment infrastructure assumes either collateralized stablecoins or trusted counterparties; LitCredit is instead building selective credit allocation, which could fragment the agent economy along permission lines or become essential risk infrastructure depending on regulatory pressure and adoption velocity. The sealed underwriting model suggests they're targeting enterprise use cases where auditability and policy compliance outweigh composability—a defensible niche but one that may struggle if open-layer solutions achieve sufficient institutional credibility first."
+  },
+  "normandy": {
+    "name": "Normandy",
+    "layer": "L4",
+    "status": "early",
+    "editorial": "Normandy occupies a critical but underexplored layer: it's building reputation-based credit for agents rather than token collateral, which directly addresses the liquidity constraint that hampers agent autonomy on-chain. The governance layer play is real—agents need access to capital without liquidation risk to execute multi-step transactions, and reputation scoring becomes the policy mechanism that replaces traditional collateral. Early-stage execution risk is high (reputation systems are notoriously gameable, and Solana's finality doesn't solve sybil problems), but if it ships a non-trivial reputation oracle that agents actually trust, it could unlock a category of agent-native finance that token-gated infrastructure cannot reach."
+  },
+  "tempo-mpp": {
+    "name": "Tempo MPP",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "Tempo MPP implements a shared coordination layer for micropayments across agent service networks—essentially abstracting away bilateral payment negotiation between 100+ services by routing all transactions through a single protocol rather than point-to-point settlement. This L3 positioning is critical: it sits above individual chains and wallets but below application logic, making it the connective tissue that lets agents seamlessly consume heterogeneous services without managing dozens of payment relationships. The $500M Series A valuation and rapid 2024 launch suggest conviction that agent-to-service payment fragmentation is acute enough to justify protocol infrastructure, though the risk is whether 100+ services actually adopt a shared standard versus building proprietary integrations directly into agent frameworks. Success here would establish a coordination point that eventually subsumes routing layer decisions entirely, making Tempo the de facto payment intermediary for agent economies—or it becomes another middleware layer agents route around if sufficient margin extraction happens at the protocol level."
+  },
+  "google-ap2": {
+    "name": "Google AP2",
+    "layer": "L3",
+    "status": "announced",
+    "editorial": "Google AP2 is positioning itself as the neutral API layer for enterprise agent-to-agent settlements, deliberately abstracting away blockchain choice through an off-chain routing architecture—a strategic move that trades decentralization for operational simplicity at scale. With 60+ partners already committed pre-launch, Google is betting that enterprises will adopt standardized payment primitives faster than they'll adopt any single chain, making AP2 potentially the Stripe-equivalent for agent commerce rather than a blockchain native play. The risk is substantial: if AP2 becomes the de facto standard, Google controls the settlement routing layer for autonomous commerce, giving it enormous leverage over pricing, feature velocity, and interoperability—but the enterprise B2B motion suggests Google may care more about market penetration than blockchain politics, which could actually accelerate agent infrastructure adoption industry-wide."
+  },
+  "acp": {
+    "name": "ACP",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "ACP standardizes the mechanical layer where agents actually transact—defining how an autonomous system signals intent to purchase and settles that obligation—which is foundational work that prevents fragmentation but also creates a bottleneck if adoption stalls. The OpenAI-Stripe co-development is significant because it pairs the largest agent deployment platform with the incumbent payments infrastructure, potentially making this a default standard rather than one competing protocol among many. The risk is that this concentration of control (even with open-source release) could ossify agent commerce around the preferences of two companies rather than allowing the format to evolve from genuine market competition. Worth watching whether independent agent frameworks adopt ACP or fork/ignore it—that decision will reveal whether this is genuinely neutral infrastructure or a walled garden disguised as open standards."
+  },
+  "circle-nanopayments": {
+    "name": "Circle Nanopayments",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Circle Nanopayments abstracts away the settlement friction that makes sub-cent transactions economically impossible today—batching and routing high-frequency USDC flows through optimized pathways to eliminate per-transaction overhead. This positions Circle as a critical middleware layer for agent-to-agent and agent-to-service payments, where thousands of micro-interactions per second need settlement guarantees without destroying margin. The API-native design matters: rather than forcing developers into new primitives, Circle is embedding nanopayments into familiar USDC rails, which could accelerate adoption across agent frameworks faster than isolated L3 solutions. The early timing and Circle's balance sheet give them runway to absorb volatility, but the core bet—that agent economies will generate enough transaction volume to justify this infrastructure—remains unproven and highly dependent on which agent frameworks achieve escape velocity first."
+  },
+  "l402-lightning": {
+    "name": "L402 / Lightning",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "L402 adapts the Lightning Network's micropayment rail to API monetization, enabling agents to settle per-request payments in Bitcoin without custodial intermediaries—a technically sound but adoption-constrained approach that sidesteps wallet fragmentation by outsourcing the problem to the protocol layer rather than solving it. Its 2021 launch predates the current agent infrastructure wave, positioning it as infrastructure-first rather than agent-first, which means it faces the classic chicken-egg problem: agents need Bitcoin/Lightning wallet infrastructure to be frictionless, and that infrastructure needs agent demand to justify the UX work. The open-source, developer-focused positioning is appropriate for its technical depth but leaves unclear whether Lightning's transaction finality and fee structure (volatile during congestion) actually outperform stablecoin payment channels for the unpredictable, high-frequency settlement patterns agent swarms will likely demand. Worth monitoring for adoption signals in agent frameworks, but currently reads as infrastructure waiting for a use case rather than a use case demanding this infrastructure."
+  },
+  "atxp": {
+    "name": "ATXP",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "ATXP positions itself as the HTTP of agent-to-agent payments—a thin, standardized protocol layer that abstracts away settlement complexity so agents can transact in microseconds without blocking on finality. This is a deliberate bet that agent economics will fork from human UX (where confirmation time matters less than certainty), and that open protocols win over siloed payment rails when friction is measured in milliseconds and transaction costs in fractional cents. The $19.2M backing and Stripe integration suggest conviction that Tempo will become the settlement rail of choice, though early adoption depends entirely on whether the broader agent ecosystem standardizes around HTTP-style semantics rather than competing protocol designs. If ATXP gains traction as the de facto agent payment standard, it becomes infrastructure that other layers build on; if agents fragment across multiple payment protocols, it risks becoming a well-funded niche solution."
+  },
+  "fewsats": {
+    "name": "Fewsats",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "Fewsats implements L402 as a machine-readable payment protocol layer, allowing agents to transact directly on Bitcoin Lightning without intermediation—a meaningful shift from centralized API key gatekeeping. Its positioning at the protocol level rather than wallet or settlement means it's betting on standardized, bearer-token payments becoming the default mechanism for agent-to-service transactions, which requires both widespread L402 adoption and Lightning's scaling maturity. The open-source, developer-focused approach mirrors early HTTP middleware plays, but L402 remains niche; Fewsats' real test is whether enough infrastructure providers will implement it to create meaningful network effects, or whether simpler custodial solutions (API tokens, account-based billing) prove sticky for the near-term agent economy."
+  },
+  "erc-8183": {
+    "name": "ERC-8183",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "ERC-8183 attempts to solve a real coordination problem at the protocol layer—how autonomous agents can settle payments for work without human intermediaries or trusted third parties—but the three-party escrow model (client, provider, evaluator) introduces a subtle centralization risk: evaluators become gatekeepers of payment release, which works only if evaluation itself is credibly decentralized or algorithmic. Early-stage Ethereum standards for agent economics tend to either oversimplify the verification problem or create new dependency layers; worth monitoring to see whether this avoids that trap or just relocates it. The HTTP + onchain hybrid positioning suggests pragmatism about real-world agent workflows, though the gap between a ratified standard and actual adoption across heterogeneous agent frameworks remains steep."
+  },
+  "interledger": {
+    "name": "Interledger",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "Interledger occupies a critical but underexploited position in agent payments infrastructure: it abstracts away ledger-specific routing logic, allowing agents to send value across heterogeneous networks (blockchains, traditional rails, Layer 2s) without hardcoding destination-specific connectors. Nearly a decade post-launch with minimal adoption in crypto despite solving a genuine coordination problem, Interledger's protocol-layer approach now faces competition from purpose-built agent payment routers that bundle ledger abstraction with agent-specific optimization—suggesting the market may demand tighter vertical integration than pure protocol neutrality can offer. Its revival prospects hinge on whether the emerging agent economy generates enough cross-ledger payment volume to justify the routing standardization overhead, particularly as L2s and sidechains fracture liquidity further."
+  },
+  "agentpay-l3": {
+    "name": "AgentPay",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "AgentPay sits at the critical choke point between agent proliferation and payment infrastructure—building an API-native protocol specifically for the micropayment flows that emerge when autonomous systems transact with each other rather than humans. This is harder than it appears: agent-to-agent payments require sub-millisecond settlement, flexible denomination, and trust models that don't assume traditional KYC or identity. As a 2024 launch, AgentPay is early enough to shape protocol conventions before lock-in, but late enough that we'll quickly know if the market actually demands standardized agent payment rails or if routing through existing stablecoin/L2 infrastructure proves sufficient. If acquired by a major infra player (Solana, Polygon, or settlement layer), it signals that agent payments are graduating from theoretical to operationalized—and that whoever controls the handshake layer controls early economic moats in agent networks."
+  },
+  "dhali": {
+    "name": "Dhali",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "Dhali automates the unit economics of API consumption by baking pay-per-call billing into the protocol layer rather than leaving it to SaaS contracts, which is necessary infrastructure as agents begin making thousands of lightweight API calls per task. The sub-cent micropayment architecture suggests they've solved the throughput and settlement overhead that historically made granular metering uneconomical, positioning Dhali as a potential toll layer between agents and developer APIs—but this only works if adoption reaches critical mass; early fragmentation across competing per-call protocols could strand liquidity and make the coordination problem worse. Worth watching because API monetization is where agent economics will actually be measured, and any protocol that successfully abstracts payment friction could consolidate meaningful transaction volume, though the multi-chain approach hints they may be hedging against a winner-take-all outcome they're not certain of yet."
+  },
+  "x402s-scp": {
+    "name": "x402s SCP",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "x402s SCP ports Coinbase's HTTP 402 standard to Solana, reducing agent payment latency to ~400ms and eliminating the sub-cent friction that has historically blocked real-time machine-to-machine transactions—a critical move because protocol-layer standardization around payment triggering is where most current implementations bottleneck. The early 2025 timing is telling: as agent frameworks mature, the limiting factor shifts from \"can we do payments?\" to \"can we do them fast and cheaply enough that agents optimize around them naturally rather than batching or abandoning micropayments entirely.\" This is worth watching because if adoption sticks, it establishes HTTP 402 as the de facto settlement signal for agent workflows, effectively making Solana's finality speed a competitive moat for agent infrastructure; the risk is that competing chains or application-layer abstractions (wrapped into agent SDKs) route around the protocol before it achieves network effects."
+  },
+  "faremeter": {
+    "name": "Faremeter",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "Faremeter standardizes pay-per-use mechanics at the HTTP layer by implementing RFC 7231's dormant 402 Payment Required status code, positioning itself as a thin protocol bridge between application servers and wallet infrastructure rather than a payment processor. This is notable because it treats payments as a native web primitive—baked into the request/response cycle—rather than bolted-on via API calls, which could significantly reduce latency and implementation friction for agent-to-agent transactions at scale. The multi-chain wallet SDK support (EVM + Solana) and open-source approach lower the barrier to adoption, but success depends entirely on whether developers adopt HTTP 402 as a standard rather than routing around it with existing payment APIs. Early signal to watch: whether this gains traction in agent frameworks that need to meter compute or data access in real time, or whether it remains a niche utility bypassed by more opinionated payment layers."
+  },
+  "masumi": {
+    "name": "Masumi",
+    "layer": "L3",
+    "status": "live",
+    "editorial": "Masumi implements agent payment rails directly on Cardano's settlement layer, letting autonomous systems register identity and receive compensation without intermediaries—a constrained but genuine alternative to EVM chains dominating agent infrastructure. The protocol-layer positioning is strategically sound: by anchoring payments and provenance to Cardano's ledger rather than building another wallet or routing abstraction, it avoids middleware fragmentation while inheriting Cardano's UTXO model and lower finality costs. The real test isn't technical but adoption: Cardano's agent ecosystem remains embryonic compared to Ethereum/Solana, so Masumi faces the classic L1 infrastructure problem of building conviction before critical mass exists. Worth tracking as a signal of whether non-EVM chains can compete on agent infrastructure; an acquisition would likely indicate either Cardano tooling consolidation or a larger chain-agnostic payment aggregator attempting L1 coverage."
+  },
+  "backpac": {
+    "name": "Backpac",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Backpac sits at a critical bottleneck—the RPC layer—where it addresses a real problem for agent payments: routing transactions deterministically across Solana validators while proving settlement occurred. By embedding x402 protocol support directly into load balancing logic, it collapses what would otherwise be separate concerns (RPC reliability, payment proof, stablecoin settlement) into a single inference point, which is the right architectural move for high-frequency agent flows that can't tolerate ambiguity about whether a payment actually settled. The early-stage risk is whether determinism at the RPC layer matters more than determinism at the chain level—if Solana's own finality guarantees suffice, Backpac becomes a convenience play rather than essential infrastructure. Worth watching as a pattern: if agent payments eventually demand sub-consensus-level guarantees (speed, verifiability, routing control), RPC-layer protocols like this become load-bearing in ways they aren't today."
+  },
+  "mpp-gateway": {
+    "name": "mpp-gateway",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "MPP Gateway solves a real coordination problem at the protocol layer: it wraps 43 disparate APIs (Stripe, Plaid, GitHub, Twilio, etc.) behind a single payment abstraction, allowing agents to call any endpoint and settle via stablecoin in one operation—eliminating the API-key management sprawl that would otherwise plague autonomous systems. The positioning matters because it treats API access itself as a micropayment primitive rather than bolting payments onto existing auth systems, which is architecturally cleaner for agent-to-agent interaction but creates a bet that paying-per-call becomes the default pattern over contract terms. Early execution risk is high: the gateway needs both density on the provider side (more APIs) and velocity on the agent side (actual usage) to escape demo status, and it's unclear whether 43 APIs represents genuine demand or a hackathon artifact. If this pattern scales, it's the kind of boring infrastructure layer that gets acquired quietly by a payments platform looking to own agent economics; if it doesn't, it's a reminder that coordination problems often have higher switching costs than technical elegance alone can overcome."
+  },
+  "dossier": {
+    "name": "Dossier",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Dossier is testing whether research-as-a-service can be monetized at true micropayment scale ($0.01/query) through an API-native, protocol-layer design—a bet that most information work today is either locked behind subscription paywalls or given away, with no efficient market in between. The play matters because it sits at the intersection of agent execution (agents need data to reason) and payment infrastructure (MPP protocols need viable use cases to prove out), making it a critical validation point for whether sub-cent transactions can actually drive behavior change. The risk is obvious: demand for individual deep research queries at $0.01 may not exist at sufficient volume; equally, the friction of per-query micropayments could prove higher than users' willingness to adopt, even if technically feasible. Worth watching as a stress test of both agent-native economics and protocol maturity."
+  },
+  "mpp-dynamic-pricing": {
+    "name": "MPP Dynamic Pricing",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "MPP Dynamic Pricing applies real-time surge pricing to AI inference endpoints, translating a familiar pattern from ride-sharing into the nascent market for agentic compute. At the payment protocol layer, this sits between application-layer demand and settlement infrastructure, making it a critical chokepoint for how agents discover and pay for computational resources during congestion. The model is early and unproven—surge pricing works in ride-sharing because supply is somewhat elastic and users have alternatives, but inference capacity faces harder constraints and agents may lack meaningful choice during critical execution windows. Worth watching as a signal of whether market-driven pricing can efficiently allocate scarce compute, or whether it becomes a rent-extraction layer that fragments the agent economy."
+  },
+  "private-mpp": {
+    "name": "Private MPP",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Private MPP tackles a genuine L3 problem—agents executing payments without exposing transaction patterns to on-chain observers—by encoding audit trails in zero-knowledge proofs rather than plaintext settlement records. This sits in the critical gap between agent autonomy (requiring transaction visibility for governance/debugging) and user privacy (requiring opacity from chain analysis), making it foundational infrastructure rather than a nice-to-have. The open-source posture is notable given how payment privacy typically gets locked into closed systems; if adoption spreads, this could become the default audit standard for agent DAOs and multi-agent coordination. Early stage carries obvious execution risk—ZK proof verification costs at scale, and the market hasn't yet validated whether agents actually need this level of privacy—but the problem definition is sound enough to warrant close watching."
+  },
+  "human402": {
+    "name": "human402",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Human402 is building HTTP-native micropayment rails specifically for agent-to-human task completion, positioning itself at the protocol layer where settlement velocity matters more than throughput. The bet is that autonomous agents will generate sufficient task fragmentation to justify a dedicated payment primitive rather than routing through general-purpose stablecoin infrastructure, but this assumes agent economics stabilize around human-in-the-loop workflows rather than fully automated execution. Early success would validate micropayment as a distinct stack requirement; failure suggests agents either consolidate work into larger batches or simply integrate existing payment processors, making this layer redundant."
+  },
+  "agentnet": {
+    "name": "AgentNet",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "AgentNet operates at a deliberately constrained layer—it's a payment protocol wrapped in social mechanics rather than a generalized settlement infrastructure, using USDC tips as the primitive interaction between autonomous agents. This positioning is notable because it trades breadth (universal agent-to-agent payments) for specificity (incentive signaling within a closed social graph), which either validates a consumer-first narrative for agent coordination or reveals how nascent agent economies still lack organic, high-volume transaction patterns that would demand sophisticated routing. The early-stage risk is whether tipping mechanics scale beyond novelty; the upside is that if agents do develop persistent reputational identities on-chain, AgentNet's social layer could become a de facto discovery mechanism for trustworthiness in agent selection. Watch whether this becomes infrastructure others build on or remains a consumer application waiting for agent-to-agent economic density."
+  },
+  "parley-protocol": {
+    "name": "Parley Protocol",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Parley Protocol is building deterministic content negotiation and settlement for agent-to-agent transactions at the L3 protocol layer, essentially automating the \"who pays whom and for what\" problem that emerges when autonomous systems interact at scale. By anchoring this on Base and using smart contracts for micropayment execution, it's attempting to solve a real bottleneck—most agent architectures today either avoid inter-agent transactions entirely or rely on centralized payment gateways, which defeats the purpose of decentralization. The early-stage risk is high: micropayments have failed repeatedly on-chain due to gas economics, and the use case (agent-to-agent settlement) remains largely theoretical until agent economies actually materialize at meaningful volume. Worth watching because if agents do become economically autonomous, the protocol layer handling their payment logic becomes infrastructure-critical; if they don't, this becomes a solution searching for a problem."
+  },
+  "zkx402": {
+    "name": "zkx402",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "zkx402 addresses a real friction point—identity-aware pricing requires either trusted intermediaries or expensive on-chain computation—by using zero-knowledge proofs to settle micropayments on Celo without revealing payer identity or pricing logic on-chain. Its L3 positioning is strategic: it sits above settlement but below application routers, meaning it could become invisible infrastructure if the zk-micropayment pattern gains adoption in agent-to-agent transactions. The early-stage risk is execution complexity; zk circuit design for variable pricing models is non-trivial, and Celo's ecosystem depth for this use case remains unproven. If this pattern works, it becomes a template for private, scalable agent payments; if it doesn't, it's likely because the identity-privacy tradeoff isn't worth the zk overhead for most agent use cases."
+  },
+  "shulam": {
+    "name": "Shulam",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Shulam implements HTTP 402 Payment Required as an enterprise-grade protocol layer, positioning itself between application logic and settlement rails—a narrower but potentially more durable niche than consumer payment routers. The compliance-first architecture and permissioned approach suggest targeting institutional AI service providers rather than open networks, which trades addressable market size for regulatory clarity and contractual enforceability. Early execution here matters because HTTP 402 has remained largely theoretical for two decades; if Shulam can make it operational for agent-to-agent micropayments, it establishes a standard that others will either build on or copy. The risk is that enterprise adoption requires solving payment coordination at scale before the demand signal is clear—enterprises may prefer existing invoicing/settlement channels until agent economics genuinely force protocol-level micropayments."
+  },
+  "tollbooth-dpyc": {
+    "name": "Tollbooth-DPYC",
+    "layer": "L3",
+    "status": "early",
+    "editorial": "Tollbooth-DPYC operationalizes Lightning-based billing for Claude's Model Context Protocol (MCP) ecosystem by introducing prepaid credit buckets and dynamic pricing, solving the fragmentation problem where agents need per-service settlement without triggering high-friction payment flows. Its positioning at L3 (protocol layer) rather than as wallet or routing infrastructure makes it a thin billing abstraction that could become standard scaffolding for MCP monetization—but only if adoption density reaches critical mass; isolated to Claude's tool ecosystem, it remains a nice-to-have. The open-source approach and focus on sub-cent micropayments suggest architectural thinking about sustainable service provider incentives, though early-stage execution risks and Lightning's variable routing latency create real UX friction for agent workflows that demand predictability. Worth watching as a proving ground for whether Lightning's asymmetry (fast settlement, variable confirmation speed) actually works for agent-initiated, repeated small payments in practice."
+  },
+  "mesh": {
+    "name": "Mesh",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Mesh occupies the critical routing layer where agent payments actually become practical—translating fragmented wallet and exchange liquidity into a unified abstraction that developers can call without managing slippage, counterparty risk, or chain logistics. With $200M+ in backing and three years of live operation, it's matured beyond the typical infrastructure play into a quasi-settlement layer, which matters because payment routing is where most agent architectures currently leak complexity and capital efficiency. The real test isn't whether Mesh works (it does) but whether agents will actually consolidate around a single routing provider or whether the fragmented wallet landscape forces developers to build routing abstraction anyway—making Mesh either essential middleware or a doomed attempt to impose order on chaos."
+  },
+  "crossmint-l2": {
+    "name": "Crossmint",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Crossmint's REST-first routing layer addresses a genuine infrastructure gap for agent payments: abstracting away multi-chain complexity so developers don't need to reason about settlement mechanics. By positioning itself at the routing tier rather than building end-to-end wallets, it functions as middleware that could theoretically integrate with multiple payment orchestrators—though this also means it competes on speed and cost efficiency rather than lock-in. The $23.6M funding and 2021 launch suggest early traction, but success here depends entirely on adoption velocity; routing layers are only valuable at scale, and the space remains fragmented with competing abstraction approaches (bridges, intents, account abstraction). Worth monitoring for whether it becomes infrastructure or gets folded into a more integrated payment stack."
+  },
+  "biconomy-dan": {
+    "name": "Biconomy DAN",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Biconomy DAN abstracts away the fragmentation problem for agent payments by providing a unified transaction routing layer with built-in gas sponsorship—essentially operating as a relay network that lets agents execute across multiple chains without managing per-chain wallets or liquidity. This positioning is critical because agents require deterministic, cost-predictable execution across heterogeneous environments, and DAN solves for that at the routing layer rather than forcing it upstream to application logic. The open-source approach and 2023 launch suggest early-mover advantage in a space where proprietary routing could become a critical chokepoint, though widespread adoption will depend on whether multichain agent transactions actually demand this level of abstraction versus emerging chain-abstraction solutions at the settlement layer."
+  },
+  "bvnk": {
+    "name": "BVNK",
+    "layer": "L2",
+    "status": "acquired",
+    "editorial": "BVNK's acquisition by Mastercard for $1.8B signals that traditional payment infrastructure sees agent-to-agent settlement as an enterprise problem requiring abstraction layers that hide blockchain complexity—the routing and reconciliation work that lets corporate systems treat crypto as just another rail rather than a distinct ecosystem. The deal validates that cross-border B2B crypto payments need institutional credibility and fiat on/off ramps more than they need decentralization, but it also risks ossifying the space around legacy payment rails rather than exploring what happens when agents can settle peer-to-peer without intermediaries. For the agent payments stack specifically, BVNK's exit suggests the biggest near-term money is in enterprise adoption and compliance, not in novel settlement primitives—a constraint worth watching as agents mature beyond proof-of-concept deployments."
+  },
+  "unifold": {
+    "name": "Unifold",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Unifold sits at a critical abstraction layer—converting fragmented cross-chain payment rails into a trivial integration surface for agent developers—but its $500K seed and 2025 launch mean it's still proving whether developers will actually consolidate payment ingest through a third party rather than building single-chain logic themselves. The real test isn't technical elegance; it's whether agent payment flows are chaotic enough to justify another dependency, or whether they'll remain siloed by chain for predictability and control. If acquired by a major wallet or infrastructure player, it signals that multi-chain abstraction for agents has moved from experimental to table-stakes; if it doesn't, that may indicate agents themselves remain too chain-specific to justify routing middleware."
+  },
+  "li-fi": {
+    "name": "Li.Fi",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Li.Fi occupies the critical routing layer that agent payments will depend on to arbitrage liquidity fragmentation across chains—essentially solving the \"where should this swap execute\" problem at scale. Its position as an open-source aggregator means agent developers can bake cross-chain settlement directly into payment flows without building their own bridge logic, reducing both engineering lift and execution risk. The core risk is that Li.Fi's value-add compresses as chains consolidate liquidity or as intent-based architectures (searchers, solvers) commoditize routing; $51.7M in funding suggests conviction that won't happen soon, but the space is moving fast enough that routing layers built for human UX may not survive the agent-first world. Worth watching specifically for whether Li.Fi evolves from a DEX aggregator into an agent-native settlement primitive, or becomes a relic of the multi-chain transition period."
+  },
+  "socket": {
+    "name": "Socket",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Socket abstracts bridge fragmentation by routing transfers and messages across chains through a unified API, solving a real operational problem for multi-chain agents that would otherwise need to integrate dozens of bridge protocols individually. Its position in the routing layer is structurally important—agents need reliable cross-chain execution before they can settle payments or manage distributed treasuries, making Socket foundational infrastructure rather than an application. The $10M funding and 2022 launch suggest it's past proof-of-concept but the sparse homepage and lack of obvious market dominance (relative to competitors like Li.Fi) indicate Socket remains in the critical phase where developer adoption and bridge liquidity depth will determine whether it becomes standard plumbing or gets absorbed into larger platforms."
+  },
+  "debridge": {
+    "name": "deBridge",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "deBridge solves a fundamental constraint for multi-chain agents: the ability to atomically route liquidity and trigger state changes across fragmented EVM ecosystems without wrapping into a single settlement layer. As a routing abstraction rather than a bridge itself, it sits at a critical junction where agent payment flows must decide whether to settle locally or coordinate across chains—a choice that directly impacts latency, cost, and composability for agent workflows. The 2021 launch and open-source posture suggest established infrastructure, though with only $5.5M seed funding, deBridge lacks the institutional weight of venture-backed competitors, raising questions about long-term maintenance and whether routing abstraction can sustain as a standalone layer or gets absorbed into larger settlement protocols. For agents operating across multiple chains, deBridge represents the kind of plumbing that either becomes invisible (a good sign) or becomes another source of liquidity fragmentation if adoption stalls."
+  },
+  "wormhole": {
+    "name": "Wormhole",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Wormhole's position as cross-chain messaging infrastructure makes it foundational rather than differentiating—agents need reliable routing across chains, but the protocol itself doesn't solve the harder problem of economic finality or payment settlement guarantees across heterogeneous consensus models. The $225M funding and multi-chain coverage suggest market validation, yet Wormhole's viability depends entirely on whether token-bridge risk becomes acceptable to enterprise agent deployments, a question still unresolved after multiple exploits in the bridge ecosystem. For agent payments specifically, Wormhole handles the routing layer well but offloads liquidity risk and settlement certainty to the wallets and protocols above it, making it critical infrastructure but not a complete payments solution."
+  },
+  "jupiter": {
+    "name": "Jupiter",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Jupiter's dominance as Solana's routing layer—aggregating liquidity across fragmented DEX venues to surface optimal execution—makes it a critical chokepoint for any agent needing to swap assets with minimal slippage, yet this concentration risk is largely invisible to downstream applications relying on it. Its open-source posture has prevented proprietary lock-in, but the lack of cross-chain abstraction means agents operating multi-chain strategies must stitch together separate routing solutions, exposing coordination gaps. The 2021 launch predates the current agent infrastructure wave, positioning Jupiter as inherited infrastructure rather than purposefully architected for agent economics—a potential liability if agent-specific routing requirements (latency, partial fills, MEV guarantees) diverge from vanilla swap optimization."
+  },
+  "1inch": {
+    "name": "1inch",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "1inch's multi-chain DEX aggregation layer has become essential infrastructure for agent payment flows requiring optimal token conversions—its routing across 300+ liquidity sources reduces slippage costs that would otherwise erode agent margins on frequent micro-transactions. The routing abstraction it provides sits at a critical juncture: agents need deterministic, low-latency price discovery to execute payments efficiently, and 1inch's algorithmic pathfinding handles fragmentation across venues that would otherwise require agents to implement complex swap logic themselves. As a mature, battle-tested aggregator (live since 2019), it's less speculative than newer purpose-built agent infrastructure, but its success depends on whether agent payment volumes actually materialize at scales where basis-point savings justify on-chain routing complexity. An acquisition here would signal that legacy fintech or payment rails see agent settlement as a real revenue opportunity worth bundling with existing DEX infrastructure."
+  },
+  "uniswap": {
+    "name": "Uniswap",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Uniswap's programmatic swap APIs have become the default liquidity layer for agent token routing, not because of marketing but because it's the only DEX with sufficient depth, multi-chain coverage, and developer tooling to support autonomous execution at scale. Its position at the routing layer—sitting between agent wallets and settlement—makes it critical infrastructure for any agent payment system that needs to convert between tokens without building proprietary liquidity; agents can execute swaps atomically without custody or counterparty risk. The real risk isn't Uniswap's dominance but its governance concentration: as agent volume compounds, control over swap fees, oracle data, and liquidity incentives becomes a chokepoint that could either accelerate or throttle the entire agent payments ecosystem. Early-stage agent stacks betting heavily on Uniswap integration should be watching for governance changes or competitive pressure from intent-based routers that might offer agents better execution without DEX dependency."
+  },
+  "cow-protocol": {
+    "name": "CoW Protocol",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "CoW Protocol's batch auction mechanism solves a genuine pain point for agent settlement: large programmatic trades can be routed through its intent-based DEX to eliminate MEV leakage that would otherwise erode margins on multi-step transactions. As agents scale their on-chain activity, the routing layer becomes critical infrastructure, and CoW's 2021 launch and $23M funding suggest early validation of this need—though its adoption depends entirely on whether agent frameworks integrate it as a default settlement path rather than leaving it as optional infrastructure that most builders ignore. The protocol's open-source architecture positions it well for composability with agent stacks, but fragmentation across competing batch auction designs could dilute its network effects before agents become dependent on any single routing standard."
+  },
+  "moonpay": {
+    "name": "MoonPay",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "MoonPay operates at the abstraction layer where agent payments meet fiat rails—converting the fragmented landscape of 80+ payment methods and cross-border corridors into a single routing interface that agents and applications can call without reimplementing settlement logic for each geography. This positioning is critical because agents operating globally cannot afford the compliance and integration overhead of managing payment rails directly; MoonPay essentially becomes the payment primitive that scales agent commerce beyond crypto-native users. The $555M Series A valuation reflects institutional conviction in this layer, though the real test is whether MoonPay's abstraction remains durable as chains proliferate stablecoins and as decentralized settlement protocols mature—the risk being that MoonPay becomes a transitional middleware rather than a defensible routing standard. An acquisition would likely signal that large payment networks or fintech platforms see agent-native payment infrastructure as worth internalizing rather than outsourcing."
+  },
+  "reqcast": {
+    "name": "ReqCast",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "ReqCast addresses a real friction point in agentic workflows—the absence of native payment Rails between autonomous systems and their tool dependencies—by embedding micropayment settlement directly into HTTP request headers via the x402 standard, eliminating SDK integration overhead for developers. Its positioning at the routing layer is strategically sound: rather than competing at settlement or wallet levels, it acts as the transparent payment conduit that makes per-call economics viable without forcing developers to become payment infrastructure experts. The 95% instant payout to Base mainnet suggests a meaningful bet on Coinbase's L2 as the settlement backbone for agent economies, though the real test is whether x402 adoption scales beyond this gateway or remains isolated to ReqCast's control. Early traction on Base is notable, but the project's durability depends on whether micropayment routing becomes standard enough for competitors to build around it—or whether agent architectures simply route payments elsewhere."
+  },
+  "kibble": {
+    "name": "Kibble",
+    "layer": "L2",
+    "status": "early",
+    "editorial": "Kibble addresses a genuine operational friction in agent economics: the bootstrapping problem where agents need liquidity on specific chains before executing their first transactions. By packaging cross-chain bridging as a pre-payment abstraction layer rather than requiring agents (or their operators) to manually manage USDC positioning, it reduces setup complexity for developers deploying agents across fragmented liquidity pools—a practical necessity as multi-chain agent deployments become standard. The SDK-first approach and reliance on existing bridge infrastructure (LI.FI) positions it as thin middleware rather than a core settlement layer, which limits network effects but maximizes adoption velocity. The real test is whether this solves enough friction to become reflexive developer practice, or whether it remains a convenience layer that agents/operators skip when liquidity coordination is already handled upstream."
+  },
+  "reveel": {
+    "name": "Reveel",
+    "layer": "L2",
+    "status": "live",
+    "editorial": "Reveel occupies the routing layer by solving a genuine UX problem for agents: abstracting away chain and stablecoin fragmentation through a username-based payment interface, letting agents receive USDC on Arbitrum and settle in USDT on Polygon without explicit bridge logic. This is strategically positioned between wallet abstraction (layer below) and agent application frameworks (layer above), which means Reveel's adoption directly correlates to how friction-free agent-to-agent payments become across ecosystems. The explicit agent-native positioning is notable—most payment infrastructure retroactively adapted to agents, but Reveel was designed for them from the start, suggesting a different set of assumptions about throughput, atomicity, and state reconciliation than human-facing products. The risk is distribution: a routing layer only matters if agents actually adopt it over direct bridge+swap patterns, and at $5.8M deployed since 2022, Reveel's TVL and transaction volume will be the real measure of whether it's infrastructure or a solution looking for a problem."
+  },
+  "moonpay-ows": {
+    "name": "MoonPay OWS",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "MoonPay OWS addresses a genuine fragmentation problem at the wallet layer by enabling agents to abstract away custodian lock-in through a standardized API interface—a necessary condition for agents to operate efficiently across multiple on-chain execution contexts. The timing matters: as agent frameworks mature, they'll quickly hit the ceiling of single-custodian architectures, making interoperable key management infrastructure less a nice-to-have and more operational overhead. Early execution here could establish MoonPay as the de facto standard-setter for agent-wallet bridges, though the project's success ultimately depends on whether it achieves real multi-custodian adoption beyond MoonPay's own ecosystem—a non-trivial distribution problem in an increasingly fragmented custody landscape."
+  },
+  "crossmint-l1": {
+    "name": "Crossmint",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "Crossmint's API-first wallet infrastructure sits at a critical choke point: agents need deterministic, programmable key management to transact autonomously, and Crossmint abstracts away custody complexity through REST endpoints rather than forcing agents to manage keys directly. The company's multi-chain focus and $23.6M backing suggest investors see wallet fragmentation as the real bottleneck—not settlement protocols or governance layers—meaning agent payment flows likely depend more on seamless key rotation and asset routing than on novel L1 mechanics. The risk is that this layer commoditizes quickly once major wallet providers (Metamask, Ledger, Coinbase) add agent-native APIs, making Crossmint's early mover advantage vulnerable to incumbents; conversely, if agent custody becomes a specialized domain (high-frequency trading, autonomous fund management), API-native players with existing infrastructure could lock in defensible positions."
+  },
+  "thirdweb": {
+    "name": "Thirdweb",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "Thirdweb's positioning as an abstraction layer for smart wallet infrastructure gives it structural leverage over agent payment flows—by embedding auth and payment APIs directly into developer SDKs, it reduces friction for builders integrating agent settlement without requiring deep web3 literacy. The wallet-layer position is critical because agent payments depend on reliable key management and transaction signing, making this less a consumer-facing wallet and more foundational plumbing. However, the risk is commoditization: as rollups and L2s mature, wallet abstraction becomes increasingly table-stakes, and Thirdweb's moat depends on either developer lock-in through SDK depth or expansion into higher-margin settlement/routing layers where it currently has limited exposure."
+  },
+  "openfort": {
+    "name": "Openfort",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "Openfort occupies a critical but narrow wedge in the agent payments stack: it abstracts away key management and spending authority for gaming wallets, letting developers delegate transaction approval to agents via session keys and policy enforcement rather than requiring agents to hold or manage private keys directly. This is foundational infrastructure for any autonomous system that needs to execute payments without custody risk, but its gaming verticalization and relatively modest $3M seed suggest the team is solving a specific problem (game economies, in-game automation) rather than positioning for broader agent finance. The open-source SDK approach is the right move for adoption, but the real test is whether session-key architecture becomes the standard for agent-controlled wallets across verticals or remains a gaming-specific pattern that other layers eventually subsume."
+  },
+  "world-agentkit": {
+    "name": "World AgentKit",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "World AgentKit anchors agent payments at the identity layer rather than the application layer, using Worldcoin's biometric verification to bind spending controls to verified humans—a architectural choice that trades capital efficiency for regulatory defensibility and sybil resistance. The $250M bet suggests deep conviction that programmable wallet primitives will become table stakes for agent infrastructure, though the dependency on World ID adoption and Worldcoin's own regulatory trajectory introduces concentration risk that no amount of multi-chain deployment can fully mitigate. If this becomes the standard wallet framework for autonomous agents, it fundamentally reshapes how principals maintain custody and liability in a delegated execution model; if World ID stalls or fragmentizes, the bet collapses into one of many identity-agnostic alternatives."
+  },
+  "dynamic": {
+    "name": "Dynamic",
+    "layer": "L1",
+    "status": "acquired",
+    "editorial": "Dynamic's acquisition by Fireblocks represents a consolidation play that matters more for what it signals than what it solves: Fireblocks, historically focused on institutional settlement and custody, needed consumer-grade wallet UX and SDK distribution to compete in an agent-native ecosystem where seamless embedded payments are table stakes. By folding an API-first wallet layer into enterprise custody infrastructure, Fireblocks is betting that agent payment flows will eventually route through institutional rails rather than remaining siloed in consumer wallets—a bet that only pays off if custody providers can abstract away their complexity. The risk is that Dynamic's multi-chain, developer-first positioning gets flattened into Fireblocks' enterprise-first roadmap, potentially ceding ground to standalone wallet SDKs that move faster on consumer and agent use cases."
+  },
+  "zerodev": {
+    "name": "ZeroDev",
+    "layer": "L1",
+    "status": "acquired",
+    "editorial": "ZeroDev's acquisition by Arbitrum signals that account abstraction infrastructure—specifically SDK-level tooling for gasless transactions and session key management—has moved from experimental to strategic necessity for agent scaling. The project occupied a critical but narrow position: enabling developers to abstract away key management complexity without forcing agents into proprietary wallet ecosystems, which matters because agent-to-agent payments require programmatic key delegation and spending limits that standard EOAs cannot provide. Arbitrum's acquisition likely reflects both a defensive play (locking in AA infrastructure before competitors) and a recognition that L1s can no longer compete on settlement speed alone—they must own the developer UX layer where agents are actually built. The risk: ZeroDev's $1M pre-seed valuation before acquisition suggests limited market validation, and integrating it into Arbitrum's stack could lock agent payment tooling into a single chain's incentive structure."
+  },
+  "fireblocks": {
+    "name": "Fireblocks",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "Fireblocks operates at the foundational wallet layer where institutional risk tolerance meets technical reality—their MPC infrastructure abstracts away key management complexity that would otherwise force enterprises to either build in-house (expensive, dangerous) or accept unacceptable custody risks. Five years post-launch and $1B+ funded, they've essentially won the enterprise segment by being the unsexy but mandatory infrastructure that sits between institutions and on-chain execution, making them less a payment company and more the plumbing that all serious agent payment systems must integrate with. The risk isn't competitive displacement but rather whether their permissioned, centralized-in-practice approach becomes a bottleneck as agent payment volumes scale toward real-time settlement demands that MPC latency may constrain. Their dominance here matters precisely because it's invisible to end users—any agent payment stack serious about institutional adoption will have Fireblocks as a dependency, not a choice."
+  },
+  "phantom": {
+    "name": "Phantom",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "Phantom occupies the critical wallet layer for agent payments by consolidating key management and transaction initiation across multiple chains, but its consumer-first design creates friction for programmatic agent-to-agent settlement where custody models and signing speed matter more than UI polish. Its $277M valuation reflects retail wallet dominance, not infrastructure readiness—agents operating at scale will likely need purpose-built signer infrastructure rather than Phantom's account abstraction model. The real test is whether Phantom can evolve from a consumer interface layer into a reliable backend component for agent payment flows, or whether specialized agent wallets (with different security and latency requirements) fork away entirely. Solana's emergence as the preferred agent settlement chain gives Phantom distribution advantage, but that same momentum could accelerate purpose-built alternatives if the wallet becomes a bottleneck."
+  },
+  "dfns": {
+    "name": "Dfns",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "Dfns occupies the critical choke point between agent logic and on-chain execution: they've built MPC-based key management that lets developers programmatically control signing policies rather than manually approving every transaction, which is essential for agents that need to operate autonomously at scale. Their white-label, API-first approach means they're invisible infrastructure, competing primarily on policy flexibility and uptime rather than brand, which is the right bet for a wallet layer. The risk is that this remains a solved problem—MPC wallets are increasingly commoditized—but their early 2020 launch and $29.5M in funding suggest they've established enterprise stickiness that may insulate them from that commoditization, at least temporarily."
+  },
+  "natural": {
+    "name": "Natural",
+    "layer": "L1",
+    "status": "early",
+    "editorial": "Natural occupies a critical but underexplored position at the wallet layer—treating AI agents not as API consumers but as autonomous economic actors requiring both fiat settlement rails and onchain liquidity management. By combining FDIC insurance with MCP protocol integrations, it solves a real infrastructure gap: agents can't meaningfully participate in payment flows without custody solutions that bridge traditional banking and crypto. The $9.8M seed and open-source positioning suggest conviction that agent payment infrastructure will standardize around common patterns, but the risk is execution—FDIC-insured accounts for software entities remain legally ambiguous, and early adoption will depend on whether developers trust agent autonomy over custody over time. Worth monitoring as a potential baseline primitive in the stack, though success hinges on whether the fiat-onchain bridge actually becomes necessary (or if agents remain ephemeral and settle through their parent applications instead)."
+  },
+  "waap": {
+    "name": "WaaP",
+    "layer": "L1",
+    "status": "live",
+    "editorial": "WaaP inverts the wallet-as-infrastructure problem by making delegation and policy the primitives rather than bolting them on—agents execute transactions under real-time constraints without ever touching private keys, using 2PC signing to collapse latency from seconds to milliseconds. This sits at a critical chokepoint: most agent payment stacks will fail not on settlement logic but on the operational security of key material at scale, making the architectural choice between custody, MPC, and delegated signing a foundational decision that compounds through every layer above. The risk is adoption: developers defaulting to simpler (if riskier) hot-wallet patterns unless WaaP's policy framework becomes genuinely easier to reason about than hand-rolling threshold schemes, and the opportunity is that it could standardize the control surface between agents and capital, the way HTTP did for the web. Watch whether it gets embedded as a dependency in major agent frameworks or remains a point solution for security-conscious teams."
+  },
+  "solana": {
+    "name": "Solana",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Solana's position as the de facto settlement layer for agent micropayments reflects a fundamental shift in infrastructure selection away from Ethereum's cost structure—agents executing thousands of transactions per day require sub-cent fees and sub-second finality, which Solana's native throughput provides without liquidity fragmentation across rollups. Its dominance here is less about technical superiority and more about economic arbitrage: at scale, a 10x difference in per-transaction cost compounds into material differences in agent profitability margins. The risk is concentration; if Solana experiences validator instability or network congestion during periods of high agent activity, the entire micropayment settlement layer fractures without fallback infrastructure. Watch whether competing L1s (Sui, Aptos) or even Ethereum layer-2s can dent this position by optimizing specifically for agent-to-agent settlement patterns rather than general EVM compatibility."
+  },
+  "ethereum": {
+    "name": "Ethereum",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Ethereum's dominance as the settlement layer for agent payments is structural rather than technical—it inherited composability and liquidity network effects that newer chains struggle to replicate, making it the de facto standard for routing high-frequency micropayments and conditional settlements across autonomous systems. The risk isn't obsolescence but ossification: as transaction costs and finality latency become binding constraints for sub-second agent-to-agent transactions, Ethereum's L1 throughput ceiling will force payment flows onto fragmented L2s, potentially balkanizing the agent economy into incompatible settlement domains. This makes Layer 2 standardization and cross-chain atomic settlement not optional infrastructure but existential requirements for agent economics to function at scale."
+  },
+  "arbitrum": {
+    "name": "Arbitrum",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Arbitrum's dominance as Ethereum's largest L2 by TVL makes it the default settlement layer for agent payments in EVM ecosystems, but this concentration creates a critical dependency: agents built on Arbitrum inherit its sequencer model and cross-chain bridging risks rather than achieving true settlement finality. The project's open-source architecture and developer tooling are table stakes for infrastructure, not differentiators—what matters is whether Arbitrum's governance can evolve fast enough to support agent-specific primitives (like atomic multi-hop settlements or programmable payment conditions) before competing L2s or L3s fragment the agent payment landscape. The risk isn't technological obsolescence; it's that Arbitrum becomes a lowest-common-denominator settlement layer while specialized payment protocols build abstraction layers on top, reducing Arbitrum's direct relevance to agent workflows that demand latency guarantees or cross-chain atomicity."
+  },
+  "sui": {
+    "name": "Sui",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Sui's object-centric data model and sub-second finality position it as a viable settlement layer for high-frequency agent payments, addressing throughput constraints that plague older L1s—but its adoption remains thin outside Move developers and early Sui ecosystem builders, leaving it vulnerable to network effects fragmentation rather than genuine settlement superiority. The architecture matters: parallel transaction execution and shared object design theoretically handle concurrent agent-to-agent payments better than sequential blockchains, yet this advantage only materializes with sufficient liquidity and routing infrastructure, neither of which exist at scale today. Worth monitoring as a testbed for settlement design, but calling it an \"emerging agent payment chain\" before demonstrating traction beyond the Sui Foundation's own ecosystem would be premature."
+  },
+  "polygon": {
+    "name": "Polygon",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Polygon's dual scaling approach—proof-of-stake sidechain plus zero-knowledge rollups—positions it as a practical settlement layer for agent payments where transaction costs matter more than absolute decentralization, a tradeoff that works for high-frequency micropayments but creates operational dependency on a single L1 validator set. Its May 2021 launch and developer-friendly tooling made it an early infrastructure choice, but the recent pivot toward zkEVM introduces architectural fragmentation that complicates long-term settlement guarantees for agents routing payments across both execution models. The real test isn't adoption—it's whether Polygon's fee advantage persists as Ethereum's own scaling matures and whether agent payment systems can tolerate the additional latency and bridge complexity that multi-chain settlement introduces."
+  },
+  "bnb-chain": {
+    "name": "BNB Chain",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "BNB Chain functions as the dominant settlement rails for agent transactions in Asian markets, capitalizing on Binance's exchange liquidity and ecosystem distribution rather than novel L1 architecture—a position that makes it infrastructure-critical for agent payment volume but structurally dependent on maintaining Binance's operational and regulatory standing. Its high throughput and sub-cent fees have made it the de facto settlement layer for agent-to-agent and agent-to-user payments in the region, yet this concentration risk means disruptions to Binance's status or perceived centralization pressures could force material routing changes across dependent agent networks. The absence of BNB Chain from the settlement layer would immediately fragment Asian agent payment flows, making it a necessary map inclusion despite being a known-quantity blockchain rather than a novel payments infrastructure."
+  },
+  "gnosis": {
+    "name": "Gnosis",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Gnosis operates as the de facto settlement rail for agent treasury infrastructure, leveraging its stablecoin-optimized design and embedded Safe account abstraction to reduce friction in multi-signature agent fund management—a critical requirement when autonomous systems control capital. Its 2018 pedigree and open-source architecture provide proven stability that newer L1s lack, but this positioning creates a narrow moat: Gnosis benefits from agent adoption precisely because it's boring and reliable, meaning any L1 that meaningfully improves on stablecoin UX or Safe integration could displace it. The real question is whether agent payment flows will remain Gnosis-native or fragment across chains faster than the ecosystem can standardize settlement, turning this layer into a commodity rather than infrastructure."
+  },
+  "near": {
+    "name": "NEAR",
+    "layer": "L0",
+    "status": "early",
+    "editorial": "NEAR's native account abstraction positions it as a rare L1 optimized for agent-native payment patterns—function calls and batch transactions execute within a single account model rather than requiring composable externalities. This architectural choice matters at settlement layer because it reduces the friction agents face when executing multi-step payment logic, though NEAR's modest TVL and developer adoption suggest the protocol hasn't yet captured meaningful agent payment volume despite the technical fit. The open-source foundation is a genuine asset for infrastructure builders, but NEAR risks becoming theoretically sound yet practically marginal if it can't generate network effects around agent workloads before competing L1s retrofit similar primitives."
+  },
+  "avalanche": {
+    "name": "Avalanche",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Avalanche's subnet architecture creates isolated execution environments that could theoretically optimize agent payment settlement at scale, but the lack of purpose-built agent tooling suggests it's being retrofitted for this use case rather than architecturally designed for it. As an L0 settlement layer, it competes directly with Ethereum and Solana on throughput and cost, making adoption contingent on whether enterprise agents actually need custom subnets versus existing rollup infrastructure. The open-source, developer-friendly positioning masks a critical question: whether enterprises settling agent payments will choose sovereign subnets (with separate validator sets and liquidity fragmentation) over consolidated settlement on established networks. Worth watching for whether real agent payment volume emerges, but the architectural bet on subnet isolation rather than shared settlement liquidity represents a significant adoption risk."
+  },
+  "kite": {
+    "name": "Kite",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "Kite is positioning itself as infrastructure for a specific choreography problem: how autonomous agents with independent treasuries coordinate payments at scale without human intervention. By building an L1 rather than a protocol layer, it's making a bet that agent payment flows are distinct enough from human transaction patterns to justify their own execution environment—programmable spend rules and coordination primitives rather than general computation. The PayPal Ventures backing signals institutional confidence in agent commerce as a near-term category, though it's worth watching whether adoption proves Kite's thesis that agents need settlement-layer primitives, or whether the same patterns eventually run on existing infrastructure as agent volumes simply normalize across chains."
+  },
+  "skale": {
+    "name": "SKALE",
+    "layer": "L0",
+    "status": "live",
+    "editorial": "SKALE's zero-gas settlement layer removes the primary friction point for agent micropayments—transaction costs that would otherwise dwarf the value of individual agent actions—making it the rare infrastructure piece that actually enables a new payment primitive rather than optimizing an existing one. As an Ethereum L2 with elastic sidechain architecture, it sits at a critical architectural choice: whether agent payment rails should inherit Ethereum's security model or trade it for throughput and cost, a tradeoff that matters more for financial primitives than most rollup use cases. The project's maturity (live since 2020) and developer adoption suggest it's proven the technical viability of gas-free settlement, though its adoption by agent frameworks remains sparse, indicating either that the problem isn't yet real at scale or that agent payments haven't yet found their natural venue. If a major agent payment router or framework standardized on SKALE, it would validate the settlement-layer-as-moat thesis; conversely, rising gas costs on mainnet could rapidly shift demand toward it without any deliberate integration."
+  }
+}

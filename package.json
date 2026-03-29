@@ -8,7 +8,9 @@
     "sync": "node scripts/sync-data.js",
     "fetch-x402": "node scripts/fetch-x402-volume.js",
     "fetch-apv": "node scripts/fetch-apv.js",
-    "refresh": "node scripts/fetch-apv.js && node scripts/fetch-x402-volume.js && node scripts/sync-data.js"
+    "refresh": "node scripts/fetch-apv.js && node scripts/fetch-x402-volume.js && node scripts/sync-data.js",
+    "editorials": "node scripts/generate-editorials.js",
+    "apply-editorials": "node scripts/generate-editorials.js --apply"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,7 @@
   },
   "homepage": "https://github.com/jordanlyall/agent-payments-stack#readme",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "@vercel/og": "^0.11.1",
     "playwright": "^1.58.2"
   }

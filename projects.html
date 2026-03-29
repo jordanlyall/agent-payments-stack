@@ -60,31 +60,37 @@
 
   /* Left — identity */
   .prof-name-row { display: flex; align-items: center; gap: 14px; }
-  .prof-favicon { width: 36px; height: 36px; border-radius: 7px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); object-fit: contain; flex-shrink: 0; }
+  .prof-favicon { width: 44px; height: 44px; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); object-fit: contain; flex-shrink: 0; }
 
   .prof-name { font-family: 'DM Serif Display', serif; font-size: 54px; font-weight: 400; line-height: 1; letter-spacing: -1px; }
-  .prof-layer {
+  /* Layer pill — single compact position indicator */
+  .layer-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px;
     font-family: 'JetBrains Mono', monospace;
-    font-size: 9.5px; color: var(--muted); text-transform: uppercase;
-    letter-spacing: 0.1em; margin-top: 12px; opacity: 0.7;
+    font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em;
   }
-  .prof-desc { font-size: 15px; color: var(--secondary); line-height: 1.65; max-width: 500px; margin-top: 14px; }
+  .layer-pill-id {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px; padding: 2px 6px; color: var(--text); font-weight: 600;
+  }
 
-  .layer-strip { display: flex; margin: 20px 0 0; max-width: 500px; overflow-x: auto; }
-  .layer-strip::-webkit-scrollbar { display: none; }
-  .ls-step { font-family: 'JetBrains Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); padding: 4px 8px; border: 1px solid var(--faint); border-right: none; white-space: nowrap; flex-shrink: 0; }
-  .ls-step:last-child { border-right: 1px solid var(--faint); }
-  .ls-step.ls-active { color: var(--text); background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.14); }
+  .prof-desc { font-size: 15px; color: var(--secondary); line-height: 1.65; max-width: 500px; margin-top: 16px; }
 
-  /* Editorial note in left column */
-  .prof-editorial {
-    margin-top: 24px;
-    padding: 16px 20px;
-    border-left: 2px solid rgba(255,255,255,0.1);
-    font-size: 13.5px;
-    color: var(--secondary);
-    line-height: 1.7;
+  .layer-strip { display: none; } /* replaced by layer-pill */
+
+  /* APS Take — editorial voice, no box */
+  .aps-take {
+    margin-top: 18px;
     max-width: 500px;
+  }
+  .aps-take-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); margin-bottom: 6px; font-weight: 600; opacity: 0.6;
+  }
+  .aps-take-text {
+    font-size: 14px; color: var(--text); line-height: 1.7; font-style: italic; opacity: 0.8;
   }
 
   /* Right — sidebar */
@@ -180,6 +186,64 @@
     background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
     border-radius: 3px; font-size: 10.5px; color: var(--muted);
     font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Layer stat line */
+  .layer-stat-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px; color: var(--muted); letter-spacing: 0.06em;
+    text-transform: uppercase; margin-top: 8px; max-width: 500px;
+    display: flex; gap: 12px; flex-wrap: wrap;
+  }
+  .lsl-seg { display: flex; align-items: center; gap: 4px; }
+  .lsl-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+  .lsl-dot-live { background: #4ade80; }
+  .lsl-dot-early { background: var(--early); }
+  .lsl-dot-announced { background: var(--ann); }
+
+  /* APS Take — editorial callout */
+  .aps-take {
+    margin-top: 22px;
+    padding: 14px 18px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-left: 2px solid rgba(237,235,231,0.25);
+    border-radius: 0 4px 4px 0;
+    max-width: 500px;
+  }
+  .aps-take-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); margin-bottom: 7px; font-weight: 600;
+  }
+  .aps-take-text {
+    font-size: 13.5px; color: var(--secondary); line-height: 1.7;
+  }
+
+  /* Mobile status row (hidden on desktop, shown on mobile) */
+  .prof-mobile-meta {
+    display: none;
+    margin-top: 18px;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .prof-mobile-badges { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .prof-mobile-cta {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 9px 14px; background: rgba(237,235,231,0.92); color: #0d0c0b;
+    border-radius: 4px; font-size: 12.5px; font-weight: 600;
+    text-decoration: none; transition: background 0.15s;
+    letter-spacing: 0.01em; width: 100%;
+  }
+  .prof-mobile-cta:hover { background: var(--text); }
+  .prof-mobile-metric { display: flex; flex-direction: column; gap: 2px; }
+  .prof-mobile-metric-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px; font-weight: 600; letter-spacing: -0.5px; color: var(--text);
+  }
+  .prof-mobile-metric-label {
+    font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); font-weight: 500;
   }
 
   /* Below-fold */
@@ -286,8 +350,13 @@
     .page { padding: 20px 20px 40px; }
     .prof-layout { grid-template-columns: 1fr; }
     .prof-aside { display: none; }
+    .prof-mobile-meta { display: flex; }
     .pn-nav { padding: 16px 0 0; }
     .foot { flex-direction: column; gap: 8px; }
+    .aps-take { max-width: 100%; }
+    .layer-stat-line { max-width: 100%; }
+    .prof-desc { max-width: 100%; }
+    .layer-strip { max-width: 100%; }
   }
 </style>
 <script defer src="/_vercel/insights/script.js"></script>
@@ -425,18 +494,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var nameRow = mk('div', 'prof-name-row');
     var favDomain = getDomain(p.url);
-    if (favDomain) {
+    var FAV_BLOCKLIST = ['x.com', 'twitter.com', 'github.com', 't.co'];
+    if (favDomain && !FAV_BLOCKLIST.some(function(b) { return favDomain === b || favDomain.endsWith('.' + b); })) {
       var favImg = document.createElement('img');
       favImg.className = 'prof-favicon';
-      favImg.src = 'https://www.google.com/s2/favicons?domain=' + favDomain + '&sz=64';
+      // Clearbit primary — higher quality logos; fallback to Google favicon on error
+      favImg.src = 'https://logo.clearbit.com/' + favDomain;
       favImg.alt = '';
       favImg.setAttribute('data-favicon', '1');
+      favImg.setAttribute('data-fallback', 'https://www.google.com/s2/favicons?domain=' + favDomain + '&sz=64');
       nameRow.appendChild(favImg);
     }
     var nameEl = mk('div', 'prof-name'); nameEl.textContent = p.name; nameRow.appendChild(nameEl);
     left.appendChild(nameRow);
-    if (p.layer) { var layEl = mk('div','prof-layer'); layEl.textContent = p.layer + ' \u2014 ' + (LAYER_NAMES[p.layer]||''); left.appendChild(layEl); }
-    // Layer position strip
+    if (p.layer) {
+      var pill = mk('div', 'layer-pill');
+      var pillId = mk('span', 'layer-pill-id'); pillId.textContent = p.layer;
+      ap(pill, pillId, '\u00a0', LAYER_NAMES[p.layer] || '');
+      left.appendChild(pill);
+    }
+    // Layer position strip (hidden via CSS — kept for fallback)
     if (p.layer) {
       var LAYERS_ORDER = ['L0','L1','L2','L3','L4','L5'];
       var LAYERS_SHORT = { L0:'Settlement', L1:'Wallets', L2:'Routing', L3:'Protocol', L4:'Governance', L5:'App' };
@@ -447,12 +524,82 @@ document.addEventListener('DOMContentLoaded', function () {
         strip.appendChild(step);
       });
       left.appendChild(strip);
+
+      // Layer stat line: "30 protocols · 13 live · 16 early · 1 announced"
+      if (layers) {
+        var layerData = layers.filter(function(l) { return l.id === p.layer; })[0];
+        if (layerData) {
+          var lps = layerData.projects;
+          var lLive = lps.filter(function(q){return (!q.status||q.status==='live');}).length;
+          var lEarly = lps.filter(function(q){return q.status==='early';}).length;
+          var lAnn = lps.filter(function(q){return q.status==='announced';}).length;
+          var statLine = mk('div', 'layer-stat-line');
+          var totalSeg = mk('span', 'lsl-seg'); totalSeg.textContent = lps.length + ' protocols';
+          statLine.appendChild(totalSeg);
+          if (lLive) {
+            var liveSeg = mk('span', 'lsl-seg');
+            var liveDot = mk('span', 'lsl-dot lsl-dot-live'); liveSeg.appendChild(liveDot);
+            liveSeg.appendChild(document.createTextNode(lLive + ' live'));
+            statLine.appendChild(liveSeg);
+          }
+          if (lEarly) {
+            var earlySeg = mk('span', 'lsl-seg');
+            var earlyDot = mk('span', 'lsl-dot lsl-dot-early'); earlySeg.appendChild(earlyDot);
+            earlySeg.appendChild(document.createTextNode(lEarly + ' early'));
+            statLine.appendChild(earlySeg);
+          }
+          if (lAnn) {
+            var annSeg = mk('span', 'lsl-seg');
+            var annDot = mk('span', 'lsl-dot lsl-dot-announced'); annSeg.appendChild(annDot);
+            annSeg.appendChild(document.createTextNode(lAnn + ' announced'));
+            statLine.appendChild(annSeg);
+          }
+          left.appendChild(statLine);
+        }
+      }
     }
     if (p.description) { var descEl = mk('p','prof-desc'); descEl.textContent = p.description; left.appendChild(descEl); }
-    // Editorial note in left column
+
+    // APS Take — prominent editorial callout
     if (p.editorial) {
-      var edLeft = mk('div', 'prof-editorial'); edLeft.textContent = p.editorial; left.appendChild(edLeft);
+      var take = mk('div', 'aps-take');
+      var takeLabel = mk('div', 'aps-take-label'); takeLabel.textContent = 'APS Take';
+      var takeText = mk('div', 'aps-take-text'); takeText.textContent = p.editorial;
+      ap(take, takeLabel, takeText); left.appendChild(take);
     }
+
+    // Mobile meta block (status + CTA + top metric) — shown only on mobile via CSS
+    (function() {
+      var mob = mk('div', 'prof-mobile-meta');
+      // badges
+      var mobBadges = mk('div', 'prof-mobile-badges');
+      var mb = mk('span', badgeClass(p.status)); mb.textContent = p.status || 'live'; mobBadges.appendChild(mb);
+      if (isHackathon(p.url)) { var mhb = mk('span','badge badge-hack'); mhb.textContent = 'hackathon'; mobBadges.appendChild(mhb); }
+      mob.appendChild(mobBadges);
+      // CTA
+      var ctaUrl2 = p.url || (p.github && p.github.url);
+      if (ctaUrl2) { var mobCta = mkA(ctaUrl2, 'prof-mobile-cta', true); mobCta.textContent = 'Visit website \u2192'; mob.appendChild(mobCta); }
+      // Top metric (volume > npm > stars)
+      var mobMetricVal = null, mobMetricLabel = null;
+      if (p.volume && p.volume.value != null) {
+        var v2 = p.volume.value, u2 = p.volume.unit;
+        mobMetricVal = u2 === 'usd' ? (v2 >= 1e9 ? '$'+(v2/1e9).toFixed(1)+'B' : v2 >= 1e6 ? '$'+(v2/1e6).toFixed(0)+'M' : '$'+v2.toLocaleString()) : v2.toLocaleString()+' '+u2;
+        mobMetricLabel = 'Volume (30d)';
+      } else if (p.npm && p.npm.weekly_downloads) {
+        mobMetricVal = p.npm.weekly_downloads >= 1000 ? (p.npm.weekly_downloads/1000).toFixed(1)+'K' : String(p.npm.weekly_downloads);
+        mobMetricLabel = 'Weekly npm';
+      } else if (p.github && p.github.stars) {
+        mobMetricVal = p.github.stars.toLocaleString();
+        mobMetricLabel = 'GitHub Stars';
+      }
+      if (mobMetricVal) {
+        var mm = mk('div', 'prof-mobile-metric');
+        var mmv = mk('div', 'prof-mobile-metric-val'); mmv.textContent = mobMetricVal;
+        var mml = mk('div', 'prof-mobile-metric-label'); mml.textContent = mobMetricLabel;
+        ap(mm, mmv, mml); mob.appendChild(mm);
+      }
+      left.appendChild(mob);
+    }());
 
     // ── RIGHT: sidebar ──
     var aside = mk('div', 'prof-aside');
@@ -490,8 +637,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (volDisplay) {
       aside.appendChild(mk('div','aside-divider'));
       var mv = mk('div','aside-metric-val'); mv.textContent = volDisplay;
-      var ml = mk('div','aside-metric-label');
-      ml.textContent = p.volume.note ? 'Volume (30d) \u00b7 ' + p.volume.note : 'Volume (30d)';
+      var ml = mk('div','aside-metric-label'); ml.textContent = 'Volume (30d)';
       ap(aside, mv, ml);
       // Snapshot trend
       if (p.volume.snapshots && p.volume.snapshots.length >= 2) {
@@ -502,10 +648,6 @@ document.addEventListener('DOMContentLoaded', function () {
         var badge = mk('span', 'vol-trend-badge ' + (pct >= 0 ? 'vol-trend-up' : 'vol-trend-down'));
         badge.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(0) + '% vs ' + snaps[snaps.length-2].date;
         aside.appendChild(badge);
-      } else if (p.volume.snapshots && p.volume.snapshots.length === 1) {
-        var trackEl = mk('div', 'vol-tracking');
-        trackEl.textContent = 'Tracking since ' + p.volume.snapshots[0].date;
-        aside.appendChild(trackEl);
       }
     } else if (p.npm && p.npm.weekly_downloads) {
       aside.appendChild(mk('div','aside-divider'));
@@ -571,10 +713,30 @@ document.addEventListener('DOMContentLoaded', function () {
       aside.appendChild(ld);
     }
 
-    // Meta (launched if no funding to show it there, last commit)
+    // Volume ranking within layer
+    if (volDisplay && layers && p.layer) {
+      var layerVols = [];
+      layers.forEach(function(l) {
+        if (l.id !== p.layer) return;
+        l.projects.forEach(function(q) {
+          if (q.volume && q.volume.value != null && q.volume.unit === 'usd') layerVols.push({ id: q.id, val: q.volume.value });
+        });
+      });
+      layerVols.sort(function(a,b){ return b.val - a.val; });
+      var rank = layerVols.findIndex(function(v){ return v.id === p.id; });
+      if (rank !== -1 && layerVols.length > 1) {
+        var rankEl = mk('div','aside-metric-label');
+        rankEl.style.marginTop = '4px';
+        rankEl.textContent = '#' + (rank + 1) + ' by volume in ' + p.layer + ' \u00b7 ' + layerVols.length + ' tracked';
+        aside.appendChild(rankEl);
+      }
+    }
+
+    // Meta (launched if no funding to show it there, last commit, tracking since)
     var mrows = [];
     if (p.launched && !p.funding) mrows.push({label:'launched', val:p.launched});
     if (p.github && p.github.last_commit) mrows.push({label:'last commit', val:p.github.last_commit});
+    if (p.volume && p.volume.snapshots && p.volume.snapshots.length === 1) mrows.push({label:'tracking', val:'since ' + p.volume.snapshots[0].date});
     if (mrows.length) {
       aside.appendChild(mk('div','aside-divider'));
       var md = mk('div','aside-meta');
@@ -618,7 +780,8 @@ document.addEventListener('DOMContentLoaded', function () {
       acqSec.appendChild(acqChips); below.appendChild(acqSec);
     }
 
-    if (p.history && p.history.length) {
+    // History — full section only if 2+ events; single event shown inline in sidebar meta
+    if (p.history && p.history.length >= 2) {
       var hs = mk('div','rel-section');
       var ht = mk('div','rel-title'); ht.textContent = 'History'; hs.appendChild(ht);
       var hl = mk('ul','history-list');
@@ -652,42 +815,42 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Used by
-    if (layers) {
-      var usedBy = [];
-      layers.forEach(function(l) { l.projects.forEach(function(q) { if (q.related && q.related.indexOf(p.id)!==-1) usedBy.push(q); }); });
-      if (usedBy.length) {
-        var us = mk('div','rel-section');
-        var ut = mk('div','rel-title'); ut.textContent = 'Used by'; us.appendChild(ut);
-        var uc = mk('div','rel-chips');
-        usedBy.forEach(function(u) {
-          var chip = mkA('/'+u.id, 'rel-chip');
-          if (u.layer) { var lt = mk('span','rel-layer-tag'); lt.textContent = u.layer; chip.appendChild(lt); }
-          chip.appendChild(document.createTextNode(u.name)); uc.appendChild(chip);
-        });
-        us.appendChild(uc); below.appendChild(us);
-      }
-    }
+    // Ecosystem — unified section: "used by" + "integrates with" with relationship labels
+    (function() {
+      var usedBy2 = [];
+      if (layers) layers.forEach(function(l) { l.projects.forEach(function(q) { if (q.related && q.related.indexOf(p.id) !== -1) usedBy2.push(q); }); });
+      var intWith = (p.related && p.related.length && layers) ? p.related.map(function(rid){ return findProject(layers,rid); }).filter(Boolean) : [];
 
-    // Integrates with
-    if (p.related && p.related.length && layers) {
-      var rp = p.related.map(function(rid){return findProject(layers,rid);}).filter(Boolean);
-      if (rp.length) {
-        var ws = mk('div','rel-section');
-        var wt = mk('div','rel-title'); wt.textContent = 'Integrates with'; ws.appendChild(wt);
-        var wc = mk('div','rel-chips');
-        rp.forEach(function(r) {
-          var chip = mkA('/'+r.id, 'rel-chip');
-          if (r.layer) { var lt = mk('span','rel-layer-tag'); lt.textContent = r.layer; chip.appendChild(lt); }
-          chip.appendChild(document.createTextNode(r.name)); wc.appendChild(chip);
-        });
-        ws.appendChild(wc); below.appendChild(ws);
-      }
-    }
+      if (!usedBy2.length && !intWith.length) return;
 
-    // Siblings
+      var es = mk('div','rel-section');
+      var et = mk('div','rel-title'); et.textContent = 'Ecosystem'; es.appendChild(et);
+      var ec = mk('div','rel-chips');
+
+      usedBy2.forEach(function(u) {
+        var chip = mkA('/'+u.id, 'rel-chip');
+        if (u.layer) { var lt = mk('span','rel-layer-tag'); lt.textContent = u.layer; chip.appendChild(lt); }
+        chip.appendChild(document.createTextNode(u.name));
+        var rel = mk('span','rel-chip-val'); rel.textContent = 'uses'; chip.appendChild(rel);
+        ec.appendChild(chip);
+      });
+
+      intWith.forEach(function(r) {
+        // Skip if already shown in usedBy
+        if (usedBy2.some(function(u){ return u.id === r.id; })) return;
+        var chip = mkA('/'+r.id, 'rel-chip');
+        if (r.layer) { var lt = mk('span','rel-layer-tag'); lt.textContent = r.layer; chip.appendChild(lt); }
+        chip.appendChild(document.createTextNode(r.name));
+        var rel = mk('span','rel-chip-val'); rel.textContent = 'integrates'; chip.appendChild(rel);
+        ec.appendChild(chip);
+      });
+
+      es.appendChild(ec); below.appendChild(es);
+    }());
+
+    // Siblings (5 others in same layer)
     if (layers && p.layer) {
-      var sibs = getSiblings(layers, p.id, p.layer, 6);
+      var sibs = getSiblings(layers, p.id, p.layer, 5);
       if (sibs.length) {
         var ss = mk('div','rel-section');
         var st = mk('div','rel-title'); st.textContent = 'Also in '+p.layer+' \u2014 '+(LAYER_NAMES[p.layer]||''); ss.appendChild(st);
@@ -733,9 +896,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
-    // Favicon error handler
+    // Logo error handler — fallback to Google favicon, then hide
     var fi = document.querySelector('[data-favicon]');
-    if (fi) fi.addEventListener('error', function(){ this.style.display='none'; });
+    if (fi) fi.addEventListener('error', function() {
+      var fb = this.getAttribute('data-fallback');
+      if (fb && this.src !== fb) { this.src = fb; }
+      else { this.style.display = 'none'; }
+    });
   }
 
   var id = getSlug();
