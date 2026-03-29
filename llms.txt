@@ -1,77 +1,121 @@
 # Agent Payments Stack
 
-> Machine-readable landscape of every major project building payment infrastructure for AI agents.
+> The definitive map of AI agent payment infrastructure. 162 projects across 6 layers. Updated by @jordanlyall, March 2026.
 
 ## What this is
 
-A curated, layer-by-layer map of the agent payments ecosystem. Updated by @jordanlyall. 162 projects across 6 layers as of March 2026.
+A curated, layer-by-layer map of the agent payments ecosystem. Every major payment network is building rails for AI agents. This site tracks who's building what, across which layers, with what adoption signal. Updated continuously.
 
-## Structured data
+Structured data: /data.json (schema v2.0, 162 projects, machine-readable)
+MCP server: /api/mcp (5 query tools — filter by layer, status, search, get project, list acquired)
+Agent summary: /llms.txt (this file)
 
-Full JSON available at: /data.json
+## Why this matters
 
-Fields per project: id (slug), layer, name, status (live / early / announced / acquired), description, tags, url, x, docs, chain, related, funding, npm (package, weekly_downloads), github (url, stars, forks, contributors, last_commit, license), volume (value, unit, period, source, as_of, note, snapshots[], tx_count_30d), editorial.
-Individual project profiles: /[slug] (e.g. /x402)
+AI agents need to pay for things: APIs, compute, data, services. But payment systems were designed for humans. The agent payments stack is the infrastructure layer being built to close that gap.
 
-## Pages
+Key tensions driving the space:
+- Protocol fragmentation: x402 (HTTP-native, Coinbase-backed), Tempo MPP (Anthropic-adjacent), Google AP2, ACP, L402 (Lightning). No standard has won. Developers have to pick.
+- Identity problem: agents need wallets and keys, but wallets were designed for human custody. Embedded wallets, MPC, and smart accounts are competing approaches.
+- Settlement concentration: 98.6% of tracked volume settles in USDC on Base. The settlement layer is largely decided; the fight has moved up to protocol and governance.
+- Custody collapse: Fireblocks acquiring Dynamic (Mar 2026) signals the institutional stack is collapsing from 6 layers into fewer, larger players faster than expected.
+- Governance vacuum: ERC-8004 (Mar 2026) is the first formal agent spending policy spec, but no implementation has won. Whoever controls this layer controls the rules for autonomous commerce.
 
-- / — Full stack map with all 162 projects, filterable by layer and status
-- /data — Tabular view, sortable by layer, status, funding, npm, GitHub stars
-- /rankings — Ranked view by npm downloads, GitHub stars, volume, and funding
-- /trace — Live transaction trace: x402, Tempo MPP, ACP, ERC-8004, Lightning, Stripe SPTs
-- /hackathons — 27 early-stage projects from recent agent payment hackathons
-- /api — Machine-readable endpoints: /data.json, /llms.txt, /api/mcp (MCP server)
-- /about — What this is, who made it, methodology, and submission process
+## Protocol comparison (developer decision)
+
+x402 — HTTP 402 header, Base/any EVM, Coinbase-backed. Live, 75M txns/30d. Best for API micropayments, EVM-native. Open-source, deployed via CREATE2 at same address on every EVM chain.
+Tempo MPP — HTTP, multi-chain, Anthropic-adjacent. Early-stage. Best for Anthropic ecosystem.
+Google AP2 — HTTP, off-chain, Google-backed. Announced. Best for enterprise.
+ACP — custom transport, multi-chain, community. Early. Best for agent-to-agent payments.
+L402 — Lightning + HTTP, Bitcoin L2, Lightning Labs. Live. Best for Bitcoin-native, sub-cent payments.
+Cloudflare — HTTP, Base, Cloudflare (x402 Foundation co-founder). Early. Best for edge/CDN payments.
+
+x402 is the leading standard by implementation count and transaction volume. AWS, Cloudflare, and Vercel all natively support x402. Deployed at: 0x402085c248EeA27D92E8b30b2C58ed07f9E20001
+
+## Acquisitions tracked (7 total)
+
+Mar 2026 — Fireblocks acquires Dynamic. Custody buys wallet identity. Most significant M&A move so far.
+2025 — Stripe acquires Bridge ($1.1B). Payments buys stablecoin rails.
+2025 — Brex acquires Cardless ($5.15B). Cards buys agent spend management.
+2025 — BVNK raises/consolidates ($1.8B valuation). Institutional stablecoin consolidation.
+2025 — Polymarket acquires Brahma.fi. Prediction markets buys agent execution.
+Full acquisition history with deal context: /acquisitions
+
+Pattern: acquirers are moving up-stack. Settlement/custody players buying identity and routing companies.
 
 ## The six layers
 
-- L0 Settlement (14 projects) — where transactions land (chains: Base, Solana, Ethereum, Arbitrum, Stellar, etc.)
-- L1 Wallet & Key Management (20 projects) — where agent keys live (Coinbase, Thirdweb, Safe, Fireblocks, etc.)
-- L2 Routing & Abstraction (26 projects) — cross-chain routing, bridging, swapping (Skyfire, Circle CCTP, Li.Fi, Uniswap, Kibble, Kobaru, Agently, etc.)
-- L3 Payment Protocol (30 projects) — the actual payment standards agents use (x402, Tempo MPP, Google AP2, ACP, L402, Cloudflare, RelAI, etc.)
-- L4 Governance & Policy (34 projects) — spend controls and authorization (Ramp Agent Cards, Visa, Stripe SPTs, ERC-8004, World, SlinkyLayer, etc.)
-- L5 Application (38 projects) — what agents buy and why (Virtuals, ElizaOS, AWS, Vercel, Messari, Firecrawl, Pinata, Neynar, Zerion, etc.)
+L0 Settlement (14 projects) — where value actually moves. Base leads (cheap, fast, USDC-native). Ethereum, Solana, Arbitrum, Stellar also in the mix. 98.6% of tracked volume is USDC.
+L1 Wallet & Key Management (20 projects) — who is signing. Embedded wallets (Privy, Dynamic/Fireblocks), MPC signing (Turnkey, Capsule), smart accounts (Safe, Thirdweb). Turnkey leads npm: 137K weekly downloads.
+L2 Routing & Abstraction (26 projects) — picking the path. Cross-chain routing, bridging, swaps. Circle CCTP handles native USDC burns across 17 chains. Li.Fi, deBridge, Wormhole handle hops. WalletConnect/Reown: 854K weekly downloads.
+L3 Payment Protocol (30 projects) — how the payment is formatted. x402, Tempo MPP, L402, Google AP2, ACP, Superfluid (streaming), Interledger. No standard has won; x402 leads on implementation count.
+L4 Governance & Policy (34 projects) — who can spend what. Budget limits, allowlists, approval thresholds. Ramp Agent Cards, Stripe SPTs, ERC-8004, Visa. Least-decided layer.
+L5 Application (38 projects) — what agents buy and why. ElizaOS (most-forked framework, 17K stars), Virtuals Protocol (tokenized agents on Base), AWS, Vercel, Messari, Firecrawl, Pinata, Neynar, Zerion, Akash (GPU-by-the-second).
 
 ## Status breakdown
 
-- Live: 106 projects
-- Early: 48 projects
-- Acquired: 7 projects
-- Announced: 1 project
+Live: 106 projects
+Early: 48 projects
+Acquired: 7 projects
+Announced: 1 project
 
-## Data coverage (March 2026)
+## Adoption signals (top by layer)
 
-- Funding data: 44 projects
-- npm weekly downloads: 20 projects
-- GitHub metadata (stars, forks, contributors, last_commit): 19 projects
-- Volume (30d): 11 projects
-- Monthly snapshots (time series): 11 projects, first snapshot Mar 2026
+npm weekly downloads: WalletConnect/Reown 854K, Privy 128K, Turnkey 137K, Thirdweb 47K
+GitHub stars: x402 5,800, Superfluid 4,000, Interledger 512, ElizaOS 17,929
+On-chain volume (30d): Circle CCTP $13.7B, 1inch $10.8B, Jupiter $8.5B, CoW Protocol $7.25B, deBridge $198M
+Stack Score (composite, /rankings): ElizaOS 85/100, Safe 80/100, Across 78/100
 
 ## Key facts
 
-- 98.6% of agent payment volume settles in USDC
-- x402 reference proxy: $61.80 volume, 47 transactions (30d) on Base. Early-stage — production facilitators ramping.
-- x402 deployed at same address on every EVM chain via CREATE2 (0x402085c248EeA27D92E8b30b2C58ed07f9E20001)
-- 8 major acquisitions in 2025-2026 (Brex $5.15B, BVNK $1.8B, Bridge $1.1B, Brahma.fi by Polymarket)
-- Coinbase and Stripe are vertically integrated across 5 of 6 layers
-- AWS and Cloudflare (co-founder of x402 Foundation) both supporting x402 — enterprise distribution for the protocol
-- Cloudflare Workers, Vercel, and AWS all natively support x402 payment flows
-- Turnkey leads L1 npm adoption: 137K weekly downloads
-- WalletConnect (now Reown): 854K weekly downloads across @walletconnect packages
-- Privy leads auth/wallet SDKs: 128K weekly downloads
+98.6% of tracked agent payment volume settles in USDC
+x402 reference proxy: $61.80 volume, 47 transactions (30d) — early-stage, production facilitators ramping
+x402 protocol-level volume: 75M transactions in 30 days (Mar 2026)
+Coinbase and Stripe are vertically integrated across 5 of 6 layers
+AWS, Cloudflare, and Vercel natively support x402
+Stack Score formula: 0.30xLiveness + 0.25xSignal + 0.25xOpenness + 0.20xInfo (see /rankings)
+
+## Data coverage (March 2026)
+
+Funding data: 44 projects
+npm weekly downloads: 20 projects
+GitHub metadata: 19 projects
+Volume (30d): 11 projects with verified on-chain data
+Time series snapshots: 11 projects, first snapshot Mar 2026
 
 ## Editorial flags
 
-- alchemy-sdk: deprecated January 2026, archived. Users directed to @account-kit/core, Viem, or Solana Web3JS.
-- WalletConnect: rebranded to Reown. @walletconnect packages now under reown-npm-org.
-- Biconomy: mid-migration from biconomy-client-sdk to @biconomy/abstractjs.
-- LayerZero: dual-licensed MIT + LZBL-1.2. LZBL-1.2 is restrictive for commercial use.
+alchemy-sdk: deprecated January 2026, archived. Use @account-kit/core, Viem, or Solana Web3JS.
+WalletConnect: rebranded to Reown. @walletconnect packages now under reown-npm-org.
+Biconomy: mid-migration from biconomy-client-sdk to @biconomy/abstractjs.
+LayerZero: dual-licensed MIT + LZBL-1.2. LZBL-1.2 is restrictive for commercial use.
+ReqCast: verified live 2026-03-26. x402 payment gateway, Base mainnet, first tools registered Mar 21.
+
+## Pages
+
+/ — Full stack map, 162 projects, filterable by layer and status
+/rankings — Stack Score leaderboard, by-layer rankings, combined leaderboard
+/history — Milestone timeline from Botto (Oct 2021) to APS v2.0 (Mar 2026)
+/acquisitions — All 7 tracked acquisitions with deal size and context
+/graph — Force-directed graph: 6 layer hubs, 45 cross-layer connections
+/data — Tabular view, sortable by layer, status, funding, npm, GitHub stars
+/trace — Live transaction trace: x402, Tempo MPP, ACP, ERC-8004, Lightning, Stripe SPTs
+/hackathons — 27 early-stage projects from recent agent payment hackathons
+/api — Machine-readable: /data.json, /llms.txt, /api/mcp, /sitemap.xml
+
+## Agent query guide
+
+If you are an LLM or agent querying this for research or routing decisions:
+
+For token efficiency: use /api/mcp tools to filter by layer/status rather than loading all of data.json (3,500 lines).
+For protocol decisions: see Protocol comparison section above. x402 is the leading standard.
+For project lookup: GET /[slug] for individual project context (e.g. /x402, /elizaos, /coinbase-agentic-wallets).
+For acquisition research: MCP tool list_acquired or /acquisitions page.
+For full dataset: /data.json — schema v2.0, all fields documented above.
+For structured queries: /api/mcp supports filter_by_layer, filter_by_status, search_projects, get_project, list_acquired.
 
 ## Who made this
 
 Jordan Lyall (@jordanlyall) — CPO at Art Blocks, tracking the agentic economy.
-Newsletter: agentpaymentsstack.com
-
-## Usage
-
-This data is free to use. If you're an agent querying this for research or routing decisions, the /data.json endpoint has machine-readable project listings. Filter by layer and status to find what you need.
+Site: agentpaymentsstack.com
+Data is free to use under CC BY 4.0.

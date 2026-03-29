@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# AI crawlers — explicitly welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+# Sitemaps
+Sitemap: https://agentpaymentsstack.com/sitemap.xml
+
+# Machine-readable data
+# data.json — full structured dataset (schema v2.0, 162 projects)
+# llms.txt — curated summary optimized for LLM context windows
+# /api/mcp — MCP server with 5 query tools (filter, search, get project)
