@@ -693,6 +693,26 @@
   .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
   .topbar-links a:hover { color: var(--secondary); }
   .topbar-links .tl-active { color: var(--text); }
+  /* More dropdown */
+  .nav-more { position: relative; }
+  .nav-more-btn {
+    font-size: 11.5px; color: var(--muted); background: none; border: none;
+    cursor: pointer; padding: 0; font-family: inherit; transition: color 0.12s;
+    display: flex; align-items: center; gap: 3px;
+  }
+  .nav-more-btn:hover { color: var(--secondary); }
+  .nav-more-btn::after { content: '▾'; font-size: 9px; opacity: 0.6; }
+  .nav-more-drop {
+    display: none; position: absolute; top: calc(100% + 12px); right: 0;
+    background: #111; border: 1px solid var(--faint); border-radius: 6px;
+    padding: 6px 0; min-width: 130px; z-index: 200;
+  }
+  .nav-more-drop a {
+    display: block; padding: 7px 14px; font-size: 11.5px;
+    color: var(--muted); text-decoration: none; transition: color 0.1s;
+  }
+  .nav-more-drop a:hover { color: var(--text); }
+  .nav-more.open .nav-more-drop { display: block; }
   /* Hamburger */
   .mob-menu-btn {
     display: none;
@@ -817,12 +837,18 @@
       <a href="/rankings">Rankings</a>
   <a href="/acquisitions">Acquisitions</a>
 
-      <a href="/graph">Graph</a>
-      <a href="/compare">Compare</a> <a href="/history">History</a>
-      <a href="/trace">Trace</a>
-      <a href="/hackathons">Hackathons</a>
+      <a href="/compare">Compare</a>
       <a href="/api">API</a>
       <a href="/about">About</a>
+      <div class="nav-more" id="nav-more">
+        <button class="nav-more-btn" id="nav-more-btn">More</button>
+        <div class="nav-more-drop">
+          <a href="/graph">Graph</a>
+          <a href="/history">History</a>
+          <a href="/trace">Trace</a>
+          <a href="/hackathons">Hackathons</a>
+        </div>
+      </div>
       <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
     </div>
     <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu" aria-expanded="false">
@@ -841,12 +867,13 @@
   <a href="/rankings">Rankings</a>
   <a href="/acquisitions">Acquisitions</a>
 
-  <a href="/graph">Graph</a>
-      <a href="/compare">Compare</a> <a href="/history">History</a>
-  <a href="/trace">Trace</a>
-  <a href="/hackathons">Hackathons</a>
+  <a href="/compare">Compare</a>
   <a href="/api">API</a>
   <a href="/about">About</a>
+  <a href="/graph">Graph</a>
+  <a href="/history">History</a>
+  <a href="/trace">Trace</a>
+  <a href="/hackathons">Hackathons</a>
   <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
 </div>
 <div class="page">
@@ -1344,6 +1371,20 @@
   run();
 }());
 
+
+// More dropdown
+(function(){
+  var more = document.getElementById('nav-more');
+  var moreBtn = document.getElementById('nav-more-btn');
+  if (!more || !moreBtn) return;
+  moreBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    more.classList.toggle('open');
+  });
+  document.addEventListener('click', function(){
+    more.classList.remove('open');
+  });
+}());
 
 // Mobile menu toggle
 (function(){
