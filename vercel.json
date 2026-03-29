@@ -1,4 +1,6 @@
 {
+  "buildCommand": "",
+  "outputDirectory": ".",
   "redirects": [
     { "source": "/agent-credit-protocol", "destination": "/bond", "permanent": true }
   ],
