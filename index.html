@@ -832,54 +832,10 @@
 <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<nav class="topbar">
-  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
-  <div class="topbar-right">
-    <div class="topbar-links">
-      <a href="/" class="tl-active">Stack</a>
-      <a href="/data">Data</a>
-      <a href="/rankings">Rankings</a>
-  <a href="/acquisitions">Acquisitions</a>
+<nav class="topbar" id="topbar"></nav>
+<div class="mob-menu" id="mob-menu"></div>
+<script src="/nav.js"></script>
 
-      <a href="/compare">Compare</a>
-      <a href="/api">API</a>
-      <a href="/about">About</a>
-      <div class="nav-more" id="nav-more">
-        <button class="nav-more-btn" id="nav-more-btn">More</button>
-        <div class="nav-more-drop">
-          <a href="/graph">Graph</a>
-          <a href="/history">History</a>
-          <a href="/trace">Trace</a>
-          <a href="/hackathons">Hackathons</a>
-        </div>
-      </div>
-      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
-    </div>
-    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu" aria-expanded="false">
-      <svg class="icon-ham" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-      <svg class="icon-x" width="20" height="20" viewBox="0 0 20 20" fill="none">
-        <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
-    </button>
-  </div>
-</nav>
-<div class="mob-menu" id="mob-menu">
-  <a href="/" class="tl-active">Stack</a>
-  <a href="/data">Data</a>
-  <a href="/rankings">Rankings</a>
-  <a href="/acquisitions">Acquisitions</a>
-
-  <a href="/compare">Compare</a>
-  <a href="/api">API</a>
-  <a href="/about">About</a>
-  <a href="/graph">Graph</a>
-  <a href="/history">History</a>
-  <a href="/trace">Trace</a>
-  <a href="/hackathons">Hackathons</a>
-  <a href="https://tally.so/r/rjVvd5" target="_blank">Submit ↗</a>
-</div>
 <div class="page">
 
   <div class="hdr">
@@ -1374,40 +1330,6 @@
     });
   });
   run();
-}());
-
-
-// More dropdown
-(function(){
-  var more = document.getElementById('nav-more');
-  var moreBtn = document.getElementById('nav-more-btn');
-  if (!more || !moreBtn) return;
-  moreBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    more.classList.toggle('open');
-  });
-  document.addEventListener('click', function(){
-    more.classList.remove('open');
-  });
-}());
-
-// Mobile menu toggle
-(function(){
-  var btn = document.getElementById('mob-menu-btn');
-  var menu = document.getElementById('mob-menu');
-  if (!btn || !menu) return;
-  btn.addEventListener('click', function(){
-    var open = menu.classList.toggle('open');
-    btn.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', open);
-  });
-  menu.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      menu.classList.remove('open');
-      btn.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    });
-  });
 }());
 
 function copyEmbed(el){
