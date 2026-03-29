@@ -248,71 +248,111 @@
     var ctx = canvas.getContext('2d');
 
     var dpr = window.devicePixelRatio || 1;
-    var W = canvas.parentElement.offsetWidth || 680;
-    var H = 200;
-    canvas.width  = W * dpr;
-    canvas.height = H * dpr;
+    var W   = canvas.parentElement.offsetWidth || 680;
+    var H   = 200;
+    canvas.width        = W * dpr;
+    canvas.height       = H * dpr;
     canvas.style.width  = W + 'px';
     canvas.style.height = H + 'px';
     ctx.scale(dpr, dpr);
 
     var PAD_TOP = 28;
     var PAD_BOT = 32;
-    var PAD_L   = 8;
-    var PAD_R   = 8;
+    var PAD_L   = 48;   // room for y-axis labels
+    var PAD_R   = 16;
     var chartW  = W - PAD_L - PAD_R;
     var chartH  = H - PAD_TOP - PAD_BOT;
     var n       = weekly.length;
-    var colW    = chartW / n;
-    var barW    = Math.max(Math.floor(colW * 0.6), 4);
 
-    var maxTotal = 0;
-    for (var k = 0; k < weekly.length; k++) {
-      var t = (weekly[k].x402_usd || 0) + (weekly[k].acp_usd || 0);
-      if (t > maxTotal) maxTotal = t;
-    }
-    if (maxTotal === 0) return;
+    // pre-compute totals and max
+    var totals = weekly.map(function(w) {
+      return (w.x402_usd || 0) + (w.acp_usd || 0);
+    });
+    var x402s = weekly.map(function(w) { return w.x402_usd || 0; });
+    var maxVal = Math.max.apply(null, totals) * 1.12; // 12% headroom
+    if (maxVal === 0) return;
+
+    function px(val) { return PAD_TOP + chartH - (val / maxVal) * chartH; }
+    function cx(i)   { return PAD_L + (n === 1 ? chartW / 2 : i * chartW / (n - 1)); }
 
     ctx.clearRect(0, 0, W, H);
 
-    for (var i = 0; i < weekly.length; i++) {
-      var w     = weekly[i];
-      var x402v = w.x402_usd || 0;
-      var acpv  = w.acp_usd  || 0;
-      var total = x402v + acpv;
-
-      var colX    = PAD_L + i * colW;
-      var barX    = colX + (colW - barW) / 2;
-      var totalPx = (total / maxTotal) * chartH;
-      var x402Px  = (x402v / maxTotal) * chartH;
-      var acpPx   = totalPx - x402Px;
-      var barTop  = PAD_TOP + chartH - totalPx;
-
-      // ACP segment (top)
-      if (acpv > 0) {
-        ctx.fillStyle = '#c99e32';
-        ctx.fillRect(barX, barTop, barW, acpPx);
-      }
-
-      // x402 segment (bottom)
-      if (x402v > 0) {
-        ctx.fillStyle = '#3d9e5f';
-        ctx.fillRect(barX, barTop + acpPx, barW, x402Px);
-      }
-
-      // Value label above bar
-      if (total > 0) {
-        ctx.fillStyle  = '#98948f';
+    // ── Gridlines + y-axis labels ──────────────────────────────────────────
+    ctx.strokeStyle = '#201e1b';
+    ctx.lineWidth   = 1;
+    var ticks = [0, 0.25, 0.5, 0.75, 1.0];
+    ticks.forEach(function(t) {
+      var y = PAD_TOP + chartH - t * chartH;
+      ctx.beginPath();
+      ctx.moveTo(PAD_L, y);
+      ctx.lineTo(W - PAD_R, y);
+      ctx.stroke();
+      if (t > 0) {
+        ctx.fillStyle  = '#524e49';
         ctx.font       = '9px monospace';
-        ctx.textAlign  = 'center';
-        ctx.fillText(fmtUSD(total), barX + barW / 2, barTop - 5);
+        ctx.textAlign  = 'right';
+        ctx.fillText(fmtUSD(maxVal * t), PAD_L - 6, y + 3);
       }
+    });
 
-      // Week label below bar
+    // ── Stacked area: x402 base ────────────────────────────────────────────
+    var gradX402 = ctx.createLinearGradient(0, PAD_TOP, 0, PAD_TOP + chartH);
+    gradX402.addColorStop(0,   'rgba(61,158,95,0.30)');
+    gradX402.addColorStop(1,   'rgba(61,158,95,0.03)');
+
+    ctx.beginPath();
+    ctx.moveTo(cx(0), px(x402s[0]));
+    for (var i = 1; i < n; i++) ctx.lineTo(cx(i), px(x402s[i]));
+    ctx.lineTo(cx(n - 1), PAD_TOP + chartH);
+    ctx.lineTo(cx(0),     PAD_TOP + chartH);
+    ctx.closePath();
+    ctx.fillStyle = gradX402;
+    ctx.fill();
+
+    // ── Stacked area: ACP on top ───────────────────────────────────────────
+    var gradACP = ctx.createLinearGradient(0, PAD_TOP, 0, PAD_TOP + chartH);
+    gradACP.addColorStop(0,   'rgba(201,158,50,0.25)');
+    gradACP.addColorStop(1,   'rgba(201,158,50,0.03)');
+
+    ctx.beginPath();
+    ctx.moveTo(cx(0), px(totals[0]));
+    for (var j = 1; j < n; j++) ctx.lineTo(cx(j), px(totals[j]));
+    // trace back along x402 line to close ACP region
+    for (var jj = n - 1; jj >= 0; jj--) ctx.lineTo(cx(jj), px(x402s[jj]));
+    ctx.closePath();
+    ctx.fillStyle = gradACP;
+    ctx.fill();
+
+    // ── Total line ─────────────────────────────────────────────────────────
+    ctx.beginPath();
+    ctx.moveTo(cx(0), px(totals[0]));
+    for (var l = 1; l < n; l++) ctx.lineTo(cx(l), px(totals[l]));
+    ctx.strokeStyle = '#3d9e5f';
+    ctx.lineWidth   = 1.5;
+    ctx.stroke();
+
+    // ── Dots + labels ──────────────────────────────────────────────────────
+    for (var m = 0; m < n; m++) {
+      var dotY = px(totals[m]);
+      var dotX = cx(m);
+
+      // dot
+      ctx.beginPath();
+      ctx.arc(dotX, dotY, 3, 0, Math.PI * 2);
+      ctx.fillStyle = '#3d9e5f';
+      ctx.fill();
+
+      // value above dot
+      ctx.fillStyle  = '#98948f';
+      ctx.font       = '9px monospace';
+      ctx.textAlign  = 'center';
+      ctx.fillText(fmtUSD(totals[m]), dotX, dotY - 8);
+
+      // week label below
       ctx.fillStyle  = '#685e58';
       ctx.font       = '9px monospace';
       ctx.textAlign  = 'center';
-      ctx.fillText(w.week.slice(5), barX + barW / 2, H - PAD_BOT + 14);
+      ctx.fillText(weekly[m].week.slice(5), dotX, H - PAD_BOT + 14);
     }
   }
 
