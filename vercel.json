@@ -12,6 +12,7 @@
     { "source": "/hackathons",  "destination": "/hackathons.html" },
     { "source": "/graph",       "destination": "/graph.html" },
     { "source": "/history",     "destination": "/history.html" },
+    { "source": "/api/live",    "destination": "/api/live.js" },
     { "source": "/:slug([^.]+)", "destination": "/projects.html" }
   ]
 }
