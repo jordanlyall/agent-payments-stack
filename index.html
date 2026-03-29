@@ -87,7 +87,11 @@
   .apv-src-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--text); }
   .apv-src-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
   .apv-tile-right { display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; flex-shrink: 0; padding: 2px 0; }
-  .apv-spark { display: block; }
+  .apv-wow { display: none; flex-direction: column; align-items: flex-end; justify-content: center; }
+  .apv-wow-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 600; letter-spacing: -0.5px; line-height: 1; }
+  .apv-wow-val.up { color: #3d9e5f; }
+  .apv-wow-val.down { color: var(--acq); }
+  .apv-wow-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 5px; text-align: right; line-height: 1.5; }
   .apv-tile-desc { font-size: 9px; color: var(--muted); text-align: right; line-height: 1.4; max-width: 130px; }
   @media (max-width: 600px) { .apv-tile-right { display: none; } }
   .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
@@ -95,7 +99,7 @@
   .hdr-stat--apv .hdr-stat-val { font-size: 32px; letter-spacing: -1px; color: #e8ebe4; }
   .hdr-stat--apv .hdr-stat-val.loading { font-size: 20px; }
   .hdr-stat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
-  .hdr-stat-link { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; color: var(--acq); opacity: 0.8; margin-top: 3px; text-decoration: none; display: block; }
+  .hdr-stat-link { font-size: 11px; color: var(--acq); opacity: 0.8; margin-top: 4px; text-decoration: none; display: block; }
   .hdr-stat-link:hover { opacity: 1; }
   .live-badge { display: inline-flex; align-items: center; gap: 5px; font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #3d9e5f; margin-bottom: 4px; }
   .live-dot { width: 5px; height: 5px; border-radius: 50%; background: #3d9e5f; animation: livepulse 2s ease-in-out infinite; }
@@ -103,6 +107,11 @@
   .hdr-stat-val.loading { color: var(--muted); font-size: 14px; }
   .hero-newsletter { display: none; }
   .hero-nl-label { display: none; }
+  .hdr-actions { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .hdr-action-primary { font-size: 12px; font-weight: 500; color: var(--text); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); border-radius: 4px; padding: 6px 14px; text-decoration: none; transition: background 0.12s; white-space: nowrap; }
+  .hdr-action-primary:hover { background: rgba(255,255,255,0.12); }
+  .hdr-action-secondary { font-size: 12px; color: var(--secondary); text-decoration: none; transition: color 0.12s; white-space: nowrap; }
+  .hdr-action-secondary:hover { color: var(--text); }
   .filter-sub { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
   .filter-sub-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); flex-shrink: 0; }
   .data-strip-sep { color: var(--muted); opacity: 0.3; margin: 0 10px; font-size: 10px; }
@@ -133,15 +142,18 @@
   .rail-feed-type.acq { color: var(--acq); }
   .rail-feed-type.vol { color: var(--early); }
   .rail-feed-type.proto { color: var(--secondary); }
+  .rail-feed-type.update { color: var(--secondary); }
+  .rail-feed-text a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); transition: border-color 0.12s; }
+  .rail-feed-text a:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
   .rail-feed-date { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); margin-left: auto; }
   .rail-feed-text { font-size: 13px; color: var(--secondary); line-height: 1.4; }
   .rail-editorial-text { font-size: 13px; color: var(--secondary); line-height: 1.55; }
   .rail-editorial-text strong { color: var(--text); font-weight: 500; }
-  .rail-editorial-byline { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 8px; }
+  .rail-editorial-byline { font-size: 11px; color: var(--muted); margin-top: 8px; }
 
   /* Stack grid */
   .stack { display: flex; flex-direction: column; border-top: 1px solid var(--faint); }
-  .layer-section { padding: 26px 0 22px; border-bottom: 1px solid var(--faint); position: relative; overflow: hidden; }
+  .layer-section { padding: 26px 0 22px; border-bottom: 1px solid var(--faint); position: relative; overflow-x: clip; }
   .layer-section:last-child { border-bottom: none; }
   .layer-section::before {
     content: attr(data-layer);
@@ -164,6 +176,11 @@
   .layer-sep { width: 1px; height: 13px; background: var(--faint); margin: 0 14px; flex-shrink: 0; }
   .layer-desc { font-size: 12px; color: var(--muted); flex: 1; min-width: 0; }
   .layer-stat { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); flex-shrink: 0; }
+  .layer-info-btn { background: none; border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; padding: 1px 6px; font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); cursor: pointer; margin-left: 10px; transition: all 0.12s; flex-shrink: 0; line-height: 1.6; }
+  .layer-info-btn:hover { color: var(--secondary); border-color: rgba(255,255,255,0.22); }
+  .layer-info-btn.open { color: var(--secondary); border-color: rgba(255,255,255,0.22); }
+  .layer-expand { font-size: 12.5px; color: var(--secondary); line-height: 1.65; padding: 0 0 16px; display: none; max-width: 560px; }
+  .layer-expand.open { display: block; }
   .row-content { padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
 
   /* Tags */
@@ -643,24 +660,24 @@
   a.t[data-tip]:hover::after {
     content: attr(data-tip);
     position: absolute;
-    bottom: calc(100% + 7px);
+    bottom: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%);
-    background: #1c1a18;
-    color: #c8c4bc;
-    border: 1px solid rgba(255,255,255,0.1);
+    background: #0a0a09;
+    color: #d8d4cc;
+    border: 1px solid rgba(255,255,255,0.18);
     font-size: 11px;
     font-weight: 400;
     line-height: 1.45;
-    padding: 5px 9px;
-    border-radius: 4px;
+    padding: 6px 10px;
+    border-radius: 5px;
     white-space: nowrap;
-    max-width: 280px;
+    max-width: 300px;
     overflow: hidden;
     text-overflow: ellipsis;
-    z-index: 10;
+    z-index: 500;
     pointer-events: none;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.75), 0 0 0 0.5px rgba(255,255,255,0.06);
   }
 
   /* Anchor links */
@@ -790,6 +807,13 @@
   .dt-sort { cursor: pointer; user-select: none; }
   .dt-sort:hover { color: var(--secondary); }
 
+  /* View toggle */
+  .view-toggle { display: flex; gap: 2px; margin-left: auto; flex-shrink: 0; }
+  .vt-btn { background: transparent; border: 1px solid rgba(255,255,255,0.08); border-radius: 4px; padding: 5px 8px; cursor: pointer; color: var(--muted); line-height: 0; transition: all 0.12s; }
+  .vt-btn:hover { color: var(--secondary); border-color: rgba(255,255,255,0.15); }
+  .vt-btn.on { color: var(--text); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.07); }
+  #proj-table { display: none; }
+
   /* ── Mobile ── */
   @media (max-width: 900px) {
     .topbar { padding: 0 20px; }
@@ -801,9 +825,11 @@
     .filter-btns::-webkit-scrollbar { display: none; }
     .filter-count { display: none; }
     .filter-sub { display: none; }
+    .view-toggle { display: none; }
     .page { padding: 28px 20px 32px; }
     h1 { font-size: 28px; letter-spacing: -1px; }
     .deck { font-size: 13px; max-width: 100%; }
+    .hdr-actions { flex-wrap: wrap; gap: 10px; }
     .hdr-strip { flex-wrap: wrap; }
     .hdr-stat { flex: 1; min-width: 140px; }
     .hdr-stat--apv { flex: 1 1 100%; border-right: none; border-bottom: 1px solid var(--faint); }
@@ -827,6 +853,13 @@
     .writeup p { font-size: 14px; }
     .writeup ul li { font-size: 13px; }
     a.t[data-tip]:hover::after { display: none; }
+    /* Layer header: hide stat count, allow wrap */
+    .layer-stat { display: none; }
+    .layer-hdr { flex-wrap: wrap; row-gap: 4px; }
+    .layer-desc { flex: 1 1 100%; padding-left: 0; margin-top: 2px; }
+    /* Data table */
+    #proj-table { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dt-desc { display: none; }
   }
 
   @media (max-width: 480px) {
@@ -835,6 +868,8 @@
     .nums { gap: 16px; }
     .num-v { font-size: 18px; }
     a.t, .t { font-size: 11px; padding: 2px 7px; }
+    /* Stat strip: all full-width below 480px */
+    .hdr-stat { flex: 1 1 100%; min-width: 0; }
   }
 
 
@@ -852,10 +887,15 @@
     <div class="hero-eyebrow">Agent Payments Infrastructure</div>
     <h1>The canonical map of AI agent payment rails</h1>
     <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
+    <div class="hdr-actions">
+      <a href="#nsf" class="hdr-action-primary" onclick="document.getElementById('nse')&&setTimeout(function(){document.getElementById('nse').focus()},120)">Get weekly updates →</a>
+      <a href="https://tally.so/r/rjVvd5" class="hdr-action-secondary" target="_blank" rel="noopener">Submit a project ↗</a>
+    </div>
     <div class="hdr-strip">
       <a href="/apv" class="hdr-stat hdr-stat--apv">
         <div class="apv-tile-left">
           <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume · 30d</div>
+          <div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">USDC transacted by AI agents across x402 and ACP protocols</div>
           <div class="hdr-stat-val loading" id="live-vol">—</div>
           <div class="apv-sources" id="apv-sources" style="display:none">
             <div class="apv-src">
@@ -870,23 +910,25 @@
           <div class="hdr-stat-sub" id="live-sub">fetching...</div>
         </div>
         <div class="apv-tile-right">
-          <canvas id="apv-spark" class="apv-spark" width="160" height="56"></canvas>
-          <div class="apv-tile-desc">USDC settled by AI agents across tracked protocols</div>
+          <div class="apv-wow" id="apv-wow">
+            <div class="apv-wow-val" id="apv-wow-val">—</div>
+            <div class="apv-wow-lbl">x402<br>week/week</div>
+          </div>
         </div>
       </a>
       <div class="hdr-stat">
-        <div class="hdr-stat-label">Tracked volume · 9mo</div>
+        <div class="hdr-stat-label">On-chain volume · since Oct 2025</div>
         <div class="hdr-stat-val">$43M</div>
         <div class="hdr-stat-sub">~$600M annualized · 140M txns</div>
       </div>
       <div class="hdr-stat">
-        <div class="hdr-stat-label">M&amp;A activity · 18mo</div>
+        <div class="hdr-stat-label">M&amp;A activity · since Jan 2025</div>
         <div class="hdr-stat-val">$8.05B</div>
         <div class="hdr-stat-sub">7 deals · Stripe, Capital One, Mastercard</div>
         <a href="/acquisitions" class="hdr-stat-link">View all acquisitions →</a>
       </div>
       <div class="hdr-stat">
-        <div class="hdr-stat-label">Projects tracked</div>
+        <div class="hdr-stat-label">Projects tracked · as of Mar 2026</div>
         <div class="hdr-stat-val"><span id="hero-count">162</span></div>
         <div class="hdr-stat-sub">6 layers · 98.6% USDC</div>
       </div>
@@ -894,6 +936,9 @@
   </div>
 
   <!-- Filter bar -->
+  <div class="split-layout">
+  <div class="split-main">
+
   <div class="filter-bar">
     <div class="filter-search">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 9.5L12 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -907,11 +952,16 @@
       <button class="fb" data-f="acq">Acquired</button>
     </div>
     <span class="filter-count" id="fc">134 projects</span>
+    <div class="view-toggle" style="margin-left:auto;">
+      <button class="vt-btn on" id="vt-grid" title="Grid view">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/><rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/></svg>
+      </button>
+      <button class="vt-btn" id="vt-list" title="List view">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="2.5" width="12" height="1.5" rx="0.75" fill="currentColor" opacity="0.7"/><rect x="1" y="6.25" width="12" height="1.5" rx="0.75" fill="currentColor" opacity="0.7"/><rect x="1" y="10" width="12" height="1.5" rx="0.75" fill="currentColor" opacity="0.7"/></svg>
+      </button>
+    </div>
   </div>
   <div class="no-results" id="nr">No projects match. <a href="https://tally.so/r/rjVvd5" target="_blank" style="color:var(--secondary)">Submit one?</a></div>
-
-  <div class="split-layout">
-  <div class="split-main">
 
   <div class="stack">
 
@@ -920,10 +970,12 @@
       <div class="layer-hdr">
         <span class="layer-badge">L5</span>
         <span class="layer-name">Application</span>
+        <button class="layer-info-btn" onclick="toggleLayerInfo(this)">?</button>
         <span class="layer-sep"></span>
         <span class="layer-desc">What gets bought and why</span>
         <span class="layer-stat">28 projects</span>
       </div>
+      <div class="layer-expand">Where agent intent originates — the task the agent is trying to accomplish, from querying a data API to deploying compute. This is where revenue happens first and why it's the most crowded layer.</div>
       <div class="row-content">
         <a class="t" href="/virtuals-protocol" data-tip="Tokenized AI agent creation on Base" data-id="virtuals-protocol" data-url="https://virtuals.io">Virtuals Protocol</a>
         <a class="t" href="/elizaos" data-tip="Open-source multi-agent framework, 17K GitHub stars" data-id="elizaos" data-url="https://elizaos.ai">ElizaOS</a>
@@ -973,10 +1025,12 @@
       <div class="layer-hdr">
         <span class="layer-badge">L4</span>
         <span class="layer-name">Governance &amp; Policy</span>
+        <button class="layer-info-btn" onclick="toggleLayerInfo(this)">?</button>
         <span class="layer-sep"></span>
         <span class="layer-desc">May this agent spend</span>
         <span class="layer-stat">32 projects</span>
       </div>
+      <div class="layer-expand">The policy layer that determines whether an agent is allowed to spend — budget limits, per-merchant allow-lists, time-boxed windows, and human approval thresholds for large transactions. No standard has won here yet.</div>
       <div class="row-content">
         <a class="t" href="/ramp-agent-cards" data-tip="Virtual Visa cards for agents with spend limits" data-id="ramp-agent-cards" data-url="https://ramp.com">Ramp Agent Cards</a>
         <a class="t acq" href="https://brex.com" target="_blank" data-tip="Agent Mesh architecture. Acquired by Capital One." data-id="brex" data-url="https://www.brex.com">Brex <span class="sm">$5.15B</span></a>
@@ -1022,10 +1076,12 @@
       <div class="layer-hdr">
         <span class="layer-badge">L3</span>
         <span class="layer-name">Payment Protocol</span>
+        <button class="layer-info-btn" onclick="toggleLayerInfo(this)">?</button>
         <span class="layer-sep"></span>
         <span class="layer-desc">How the payment flows</span>
         <span class="layer-stat">x402 &middot; 75M txns/30d</span>
       </div>
+      <div class="layer-expand">The message format that carries a payment request — x402 uses HTTP 402 headers so an agent can discover, negotiate, and pay in a single round-trip. MPP and L402 are competing standards; the market will likely support two.</div>
       <div class="row-content">
         <a class="t" href="/x402" data-tip="HTTP 402 micropayments. Coinbase + Cloudflare. $7.2B token ecosystem." data-id="x402" data-url="https://www.x402.org">x402 <span class="sm">75M/30d</span></a>
         <a class="t" href="/tempo-mpp" data-tip="Multi-rail sessions: stablecoins + cards + Bitcoin" data-id="tempo-mpp" data-url="https://tempo.xyz">Tempo MPP <span class="sm">100+ svc</span></a>
@@ -1067,10 +1123,12 @@
       <div class="layer-hdr">
         <span class="layer-badge">L2</span>
         <span class="layer-name">Routing &amp; Abstraction</span>
+        <button class="layer-info-btn" onclick="toggleLayerInfo(this)">?</button>
         <span class="layer-sep"></span>
         <span class="layer-desc">Which chain, token, rail</span>
         <span class="layer-stat">ethers.js &middot; 2.8M npm/wk</span>
       </div>
+      <div class="layer-expand">Picks the cheapest, fastest path from one chain or token to another — in practice almost always Base settling in USDC. Cross-chain swaps only trigger when the destination requires a different asset.</div>
       <div class="row-content">
         <a class="t" href="/skyfire" data-tip="'Visa for the AI economy.' KYA identity, $9.5M seed." data-id="skyfire" data-url="https://skyfire.xyz">Skyfire</a>
         <a class="t" href="/mesh" data-tip="Routes payments across 100+ wallets/exchanges. Powers PayPal." data-id="mesh" data-url="https://www.meshpay.com">Mesh</a>
@@ -1108,10 +1166,12 @@
       <div class="layer-hdr">
         <span class="layer-badge">L1</span>
         <span class="layer-name">Wallet &amp; Key Mgmt</span>
+        <button class="layer-info-btn" onclick="toggleLayerInfo(this)">?</button>
         <span class="layer-sep"></span>
         <span class="layer-desc">Where the keys live</span>
         <span class="layer-stat">Reown &middot; 854K npm/wk</span>
       </div>
+      <div class="layer-expand">Every transaction needs a signer — an embedded wallet the agent controls, with programmable rules for what it can spend. Coinbase AgentKit is the most integrated option; Fireblocks acquired Dynamic to enter this layer from the institutional side.</div>
       <div class="row-content">
         <a class="t" href="/coinbase-agentic-wallets" data-tip="TEE agent wallets with spending limits, gasless on Base" data-id="coinbase-agentic-wallets" data-url="https://coinbase.com">Coinbase Agentic Wallets</a>
         <a class="t" href="/moonpay-ows" data-tip="Open-source wallet standard (MIT). 8 chain families. x402-native." data-id="moonpay-ows" data-url="https://openwallet.sh">MoonPay OWS</a>
@@ -1142,10 +1202,12 @@
       <div class="layer-hdr">
         <span class="layer-badge">L0</span>
         <span class="layer-name">Settlement</span>
+        <button class="layer-info-btn" onclick="toggleLayerInfo(this)">?</button>
         <span class="layer-sep"></span>
         <span class="layer-desc">Where transactions land</span>
         <span class="layer-stat">LayerZero &middot; $8.4B bridged</span>
       </div>
+      <div class="layer-expand">Where value actually moves — 98.6% of tracked agent payments settle in USDC, with Base as the dominant chain because it is cheap enough for micropayments and fast enough for real-time interactions.</div>
       <div class="row-content">
         <a class="t" href="/base" data-tip="Coinbase L2. Dominant x402 chain. Gasless paymasters." data-id="base" data-url="https://base.org">Base <span class="sm">119M txns</span></a>
         <a class="t" href="/solana" data-tip="Leads in dollar volume share. Sub-second finality." data-id="solana" data-url="https://solana.com">Solana <span class="sm">38.6M txns</span></a>
@@ -1165,6 +1227,8 @@
     </div>
 
   </div><!-- /.stack -->
+
+  <div id="proj-table"></div>
 
   <!-- Map view wrapper end -->
   <div id="map-sections-end"></div>
@@ -1212,7 +1276,7 @@
   </div><!-- /split-main -->
 
   <div class="split-rail" id="split-rail">
-    <script type="application/json" id="rail-data">{"activity":[{"date":"2026-03-28","type":"proto","text":"/compare live — side-by-side matrix: x402, L402, Tempo MPP, ACP, Google AP2"},{"date":"2026-03-27","type":"added","text":"Stack Score + /history timeline shipped — 10 milestones, APS v2.0"},{"date":"2026-03-25","type":"added","text":"APS launched — 162 projects mapped across 6 layers"},{"date":"2026-03-21","type":"acq","text":"Fireblocks acquires Dynamic — custody meets wallet identity"},{"date":"2026-03-18","type":"vol","text":"x402 crosses 75M transactions in 30 days"}],"editorial":{"text":"Three days in, one observation: every significant move in the last 90 days — Fireblocks\/Dynamic, x402 volume, ERC-8004 — points to the same thing. The stack is collapsing from 6 layers toward 3. Settlement, identity, and application. Everything else is middleware.","byline":"@jordanlyall","date":"2026-03-28"}}</script>
+    <script type="application/json" id="rail-data">{"activity":[{"date":"2026-03-28","type":"update","text":"/compare live — x402, L402, Tempo MPP, ACP, Google AP2","url":"/compare"},{"date":"2026-03-27","type":"update","text":"Stack Score + /history timeline shipped","url":"/history"},{"date":"2026-03-25","type":"added","text":"APS launched — 162 projects across 6 layers","url":"/"},{"date":"2026-03-21","type":"acq","text":"Fireblocks acquires Dynamic — custody meets wallet identity","url":"/fireblocks"},{"date":"2026-03-18","type":"vol","text":"x402 crosses 75M transactions in 30 days","url":"/x402"}],"editorial":{"text":"Three days in, one observation: every significant move in the last 90 days — Fireblocks\/Dynamic, x402 volume, ERC-8004 — points to the same thing. The stack is collapsing from 6 layers toward 3. Settlement, identity, and application. Everything else is middleware.","byline":"@jordanlyall","date":"2026-03-28"}}</script>
   </div>
 
   </div><!-- /split-layout -->
@@ -1229,17 +1293,22 @@
     var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     function fmtDate(d) { var p = d.split('-'); return months[parseInt(p[1],10)-1] + ' ' + parseInt(p[2],10); }
     function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    var TYPE_LABELS = { added: 'ADDED', acq: 'ACQUIRED', vol: 'VOLUME', proto: 'PROTOCOL', update: 'UPDATE' };
     var html = '';
     if (rail.activity && rail.activity.length) {
       html += '<div class="rail-module">';
       html += '<div class="rail-mod-label"><span class="rail-live-dot"></span>Activity</div>';
       rail.activity.forEach(function(item) {
+        var label = TYPE_LABELS[item.type] || esc(item.type.toUpperCase());
+        var textHtml = item.url
+          ? '<a href="' + esc(item.url) + '">' + esc(item.text) + '</a>'
+          : esc(item.text);
         html += '<div class="rail-feed-item">';
         html += '<div class="rail-feed-meta">';
-        html += '<span class="rail-feed-type ' + esc(item.type) + '">' + esc(item.type.toUpperCase()) + '</span>';
+        html += '<span class="rail-feed-type ' + esc(item.type) + '">' + label + '</span>';
         html += '<span class="rail-feed-date">' + fmtDate(item.date) + '</span>';
         html += '</div>';
-        html += '<div class="rail-feed-text">' + esc(item.text) + '</div>';
+        html += '<div class="rail-feed-text">' + textHtml + '</div>';
         html += '</div>';
       });
       html += '</div>';
@@ -1344,6 +1413,7 @@
 
     document.getElementById('fc').textContent = shown === TOTAL ? TOTAL+' projects' : shown+' of '+TOTAL;
     document.getElementById('nr').style.display = shown === 0 ? 'block' : 'none';
+    if (window._runTableView) window._runTableView(activeF, q);
   }
 
   document.getElementById('q').addEventListener('input', e=>{ q=e.target.value.toLowerCase().trim(); run(); });
@@ -1356,6 +1426,14 @@
   });
   run();
 }());
+
+function toggleLayerInfo(btn) {
+  var section = btn.closest('.layer-section');
+  var expand = section.querySelector('.layer-expand');
+  var isOpen = expand.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  btn.textContent = isOpen ? '×' : '?';
+}
 
 function copyEmbed(el){
   const code = el.querySelector('code').textContent;
@@ -1384,7 +1462,8 @@ document.getElementById('nsf').addEventListener('submit',async e=>{
     else{b.textContent='Subscribe';b.disabled=false;}
   }catch{b.textContent='Subscribe';b.disabled=false;}
 });
-document.getElementById('sf').addEventListener('submit',async e=>{
+const _sf=document.getElementById('sf');
+if(_sf)_sf.addEventListener('submit',async e=>{
   e.preventDefault();
   const v=document.getElementById('se').value;
   await doSubscribe(v,document.getElementById('sb'),document.getElementById('sm'));
@@ -1410,6 +1489,174 @@ document.getElementById('sf').addEventListener('submit',async e=>{
     } catch(e) {}
   });
 })();
+</script>
+
+<script>
+// Table view toggle
+(function() {
+  var LAYER_ORDER = {'L0':0,'L1':1,'L2':2,'L3':3,'L4':4,'L5':5};
+  var LAYER_NAMES = {'L0':'Settlement','L1':'Routing','L2':'Wallet & Identity','L3':'Protocol','L4':'Governance','L5':'Application'};
+  var STATUS_ORDER = {'live':0,'early':1,'ann':2,'acq':3};
+  var tableBuilt = false;
+  var sortCol = 'layer', sortDir = 1;
+  var allRows = [];
+
+  function chipStatus(chip) {
+    if (chip.classList.contains('early')) return 'early';
+    if (chip.classList.contains('acq')) return 'acq';
+    if (chip.classList.contains('ann')) return 'ann';
+    return 'live';
+  }
+
+  function buildTable() {
+    if (tableBuilt) return;
+    tableBuilt = true;
+
+    document.querySelectorAll('.layer-section').forEach(function(section) {
+      var layer = section.getAttribute('data-layer') || '';
+      section.querySelectorAll('a.t').forEach(function(chip) {
+        var clone = chip.cloneNode(true);
+        clone.querySelectorAll('img').forEach(function(img) { img.remove(); });
+        var name = clone.textContent.replace(/\s+/g, ' ').trim();
+        allRows.push({
+          layer: layer,
+          name: name,
+          desc: chip.getAttribute('data-tip') || '',
+          url: chip.getAttribute('data-url') || '',
+          href: chip.getAttribute('href') || '',
+          status: chipStatus(chip)
+        });
+      });
+    });
+
+    var container = document.getElementById('proj-table');
+    var wrap = document.createElement('div');
+    wrap.style.borderTop = '1px solid var(--faint)';
+
+    var table = document.createElement('table');
+    table.className = 'data-table';
+    table.id = 'dt-table';
+
+    var thead = document.createElement('thead');
+    var hr = document.createElement('tr');
+    var cols = [{label:'Layer',key:'layer'},{label:'Name',key:'name'},{label:'Status',key:'status'},{label:'Description',key:''}];
+    cols.forEach(function(col) {
+      var th = document.createElement('th');
+      th.textContent = col.label;
+      if (col.key) {
+        th.className = 'dt-sort';
+        (function(k) {
+          th.addEventListener('click', function() {
+            if (sortCol === k) { sortDir *= -1; } else { sortCol = k; sortDir = 1; }
+            renderRows();
+          });
+        }(col.key));
+      }
+      hr.appendChild(th);
+    });
+    thead.appendChild(hr);
+    table.appendChild(thead);
+
+    var tbody = document.createElement('tbody');
+    tbody.id = 'dt-body';
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    container.appendChild(wrap);
+    renderRows();
+  }
+
+  function renderRows() {
+    var tbody = document.getElementById('dt-body');
+    if (!tbody) return;
+    while (tbody.firstChild) { tbody.removeChild(tbody.firstChild); }
+
+    var sorted = allRows.slice().sort(function(a, b) {
+      if (sortCol === 'layer') {
+        var d = (LAYER_ORDER[a.layer]||0) - (LAYER_ORDER[b.layer]||0);
+        return d !== 0 ? d * sortDir : a.name.localeCompare(b.name);
+      }
+      if (sortCol === 'name') return a.name.localeCompare(b.name) * sortDir;
+      if (sortCol === 'status') return ((STATUS_ORDER[a.status]||0) - (STATUS_ORDER[b.status]||0)) * sortDir;
+      return 0;
+    });
+
+    sorted.forEach(function(row) {
+      var tr = document.createElement('tr');
+      tr.setAttribute('data-status', row.status);
+      tr.setAttribute('data-layer', row.layer);
+      tr.setAttribute('data-name', row.name.toLowerCase());
+      tr.setAttribute('data-desc', row.desc.toLowerCase());
+
+      var tdL = document.createElement('td');
+      var lbadge = document.createElement('span');
+      lbadge.className = 'dt-layer';
+      lbadge.textContent = row.layer;
+      lbadge.title = LAYER_NAMES[row.layer] || '';
+      tdL.appendChild(lbadge);
+      tr.appendChild(tdL);
+
+      var tdN = document.createElement('td');
+      tdN.className = 'dt-name';
+      var a = document.createElement('a');
+      a.href = row.href || row.url || '#';
+      if (row.url) {
+        try {
+          var domain = new URL(row.url).hostname;
+          var favImg = document.createElement('img');
+          favImg.src = 'https://www.google.com/s2/favicons?domain=' + domain + '&sz=32';
+          favImg.style.cssText = 'width:12px;height:12px;border-radius:2px;margin-right:5px;opacity:0.6;vertical-align:middle;filter:grayscale(1)';
+          favImg.onerror = function() { this.style.display = 'none'; };
+          a.appendChild(favImg);
+        } catch(e) {}
+      }
+      a.appendChild(document.createTextNode(row.name));
+      tdN.appendChild(a);
+      tr.appendChild(tdN);
+
+      var tdS = document.createElement('td');
+      var sbadge = document.createElement('span');
+      sbadge.className = 'dt-status ' + row.status;
+      sbadge.textContent = row.status;
+      tdS.appendChild(sbadge);
+      tr.appendChild(tdS);
+
+      var tdD = document.createElement('td');
+      tdD.className = 'dt-desc';
+      tdD.textContent = row.desc;
+      tr.appendChild(tdD);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  window._runTableView = function(activeF, q) {
+    var tbody = document.getElementById('dt-body');
+    if (!tbody) return;
+    tbody.querySelectorAll('tr').forEach(function(tr) {
+      var status = tr.getAttribute('data-status');
+      var name = tr.getAttribute('data-name') || '';
+      var desc = tr.getAttribute('data-desc') || '';
+      var matchQ = !q || name.includes(q) || desc.includes(q);
+      var matchF = !activeF || activeF === 'all' || (activeF === 'live' ? status === 'live' : status === activeF);
+      tr.style.display = matchQ && matchF ? '' : 'none';
+    });
+  };
+
+  document.getElementById('vt-grid').addEventListener('click', function() {
+    document.getElementById('vt-grid').classList.add('on');
+    document.getElementById('vt-list').classList.remove('on');
+    document.querySelector('.stack').classList.remove('hidden');
+    document.getElementById('proj-table').style.display = 'none';
+  });
+
+  document.getElementById('vt-list').addEventListener('click', function() {
+    document.getElementById('vt-list').classList.add('on');
+    document.getElementById('vt-grid').classList.remove('on');
+    document.querySelector('.stack').classList.add('hidden');
+    document.getElementById('proj-table').style.display = 'block';
+    buildTable();
+  });
+}());
 </script>
 
 <script>
@@ -1504,64 +1751,28 @@ function showFlowDetail(idx) {
       if (subEl) subEl.textContent = 'data unavailable';
     });
 
-  // Sparkline
+  // Week-over-week % change (x402 only — consistent series)
   fetch('/data/apv-history.json')
     .then(function(r) { return r.json(); })
     .then(function(h) {
-      var canvas = document.getElementById('apv-spark');
-      if (!canvas || !canvas.getContext || !h || !h.weekly || h.weekly.length < 2) return;
+      if (!h || !h.weekly || h.weekly.length < 2) return;
       var weekly = h.weekly;
-      var ctx    = canvas.getContext('2d');
-      var dpr    = window.devicePixelRatio || 1;
-      var W = 160, H = 56;
-      canvas.width        = W * dpr;
-      canvas.height       = H * dpr;
-      canvas.style.width  = W + 'px';
-      canvas.style.height = H + 'px';
-      ctx.scale(dpr, dpr);
-
-      var PAD = 6;
-      var cW  = W - PAD * 2;
-      var cH  = H - PAD * 2;
-      var n   = weekly.length;
-
-      var vals = weekly.map(function(w) {
-        return (w.x402_usd || 0) + (w.acp_usd || 0);
-      });
-      var maxV = Math.max.apply(null, vals) * 1.1;
-      if (maxV === 0) return;
-
-      function cx(i) { return PAD + i * cW / (n - 1); }
-      function cy(v) { return PAD + cH - (v / maxV) * cH; }
-
-      // Filled area
-      var grad = ctx.createLinearGradient(0, PAD, 0, PAD + cH);
-      grad.addColorStop(0,   'rgba(61,158,95,0.28)');
-      grad.addColorStop(1,   'rgba(61,158,95,0.02)');
-      ctx.beginPath();
-      ctx.moveTo(cx(0), cy(vals[0]));
-      for (var i = 1; i < n; i++) ctx.lineTo(cx(i), cy(vals[i]));
-      ctx.lineTo(cx(n - 1), PAD + cH);
-      ctx.lineTo(cx(0),     PAD + cH);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-
-      // Line
-      ctx.beginPath();
-      ctx.moveTo(cx(0), cy(vals[0]));
-      for (var j = 1; j < n; j++) ctx.lineTo(cx(j), cy(vals[j]));
-      ctx.strokeStyle = '#3d9e5f';
-      ctx.lineWidth   = 1.5;
-      ctx.stroke();
-
-      // End dot
-      ctx.beginPath();
-      ctx.arc(cx(n - 1), cy(vals[n - 1]), 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = '#3d9e5f';
-      ctx.fill();
+      var latest = weekly[weekly.length - 1];
+      var prev   = weekly[weekly.length - 2];
+      var latestV = latest.x402_usd || 0;
+      var prevV   = prev.x402_usd || 0;
+      if (prevV === 0) return;
+      var pct  = ((latestV - prevV) / prevV) * 100;
+      var sign = pct >= 0 ? '+' : '';
+      var el   = document.getElementById('apv-wow-val');
+      var wow  = document.getElementById('apv-wow');
+      if (el && wow) {
+        el.textContent = sign + pct.toFixed(1) + '%';
+        el.className = 'apv-wow-val ' + (pct >= 0 ? 'up' : 'down');
+        wow.style.display = 'flex';
+      }
     })
-    .catch(function() { /* sparkline stays blank */ });
+    .catch(function() {});
 }());
 </script>
 </body>
