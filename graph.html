@@ -187,9 +187,10 @@ LAYER_ORDER.forEach(function(lid){
 });
 data.layers.forEach(function(l){
   l.projects.forEach(function(p){
-    var col = LAYERS[p.layer] ? LAYERS[p.layer].color : '#685e58';
+    var lid = p.layer || l.id;
+    var col = LAYERS[lid] ? LAYERS[lid].color : '#685e58';
     var sc = STATUS_COLOR[p.status||'live'] || col;
-    nodes.push({ id:p.id, type:'project', layer:p.layer, name:p.name, status:p.status||'live',
+    nodes.push({ id:p.id, type:'project', layer:lid, name:p.name, status:p.status||'live',
                   description:p.description||'', color:col, statusColor:sc, data:p,
                   x:0, y:0, vx:0, vy:0, r: p.status==='acquired' ? 5.5 : 5 });
   });
@@ -203,7 +204,7 @@ var nodeIds = new Set(nodes.map(function(n){ return n.id; }));
 var links = [];
 data.layers.forEach(function(l){
   l.projects.forEach(function(p){
-    links.push({ s:nodeMap[p.id], t:nodeMap[p.layer], type:'layer' });
+    links.push({ s:nodeMap[p.id], t:nodeMap[p.layer || l.id], type:'layer' });
   });
 });
 var seen = new Set();
