@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "fetched_at": "2026-03-29T05:29:08.174Z",
+    "window": "30d",
+    "sources": [
+      "x402"
+    ],
+    "dune_query_x402": "5236154",
+    "dune_query_acp": null,
+    "note": "APV = agent payment volume. x402 tracks EVM facilitator volume. ACP tracks Virtuals Protocol job escrow volume on Base."
+  },
+  "apv": {
+    "volume_30d_usd": 302866.65,
+    "tx_count_30d": 770784
+  },
+  "x402": {
+    "volume_usd": 302866.65,
+    "tx_count": 770784,
+    "weekly": [
+      {
+        "week": "2026-03-23",
+        "volume_usd": 12058.33,
+        "tx_count": 71163
+      },
+      {
+        "week": "2026-03-16",
+        "volume_usd": 80709.81,
+        "tx_count": 201544
+      },
+      {
+        "week": "2026-03-09",
+        "volume_usd": 138282.36,
+        "tx_count": 243210
+      },
+      {
+        "week": "2026-03-02",
+        "volume_usd": 71816.16,
+        "tx_count": 254867
+      }
+    ]
+  },
+  "acp": {
+    "volume_usd": 0,
+    "tx_count": 0
+  }
+}
