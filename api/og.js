@@ -1,12 +1,12 @@
 /**
  * /api/og — Dynamic OG image generator
  * Matches the APS project page aesthetic exactly.
- * Edge runtime. Params: name, layer, status, desc
+ * Node runtime (uses fs to load local fonts). Params: name, layer, status, desc
  */
 
 import { ImageResponse } from '@vercel/og';
-
-export const config = { runtime: 'edge' };
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 const STATUS_COLOR = {
   live:      '#3d9e5f',
@@ -24,8 +24,8 @@ const LAYER_LABELS = {
   L5: 'Application',
 };
 
-export default async function handler(req) {
-  const { searchParams } = new URL(req.url);
+export default async function handler(req, res) {
+  const { searchParams } = new URL(req.url, 'http://localhost');
   const name   = searchParams.get('name')   || 'Unknown Project';
   const layer  = searchParams.get('layer')  || '';
   const status = searchParams.get('status') || 'announced';
@@ -35,17 +35,14 @@ export default async function handler(req) {
   const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
   const layerName   = LAYER_LABELS[layer] || '';
 
-  // Load fonts from own domain (edge can't use fs)
-  const base = new URL(req.url).origin;
-  const [serifFont, monoFont] = await Promise.all([
-    fetch(`${base}/public/fonts/DMSerifDisplay.ttf`).then(r => r.arrayBuffer()),
-    fetch(`${base}/public/fonts/JetBrainsMono-SemiBold.ttf`).then(r => r.arrayBuffer()),
-  ]);
+  // Load fonts from filesystem (Node runtime)
+  const serifFont = readFileSync(join(process.cwd(), 'public/fonts/DMSerifDisplay.ttf'));
+  const monoFont  = readFileSync(join(process.cwd(), 'public/fonts/JetBrainsMono-SemiBold.ttf'));
 
   const truncDesc = desc.length > 110 ? desc.slice(0, 107) + '...' : desc;
   const fontSize  = name.length > 22 ? 72 : name.length > 14 ? 86 : 100;
 
-  return new ImageResponse(
+  const imageResponse = new ImageResponse(
     {
       type: 'div',
       props: {
@@ -227,4 +224,9 @@ export default async function handler(req) {
       ],
     }
   );
+
+  const buffer = Buffer.from(await imageResponse.arrayBuffer());
+  res.setHeader('Content-Type', 'image/png');
+  res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
+  res.status(200).end(buffer);
 }
