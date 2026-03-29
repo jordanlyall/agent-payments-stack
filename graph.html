@@ -345,11 +345,13 @@ function applyLayerFilter(){
 }
 
 // D3 setup
-var wrap = document.getElementById('graph-wrap');
-var w = wrap.offsetWidth;
-var h = wrap.offsetHeight;
+var w = window.innerWidth;
+var h = window.innerHeight - 40;
 
-var svg = d3.select('#graph-svg');
+var svg = d3.select('#graph-svg')
+  .attr('width', w)
+  .attr('height', h)
+  .attr('viewBox', '0 0 ' + w + ' ' + h);
 var container = svg.append('g').attr('class','graph-container');
 
 // Zoom
