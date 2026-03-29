@@ -14,7 +14,7 @@
     { "source": "/history",     "destination": "/history.html" },
     { "source": "/compare",     "destination": "/compare.html" },
     { "source": "/api/live",    "destination": "/api/live.js" },
-    { "source": "/api/og",      "destination": "/api/og.js" },
+
     { "source": "/:slug([^.]+)", "destination": "/api/project.js" }
   ]
 }
