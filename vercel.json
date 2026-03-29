@@ -10,6 +10,7 @@
     { "source": "/about",       "destination": "/about.html" },
     { "source": "/acquisitions", "destination": "/acquisitions.html" },
     { "source": "/hackathons",  "destination": "/hackathons.html" },
+    { "source": "/graph",       "destination": "/graph.html" },
     { "source": "/:slug([^.]+)", "destination": "/projects.html" }
   ]
 }
