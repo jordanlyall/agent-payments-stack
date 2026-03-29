@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocol Comparison — Agent Payments Stack</title>
+<meta name="description" content="x402 vs Tempo MPP vs L402 vs ACP vs Google AP2. The developer's guide to picking an agent payment protocol. Side-by-side comparison of transport, chain, cost, and use case fit.">
+<link rel="canonical" href="https://agentpaymentsstack.com/compare">
+<meta property="og:title" content="Protocol Comparison — Agent Payments Stack">
+<meta property="og:description" content="x402 vs Tempo MPP vs L402 vs ACP. Side-by-side comparison for developers choosing an agent payment protocol.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentpaymentsstack.com/compare">
+<meta property="og:image" content="https://agentpaymentsstack.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --ann: #524e49; --acq: #d9613f;
+    --live: #3d9e5f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  /* Topbar */
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+  .mob-menu-btn { display: none; background: none; border: none; cursor: pointer; padding: 6px; color: var(--text); line-height: 0; }
+  .mob-menu-btn .icon-ham { display: block; } .mob-menu-btn .icon-x { display: none; }
+  .mob-menu-btn.open .icon-ham { display: none; } .mob-menu-btn.open .icon-x { display: block; }
+  .mob-menu { display: none; position: fixed; top: 50px; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 98; padding: 16px 0; flex-direction: column; border-top: 1px solid var(--faint); overflow-y: auto; }
+  .mob-menu.open { display: flex; }
+  .mob-menu a { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--secondary); text-decoration: none; padding: 16px 24px; border-bottom: 1px solid var(--faint); }
+  .mob-menu a.tl-active { color: var(--text); }
+
+  /* Page */
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 56px 80px; }
+
+  /* Header */
+  .page-hdr { margin-bottom: 40px; }
+  .page-hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 8px; }
+  .page-hdr p { font-size: 13px; color: var(--secondary); max-width: 600px; line-height: 1.65; }
+  .page-meta { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 10px; }
+
+  /* Protocol cards row */
+  .proto-cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 6px; overflow: hidden; margin-bottom: 36px; }
+  .proto-card { background: var(--bg); padding: 18px 16px 20px; }
+  .proto-card-name { font-size: 15px; font-weight: 700; letter-spacing: -0.4px; margin-bottom: 5px; }
+  .proto-card-tag { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 10px; }
+  .proto-card-desc { font-size: 11.5px; color: var(--secondary); line-height: 1.55; }
+  .proto-status { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 8px; padding: 2px 6px; border-radius: 3px; letter-spacing: 0.04em; margin-bottom: 8px; }
+  .proto-status.live { color: var(--live); background: rgba(61,158,95,0.12); }
+  .proto-status.announced { color: var(--muted); background: rgba(255,255,255,0.05); }
+
+  /* Comparison matrix */
+  .section-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 40px 0 16px; }
+  .cmp-table { width: 100%; border-collapse: collapse; }
+  .cmp-table th { text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding: 10px 14px; border-bottom: 2px solid var(--faint); white-space: nowrap; }
+  .cmp-table th.col-proto { color: var(--text); font-size: 11px; }
+  .cmp-table th:first-child { width: 160px; color: var(--muted); font-size: 9px; }
+  .cmp-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .cmp-table tbody tr:hover { background: rgba(255,255,255,0.018); }
+  .cmp-table td { padding: 10px 14px; font-size: 12.5px; vertical-align: top; }
+  .cmp-table td:first-child { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); white-space: nowrap; font-weight: 600; letter-spacing: 0.04em; padding-top: 12px; }
+  .cmp-val { color: var(--text); line-height: 1.45; }
+  .cmp-val.dim { color: var(--secondary); }
+  .cmp-val.good { color: var(--live); }
+  .cmp-val.warn { color: var(--early); }
+  .cmp-val.none { color: var(--faint); font-style: italic; }
+  .cmp-check { color: var(--live); font-size: 13px; }
+  .cmp-x { color: var(--faint); font-size: 13px; }
+  .cmp-partial { color: var(--early); font-size: 11px; }
+
+  /* Decision cards */
+  .decision-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 6px; overflow: hidden; margin-top: 4px; }
+  .decision-card { background: var(--bg); padding: 20px 22px 24px; }
+  .dc-proto { font-size: 14px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+  .dc-tagline { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
+  .dc-section { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 12px 0 5px; }
+  .dc-items { font-size: 12.5px; color: var(--secondary); line-height: 1.7; }
+  .dc-items li { margin-left: 14px; }
+  .dc-skip { font-size: 12px; color: var(--faint); font-style: italic; margin-top: 8px; line-height: 1.55; }
+
+  /* Editorial note */
+  .editorial { background: rgba(255,255,255,0.025); border: 1px solid var(--faint); border-left: 3px solid var(--early); border-radius: 4px; padding: 16px 20px; margin-top: 40px; }
+  .editorial-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--early); margin-bottom: 8px; }
+  .editorial-text { font-size: 13px; color: var(--secondary); line-height: 1.65; }
+  .editorial-text strong { color: var(--text); font-weight: 500; }
+  .editorial-byline { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); margin-top: 10px; }
+
+  /* Footer */
+  .foot { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+
+  @media (max-width: 1100px) {
+    .proto-cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .topbar { padding: 0 20px; }
+    .topbar-links { display: none; }
+    .mob-menu-btn { display: flex; align-items: center; }
+    .page { padding: 28px 20px 60px; }
+    .proto-cards { grid-template-columns: 1fr 1fr; }
+    .cmp-table th, .cmp-table td { padding: 8px 10px; font-size: 11.5px; }
+    .cmp-table th:first-child { width: 110px; }
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .proto-cards { grid-template-columns: 1fr; }
+  }
+</style>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="/" class="topbar-logo">AGENT PAYMENTS STACK</a>
+  <div class="topbar-right">
+    <div class="topbar-links">
+      <a href="/">Stack</a>
+      <a href="/data">Data</a>
+      <a href="/rankings">Rankings</a>
+      <a href="/acquisitions">Acquisitions</a>
+      <a href="/graph">Graph</a>
+      <a href="/history">History</a>
+      <a href="/compare" class="tl-active">Compare</a>
+      <a href="/api">API</a>
+      <a href="/about">About</a>
+      <a href="https://tally.so/r/rjVvd5" target="_blank">Submit &#8599;</a>
+    </div>
+    <button class="mob-menu-btn" id="mob-menu-btn" aria-label="Menu" aria-expanded="false">
+      <svg class="icon-ham" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <svg class="icon-x" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="/">Stack</a>
+  <a href="/data">Data</a>
+  <a href="/rankings">Rankings</a>
+  <a href="/acquisitions">Acquisitions</a>
+  <a href="/graph">Graph</a>
+  <a href="/history">History</a>
+  <a href="/compare" class="tl-active">Compare</a>
+  <a href="/api">API</a>
+  <a href="/about">About</a>
+  <a href="https://tally.so/r/rjVvd5" target="_blank">Submit &#8599;</a>
+</div>
+
+<div class="page">
+
+  <div class="page-hdr">
+    <h1>Protocol Comparison</h1>
+    <p>The #1 developer question: which payment protocol do I build on? Five protocols, one table. No standard has won — but the signal is clear.</p>
+    <div class="page-meta">Updated March 2026 &middot; @jordanlyall &middot; <a href="/data.json" style="color:inherit">data.json</a></div>
+  </div>
+
+  <!-- Protocol cards -->
+  <div class="proto-cards">
+    <div class="proto-card">
+      <div class="proto-status live">Live</div>
+      <div class="proto-card-name">x402</div>
+      <div class="proto-card-tag">Coinbase &middot; Base / EVM</div>
+      <div class="proto-card-desc">HTTP 402 status code as a payment primitive. Agent discovers cost, pays, retries — all in one round-trip.</div>
+    </div>
+    <div class="proto-card">
+      <div class="proto-status live">Live</div>
+      <div class="proto-card-name">Tempo MPP</div>
+      <div class="proto-card-tag">Tempo &middot; Multi-chain</div>
+      <div class="proto-card-desc">Multi-party payment protocol connecting 100+ agent services. Coordination layer for complex service networks.</div>
+    </div>
+    <div class="proto-card">
+      <div class="proto-status live">Live</div>
+      <div class="proto-card-name">L402</div>
+      <div class="proto-card-tag">Lightning Labs &middot; Bitcoin L2</div>
+      <div class="proto-card-desc">Lightning Network + HTTP headers for API monetization. Sub-cent Bitcoin micropayments per request.</div>
+    </div>
+    <div class="proto-card">
+      <div class="proto-status live">Live</div>
+      <div class="proto-card-name">ACP</div>
+      <div class="proto-card-tag">OpenAI + Stripe &middot; Multi-chain</div>
+      <div class="proto-card-desc">Agentic Commerce Protocol. Standardizes how agents initiate and settle purchases across services.</div>
+    </div>
+    <div class="proto-card">
+      <div class="proto-status announced">Announced</div>
+      <div class="proto-card-name">Google AP2</div>
+      <div class="proto-card-tag">Google &middot; Off-chain</div>
+      <div class="proto-card-desc">Agent-to-Agent Payment protocol. 60+ enterprise partners. In development — no public spec yet.</div>
+    </div>
+  </div>
+
+  <!-- Matrix -->
+  <div class="section-label">Side-by-Side</div>
+  <div style="overflow-x:auto">
+  <table class="cmp-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="col-proto">x402</th>
+        <th class="col-proto">Tempo MPP</th>
+        <th class="col-proto">L402</th>
+        <th class="col-proto">ACP</th>
+        <th class="col-proto">Google AP2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Status</td>
+        <td><span class="cmp-val good">Live</span></td>
+        <td><span class="cmp-val good">Live</span></td>
+        <td><span class="cmp-val good">Live</span></td>
+        <td><span class="cmp-val good">Live</span></td>
+        <td><span class="cmp-val warn">Announced</span></td>
+      </tr>
+      <tr>
+        <td>Transport</td>
+        <td><span class="cmp-val">HTTP 402 header</span></td>
+        <td><span class="cmp-val">HTTP</span></td>
+        <td><span class="cmp-val">Lightning + HTTP header</span></td>
+        <td><span class="cmp-val">HTTP</span></td>
+        <td><span class="cmp-val dim">HTTP (TBD)</span></td>
+      </tr>
+      <tr>
+        <td>Network</td>
+        <td><span class="cmp-val">Base, any EVM</span></td>
+        <td><span class="cmp-val">Multi-chain (off-chain coordination)</span></td>
+        <td><span class="cmp-val">Bitcoin Lightning L2</span></td>
+        <td><span class="cmp-val">Multi-chain</span></td>
+        <td><span class="cmp-val dim">Off-chain / enterprise</span></td>
+      </tr>
+      <tr>
+        <td>Settlement token</td>
+        <td><span class="cmp-val">USDC</span></td>
+        <td><span class="cmp-val dim">Varies / off-chain</span></td>
+        <td><span class="cmp-val">BTC (sats)</span></td>
+        <td><span class="cmp-val">USD / stablecoin</span></td>
+        <td><span class="cmp-val dim">TBD</span></td>
+      </tr>
+      <tr>
+        <td>On-chain</td>
+        <td><span class="cmp-check">&#10003;</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+        <td><span class="cmp-check">&#10003;</span> <span style="font-size:10px;color:var(--muted)">Lightning</span></td>
+        <td><span class="cmp-partial">Partial</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+      </tr>
+      <tr>
+        <td>Open source</td>
+        <td><span class="cmp-check">&#10003;</span> <span style="font-size:10px;color:var(--muted)">Apache-2.0</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+        <td><span class="cmp-check">&#10003;</span></td>
+        <td><span class="cmp-check">&#10003;</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+      </tr>
+      <tr>
+        <td>GitHub stars</td>
+        <td><span class="cmp-val good">5,800 &#9733;</span></td>
+        <td><span class="cmp-val none">not public</span></td>
+        <td><span class="cmp-val dim">community repos</span></td>
+        <td><span class="cmp-val dim">via Stripe docs</span></td>
+        <td><span class="cmp-val none">not public</span></td>
+      </tr>
+      <tr>
+        <td>Backed by</td>
+        <td><span class="cmp-val">Coinbase</span></td>
+        <td><span class="cmp-val">Tempo ($500M Series A)</span></td>
+        <td><span class="cmp-val">Lightning Labs</span></td>
+        <td><span class="cmp-val">OpenAI + Stripe</span></td>
+        <td><span class="cmp-val">Google</span></td>
+      </tr>
+      <tr>
+        <td>Launched</td>
+        <td><span class="cmp-val">Nov 2024</span></td>
+        <td><span class="cmp-val">2024</span></td>
+        <td><span class="cmp-val">2021</span></td>
+        <td><span class="cmp-val">Nov 2024</span></td>
+        <td><span class="cmp-val warn">Not yet</span></td>
+      </tr>
+      <tr>
+        <td>Infra support</td>
+        <td><span class="cmp-val good">AWS, Cloudflare, Vercel</span></td>
+        <td><span class="cmp-val dim">Tempo-hosted</span></td>
+        <td><span class="cmp-val">Lightning node required</span></td>
+        <td><span class="cmp-val">Stripe SDK</span></td>
+        <td><span class="cmp-val none">TBD</span></td>
+      </tr>
+      <tr>
+        <td>EVM compatible</td>
+        <td><span class="cmp-check">&#10003;</span></td>
+        <td><span class="cmp-partial">Partial</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+        <td><span class="cmp-partial">Partial</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+      </tr>
+      <tr>
+        <td>ElizaOS plugin</td>
+        <td><span class="cmp-check">&#10003;</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+        <td><span class="cmp-x">&mdash;</span></td>
+      </tr>
+      <tr>
+        <td>30d volume</td>
+        <td><span class="cmp-val">75M txns (protocol)<br><span style="font-size:11px;color:var(--muted)">$61.80 ref proxy</span></span></td>
+        <td><span class="cmp-val dim">100+ services (undisclosed)</span></td>
+        <td><span class="cmp-val dim">not tracked</span></td>
+        <td><span class="cmp-val dim">not tracked</span></td>
+        <td><span class="cmp-val none">pre-launch</span></td>
+      </tr>
+      <tr>
+        <td>Best for</td>
+        <td><span class="cmp-val">API micropayments, EVM-native agents</span></td>
+        <td><span class="cmp-val">Enterprise service networks, Anthropic stack</span></td>
+        <td><span class="cmp-val">Bitcoin-native, sub-cent payments</span></td>
+        <td><span class="cmp-val">OpenAI / Stripe ecosystem</span></td>
+        <td><span class="cmp-val dim">Enterprise (watch and wait)</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- Decision guide -->
+  <div class="section-label" style="margin-top:48px">When to Pick Each</div>
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="dc-proto">x402</div>
+      <div class="dc-tagline">The default choice for EVM builders</div>
+      <div class="dc-section">Pick this if</div>
+      <ul class="dc-items">
+        <li>You're building on Base, Ethereum, or any EVM chain</li>
+        <li>You want HTTP-native payments with no extra infrastructure</li>
+        <li>You're using ElizaOS, Coinbase AgentKit, or Vercel/Cloudflare/AWS</li>
+        <li>You want open-source you can audit and fork</li>
+        <li>You need Coinbase ecosystem compatibility</li>
+      </ul>
+      <div class="dc-skip">Skip if you need Bitcoin-native payments or are deep in the OpenAI/Stripe stack.</div>
+    </div>
+    <div class="decision-card">
+      <div class="dc-proto">Tempo MPP</div>
+      <div class="dc-tagline">For complex service networks and enterprise</div>
+      <div class="dc-section">Pick this if</div>
+      <ul class="dc-items">
+        <li>You're building multi-party service coordination (not just pay-per-call)</li>
+        <li>You're in the Anthropic or enterprise AI ecosystem</li>
+        <li>You need 100+ services on a shared coordination layer</li>
+        <li>You prefer managed infrastructure over self-hosted</li>
+      </ul>
+      <div class="dc-skip">Skip if you want on-chain settlement or open-source. Opaque by design.</div>
+    </div>
+    <div class="decision-card">
+      <div class="dc-proto">L402 / Lightning</div>
+      <div class="dc-tagline">For Bitcoin-native, sub-cent micropayments</div>
+      <div class="dc-section">Pick this if</div>
+      <ul class="dc-items">
+        <li>Your users or stack is Bitcoin-native</li>
+        <li>You need true sub-cent micropayments (fractions of a sat)</li>
+        <li>You're already running Lightning infrastructure</li>
+        <li>Latency and finality on Lightning rails are acceptable</li>
+      </ul>
+      <div class="dc-skip">Skip if you need EVM compatibility, USDC settlement, or don't want to run Lightning nodes.</div>
+    </div>
+    <div class="decision-card">
+      <div class="dc-proto">ACP</div>
+      <div class="dc-tagline">For the OpenAI / Stripe developer stack</div>
+      <div class="dc-section">Pick this if</div>
+      <ul class="dc-items">
+        <li>You're building with OpenAI APIs as your agent runtime</li>
+        <li>You're already using Stripe for payments</li>
+        <li>You want the most familiar auth and payment UX for end users</li>
+        <li>You need fiat-friendly settlement alongside crypto</li>
+      </ul>
+      <div class="dc-skip">Skip if you need pure on-chain settlement or EVM-native agent infrastructure.</div>
+    </div>
+  </div>
+
+  <!-- Editorial -->
+  <div class="editorial">
+    <div class="editorial-label">Editorial Take &middot; March 2026</div>
+    <div class="editorial-text">
+      <strong>x402 is the leading standard.</strong> AWS, Cloudflare, and Vercel natively support it. It has the most GitHub stars (5,800), the most ElizaOS integrations, and the most open infrastructure. Coinbase, Anthropic, and Stripe are all building around it. That is not an accident.<br><br>
+      <strong>The real race is x402 vs ACP.</strong> Both launched Nov 2024. Both target HTTP-native agent payments. The difference is ecosystem: x402 is on-chain and EVM-native; ACP is Stripe-native and developer-familiar. A world with both is likely. A developer on Base builds on x402. A developer on OpenAI builds on ACP.<br><br>
+      <strong>L402 solves a different problem.</strong> If you need Bitcoin-native or Lightning rails, it is the only answer. If you don't, it is not competitive with x402 on simplicity or EVM ecosystem support.<br><br>
+      <strong>Google AP2 is the wildcard.</strong> 60+ enterprise partners and Google distribution is not nothing. But "announced" means no spec, no code, no timeline. File it under "watch closely."<br><br>
+      <strong>Tempo MPP is the enterprise layer, not the open layer.</strong> $500M Series A and 100+ services are real signals, but the lack of open-source and on-chain settlement limits developer adoption. It will dominate where managed infrastructure is preferred.
+    </div>
+    <div class="editorial-byline">@jordanlyall &middot; agentpaymentsstack.com</div>
+  </div>
+
+  <div class="foot">
+    <div><a href="/">agentpaymentsstack.com</a> &middot; <a href="https://x.com/jordanlyall" target="_blank">@jordanlyall</a></div>
+    <div><a href="/data.json">data.json</a> &middot; <a href="/llms.txt">llms.txt</a></div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var btn = document.getElementById('mob-menu-btn');
+  var menu = document.getElementById('mob-menu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      menu.classList.remove('open');
+      btn.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+  });
+}());
+</script>
+</body>
+</html>
