@@ -1,12 +1,12 @@
 /**
  * /api/og — Dynamic OG image generator
- * Matches the APS project page aesthetic exactly.
- * Node runtime (uses fs to load local fonts). Params: name, layer, status, desc
+ * Edge runtime: fonts fetched from deployment URL (not fs).
+ * Params: name, layer, status, desc
  */
 
 import { ImageResponse } from '@vercel/og';
-import { readFileSync } from 'fs';
-import { join } from 'path';
+
+export const config = { runtime: 'edge' };
 
 const STATUS_COLOR = {
   live:      '#3d9e5f',
@@ -24,8 +24,8 @@ const LAYER_LABELS = {
   L5: 'Application',
 };
 
-export default async function handler(req, res) {
-  const { searchParams } = new URL(req.url, 'http://localhost');
+export default async function handler(req) {
+  const { searchParams, origin } = new URL(req.url);
   const name   = searchParams.get('name')   || 'Unknown Project';
   const layer  = searchParams.get('layer')  || '';
   const status = searchParams.get('status') || 'announced';
@@ -35,14 +35,16 @@ export default async function handler(req, res) {
   const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
   const layerName   = LAYER_LABELS[layer] || '';
 
-  // Load fonts from filesystem (Node runtime)
-  const serifFont = readFileSync(join(process.cwd(), 'public/fonts/DMSerifDisplay.ttf'));
-  const monoFont  = readFileSync(join(process.cwd(), 'public/fonts/JetBrainsMono-SemiBold.ttf'));
+  // Fetch fonts from static deployment URL
+  const [serifFont, monoFont] = await Promise.all([
+    fetch(`${origin}/public/fonts/DMSerifDisplay.ttf`).then(r => r.arrayBuffer()),
+    fetch(`${origin}/public/fonts/JetBrainsMono-SemiBold.ttf`).then(r => r.arrayBuffer()),
+  ]);
 
   const truncDesc = desc.length > 110 ? desc.slice(0, 107) + '...' : desc;
   const fontSize  = name.length > 22 ? 72 : name.length > 14 ? 86 : 100;
 
-  const imageResponse = new ImageResponse(
+  return new ImageResponse(
     {
       type: 'div',
       props: {
@@ -224,9 +226,4 @@ export default async function handler(req, res) {
       ],
     }
   );
-
-  const buffer = Buffer.from(await imageResponse.arrayBuffer());
-  res.setHeader('Content-Type', 'image/png');
-  res.setHeader('Cache-Control', 'public, max-age=86400, s-maxage=86400');
-  res.status(200).end(buffer);
 }
