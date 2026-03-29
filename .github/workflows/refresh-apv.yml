@@ -1,0 +1,30 @@
+name: Refresh APV Data
+
+on:
+  schedule:
+    - cron: '0 14 * * *'  # 6am PT daily (UTC-8)
+  workflow_dispatch:        # allow manual trigger from GitHub Actions UI
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch APV from Dune
+        env:
+          DUNE_API_KEY: ${{ secrets.DUNE_API_KEY }}
+          DUNE_ACP_QUERY_ID: ${{ secrets.DUNE_ACP_QUERY_ID }}
+        run: node scripts/fetch-apv.js
+
+      - name: Commit updated APV data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/apv.json
+          git diff --staged --quiet || git commit -m "data: refresh APV [skip ci]"
+          git push
