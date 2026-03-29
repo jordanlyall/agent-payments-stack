@@ -1,0 +1,29 @@
+{
+  "name": "agent-payments-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sync": "node scripts/sync-data.js",
+    "fetch-x402": "node scripts/fetch-x402-volume.js",
+    "fetch-apv": "node scripts/fetch-apv.js",
+    "refresh": "node scripts/fetch-apv.js && node scripts/fetch-x402-volume.js && node scripts/sync-data.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordanlyall/agent-payments-stack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jordanlyall/agent-payments-stack/issues"
+  },
+  "homepage": "https://github.com/jordanlyall/agent-payments-stack#readme",
+  "dependencies": {
+    "@vercel/og": "^0.11.1",
+    "playwright": "^1.58.2"
+  }
+}
