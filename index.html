@@ -1549,7 +1549,7 @@ if(_sf)_sf.addEventListener('submit',async e=>{
   var LAYER_NAMES = {'L0':'Settlement','L1':'Routing','L2':'Wallet & Identity','L3':'Protocol','L4':'Governance','L5':'Application'};
   var STATUS_ORDER = {'live':0,'early':1,'ann':2,'acq':3};
   var tableBuilt = false;
-  var sortCol = 'layer', sortDir = 1;
+  var sortCol = 'status', sortDir = 1;
   var allRows = [];
 
   function chipStatus(chip) {
@@ -1624,10 +1624,17 @@ if(_sf)_sf.addEventListener('submit',async e=>{
     var sorted = allRows.slice().sort(function(a, b) {
       if (sortCol === 'layer') {
         var d = (LAYER_ORDER[a.layer]||0) - (LAYER_ORDER[b.layer]||0);
-        return d !== 0 ? d * sortDir : a.name.localeCompare(b.name);
+        if (d !== 0) return d * sortDir;
+        var sd = (STATUS_ORDER[a.status]||0) - (STATUS_ORDER[b.status]||0);
+        return sd !== 0 ? sd : a.name.localeCompare(b.name);
       }
       if (sortCol === 'name') return a.name.localeCompare(b.name) * sortDir;
-      if (sortCol === 'status') return ((STATUS_ORDER[a.status]||0) - (STATUS_ORDER[b.status]||0)) * sortDir;
+      if (sortCol === 'status') {
+        var sd = (STATUS_ORDER[a.status]||0) - (STATUS_ORDER[b.status]||0);
+        if (sd !== 0) return sd * sortDir;
+        var ld = (LAYER_ORDER[a.layer]||0) - (LAYER_ORDER[b.layer]||0);
+        return ld !== 0 ? ld : a.name.localeCompare(b.name);
+      }
       return 0;
     });
 
