@@ -550,7 +550,7 @@
           ],
           "url": "https://themeridian.finance",
           "chain": "Arc",
-          "editorial": "3,200+ organic users, 200K+ TVL, 15K+ transactions on Arc Testnet. First USYC on Arc. Circle MNDA in progress."
+          "editorial": "3,200+ organic users, 200K+ TVL, 15K+ transactions on Arc Testnet. First USYC on Arc."
         },
         {
           "layer": "L5",
@@ -1598,6 +1598,22 @@
         },
         {
           "layer": "L3",
+          "id": "elenpay",
+          "name": "ElenPAY",
+          "status": "live",
+          "description": "Lightning Network payment rails for AI agents, enabling private, instant, and cost-efficient transactions — optimized for real-time, high-frequency use cases beyond traditional on-chain systems.",
+          "tags": [
+            "lightning",
+            "b2b",
+            "developer"
+          ],
+          "url": "https://www.elenpay.tech",
+          "x": "elenpay_tech",
+          "chain": "Bitcoin",
+          "editorial": "ElenPAY abstracts Lightning node management and liquidity for businesses processing high-frequency micropayments — a real infrastructure gap. The 1M tx/min claim and Spain Ministry of Science recognition signal operational maturity. The question is whether Lightning's fee volatility and routing complexity remain blockers for agent-native use cases, or whether ElenPAY's managed layer resolves enough of that friction to compete with stablecoin rails."
+        },
+        {
+          "layer": "L3",
           "id": "superfluid",
           "name": "Superfluid",
           "status": "live",
@@ -1779,6 +1795,15 @@
             "onchain"
           ],
           "x": "MasumiNetwork",
+          "github": {
+            "url": "https://github.com/masumi-network/masumi-payment-service",
+            "stars": 13,
+            "forks": 12,
+            "contributors": 13,
+            "license": "MIT",
+            "last_commit": "2026-03",
+            "as_of": "2026-03-30"
+          },
           "docs": "https://docs.masumi.network",
           "editorial": "Masumi embeds agent payments directly on Cardano's settlement layer, avoiding EVM middleware fragmentation—but faces Cardano's thin agent ecosystem compared to Ethereum/Solana. The protocol-layer approach is strategically sound; the real test is adoption. An acquisition would signal either Cardano consolidation or cross-chain payment aggregation."
         },

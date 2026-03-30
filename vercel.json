@@ -2,7 +2,8 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "redirects": [
-    { "source": "/agent-credit-protocol", "destination": "/bond", "permanent": true }
+    { "source": "/agent-credit-protocol", "destination": "/bond", "permanent": true },
+    { "source": "/masumi-network", "destination": "/masumi", "permanent": true }
   ],
   "rewrites": [
     { "source": "/data",        "destination": "/data.html" },
