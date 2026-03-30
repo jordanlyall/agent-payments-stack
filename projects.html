@@ -120,6 +120,20 @@
   .cta-btn:hover { background: var(--text); }
 
   .aside-divider { height: 1px; background: var(--faint); margin: 14px 0; }
+  .score-widget { margin: 14px 0; }
+  .score-widget-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+  .score-widget-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .score-widget-num { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; letter-spacing: -1px; color: var(--text); line-height: 1; flex-shrink: 0; }
+  .score-widget-bar-wrap { flex: 1; background: var(--faint); border-radius: 2px; height: 4px; overflow: hidden; }
+  .score-widget-bar { height: 100%; border-radius: 2px; background: #3d9e5f; transition: width 0.4s ease; }
+  .score-widget-factors { display: flex; flex-direction: column; gap: 3px; }
+  .score-widget-factor { display: flex; align-items: center; gap: 6px; }
+  .score-widget-f-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); width: 60px; flex-shrink: 0; }
+  .score-widget-f-bar-wrap { flex: 1; background: var(--faint); border-radius: 2px; height: 3px; overflow: hidden; }
+  .score-widget-f-bar { height: 100%; border-radius: 2px; background: rgba(255,255,255,0.15); }
+  .score-widget-f-val { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); width: 22px; text-align: right; flex-shrink: 0; }
+  .score-widget-link { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); text-decoration: none; margin-top: 6px; display: inline-block; }
+  .score-widget-link:hover { color: var(--secondary); }
 
   /* Metric */
   .aside-metric-val {
@@ -464,6 +478,31 @@ document.addEventListener('DOMContentLoaded', function () {
   function ap(p) { for (var i=1;i<arguments.length;i++) { var c=arguments[i]; if (c!=null) { if (typeof c==='string') p.appendChild(document.createTextNode(c)); else p.appendChild(c); } } return p; }
   function clr(el) { while(el.firstChild) el.removeChild(el.firstChild); }
 
+
+  function stackScore(p) {
+    var liveness = {'live':80,'early':50,'acquired':40,'announced':15}[p.status]||15;
+    if(p.volume&&p.volume.value) liveness=Math.min(100,liveness+20);
+    var stars=(p.github&&p.github.stars)?Math.min(50,p.github.stars/400):0;
+    var npm=(p.npm&&p.npm.weekly_downloads)?Math.min(35,p.npm.weekly_downloads/286):0;
+    var contrib=(p.github&&p.github.contributors)?Math.min(15,p.github.contributors/13.3):0;
+    var signal=stars+npm+contrib;
+    var openness=0;
+    if(p.github&&p.github.url) openness+=40;
+    if(p.tags&&p.tags.indexOf('open-source')>=0) openness+=35;
+    if(p.docs) openness+=25;
+    var info=0;
+    if(p.launched) info+=35;
+    if(p.funding) info+=35;
+    if(p.description&&p.description.length>30) info+=30;
+    var score=0.30*liveness+0.25*signal+0.25*openness+0.20*info;
+    return {score:Math.round(score),factors:[
+      {name:'Liveness',val:Math.round(liveness*0.30),max:30},
+      {name:'Signal',val:Math.round(signal*0.25),max:25},
+      {name:'Open',val:Math.round(openness*0.25),max:25},
+      {name:'Info',val:Math.round(info*0.20),max:20}
+    ]};
+  }
+
   function renderProfile(p, layers) {
     document.title = p.name + ' \u2014 Agent Payments Stack';
     var metaDesc = document.querySelector('meta[name="description"]');
@@ -614,6 +653,33 @@ document.addEventListener('DOMContentLoaded', function () {
     var ctaUrl = p.url || (p.github && p.github.url);
     if (ctaUrl) { var cta = mkA(ctaUrl, 'cta-btn', true); cta.textContent = 'Visit website \u2192'; statusBlock.appendChild(cta); }
     aside.appendChild(statusBlock);
+
+    // Stack Score widget
+    (function(){
+      var sc=stackScore(p);
+      aside.appendChild(mk('div','aside-divider'));
+      var sw=mk('div','score-widget');
+      var swl=mk('div','score-widget-label'); swl.textContent='Stack Score'; sw.appendChild(swl);
+      var swr=mk('div','score-widget-row');
+      var swn=mk('div','score-widget-num'); swn.textContent=sc.score; swr.appendChild(swn);
+      var swbw=mk('div','score-widget-bar-wrap');
+      var swb=mk('div','score-widget-bar');
+      swb.style.width=sc.score+'%';
+      swb.style.background=sc.score>=70?'#3d9e5f':sc.score>=45?'#c99e32':'#685e58';
+      swbw.appendChild(swb); swr.appendChild(swbw); sw.appendChild(swr);
+      var swf=mk('div','score-widget-factors');
+      sc.factors.forEach(function(f){
+        var row=mk('div','score-widget-factor');
+        var lbl=mk('div','score-widget-f-label'); lbl.textContent=f.name; row.appendChild(lbl);
+        var bw=mk('div','score-widget-f-bar-wrap');
+        var bb=mk('div','score-widget-f-bar'); bb.style.width=(f.max>0?(f.val/f.max*100):0)+'%'; bw.appendChild(bb); row.appendChild(bw);
+        var fv=mk('div','score-widget-f-val'); fv.textContent=f.val; row.appendChild(fv);
+        swf.appendChild(row);
+      });
+      sw.appendChild(swf);
+      var lnk=mkA('/rankings','score-widget-link'); lnk.textContent='See rankings →'; sw.appendChild(lnk);
+      aside.appendChild(sw);
+    }());
 
     // Hero metric: volume > npm > github stars > github forks
     // Supports both legacy {30d: "$61.80"} and new {value: 13700000000, unit: "usd", period: "30d"} schemas
