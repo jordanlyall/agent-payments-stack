@@ -74,14 +74,25 @@
 
   /* Header */
   .hdr { margin-bottom: 0; }
-  .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 8.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .hero-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .hero-eyebrow a { color: var(--muted); text-decoration: none; }
+  .hero-eyebrow a:hover { color: var(--secondary); }
+  .hero-eyebrow-sep { opacity: 0.3; }
   h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.8px; line-height: 1.2; }
   .deck { font-size: 13px; color: var(--secondary); line-height: 1.65; max-width: 680px; margin-top: 10px; }
-  .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 18px; }
+  .hdr-strip { display: flex; align-items: stretch; gap: 1px; background: var(--faint); border: 1px solid var(--faint); border-radius: 5px; overflow: hidden; margin-top: 24px; }
   .hdr-stat { background: var(--bg); padding: 12px 20px; flex: 1; display: flex; flex-direction: column; gap: 2px; }
-  .hdr-stat--apv { flex: 1.4; padding: 16px 24px; border-right: 1px solid var(--faint); flex-direction: row; align-items: stretch; gap: 16px; text-decoration: none; cursor: pointer; transition: background 0.12s; }
+  .hdr-stat--apv { flex: 1.4; padding: 12px 20px; border-right: 1px solid var(--faint); flex-direction: row; align-items: stretch; gap: 16px; text-decoration: none; cursor: pointer; transition: background 0.12s; }
   .hdr-stat--apv:hover { background: #111010; }
-  .apv-tile-left { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; justify-content: center; }
+  .apv-tile-left { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; justify-content: center; } /* legacy, unused */
+  .apv-equation { display: flex; align-items: baseline; gap: 8px; line-height: 1; }
+  .apv-brand { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; letter-spacing: 0.04em; color: var(--secondary); }
+  .apv-eq { font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 400; color: var(--muted); }
+  .apv-def { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-top: 4px; }
+  /* APV tile two-column interior */
+  .apv-inner { display: flex; gap: 0; align-items: stretch; width: 100%; }
+  .apv-main { display: flex; flex-direction: column; gap: 2px; justify-content: center; flex: 1; min-width: 0; padding-right: 20px; }
+  .apv-detail { display: flex; flex-direction: column; justify-content: center; gap: 8px; border-left: 1px solid var(--faint); padding-left: 20px; flex: 1; min-width: 0; }
   .apv-sources { display: flex; gap: 14px; margin-top: 6px; }
   .apv-src { display: flex; flex-direction: column; gap: 1px; }
   .apv-src-val { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--text); }
@@ -94,9 +105,9 @@
   .apv-wow-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 5px; text-align: right; line-height: 1.5; }
   .apv-tile-desc { font-size: 9px; color: var(--muted); text-align: right; line-height: 1.4; max-width: 130px; }
   @media (max-width: 600px) { .apv-tile-right { display: none; } }
-  .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .hdr-stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
   .hdr-stat-val { font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; color: var(--text); line-height: 1; }
-  .hdr-stat--apv .hdr-stat-val { font-size: 32px; letter-spacing: -1px; color: #e8ebe4; }
+  .hdr-stat--apv .hdr-stat-val { font-size: 30px; letter-spacing: -1px; color: #e8ebe4; }
   .hdr-stat--apv .hdr-stat-val.loading { font-size: 20px; }
   .hdr-stat-sub { font-size: 10px; color: var(--muted); margin-top: 2px; }
   .hdr-stat-link { font-size: 11px; color: var(--acq); opacity: 0.8; margin-top: 4px; text-decoration: none; display: block; }
@@ -107,11 +118,57 @@
   .hdr-stat-val.loading { color: var(--muted); font-size: 14px; }
   .hero-newsletter { display: none; }
   .hero-nl-label { display: none; }
-  .hdr-actions { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .hdr-actions { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
   .hdr-action-primary { font-size: 12px; font-weight: 500; color: var(--text); background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.13); border-radius: 4px; padding: 6px 14px; text-decoration: none; transition: background 0.12s; white-space: nowrap; }
   .hdr-action-primary:hover { background: rgba(255,255,255,0.12); }
   .hdr-action-secondary { font-size: 12px; color: var(--secondary); text-decoration: none; transition: color 0.12s; white-space: nowrap; }
   .hdr-action-secondary:hover { color: var(--text); }
+
+  /* Hero two-column layout */
+  .hero-top { display: flex; align-items: flex-end; gap: 48px; margin-bottom: 0; }
+  .hero-copy { flex: 1; min-width: 0; }
+  .hero-cta-col { flex-shrink: 0; width: 260px; display: flex; flex-direction: column; gap: 10px; padding-bottom: 2px; }
+  .hero-cta-label { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  @media (max-width: 760px) {
+    .hero-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .hero-cta-col { width: 100%; }
+  }
+
+  /* Hero inline subscribe */
+  .hero-subscribe { display: flex; align-items: center; gap: 0; }
+  .hero-subscribe input {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    padding: 7px 13px;
+    font-size: 12.5px;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text);
+    outline: none;
+    flex: 1;
+    min-width: 0;
+    transition: border-color 0.12s, background 0.12s;
+  }
+  .hero-subscribe input::placeholder { color: var(--muted); }
+  .hero-subscribe input:focus { border-color: rgba(255,255,255,0.24); background: rgba(255,255,255,0.06); }
+  .hero-subscribe button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    padding: 7px 14px;
+    font-size: 12.5px;
+    font-weight: 500;
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.12s;
+  }
+  .hero-subscribe button:hover { background: rgba(255,255,255,0.16); }
+  .hero-subscribe-link { font-size: 11.5px; color: var(--muted); text-decoration: none; white-space: nowrap; transition: color 0.12s; }
+  .hero-subscribe-link:hover { color: var(--secondary); }
   .filter-sub { display: flex; align-items: center; gap: 8px; margin-left: auto; flex-shrink: 0; }
   .filter-sub-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); flex-shrink: 0; }
   .data-strip-sep { color: var(--muted); opacity: 0.3; margin: 0 10px; font-size: 10px; }
@@ -884,53 +941,67 @@
 <div class="page">
 
   <div class="hdr">
-    <div class="hero-eyebrow">Agent Payments Infrastructure</div>
-    <h1>The canonical map of AI agent payment rails</h1>
-    <p class="deck">162 projects across 6 layers — from Stripe and Mastercard buying in, to new protocols being built from scratch. Every piece of the stack for agentic commerce, tracked and curated as the space moves.</p>
-    <div class="hdr-actions">
-      <a href="#nsf" class="hdr-action-primary" onclick="document.getElementById('nse')&&setTimeout(function(){document.getElementById('nse').focus()},120)">Get weekly updates →</a>
-      <a href="https://tally.so/r/rjVvd5" class="hdr-action-secondary" target="_blank" rel="noopener">Submit a project ↗</a>
+    <div class="hero-top">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">
+          <span>by <a href="https://x.com/jordanlyall" target="_blank" rel="noopener">@jordanlyall</a></span>
+          <span class="hero-eyebrow-sep">·</span>
+          <span>Updated Mar 2026</span>
+        </div>
+        <h1>The canonical map of AI agent payment rails</h1>
+        <p class="deck">AI agents need to pay for things. The infrastructure to make that possible is being built right now: by crypto protocols, payment networks, and every major financial platform simultaneously. This is who's building it.</p>
+      </div>
+      <div class="hero-cta-col">
+        <div class="hero-cta-label">Weekly digest of new projects + volume movements</div>
+        <div class="hero-subscribe">
+          <input type="email" id="hero-email" placeholder="your@email.com" autocomplete="email">
+          <button type="button" onclick="handleHeroSubscribe()">Subscribe</button>
+        </div>
+        <a href="https://tally.so/r/rjVvd5" class="hero-subscribe-link" target="_blank" rel="noopener">Submit a project ↗</a>
+      </div>
     </div>
     <div class="hdr-strip">
       <a href="/apv" class="hdr-stat hdr-stat--apv">
-        <div class="apv-tile-left">
-          <div class="live-badge"><span class="live-dot"></span>Agent Payment Volume · 30d</div>
-          <div style="font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4;">USDC transacted by AI agents across x402 and ACP protocols</div>
-          <div class="hdr-stat-val loading" id="live-vol">—</div>
-          <div class="apv-sources" id="apv-sources" style="display:none">
-            <div class="apv-src">
-              <div class="apv-src-val" id="live-x402">—</div>
-              <div class="apv-src-lbl">x402</div>
+        <div class="apv-inner">
+          <div class="apv-main">
+            <div class="live-badge"><span class="live-dot"></span>Live · 30d</div>
+            <div class="apv-equation">
+              <span class="apv-brand">APV</span>
+              <span class="apv-eq">=</span>
+              <span class="hdr-stat-val loading" id="live-vol">—</span>
             </div>
-            <div class="apv-src">
-              <div class="apv-src-val" id="live-acp">—</div>
-              <div class="apv-src-lbl">ACP</div>
-            </div>
+            <div class="apv-def">Agent Payment Volume</div>
           </div>
-          <div class="hdr-stat-sub" id="live-sub">fetching...</div>
-        </div>
-        <div class="apv-tile-right">
-          <div class="apv-wow" id="apv-wow">
-            <div class="apv-wow-val" id="apv-wow-val">—</div>
-            <div class="apv-wow-lbl">x402<br>week/week</div>
+          <div class="apv-detail">
+            <div class="apv-sources" id="apv-sources" style="display:none">
+              <div class="apv-src">
+                <div class="apv-src-val" id="live-x402">—</div>
+                <div class="apv-src-lbl">x402</div>
+              </div>
+              <div class="apv-src">
+                <div class="apv-src-val" id="live-acp">—</div>
+                <div class="apv-src-lbl">ACP</div>
+              </div>
+            </div>
+            <div class="hdr-stat-sub" id="live-sub">fetching...</div>
           </div>
         </div>
       </a>
       <div class="hdr-stat">
-        <div class="hdr-stat-label">On-chain volume · since Oct 2025</div>
+        <div class="hdr-stat-label">Cumulative on-chain volume</div>
         <div class="hdr-stat-val">$43M</div>
-        <div class="hdr-stat-sub">~$600M annualized · 140M txns</div>
+        <div class="hdr-stat-sub">x402 + ACP · since Oct 2025 · 140M txns</div>
       </div>
       <div class="hdr-stat">
-        <div class="hdr-stat-label">M&amp;A activity · since Jan 2025</div>
+        <div class="hdr-stat-label">M&amp;A deal value · 2025–2026</div>
         <div class="hdr-stat-val">$8.05B</div>
-        <div class="hdr-stat-sub">7 deals · Stripe, Capital One, Mastercard</div>
-        <a href="/acquisitions" class="hdr-stat-link">View all acquisitions →</a>
+        <div class="hdr-stat-sub">7 acquisitions · Stripe, Capital One, Mastercard</div>
+        <a href="/acquisitions" class="hdr-stat-link">View all →</a>
       </div>
       <div class="hdr-stat">
-        <div class="hdr-stat-label">Projects tracked · as of Mar 2026</div>
+        <div class="hdr-stat-label">Projects in database</div>
         <div class="hdr-stat-val"><span id="hero-count">162</span></div>
-        <div class="hdr-stat-sub">6 layers · 98.6% USDC</div>
+        <div class="hdr-stat-sub">6 layers · L0 settlement to L5 apps</div>
       </div>
     </div>
   </div>
@@ -1462,6 +1533,20 @@ document.getElementById('nsf').addEventListener('submit',async e=>{
     else{b.textContent='Subscribe';b.disabled=false;}
   }catch{b.textContent='Subscribe';b.disabled=false;}
 });
+async function handleHeroSubscribe(){
+  const inp=document.getElementById('hero-email');
+  const btn=inp&&inp.nextElementSibling;
+  if(!inp||!inp.value)return;
+  const email=inp.value.trim();
+  if(!email)return;
+  btn.textContent='...';btn.disabled=true;
+  try{
+    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email})});
+    if(r.ok){btn.textContent='Done';inp.value='';inp.placeholder='Subscribed!';}
+    else{btn.textContent='Get weekly updates';btn.disabled=false;}
+  }catch{btn.textContent='Get weekly updates';btn.disabled=false;}
+}
+document.getElementById('hero-email')&&document.getElementById('hero-email').addEventListener('keydown',function(e){if(e.key==='Enter')handleHeroSubscribe();});
 const _sf=document.getElementById('sf');
 if(_sf)_sf.addEventListener('submit',async e=>{
   e.preventDefault();
