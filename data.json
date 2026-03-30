@@ -1372,6 +1372,46 @@
           ],
           "editorial": "One of the few projects combining x402 with ERC-8004 portable reputation at the protocol level. API reputation as a governance primitive: bad actors lose standing across the entire market.",
           "added": "2026-03-27"
+        },
+        {
+          "layer": "L4",
+          "id": "x402scan",
+          "name": "x402scan",
+          "status": "live",
+          "description": "Ecosystem explorer for x402 servers. Browse registered APIs, view transaction volumes, and access resources directly via an embedded wallet.",
+          "url": "https://www.x402scan.com",
+          "x": "x402scan",
+          "chain": "Base",
+          "tags": ["open-source", "developer", "onchain"],
+          "github": {
+            "url": "https://github.com/Merit-Systems/x402scan",
+            "stars": 312,
+            "forks": 203,
+            "license": "Apache-2.0",
+            "last_commit": "2026-03",
+            "as_of": "2026-03-30"
+          },
+          "editorial": "x402scan is the canonical explorer for the x402 payment ecosystem — what Etherscan is to Ethereum, x402scan is to agent micropayments. 312 stars and 203 forks signal real developer traction. Built by Merit Systems, the same team behind AgentCash."
+        },
+        {
+          "layer": "L4",
+          "id": "mppscan",
+          "name": "MPPScan",
+          "status": "live",
+          "description": "Discovery registry and explorer for Tempo MPP servers. Indexes APIs that expose x-payment-info OpenAPI specs, tracks transaction volume and agent activity across the MPP ecosystem.",
+          "url": "https://mppscan.com",
+          "tags": ["developer", "b2b"],
+          "editorial": "MPPScan is the discovery layer for Tempo MPP — 349 registered servers, 33K+ transactions tracked. Separate from x402 onchain volume, MPPScan captures off-chain agent payment activity that most dashboards miss. The validation tooling (@agentcash/discovery) creates a quality floor for registered APIs."
+        },
+        {
+          "layer": "L4",
+          "id": "agentcash",
+          "name": "AgentCash",
+          "status": "live",
+          "description": "CLI and SDK for agent-native API access via x402 and MPP micropayments. Handles wallet setup, discovery, and pay-per-call invocation with no API keys required.",
+          "url": "https://agentcash.dev",
+          "tags": ["developer", "open-source"],
+          "editorial": "AgentCash abstracts the entire x402/MPP stack into a single CLI — wallet, discovery, and payment in one command. The 'npx agentcash onboard' UX is the lowest-friction entry point into agent payments currently available. If developer adoption is the bottleneck for x402/MPP, AgentCash is the wedge."
         }
       ]
     },
