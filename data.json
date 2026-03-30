@@ -2,8 +2,8 @@
   "schema_version": "2.0",
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
-  "updated": "2026-03-28",
-  "version": "1.10",
+  "updated": "2026-03-29",
+  "version": "1.11",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -743,6 +743,38 @@
           ],
           "editorial": "x402-first browser automation infrastructure. Competing with Browserbase for the browser-as-infrastructure-for-agents category.",
           "added": "2026-03-27"
+        },
+        {
+          "layer": "L5",
+          "id": "bankr",
+          "name": "Bankr",
+          "status": "live",
+          "url": "https://skills.bankr.bot",
+          "description": "AI agent skills marketplace on Base. Builders compose agent capabilities as modular skills, enabling agents to earn and spend across a shared protocol layer.",
+          "launched": "2025",
+          "tags": [
+            "developer",
+            "onchain",
+            "b2b"
+          ],
+          "chain": "Base",
+          "added": "2026-03-29"
+        },
+        {
+          "layer": "L5",
+          "id": "minebotcoin",
+          "name": "MineBotcoin / BOTCOIN",
+          "status": "live",
+          "url": "https://skills.bankr.bot",
+          "description": "Epoch-based proof-of-inference mining protocol on Base. Agents earn BOTCOIN rewards by solving natural language challenges — the first agent-native income primitive (earn via inference, not hashing).",
+          "launched": "2026-03",
+          "tags": [
+            "onchain",
+            "developer",
+            "agent-income"
+          ],
+          "chain": "Base",
+          "added": "2026-03-29"
         }
       ]
     },
