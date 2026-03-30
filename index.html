@@ -1546,6 +1546,7 @@ if(_sf)_sf.addEventListener('submit',async e=>{
 // Table view toggle
 (function() {
   var LAYER_ORDER = {'L0':0,'L1':1,'L2':2,'L3':3,'L4':4,'L5':5};
+  var LAYER_RELEVANCE = {'L3':0,'L5':1,'L2':2,'L1':3,'L4':4,'L0':5};
   var LAYER_NAMES = {'L0':'Settlement','L1':'Routing','L2':'Wallet & Identity','L3':'Protocol','L4':'Governance','L5':'Application'};
   var STATUS_ORDER = {'live':0,'early':1,'ann':2,'acq':3};
   var tableBuilt = false;
@@ -1632,7 +1633,7 @@ if(_sf)_sf.addEventListener('submit',async e=>{
       if (sortCol === 'status') {
         var sd = (STATUS_ORDER[a.status]||0) - (STATUS_ORDER[b.status]||0);
         if (sd !== 0) return sd * sortDir;
-        var ld = (LAYER_ORDER[a.layer]||0) - (LAYER_ORDER[b.layer]||0);
+        var ld = (LAYER_RELEVANCE[a.layer]||0) - (LAYER_RELEVANCE[b.layer]||0);
         return ld !== 0 ? ld : a.name.localeCompare(b.name);
       }
       return 0;
