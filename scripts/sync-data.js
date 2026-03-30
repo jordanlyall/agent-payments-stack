@@ -98,3 +98,48 @@ syncFile(path.join(__dirname, '..', 'graph.html'));
 
 // Auto-update counts in index.html
 syncIndexCounts(path.join(__dirname, '..', 'index.html'));
+
+// Sync chip elements in index.html from data.json
+(function() {
+  var indexPath = path.join(__dirname, '..', 'index.html');
+  var html = fs.readFileSync(indexPath, 'utf8');
+
+  function esc(str) {
+    return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function buildChip(p) {
+    var status = p.status || 'live';
+    var cls = 't';
+    if (status === 'early') cls += ' early';
+    if (status === 'acquired') cls += ' acq';
+    if (status === 'announced') cls += ' announced';
+
+    var href = (status === 'live') ? ('/' + p.id) : (p.url || '#');
+    var target = (status === 'live') ? '' : ' target="_blank"';
+
+    // Short label (volume, acq price, etc.)
+    var sm = '';
+    if (p.volume && p.volume.label) sm = '<span class="sm">' + esc(p.volume.label) + '</span>';
+    else if (p.funding && status === 'acquired') sm = '<span class="sm">' + esc(p.funding) + '</span>';
+
+    var tip = esc(p.description || '');
+    return '        <a class="' + cls + '" href="' + esc(href) + '"' + target +
+           ' data-tip="' + tip + '" data-id="' + esc(p.id) + '" data-url="' + esc(p.url || '') + '">' +
+           esc(p.name) + (sm ? ' ' + sm : '') + '</a>';
+  }
+
+  data.layers.forEach(function(layer) {
+    var chips = layer.projects.map(buildChip).join('\n');
+    // Replace content inside <div class="row-content"> for this layer
+    var re = new RegExp(
+      '(data-layer="' + layer.id + '"[\\s\\S]*?<div class="row-content">)[\\s\\S]*?(</div>\\s*</div>\\s*(?=<!--\\s*L|$))',
+    );
+    html = html.replace(re, function(match, pre, post) {
+      return pre + '\n' + chips + '\n      ' + post;
+    });
+  });
+
+  fs.writeFileSync(indexPath, html);
+  console.log('Synced chips in index.html (' + total + ' chips)');
+}());
