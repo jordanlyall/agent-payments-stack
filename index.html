@@ -199,6 +199,14 @@
   .rail-feed-type.acq { color: var(--acq); }
   .rail-feed-type.vol { color: var(--early); }
   .rail-feed-type.proto { color: var(--secondary); }
+  .rail-new-item { display: flex; align-items: baseline; gap: 8px; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04); text-decoration: none; }
+  .rail-new-item:last-child { border-bottom: none; }
+  .rail-new-name { font-size: 12.5px; color: var(--text); font-weight: 500; }
+  .rail-new-name:hover { color: var(--secondary); }
+  .rail-new-layer { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); flex-shrink: 0; }
+  .rail-new-status { font-family: 'JetBrains Mono', monospace; font-size: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 1px 4px; border-radius: 2px; flex-shrink: 0; }
+  .rail-new-status.live { background: rgba(61,158,95,0.12); color: #3d9e5f; }
+  .rail-new-status.announced { background: rgba(255,255,255,0.06); color: var(--muted); }
   .rail-feed-type.update { color: var(--secondary); }
   .rail-feed-text a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); transition: border-color 0.12s; }
   .rail-feed-text a:hover { border-color: rgba(255,255,255,0.3); color: var(--text); }
@@ -1349,7 +1357,7 @@
   </div><!-- /split-main -->
 
   <div class="split-rail" id="split-rail">
-    <script type="application/json" id="rail-data">{"activity":[{"date":"2026-03-28","type":"update","text":"/compare live — x402, L402, Tempo MPP, ACP, Google AP2","url":"/compare"},{"date":"2026-03-27","type":"update","text":"Stack Score + /history timeline shipped","url":"/history"},{"date":"2026-03-25","type":"added","text":"APS launched — 167 projects across 6 layers","url":"/"},{"date":"2026-03-21","type":"acq","text":"Fireblocks acquires Dynamic — custody meets wallet identity","url":"/fireblocks"},{"date":"2026-03-18","type":"vol","text":"x402 crosses 75M transactions in 30 days","url":"/x402"}],"editorial":{"text":"Three days in, one observation: every significant move in the last 90 days — Fireblocks\/Dynamic, x402 volume, ERC-8004 — points to the same thing. The stack is collapsing from 6 layers toward 3. Settlement, identity, and application. Everything else is middleware.","byline":"@jordanlyall","date":"2026-03-28"}}</script>
+    <script type="application/json" id="rail-data">{"recently_added":["elenpay","masumi-network","u402","bankr","botcoin"],"activity":[{"date":"2026-03-28","type":"update","text":"/compare live — x402, L402, Tempo MPP, ACP, Google AP2","url":"/compare"},{"date":"2026-03-27","type":"update","text":"Stack Score + /history timeline shipped","url":"/history"},{"date":"2026-03-25","type":"added","text":"APS launched — 167 projects across 6 layers","url":"/"},{"date":"2026-03-21","type":"acq","text":"Fireblocks acquires Dynamic — custody meets wallet identity","url":"/fireblocks"},{"date":"2026-03-18","type":"vol","text":"x402 crosses 75M transactions in 30 days","url":"/x402"}],"editorial":{"text":"Three days in, one observation: every significant move in the last 90 days — Fireblocks\/Dynamic, x402 volume, ERC-8004 — points to the same thing. The stack is collapsing from 6 layers toward 3. Settlement, identity, and application. Everything else is middleware.","byline":"@jordanlyall","date":"2026-03-28"}}</script>
   </div>
 
   </div><!-- /split-layout -->
@@ -1368,6 +1376,31 @@
     function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
     var TYPE_LABELS = { added: 'ADDED', acq: 'ACQUIRED', vol: 'VOLUME', proto: 'PROTOCOL', update: 'UPDATE' };
     var html = '';
+    // Recently added module
+    if (rail.recently_added && rail.recently_added.length) {
+      var apsEl = document.getElementById('aps-data');
+      if (apsEl) {
+        try {
+          var apsData = JSON.parse(apsEl.textContent);
+          var projectMap = {};
+          (apsData.layers || []).forEach(function(l) {
+            (l.projects || []).forEach(function(p) { projectMap[p.id] = p; });
+          });
+          html += '<div class="rail-module">';
+          html += '<div class="rail-mod-label">New this week</div>';
+          rail.recently_added.forEach(function(id) {
+            var p = projectMap[id];
+            if (!p) return;
+            html += '<a class="rail-new-item" href="/'+esc(id)+'">';
+            html += '<span class="rail-new-name">'+esc(p.name)+'</span>';
+            html += '<span class="rail-new-layer">'+esc(p.layer)+'</span>';
+            if (p.status === 'announced') html += '<span class="rail-new-status announced">soon</span>';
+            html += '</a>';
+          });
+          html += '</div>';
+        } catch(e) {}
+      }
+    }
     if (rail.activity && rail.activity.length) {
       html += '<div class="rail-module">';
       html += '<div class="rail-mod-label"><span class="rail-live-dot"></span>Activity</div>';
