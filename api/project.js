@@ -33,6 +33,10 @@ export default function handler(req, res) {
     if (project) break;
   }
 
+  if (!project) {
+    return res.status(404).send('Project not found');
+  }
+
   return serveShell(res, project, layerId, slug);
 }
 
@@ -43,12 +47,6 @@ function serveShell(res, project, layerId = '', slug = '') {
   } catch (_) {
     res.status(500).send('projects.html not found');
     return;
-  }
-
-  if (!project) {
-    // No project found — serve shell as-is
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    return res.status(200).send(html);
   }
 
   const name   = project.name || slug;

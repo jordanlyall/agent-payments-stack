@@ -6,7 +6,23 @@ const path = require('path');
 
 const dataPath = path.join(__dirname, '..', 'data.json');
 const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
-const json = JSON.stringify(data);
+
+// Strip internal_note fields before embedding in public HTML
+function stripInternal(obj) {
+  if (Array.isArray(obj)) return obj.map(stripInternal);
+  if (obj && typeof obj === 'object') {
+    const out = {};
+    for (const [k, v] of Object.entries(obj)) {
+      if (k === 'internal_note') continue;
+      out[k] = stripInternal(v);
+    }
+    return out;
+  }
+  return obj;
+}
+
+const publicData = stripInternal(data);
+const json = JSON.stringify(publicData);
 const total = data.layers.reduce((s,l)=>s+l.projects.length,0);
 
 function syncFile(htmlPath) {
