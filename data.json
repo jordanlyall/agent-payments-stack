@@ -1601,7 +1601,7 @@
           "id": "elenpay",
           "name": "ElenPAY",
           "status": "live",
-          "description": "Lightning Network payment rails for AI agents, enabling private, instant, and cost-efficient transactions — optimized for real-time, high-frequency use cases beyond traditional on-chain systems.",
+          "description": "Lightning Network payment rails for AI agents, enabling private, instant, and cost-efficient transactions—optimized for real-time, high-frequency use cases beyond traditional on-chain systems.",
           "tags": [
             "lightning",
             "b2b",
