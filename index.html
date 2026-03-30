@@ -1394,33 +1394,7 @@
     }
     container.innerHTML = html;
 
-    // Append subscribe module via DOM (no innerHTML)
-    var subMod = document.createElement('div');
-    subMod.className = 'rail-module';
-    var subLabel = document.createElement('div');
-    subLabel.className = 'rail-mod-label';
-    subLabel.textContent = 'Weekly updates';
-    var subForm = document.createElement('form');
-    subForm.id = 'nsf';
-    subForm.className = 'rail-sub-form';
-    var subInput = document.createElement('input');
-    subInput.type = 'email';
-    subInput.id = 'nse';
-    subInput.placeholder = 'your@email.com';
-    subInput.required = true;
-    var subBtn = document.createElement('button');
-    subBtn.type = 'submit';
-    subBtn.id = 'nsb';
-    subBtn.textContent = 'Subscribe';
-    var subMsg = document.createElement('span');
-    subMsg.id = 'sub-msg';
-    subMsg.style.cssText = 'display:none;font-size:11px;color:var(--muted)';
-    subForm.appendChild(subInput);
-    subForm.appendChild(subBtn);
-    subMod.appendChild(subLabel);
-    subMod.appendChild(subForm);
-    subMod.appendChild(subMsg);
-    container.appendChild(subMod);
+    // Subscribe form moved to hero section
   }());
   </script>
 
@@ -1523,16 +1497,6 @@ async function doSubscribe(email,btn,msg){
     else{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
   }catch{msg.textContent='Error. Try again.';msg.style.color='var(--acq)';msg.style.display='inline';btn.textContent='Subscribe';btn.disabled=false;}
 }
-document.getElementById('nsf').addEventListener('submit',async e=>{
-  e.preventDefault();
-  const v=document.getElementById('nse').value,b=document.getElementById('nsb'),i=document.getElementById('nse');
-  b.textContent='...';b.disabled=true;
-  try{
-    const r=await fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:v})});
-    if(r.ok){b.textContent='✓';i.value='';i.placeholder='Subscribed!';}
-    else{b.textContent='Subscribe';b.disabled=false;}
-  }catch{b.textContent='Subscribe';b.disabled=false;}
-});
 async function handleHeroSubscribe(){
   const inp=document.getElementById('hero-email');
   const btn=inp&&inp.nextElementSibling;
