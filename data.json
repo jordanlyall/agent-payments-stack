@@ -15,6 +15,11 @@
   "rail": {
     "activity": [
       {
+        "date": "2026-03-30",
+        "type": "added",
+        "text": "x402scan, MPPScan, and AgentCash added \u2014 Merit Systems ecosystem now mapped"
+      },
+      {
         "date": "2026-03-26",
         "type": "added",
         "text": "OpenMatter and Kibble added \u2014 governance layer grows to 32 projects"
