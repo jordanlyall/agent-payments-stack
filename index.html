@@ -632,6 +632,10 @@
   .fb[data-f="acq"] { border-color: rgba(217,97,63,0.22); color: rgba(217,97,63,0.6); }
   .fb[data-f="acq"]:hover { color: var(--acq); border-color: rgba(217,97,63,0.32); }
   .fb[data-f="acq"].on { background: rgba(217,97,63,0.08); border-color: rgba(217,97,63,0.38); color: var(--acq); }
+  .filter-chain-row { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 6px; }
+  .fc-btn { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: 0.04em; padding: 4px 9px; border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; background: none; color: var(--muted); cursor: pointer; transition: all 0.12s; white-space: nowrap; }
+  .fc-btn:hover { color: var(--secondary); border-color: rgba(255,255,255,0.2); }
+  .fc-btn.on { color: var(--text); border-color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.07); }
 
   .filter-count { display: none; }
   .no-results { padding: 32px 0; text-align: center; font-size: 13px; color: var(--muted); display: none; }
@@ -1032,7 +1036,14 @@
       <button class="fb" data-f="ann">Announced</button>
       <button class="fb" data-f="acq">Acquired</button>
     </div>
-    <span class="filter-count" id="fc">134 projects</span>
+    <div class="filter-chain-row" id="chain-filters" style="display:none">
+      <button class="fc-btn on" data-c="all">All chains</button>
+      <button class="fc-btn" data-c="Base">Base</button>
+      <button class="fc-btn" data-c="Ethereum">Ethereum</button>
+      <button class="fc-btn" data-c="Solana">Solana</button>
+      <button class="fc-btn" data-c="Arbitrum">Arbitrum</button>
+    </div>
+    <span class="filter-count" id="fc">167 projects</span>
     <div class="view-toggle" style="margin-left:auto;">
       <button class="vt-btn" id="vt-grid" title="Grid view">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/><rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor" opacity="0.7"/></svg>
@@ -1456,7 +1467,20 @@
   document.getElementById('hero-count').textContent = TOTAL;
   document.getElementById('footer-count').textContent = TOTAL + ' projects across 6 layers';
   document.getElementById('q').placeholder = 'Search ' + TOTAL + ' projects...';
-  let activeF = 'all', q = '';
+
+  // Enrich chips with data-chain
+  (function() {
+    var apsEl = document.getElementById('aps-data');
+    if (!apsEl) return;
+    try {
+      var d = JSON.parse(apsEl.textContent);
+      var cm = {};
+      (d.layers||[]).forEach(function(l){(l.projects||[]).forEach(function(p){cm[p.id]=p.chain||'';});});
+      document.querySelectorAll('.t[data-id]').forEach(function(el){var c=cm[el.getAttribute('data-id')]||'';if(c)el.setAttribute('data-chain',c);});
+      document.getElementById('chain-filters').style.display='flex';
+    } catch(e) {}
+  }());
+  let activeF = 'all', activeChain = 'all', q = '';
 
   function run(){
     let shown = 0;
@@ -1469,7 +1493,9 @@
         if(activeF === 'live') matchF = !c.classList.contains('early') && !c.classList.contains('ann') && !c.classList.contains('acq');
         else matchF = c.classList.contains(activeF);
       }
-      const vis = matchQ && matchF;
+      let matchC = true;
+      if(activeChain !== 'all'){var ch=c.getAttribute('data-chain')||'';matchC=ch.includes(activeChain);}
+      const vis = matchQ && matchF && matchC;
       c.style.display = vis ? '' : 'none';
       if(vis) shown++;
     });
@@ -1497,6 +1523,7 @@
   }
 
   document.getElementById('q').addEventListener('input', e=>{ q=e.target.value.toLowerCase().trim(); run(); });
+  document.querySelectorAll('.fc-btn').forEach(btn=>{btn.addEventListener('click',()=>{activeChain=btn.dataset.c;document.querySelectorAll('.fc-btn').forEach(b=>b.classList.toggle('on',b===btn));run();});});
   document.querySelectorAll('.fb').forEach(btn=>{
     btn.addEventListener('click',()=>{
       activeF = btn.dataset.f;
