@@ -2,9 +2,9 @@
   "meta": {
     "contract": "0x402085c248EeA27D92E8b30b2C58ed07f9E20001",
     "chain": "base",
-    "fetched_at": "2026-03-30T10:00:03.958Z",
-    "current_block": 44037727,
-    "start_block_30d": 42741727,
+    "fetched_at": "2026-03-31T10:00:04.375Z",
+    "current_block": 44080927,
+    "start_block_30d": 42784927,
     "note": "Volume decoded from x402ExactPermit2Proxy function call input data via Blockscout API",
     "source": "blockscout"
   },
