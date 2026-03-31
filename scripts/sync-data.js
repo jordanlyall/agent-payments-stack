@@ -115,8 +115,8 @@ syncIndexCounts(path.join(__dirname, '..', 'index.html'));
     if (status === 'acquired') cls += ' acq';
     if (status === 'announced') cls += ' announced';
 
-    var href = (status === 'live') ? ('/' + p.id) : (p.url || '#');
-    var target = (status === 'live') ? '' : ' target="_blank"';
+    var href = '/' + p.id;
+    var target = '';
 
     // Short label (volume, acq price, etc.)
     var sm = '';
