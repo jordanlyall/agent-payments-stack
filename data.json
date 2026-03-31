@@ -3,7 +3,7 @@
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
   "updated": "2026-03-30",
-  "version": "1.13",
+  "version": "1.14",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -14,6 +14,11 @@
   },
   "rail": {
     "activity": [
+      {
+        "date": "2026-03-30",
+        "type": "added",
+        "text": "u402 and Revettr added via submit form — ZK privacy on x402, counterparty risk scoring"
+      },
       {
         "date": "2026-03-30",
         "type": "added",
@@ -1485,6 +1490,23 @@
           "url": "https://www.agenttax.io",
           "chain": "Base",
           "added": "2026-03-30"
+        },
+        {
+          "layer": "L4",
+          "id": "revettr",
+          "name": "Revettr",
+          "status": "live",
+          "description": "x402-native counterparty risk scoring for AI agents. Evaluates wallet history, domain intel, IP reputation, sanctions, and cross-chain trust signals before payment authorization. REST API + MCP server + Python SDK. Multi-chain: Base, Solana, XRPL, Bitcoin.",
+          "launched": "2026",
+          "tags": [
+            "api-native",
+            "onchain",
+            "developer",
+            "b2b"
+          ],
+          "url": "https://revettr.com",
+          "chain": "Base",
+          "added": "2026-03-30"
         }
       ]
     },
@@ -2208,6 +2230,22 @@
             "open-source"
           ],
           "editorial": "AgentCash abstracts the entire x402/MPP stack into a single CLI — wallet, discovery, and payment in one command. The 'npx agentcash onboard' UX is the lowest-friction entry point into agent payments currently available. If developer adoption is the bottleneck for x402/MPP, AgentCash is the wedge."
+        },
+        {
+          "layer": "L3",
+          "id": "u402",
+          "name": "u402",
+          "status": "announced",
+          "description": "Compliance-ready, post-quantum-ready private payment protocol for AI agents. Extends x402 with zero-knowledge proofs — the only privacy layer on the x402 stack.",
+          "launched": "2026",
+          "tags": [
+            "zk",
+            "http",
+            "onchain",
+            "developer"
+          ],
+          "url": "https://permissionless-technologies.com/docs/u402",
+          "added": "2026-03-30"
         }
       ]
     },
