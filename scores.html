@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack Scores — Agent Payments Stack</title>
+<meta name="description" content="Stack Score ranks every project in the agent payments ecosystem by liveness, developer signal, openness, and completeness of information.">
+<link rel="canonical" href="https://agentpaymentsstack.com/scores">
+<meta property="og:title" content="Stack Scores — Agent Payments Stack">
+<meta property="og:description" content="Stack Score ranks every project in the agent payments ecosystem by liveness, developer signal, openness, and completeness of information.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://agentpaymentsstack.com/scores">
+<meta property="og:image" content="https://agentpaymentsstack.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text x='50' y='68' font-family='system-ui' font-size='52' font-weight='700' fill='%23f0f0f0' text-anchor='middle'>$</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #0d0c0b; --text: #edebe7; --secondary: #98948f; --muted: #685e58;
+    --faint: #201e1b; --early: #c99e32; --acq: #d9613f;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', sans-serif; -webkit-font-smoothing: antialiased; }
+
+  .topbar { border-bottom: 1px solid var(--faint); height: 50px; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .topbar-logo { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--text); text-decoration: none; }
+  .topbar-links { display: flex; gap: 18px; align-items: center; }
+  .topbar-links a { font-size: 11.5px; color: var(--muted); text-decoration: none; transition: color 0.12s; }
+  .topbar-links a:hover { color: var(--secondary); }
+  .topbar-links .tl-active { color: var(--text); }
+
+  .page { max-width: 1100px; margin: 0 auto; padding: 48px 56px 80px; }
+
+  /* Page header */
+  .page-hdr { margin-bottom: 40px; }
+  .page-hdr h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.8px; line-height: 1; margin-bottom: 8px; }
+  .page-hdr p { font-size: 13.5px; color: var(--secondary); max-width: 560px; line-height: 1.6; }
+
+  /* Formula card */
+  .formula-card { background: rgba(255,255,255,0.025); border: 1px solid var(--faint); border-radius: 6px; padding: 24px 28px; margin-bottom: 40px; }
+  .formula-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+  .formula-eq { font-family: 'JetBrains Mono', monospace; font-size: 16px; color: var(--text); letter-spacing: -0.3px; margin-bottom: 20px; }
+  .formula-eq .fw { color: var(--early); }
+  .formula-factors { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding-top: 20px; border-top: 1px solid var(--faint); }
+  @media (max-width: 700px) { .formula-factors { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 420px) { .formula-factors { grid-template-columns: 1fr; } }
+
+  .ff-head { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+  .ff-name { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+  .ff-weight { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--early); }
+  .ff-items { font-size: 12px; color: var(--muted); line-height: 1.8; }
+  .ff-items span { color: var(--secondary); }
+
+  /* Filter bar */
+  .filter-bar { display: flex; align-items: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
+  .filter-group { display: flex; align-items: center; gap: 8px; }
+  .filter-label { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+  .filter-btn { background: transparent; border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 4px 11px; font-size: 11px; color: var(--muted); cursor: pointer; font-family: inherit; transition: all 0.12s; }
+  .filter-btn:hover { color: var(--secondary); border-color: rgba(255,255,255,0.16); }
+  .filter-btn.on { color: var(--text); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.05); }
+
+  /* Score count */
+  .score-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 16px; }
+
+  /* Score table */
+  .score-table { width: 100%; border-collapse: collapse; }
+  .score-table thead th {
+    text-align: left; font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+    padding: 8px 12px; border-bottom: 1px solid var(--faint); white-space: nowrap; cursor: pointer;
+    user-select: none;
+  }
+  .score-table thead th:hover { color: var(--secondary); }
+  .score-table thead th.sorted { color: var(--text); }
+  .score-table thead th.sorted::after { content: ' \2193'; font-size: 8px; }
+  .score-table thead th.sorted.asc::after { content: ' \2191'; }
+  .score-table thead th.num { text-align: right; }
+  .score-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.08s; }
+  .score-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+  .score-table td { padding: 9px 12px; font-size: 12.5px; vertical-align: middle; }
+
+  .sc-rank { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--faint); width: 28px; }
+  .sc-layer { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; color: var(--muted); white-space: nowrap; }
+  .sc-name a { color: var(--text); text-decoration: none; font-weight: 500; }
+  .sc-name a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  .sc-name.is-early a { color: var(--early); }
+  .sc-name.is-acq a { color: var(--acq); }
+
+  .sc-score-cell { text-align: right; white-space: nowrap; }
+  .sc-score-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 600; color: var(--text); }
+  .sc-score-den { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--faint); }
+
+  .sc-bar-cell { width: 100px; }
+  .sc-breakdown { display: flex; gap: 2px; height: 4px; border-radius: 2px; overflow: hidden; }
+  .sc-seg { height: 100%; }
+  .sc-seg.live { background: #5b9cf6; }
+  .sc-seg.sig  { background: #7dd396; }
+  .sc-seg.open { background: var(--early); }
+  .sc-seg.info { background: #b07ef8; }
+
+  .sc-top { font-family: 'JetBrains Mono', monospace; font-size: 10px; white-space: nowrap; }
+  .sc-top.live { color: #5b9cf6; }
+  .sc-top.sig  { color: #7dd396; }
+  .sc-top.open { color: var(--early); }
+  .sc-top.info { color: #b07ef8; }
+
+  /* Status badge */
+  .st { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 1px 5px; border-radius: 3px; letter-spacing: 0.04em; margin-left: 6px; }
+  .st.early { color: var(--early); background: rgba(201,158,50,0.1); }
+  .st.acq   { color: var(--acq);   background: rgba(217,97,63,0.1); }
+
+  /* Legend */
+  .legend { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+  .legend-dot.live { background: #5b9cf6; }
+  .legend-dot.sig  { background: #7dd396; }
+  .legend-dot.open { background: var(--early); }
+  .legend-dot.info { background: #b07ef8; }
+
+  /* Footer */
+  .foot { margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--muted); }
+  .foot a { color: inherit; text-decoration: none; }
+  .foot a:hover { color: var(--secondary); }
+
+  @media (max-width: 900px) {
+    .topbar { padding: 0 20px; }
+    .topbar-links { display: none; }
+    .page { padding: 32px 20px 60px; }
+    .formula-card { padding: 18px 18px; }
+    .formula-eq { font-size: 13px; }
+    .sc-layer { display: none; }
+  }
+</style>
+</head>
+<body>
+<nav class="topbar" id="topbar"></nav>
+<div class="mob-menu" id="mob-menu"></div>
+<div class="page">
+
+  <div class="page-hdr">
+    <h1>Stack Scores</h1>
+    <p>A composite health score for every project in the agent payments ecosystem. Measures how live, well-signaled, open, and documented each project is — out of 100.</p>
+  </div>
+
+  <div class="formula-card">
+    <div class="formula-label">Scoring Formula</div>
+    <div class="formula-eq">
+      Score = <span class="fw">0.30</span>&thinsp;&times;&thinsp;Live
+      &nbsp;+&nbsp; <span class="fw">0.25</span>&thinsp;&times;&thinsp;Signal
+      &nbsp;+&nbsp; <span class="fw">0.25</span>&thinsp;&times;&thinsp;Open
+      &nbsp;+&nbsp; <span class="fw">0.20</span>&thinsp;&times;&thinsp;Info
+    </div>
+    <div class="formula-factors">
+      <div class="ff">
+        <div class="ff-head">
+          <span class="ff-name" style="color:#5b9cf6">Live</span>
+          <span class="ff-weight">30%</span>
+        </div>
+        <div class="ff-items">
+          Deployed &amp; live &rarr; <span>80</span><br>
+          On-chain volume &rarr; <span>+20</span><br>
+          Early-stage &rarr; <span>50</span><br>
+          Acquired &rarr; <span>40</span><br>
+          Announced &rarr; <span>15</span>
+        </div>
+      </div>
+      <div class="ff">
+        <div class="ff-head">
+          <span class="ff-name" style="color:#7dd396">Signal</span>
+          <span class="ff-weight">25%</span>
+        </div>
+        <div class="ff-items">
+          GitHub stars &rarr; <span>max 50</span><br>
+          npm weekly downloads &rarr; <span>max 35</span><br>
+          Contributors &rarr; <span>max 15</span>
+        </div>
+      </div>
+      <div class="ff">
+        <div class="ff-head">
+          <span class="ff-name" style="color:var(--early)">Open</span>
+          <span class="ff-weight">25%</span>
+        </div>
+        <div class="ff-items">
+          GitHub repo &rarr; <span>40</span><br>
+          Open-source license &rarr; <span>35</span><br>
+          Public docs &rarr; <span>25</span>
+        </div>
+      </div>
+      <div class="ff">
+        <div class="ff-head">
+          <span class="ff-name" style="color:#b07ef8">Info</span>
+          <span class="ff-weight">20%</span>
+        </div>
+        <div class="ff-items">
+          Launch date known &rarr; <span>35</span><br>
+          Funding disclosed &rarr; <span>35</span><br>
+          Has description &rarr; <span>30</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-bar">
+    <div class="filter-group" id="layer-filter-group">
+      <span class="filter-label">Layer</span>
+      <button class="filter-btn on" data-layer="all">All</button>
+    </div>
+    <div class="filter-group" id="status-filter-group">
+      <span class="filter-label">Status</span>
+      <button class="filter-btn on" data-status="all">All</button>
+      <button class="filter-btn" data-status="live">Live</button>
+      <button class="filter-btn" data-status="early">Early</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot live"></div>Live</div>
+    <div class="legend-item"><div class="legend-dot sig"></div>Signal</div>
+    <div class="legend-item"><div class="legend-dot open"></div>Open</div>
+    <div class="legend-item"><div class="legend-dot info"></div>Info</div>
+  </div>
+
+  <div class="score-count" id="score-count"></div>
+
+  <table class="score-table" id="score-table">
+    <thead>
+      <tr>
+        <th class="sc-rank">#</th>
+        <th data-col="layer">Layer</th>
+        <th data-col="name">Project</th>
+        <th data-col="score" class="num sorted">Score</th>
+        <th></th>
+        <th data-col="top">Top Factor</th>
+      </tr>
+    </thead>
+    <tbody id="score-tbody"></tbody>
+  </table>
+
+  <div class="foot">
+    <span>Scores update when <a href="/data">data.json</a> is updated. <a href="/about">Methodology</a>.</span>
+    <span id="foot-count"></span>
+  </div>
+</div>
+
+<script>
+(function () {
+  var DATA_URL = '/data.json';
+  var allRows = [];
+  var sortCol = 'score';
+  var sortAsc = false;
+  var filterLayer = 'all';
+  var filterStatus = 'all';
+
+  function stackScore(p) {
+    var liveness = { live: 80, early: 50, acquired: 40, announced: 15 }[p.status] || 15;
+    if (p.volume && p.volume.value) liveness = Math.min(100, liveness + 20);
+
+    var stars   = (p.github && p.github.stars)         ? Math.min(50, p.github.stars / 400)         : 0;
+    var npm     = (p.npm    && p.npm.weekly_downloads)  ? Math.min(35, p.npm.weekly_downloads / 286)  : 0;
+    var contrib = (p.github && p.github.contributors)   ? Math.min(15, p.github.contributors / 13.3)  : 0;
+    var signal  = stars + npm + contrib;
+
+    var openness = 0;
+    if (p.github && p.github.url)                        openness += 40;
+    if (p.tags   && p.tags.indexOf('open-source') >= 0) openness += 35;
+    if (p.docs)                                          openness += 25;
+
+    var info = 0;
+    if (p.launched)                                   info += 35;
+    if (p.funding)                                    info += 35;
+    if (p.description && p.description.length > 30)  info += 30;
+
+    var score = 0.30 * liveness + 0.25 * signal + 0.25 * openness + 0.20 * info;
+    var factors = [
+      { name: 'Live',   key: 'live', val: liveness * 0.30 },
+      { name: 'Signal', key: 'sig',  val: signal   * 0.25 },
+      { name: 'Open',   key: 'open', val: openness * 0.25 },
+      { name: 'Info',   key: 'info', val: info     * 0.20 }
+    ];
+    factors.sort(function (a, b) { return b.val - a.val; });
+    return {
+      score: Math.round(score),
+      top: factors[0],
+      breakdown: [
+        { key: 'live', val: liveness * 0.30 },
+        { key: 'sig',  val: signal   * 0.25 },
+        { key: 'open', val: openness * 0.25 },
+        { key: 'info', val: info     * 0.20 }
+      ]
+    };
+  }
+
+  function el(tag, cls) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    return node;
+  }
+
+  function buildLayerFilters(layers) {
+    var group = document.getElementById('layer-filter-group');
+    layers.forEach(function (layer) {
+      var btn = el('button', 'filter-btn');
+      btn.setAttribute('data-layer', layer.id);
+      btn.textContent = layer.id;
+      group.appendChild(btn);
+    });
+    group.querySelectorAll('[data-layer]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        group.querySelectorAll('[data-layer]').forEach(function (b) { b.classList.remove('on'); });
+        btn.classList.add('on');
+        filterLayer = btn.getAttribute('data-layer');
+        render();
+      });
+    });
+  }
+
+  function render() {
+    var rows = allRows.filter(function (r) {
+      if (filterLayer !== 'all' && r.layer !== filterLayer) return false;
+      if (filterStatus === 'live'  && r.p.status !== 'live')  return false;
+      if (filterStatus === 'early' && r.p.status !== 'early') return false;
+      return true;
+    });
+
+    rows.sort(function (a, b) {
+      if (sortCol === 'name')  { var an = a.p.name.toLowerCase(), bn = b.p.name.toLowerCase(); return sortAsc ? an.localeCompare(bn) : bn.localeCompare(an); }
+      if (sortCol === 'layer') { return sortAsc ? a.layer.localeCompare(b.layer) : b.layer.localeCompare(a.layer); }
+      if (sortCol === 'top')   { return sortAsc ? a.topKey.localeCompare(b.topKey) : b.topKey.localeCompare(a.topKey); }
+      return sortAsc ? a.score - b.score : b.score - a.score;
+    });
+
+    var tbody = document.getElementById('score-tbody');
+    while (tbody.firstChild) tbody.removeChild(tbody.firstChild);
+
+    rows.forEach(function (item, i) {
+      var p = item.p;
+      var sc = item.sc;
+      var tr = el('tr');
+
+      // Rank
+      var tdRank = el('td', 'sc-rank'); tdRank.textContent = String(i + 1); tr.appendChild(tdRank);
+
+      // Layer
+      var tdLayer = el('td', 'sc-layer'); tdLayer.textContent = item.layer; tr.appendChild(tdLayer);
+
+      // Name + badge
+      var tdName = el('td', 'sc-name' + (p.status === 'early' ? ' is-early' : p.status === 'acquired' ? ' is-acq' : ''));
+      var link = el('a'); link.href = '/' + p.id; link.textContent = p.name; tdName.appendChild(link);
+      if (p.status === 'early') {
+        var b1 = el('span', 'st early'); b1.textContent = 'EARLY'; tdName.appendChild(b1);
+      } else if (p.status === 'acquired') {
+        var b2 = el('span', 'st acq'); b2.textContent = 'ACQ'; tdName.appendChild(b2);
+      }
+      tr.appendChild(tdName);
+
+      // Score
+      var tdScore = el('td', 'sc-score-cell');
+      var scoreNum = el('span', 'sc-score-num'); scoreNum.textContent = String(item.score);
+      var scoreDen = el('span', 'sc-score-den'); scoreDen.textContent = '/100';
+      tdScore.appendChild(scoreNum); tdScore.appendChild(scoreDen);
+      tr.appendChild(tdScore);
+
+      // Breakdown bar
+      var tdBar = el('td', 'sc-bar-cell');
+      var segWrap = el('div', 'sc-breakdown');
+      sc.breakdown.forEach(function (seg) {
+        var s = el('div', 'sc-seg ' + seg.key);
+        s.style.width = Math.max(0, seg.val) + '%';
+        s.title = seg.key + ': ' + Math.round(seg.val);
+        segWrap.appendChild(s);
+      });
+      tdBar.appendChild(segWrap);
+      tr.appendChild(tdBar);
+
+      // Top factor
+      var tdTop = el('td', 'sc-top ' + sc.top.key); tdTop.textContent = sc.top.name; tr.appendChild(tdTop);
+
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('score-count').textContent = rows.length + ' projects';
+    document.getElementById('foot-count').textContent = rows.length + ' projects shown';
+  }
+
+  // Sort headers
+  document.querySelectorAll('.score-table thead th[data-col]').forEach(function (th) {
+    th.addEventListener('click', function () {
+      var col = th.getAttribute('data-col');
+      if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = col !== 'score'; }
+      document.querySelectorAll('.score-table thead th').forEach(function (h) { h.classList.remove('sorted', 'asc'); });
+      th.classList.add('sorted');
+      if (sortAsc) th.classList.add('asc');
+      render();
+    });
+  });
+
+  // Status filters
+  document.getElementById('status-filter-group').querySelectorAll('[data-status]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.getElementById('status-filter-group').querySelectorAll('[data-status]').forEach(function (b) { b.classList.remove('on'); });
+      btn.classList.add('on');
+      filterStatus = btn.getAttribute('data-status');
+      render();
+    });
+  });
+
+  // Load data
+  fetch(DATA_URL).then(function (r) { return r.json(); }).then(function (data) {
+    buildLayerFilters(data.layers);
+    data.layers.forEach(function (layer) {
+      layer.projects.forEach(function (p) {
+        var sc = stackScore(p);
+        allRows.push({ layer: layer.id, p: p, score: sc.score, sc: sc, topKey: sc.top.key });
+      });
+    });
+    allRows.sort(function (a, b) { return b.score - a.score; });
+    render();
+  });
+}());
+</script>
+<script src="/nav.js"></script>
+</body>
+</html>
