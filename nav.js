@@ -92,7 +92,6 @@
     append(links,
       navLink('/', 'Stack'),
       navLink('/data', 'Data'),
-      navLink('/rankings', 'Rankings'),
       navLink('/scores', 'Scores'),
       navLink('/acquisitions', 'Acquisitions'),
       navLink('/apv', 'APV'),
@@ -104,6 +103,7 @@
     // More dropdown
     var moreDrop = el('div', { class: 'nav-more-drop' });
     append(moreDrop,
+      navLink('/rankings',   'Rankings'),
       navLink('/graph',      'Graph'),
       navLink('/history',    'History'),
       navLink('/trace',      'Trace'),
@@ -146,7 +146,6 @@
     append(mobMenu,
       navLink('/', 'Stack'),
       navLink('/data', 'Data'),
-      navLink('/rankings', 'Rankings'),
       navLink('/scores', 'Scores'),
       navLink('/acquisitions', 'Acquisitions'),
       navLink('/apv', 'APV'),
