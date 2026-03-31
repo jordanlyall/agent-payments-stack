@@ -1948,7 +1948,7 @@
           "name": "Backpac",
           "status": "early",
           "url": "https://backpac.xyz",
-          "description": "Solana RPC load balancer with x402 integration. Provides deterministic transaction routing and verifiable stablecoin settlement for agent payment flows.",
+          "description": "Settlement certainty layer for AI agent payments. Detects and recovers from silent transaction failures — mempool drops, reorgs, node faults — that corrupt agent state without returning errors. Credits-first with x402 fallback. Chain-agnostic.",
           "launched": "2025",
           "tags": [
             "developer",
