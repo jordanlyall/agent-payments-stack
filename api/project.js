@@ -40,6 +40,29 @@ export default function handler(req, res) {
   return serveShell(res, project, layerId, slug);
 }
 
+function stackScore(p) {
+  const base = { live: 80, early: 50, acquired: 40, announced: 15 };
+  let liveness = base[p.status] ?? 15;
+  if (p.volume && p.volume.value) liveness = Math.min(100, liveness + 20);
+
+  const stars   = p.github?.stars             ? Math.min(50, p.github.stars / 400)        : 0;
+  const npm     = p.npm?.weekly_downloads      ? Math.min(35, p.npm.weekly_downloads / 286) : 0;
+  const contrib = p.github?.contributors       ? Math.min(15, p.github.contributors / 13.3) : 0;
+  const signal  = stars + npm + contrib;
+
+  let openness = 0;
+  if (p.github?.url)                   openness += 40;
+  if (p.tags?.includes('open-source')) openness += 35;
+  if (p.docs)                          openness += 25;
+
+  let info = 0;
+  if (p.launched)                   info += 35;
+  if (p.funding)                    info += 35;
+  if (p.description?.length > 30)   info += 30;
+
+  return Math.round(0.30 * liveness + 0.25 * signal + 0.25 * openness + 0.20 * info);
+}
+
 function serveShell(res, project, layerId = '', slug = '') {
   let html;
   try {
@@ -54,11 +77,13 @@ function serveShell(res, project, layerId = '', slug = '') {
   const status = project.status || 'announced';
   const url    = `https://agentpaymentsstack.com/${slug}`;
 
+  const score = stackScore(project);
   const ogImageUrl = `https://agentpaymentsstack.com/api/og?` +
     `name=${encodeURIComponent(name)}` +
     `&layer=${encodeURIComponent(layerId)}` +
     `&status=${encodeURIComponent(status)}` +
-    `&desc=${encodeURIComponent(desc)}`;
+    `&desc=${encodeURIComponent(desc)}` +
+    `&score=${score}`;
 
   // Replace static OG tags
   html = html

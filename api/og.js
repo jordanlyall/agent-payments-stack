@@ -30,6 +30,7 @@ export default async function handler(req) {
   const layer  = searchParams.get('layer')  || '';
   const status = searchParams.get('status') || 'announced';
   const desc   = searchParams.get('desc')   || '';
+  const score  = searchParams.get('score')  || '';
 
   const statusColor = STATUS_COLOR[status] || STATUS_COLOR.announced;
   const statusLabel = status.charAt(0).toUpperCase() + status.slice(1);
@@ -41,7 +42,7 @@ export default async function handler(req) {
     fetch(`${origin}/public/fonts/JetBrainsMono-SemiBold.ttf`).then(r => r.arrayBuffer()),
   ]);
 
-  const truncDesc = desc.length > 110 ? desc.slice(0, 107) + '...' : desc;
+  const truncDesc = desc.length > 90 ? desc.slice(0, 87) + '...' : desc;
   const fontSize  = name.length > 22 ? 72 : name.length > 14 ? 86 : 100;
 
   return new ImageResponse(
@@ -126,38 +127,120 @@ export default async function handler(req) {
             },
           },
 
-          // Middle: project name + description
+          // Middle: name/desc (left) + score (right)
           {
             type: 'div',
             props: {
-              style: { display: 'flex', flexDirection: 'column', gap: '16px' },
+              style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px' },
               children: [
+                // Left: name + description
                 {
                   type: 'div',
                   props: {
-                    style: {
-                      fontFamily: '"DM Serif Display"',
-                      fontSize: `${fontSize}px`,
-                      fontWeight: 400,
-                      letterSpacing: '-1.5px',
-                      color: '#edebe7',
-                      lineHeight: 1.0,
-                    },
-                    children: name,
+                    style: { display: 'flex', flexDirection: 'column', gap: '16px', flex: 1 },
+                    children: [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            fontFamily: '"DM Serif Display"',
+                            fontSize: `${fontSize}px`,
+                            fontWeight: 400,
+                            letterSpacing: '-1.5px',
+                            color: '#edebe7',
+                            lineHeight: 1.0,
+                          },
+                          children: name,
+                        },
+                      },
+                      truncDesc
+                        ? {
+                            type: 'div',
+                            props: {
+                              style: {
+                                fontSize: '19px',
+                                color: '#98948f',
+                                lineHeight: 1.5,
+                                fontFamily: 'sans-serif',
+                              },
+                              children: truncDesc,
+                            },
+                          }
+                        : null,
+                    ].filter(Boolean),
                   },
                 },
-                truncDesc
+                // Right: score
+                score
                   ? {
                       type: 'div',
                       props: {
                         style: {
-                          fontSize: '20px',
-                          color: '#98948f',
-                          lineHeight: 1.5,
-                          maxWidth: '820px',
-                          fontFamily: 'sans-serif',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          flexShrink: 0,
+                          background: 'rgba(255,255,255,0.03)',
+                          border: '1px solid #2a2824',
+                          borderRadius: '8px',
+                          padding: '20px 28px',
+                          gap: '4px',
                         },
-                        children: truncDesc,
+                        children: [
+                          {
+                            type: 'div',
+                            props: {
+                              style: {
+                                display: 'flex',
+                                alignItems: 'baseline',
+                                gap: '4px',
+                              },
+                              children: [
+                                {
+                                  type: 'div',
+                                  props: {
+                                    style: {
+                                      fontFamily: '"JetBrains Mono"',
+                                      fontSize: '72px',
+                                      fontWeight: 600,
+                                      letterSpacing: '-2px',
+                                      color: '#edebe7',
+                                      lineHeight: 1,
+                                    },
+                                    children: score,
+                                  },
+                                },
+                                {
+                                  type: 'div',
+                                  props: {
+                                    style: {
+                                      fontFamily: '"JetBrains Mono"',
+                                      fontSize: '20px',
+                                      color: '#524e49',
+                                      fontWeight: 600,
+                                    },
+                                    children: '/100',
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                          {
+                            type: 'div',
+                            props: {
+                              style: {
+                                fontFamily: '"JetBrains Mono"',
+                                fontSize: '10px',
+                                fontWeight: 600,
+                                letterSpacing: '0.12em',
+                                textTransform: 'uppercase',
+                                color: '#685e58',
+                                marginTop: '2px',
+                              },
+                              children: 'Stack Score',
+                            },
+                          },
+                        ],
                       },
                     }
                   : null,
