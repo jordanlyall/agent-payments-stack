@@ -1,12 +1,12 @@
 # Agent Payments Stack
 
-> The definitive map of AI agent payment infrastructure. 162 projects across 6 layers. Updated by @jordanlyall, March 2026.
+> The definitive map of AI agent payment infrastructure. 179 projects across 6 layers. Updated by @jordanlyall, April 2026.
 
 ## What this is
 
 A curated, layer-by-layer map of the agent payments ecosystem. Every major payment network is building rails for AI agents. This site tracks who's building what, across which layers, with what adoption signal. Updated continuously.
 
-Structured data: /data.json (schema v2.0, 162 projects, machine-readable)
+Structured data: /data.json (schema v2.0, 179 projects, machine-readable)
 MCP server: /api/mcp (5 query tools — filter by layer, status, search, get project, list acquired)
 Agent summary: /llms.txt (this file)
 
@@ -46,18 +46,18 @@ Pattern: acquirers are moving up-stack. Settlement/custody players buying identi
 ## The six layers
 
 L0 Settlement (14 projects) — where value actually moves. Base leads (cheap, fast, USDC-native). Ethereum, Solana, Arbitrum, Stellar also in the mix. 98.6% of tracked volume is USDC.
-L1 Wallet & Key Management (20 projects) — who is signing. Embedded wallets (Privy, Dynamic/Fireblocks), MPC signing (Turnkey, Capsule), smart accounts (Safe, Thirdweb). Turnkey leads npm: 137K weekly downloads.
+L1 Wallet & Key Management (21 projects) — who is signing. Embedded wallets (Privy, Dynamic/Fireblocks), MPC signing (Turnkey, Capsule), smart accounts (Safe, Thirdweb), programmable agent wallets (Frames). Turnkey leads npm: 137K weekly downloads.
 L2 Routing & Abstraction (26 projects) — picking the path. Cross-chain routing, bridging, swaps. Circle CCTP handles native USDC burns across 17 chains. Li.Fi, deBridge, Wormhole handle hops. WalletConnect/Reown: 854K weekly downloads.
-L3 Payment Protocol (30 projects) — how the payment is formatted. x402, Tempo MPP, L402, Google AP2, ACP, Superfluid (streaming), Interledger. No standard has won; x402 leads on implementation count.
-L4 Governance & Policy (34 projects) — who can spend what. Budget limits, allowlists, approval thresholds. Ramp Agent Cards, Stripe SPTs, ERC-8004, Visa. Least-decided layer.
-L5 Application (38 projects) — what agents buy and why. ElizaOS (most-forked framework, 17K stars), Virtuals Protocol (tokenized agents on Base), AWS, Vercel, Messari, Firecrawl, Pinata, Neynar, Zerion, Akash (GPU-by-the-second).
+L3 Payment Protocol (35 projects) — how the payment is formatted. x402, Tempo MPP, L402, Google AP2, ACP, Superfluid (streaming), Interledger. No standard has won; x402 leads on implementation count.
+L4 Governance & Policy (40 projects) — who can spend what. Budget limits, allowlists, approval thresholds. Ramp Agent Cards, Stripe SPTs, ERC-8004, Visa, Conto (spending control center), Costillery (receipt analytics for MPP/x402). Least-decided layer.
+L5 Application (43 projects) — what agents buy and why. ElizaOS (most-forked framework, 17K stars), Virtuals Protocol (tokenized agents on Base), AWS, Vercel, Messari, Firecrawl, Pinata, Neynar, Zerion, Akash (GPU-by-the-second).
 
 ## Status breakdown
 
-Live: 106 projects
-Early: 48 projects
+Live: 115 projects
+Early: 55 projects
 Acquired: 7 projects
-Announced: 1 project
+Announced: 2 projects
 
 ## Adoption signals (top by layer)
 
@@ -93,7 +93,7 @@ ReqCast: verified live 2026-03-26. x402 payment gateway, Base mainnet, first too
 
 ## Pages
 
-/ — Full stack map, 162 projects, filterable by layer and status
+/ — Full stack map, 179 projects, filterable by layer and status
 /rankings — Stack Score leaderboard, by-layer rankings, combined leaderboard
 /history — Milestone timeline from Botto (Oct 2021) to APS v2.0 (Mar 2026)
 /acquisitions — All 7 tracked acquisitions with deal size and context
