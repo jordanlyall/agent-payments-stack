@@ -2,8 +2,8 @@
   "schema_version": "2.0",
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
-  "updated": "2026-04-01",
-  "version": "1.15",
+  "updated": "2026-04-02",
+  "version": "1.16",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -1541,6 +1541,22 @@
             "sdk"
           ],
           "url": "https://costillery.com"
+        },
+        {
+          "layer": "L4",
+          "id": "ampersend",
+          "name": "Ampersend",
+          "status": "early",
+          "description": "Policy engine and control layer for agentic spend. Enforces budgets, merchant allowlists, spend thresholds, and approval escalations with full audit trail. Native x402 integration.",
+          "url": "https://www.ampersend.ai",
+          "tags": [
+            "api-native",
+            "developer",
+            "b2b",
+            "enterprise",
+            "offchain"
+          ],
+          "added": "2026-04-02"
         }
       ]
     },
@@ -3093,6 +3109,22 @@
           ],
           "editorial": "Meta-facilitator concept: instead of picking one facilitator, Onchain aggregates them. Relevant as the x402 facilitator landscape fragments across chains and operators.",
           "added": "2026-03-27"
+        },
+        {
+          "layer": "L2",
+          "id": "1money",
+          "name": "1Money",
+          "status": "live",
+          "description": "Stablecoin banking infrastructure for programmable payments. Multi-currency on/off ramps, stablecoin-to-stablecoin swaps, and virtual accounts with local routing numbers. Zero platform fees, usage-based pricing.",
+          "url": "https://www.1money.com",
+          "tags": [
+            "api-native",
+            "developer",
+            "b2b",
+            "offchain"
+          ],
+          "funding": "$23M",
+          "added": "2026-04-02"
         }
       ]
     },
