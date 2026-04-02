@@ -15,6 +15,11 @@
   "rail": {
     "activity": [
       {
+        "date": "2026-04-02",
+        "type": "added",
+        "text": "Ampersend and 1Money added \u2014 x402-native spend policy engine and stablecoin banking infra"
+      },
+      {
         "date": "2026-04-01",
         "type": "added",
         "text": "Frames, Conto, and Costillery added via submit form \u2014 agent wallet infra, spending governance, and MPP/x402 receipt analytics"
