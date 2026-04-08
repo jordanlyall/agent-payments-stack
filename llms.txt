@@ -1,12 +1,12 @@
 # Agent Payments Stack
 
-> The definitive map of AI agent payment infrastructure. 181 projects across 6 layers. Updated by @jordanlyall, April 2026.
+> The definitive map of AI agent payment infrastructure. 182 projects across 6 layers. Updated by @jordanlyall, April 2026.
 
 ## What this is
 
 A curated, layer-by-layer map of the agent payments ecosystem. Every major payment network is building rails for AI agents. This site tracks who's building what, across which layers, with what adoption signal. Updated continuously.
 
-Structured data: /data.json (schema v2.0, 181 projects, machine-readable)
+Structured data: /data.json (schema v2.0, 182 projects, machine-readable)
 MCP server: /api/mcp (5 query tools — filter by layer, status, search, get project, list acquired)
 Agent summary: /llms.txt (this file)
 
@@ -49,8 +49,8 @@ L0 Settlement (14 projects) — where value actually moves. Base leads (cheap, f
 L1 Wallet & Key Management (21 projects) — who is signing. Embedded wallets (Privy, Dynamic/Fireblocks), MPC signing (Turnkey, Capsule), smart accounts (Safe, Thirdweb), programmable agent wallets (Frames). Turnkey leads npm: 137K weekly downloads.
 L2 Routing & Abstraction (27 projects) — picking the path. Cross-chain routing, bridging, swaps. Circle CCTP handles native USDC burns across 17 chains. Li.Fi, deBridge, Wormhole handle hops. WalletConnect/Reown: 854K weekly downloads. 1Money: stablecoin banking with multi-currency on/off ramps and virtual accounts.
 L3 Payment Protocol (35 projects) — how the payment is formatted. x402, Tempo MPP, L402, Google AP2, ACP, Superfluid (streaming), Interledger. No standard has won; x402 leads on implementation count.
-L4 Governance & Policy (41 projects) — who can spend what. Budget limits, allowlists, approval thresholds. Ramp Agent Cards, Stripe SPTs, ERC-8004, Visa, Conto (spending control center), Costillery (receipt analytics for MPP/x402), Ampersend (policy engine with native x402 integration). Least-decided layer.
-L5 Application (43 projects) — what agents buy and why. ElizaOS (most-forked framework, 17K stars), Virtuals Protocol (tokenized agents on Base), AWS, Vercel, Messari, Firecrawl, Pinata, Neynar, Zerion, Akash (GPU-by-the-second).
+L4 Governance & Policy (42 projects) — who can spend what. Budget limits, allowlists, approval thresholds. Ramp Agent Cards, Stripe SPTs, ERC-8004, Visa, Conto (spending control center), Costillery (receipt analytics for MPP/x402), Ampersend (policy engine with native x402 integration), AgentCard (spend-controlled credit cards for agents). Least-decided layer.
+L5 Application (44 projects) — what agents buy and why. ElizaOS (most-forked framework, 17K stars), Virtuals Protocol (tokenized agents on Base), Agoragentic (capability router, 170+ verified listings on Base), AWS, Vercel, Messari, Firecrawl, Pinata, Neynar, Zerion, Akash (GPU-by-the-second).
 
 ## Status breakdown
 
@@ -93,7 +93,7 @@ ReqCast: verified live 2026-03-26. x402 payment gateway, Base mainnet, first too
 
 ## Pages
 
-/ — Full stack map, 181 projects, filterable by layer and status
+/ — Full stack map, 182 projects, filterable by layer and status
 /rankings — Stack Score leaderboard, by-layer rankings, combined leaderboard
 /history — Milestone timeline from Botto (Oct 2021) to APS v2.0 (Mar 2026)
 /acquisitions — All 7 tracked acquisitions with deal size and context

@@ -2,8 +2,8 @@
   "schema_version": "2.0",
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
-  "updated": "2026-04-02",
-  "version": "1.16",
+  "updated": "2026-04-08",
+  "version": "v1.17",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -854,6 +854,30 @@
           "x": "gitlawb",
           "added": "2026-03-30",
           "internal_note": "Bankr x Synthesis Hackathon winner."
+        },
+        {
+          "layer": "L5",
+          "id": "agoragentic",
+          "name": "Agoragentic",
+          "status": "live",
+          "description": "Capability router and marketplace for AI agents. Agents discover, invoke, and pay for services through one API. 170+ verified listings, USDC escrow on Base, sandbox endpoint verification, and 15 framework integrations.",
+          "launched": "2026",
+          "tags": [
+            "marketplace",
+            "x402",
+            "onchain",
+            "b2b",
+            "developer",
+            "open-source",
+            "api-native"
+          ],
+          "url": "https://agoragentic.com",
+          "chain": "Base",
+          "github": "https://github.com/rhein1/agoragentic-integrations",
+          "x": "Agoragentic",
+          "added": "2026-03-27",
+          "updated": "2026-04-08",
+          "internal_note": "Originally L2/early. Reclassified to L5/live Apr 8 based on updated submission: 170+ listings, USDC escrow, 15 framework integrations."
         }
       ]
     },
@@ -1562,6 +1586,23 @@
             "offchain"
           ],
           "added": "2026-04-02"
+        },
+        {
+          "layer": "L4",
+          "id": "agentcard",
+          "name": "AgentCard",
+          "status": "live",
+          "description": "Spend-controlled credit cards for AI agents. Lets agents make payments anywhere with enforced budget policies and safety controls.",
+          "launched": "2026",
+          "tags": [
+            "api-native",
+            "b2b",
+            "developer",
+            "offchain"
+          ],
+          "url": "https://agentcard.ai",
+          "added": "2026-04-08",
+          "internal_note": "Self-reported L3 but placed at L4 \u2014 spend controls are policy layer."
         }
       ]
     },
@@ -3052,21 +3093,6 @@
           "funding": "$5.8M",
           "launched": "2022",
           "editorial": "Reveel abstracts chain and stablecoin fragmentation through username-based payments, letting agents receive USDC on Arbitrum and settle in USDT on Polygon automatically. Positioned between wallet abstraction and agent frameworks, its adoption directly determines how frictionless cross-chain agent payments become. The critical test: whether $5.8M TVL converts to real adoption over direct bridge-swaps, separating genuine infrastructure from a solution seeking a problem."
-        },
-        {
-          "layer": "L2",
-          "id": "agoragentic",
-          "name": "Agoragentic",
-          "status": "early",
-          "description": "Autonomous agent execution gateway \u2014 agents discover, invoke, and pay for services through one API with settlement on Base.",
-          "tags": [
-            "gateway",
-            "discovery",
-            "onchain"
-          ],
-          "url": "https://agoragentic.com",
-          "chain": "Base",
-          "editorial": "20+ integrations, 200+ agents transacting with no human in the loop."
         },
         {
           "layer": "L2",
