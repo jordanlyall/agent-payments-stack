@@ -15,6 +15,11 @@
   "rail": {
     "activity": [
       {
+        "date": "2026-04-08",
+        "type": "added",
+        "text": "AgentCard added (L4, spend-controlled cards for agents); Agoragentic reclassified L2 \u2192 L5/live \u2014 170+ verified listings on Base"
+      },
+      {
         "date": "2026-04-02",
         "type": "added",
         "text": "Ampersend and 1Money added \u2014 x402-native spend policy engine and stablecoin banking infra"
