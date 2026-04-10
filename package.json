@@ -10,7 +10,10 @@
     "fetch-apv": "node scripts/fetch-apv.js",
     "refresh": "node scripts/fetch-apv.js && node scripts/fetch-x402-volume.js && node scripts/sync-data.js",
     "editorials": "node scripts/generate-editorials.js",
-    "apply-editorials": "node scripts/generate-editorials.js --apply"
+    "apply-editorials": "node scripts/generate-editorials.js --apply",
+    "tally": "node scripts/process-tally.js",
+    "tally:list": "node scripts/process-tally.js --list",
+    "tally:approve-all": "node scripts/process-tally.js --approve-all"
   },
   "repository": {
     "type": "git",

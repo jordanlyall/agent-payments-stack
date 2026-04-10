@@ -2,3 +2,5 @@
 node_modules/
 package-lock.json
 screenshot.mjs
+data/pending-submissions.json
+.env
