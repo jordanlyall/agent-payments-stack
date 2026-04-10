@@ -1,12 +1,12 @@
 # Agent Payments Stack
 
-> The definitive map of AI agent payment infrastructure. 182 projects across 6 layers. Updated by @jordanlyall, April 2026.
+> The definitive map of AI agent payment infrastructure. 184 projects across 6 layers. Updated by @jordanlyall, April 2026.
 
 ## What this is
 
 A curated, layer-by-layer map of the agent payments ecosystem. Every major payment network is building rails for AI agents. This site tracks who's building what, across which layers, with what adoption signal. Updated continuously.
 
-Structured data: /data.json (schema v2.0, 182 projects, machine-readable)
+Structured data: /data.json (schema v2.0, 184 projects, machine-readable)
 MCP server: /api/mcp (5 query tools — filter by layer, status, search, get project, list acquired)
 Agent summary: /llms.txt (this file)
 
@@ -93,7 +93,7 @@ ReqCast: verified live 2026-03-26. x402 payment gateway, Base mainnet, first too
 
 ## Pages
 
-/ — Full stack map, 182 projects, filterable by layer and status
+/ — Full stack map, 184 projects, filterable by layer and status
 /rankings — Stack Score leaderboard, by-layer rankings, combined leaderboard
 /history — Milestone timeline from Botto (Oct 2021) to APS v2.0 (Mar 2026)
 /acquisitions — All 7 tracked acquisitions with deal size and context

@@ -2,15 +2,16 @@
   "schema_version": "2.0",
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
-  "updated": "2026-04-08",
-  "version": "v1.17",
+  "updated": "2026-04-10",
+  "version": "v1.18",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
     "volume_9mo": "$43M",
     "transactions": "140M",
     "annualized": "~$600M",
-    "usdc_share": "98.6%"
+    "usdc_share": "98.6%",
+    "total_projects": 184
   },
   "rail": {
     "activity": [
@@ -883,6 +884,24 @@
           "added": "2026-03-27",
           "updated": "2026-04-08",
           "internal_note": "Originally L2/early. Reclassified to L5/live Apr 8 based on updated submission: 170+ listings, USDC escrow, 15 framework integrations."
+        },
+        {
+          "layer": "L5",
+          "id": "paragraph-publish",
+          "name": "Paragraph Publish",
+          "status": "live",
+          "description": "Content marketplace for humans and AI agents. Sell any file for USDC/DAI on Ethereum, Base, or Tempo. Supports $0.10 microtransactions with zero platform fees. Every sales page ships an agent-native purchase flow via an embedded Agent tab.",
+          "url": "https://publish.new",
+          "chain": "multi",
+          "tags": [
+            "consumer",
+            "developer",
+            "onchain",
+            "micropayment"
+          ],
+          "launched": "2026",
+          "added": "2026-04-10",
+          "internal_note": "Zero platform fees vs Gumroad 10% + $0.50/sale. Agent tab on every listing = manual AgentCard for content. Source: Bankless (Apr 7)."
         }
       ]
     },
@@ -2592,13 +2611,14 @@
           "id": "across",
           "name": "Across",
           "status": "live",
-          "description": "Optimistic bridge protocol for fast cross-chain token transfers. Low-latency USDC bridging used in agent payment stacks.",
+          "description": "Optimistic bridge protocol for fast cross-chain token transfers. Low-latency USDC bridging used in agent payment stacks. Ships Across Skills: a Claude Code skill and MCP server that lets agents get live bridge quotes and execute cross-chain transfers via tool calls.",
           "launched": "2021",
           "tags": [
             "open-source",
             "cross-border",
             "onchain",
-            "developer"
+            "developer",
+            "api-native"
           ],
           "github": {
             "url": "https://github.com/across-protocol/contracts",
@@ -2632,7 +2652,7 @@
             "package": "@across-protocol/app-sdk",
             "weekly_downloads": 2936
           },
-          "editorial": "Fastest USDC bridge by settlement time. Optimistic architecture (no ZK wait) makes it practical for agent payment flows that need cross-chain funds in seconds, not minutes."
+          "editorial": "Fastest USDC bridge by settlement time. Optimistic architecture (no ZK wait) makes it practical for agent payment flows that need cross-chain funds in seconds, not minutes. Across Skills (skills.across.to) extends this to agent-native tooling: a Claude Code skill and MCP server for live quotes and bridge execution via tool call. Combined with x402, covers receive \u2192 bridge \u2192 spend in a single agent context."
         },
         {
           "layer": "L2",
@@ -3161,6 +3181,24 @@
           ],
           "funding": "$23M",
           "added": "2026-04-02"
+        },
+        {
+          "layer": "L2",
+          "id": "better-money-company",
+          "name": "The Better Money Company",
+          "status": "announced",
+          "description": "Stablecoin clearinghouse that makes any stablecoin worth exactly $1 anywhere \u2014 solving the fragmentation problem the way ACH/Fedwire solved it for fiat. Coordination layer across issuers, wallets, and builders.",
+          "url": "https://bettermoney.co",
+          "funding": "$10M",
+          "tags": [
+            "offchain",
+            "b2b",
+            "enterprise",
+            "cross-border"
+          ],
+          "launched": "2026",
+          "added": "2026-04-10",
+          "internal_note": "a16z lead. Issuer partners: Paxos, Bridge, MoonPay, Agora, M0, Bastion, Frax, Brale, MetaMask, Phantom. Builder partners: Ramp, Modern Treasury, Privy, Turnkey, LayerZero, BitGo. Source: @SamBroner (Mar 31, 230K views)."
         }
       ]
     },
