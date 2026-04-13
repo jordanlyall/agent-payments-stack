@@ -3,7 +3,7 @@
   "title": "The Agent Payments Stack",
   "description": "Every major payment network is building rails for AI agents. 98.6% of volume settles in USDC.",
   "updated": "2026-04-13",
-  "version": "v1.20",
+  "version": "v1.21",
   "source": "agentpaymentsstack.com",
   "author": "@jordanlyall",
   "stats": {
@@ -11,10 +11,15 @@
     "transactions": "140M",
     "annualized": "~$600M",
     "usdc_share": "98.6%",
-    "total_projects": 186
+    "total_projects": 191
   },
   "rail": {
     "activity": [
+      {
+        "date": "2026-04-02",
+        "type": "proto",
+        "text": "x402 Foundation launched under Linux Foundation — 23 founding members including Visa, Mastercard, Google, Microsoft, AWS, Shopify, and Amex. Coinbase, Cloudflare, Stripe as initiators."
+      },
       {
         "date": "2026-04-13",
         "type": "added",
@@ -87,7 +92,7 @@
       }
     ],
     "editorial": {
-      "text": "L4 is the most contested layer right now. 42 projects, but only 16 live. AgentCard, Ampersend, Bullet Cash, WAAP — all attacking spend controls from different angles. The settlement and protocol layers are largely decided. The fight has moved up to who controls what agents are allowed to spend, on what, and when.",
+      "text": "The x402 Foundation changes the calculus. With Visa, Mastercard, Stripe, Google, Microsoft, AWS, Adyen, and Amex as founding members under the Linux Foundation, x402 has effectively won the L3 protocol layer before the competition formally started. ACP, L402, and Tempo MPP are now massive underdogs. The interesting question is no longer which protocol wins — it is how fast the rest of the stack fills in around it.",
       "byline": "@jordanlyall",
       "date": "2026-04-13"
     }
@@ -944,6 +949,24 @@
           "added": "2026-04-13",
           "contact": "dharmikumbhani201@gmail.com",
           "internal_note": "Self-reported as L5 Application Layer. Confirmed—functions as monetization endpoint for agent developers. Submission indicates 'live' status but limited public metrics available. Verify actual payment flow and settlement mechanism (onchain vs offchain)."
+        },
+        {
+          "layer": "L5",
+          "id": "shopify",
+          "name": "Shopify",
+          "status": "announced",
+          "description": "Global commerce platform and x402 Foundation founding member. Positions Shopify merchants to accept agent-native payments without manual checkout flows.",
+          "url": "https://www.shopify.com",
+          "launched": "2006",
+          "tags": [
+            "consumer",
+            "b2b",
+            "offchain",
+            "api-native"
+          ],
+          "x": "Shopify",
+          "added": "2026-04-13",
+          "internal_note": "x402 Foundation founding member (Apr 2). Largest commerce platform in the Foundation — signals agent-to-merchant payments as a real near-term use case."
         }
       ]
     },
@@ -2407,6 +2430,46 @@
           ],
           "url": "https://permissionless-technologies.com/docs/u402",
           "added": "2026-03-30"
+        },
+        {
+          "layer": "L3",
+          "id": "x402-foundation",
+          "name": "x402 Foundation",
+          "status": "live",
+          "description": "Neutral, community-governed home for the x402 protocol under the Linux Foundation. Initiated by Coinbase, Cloudflare, and Stripe. 23 founding members including Visa, Mastercard, Google, Microsoft, AWS, Shopify, Amex, and Adyen.",
+          "url": "https://www.x402.org",
+          "launched": "2026",
+          "tags": [
+            "http",
+            "open-source",
+            "developer",
+            "coinbase",
+            "stripe",
+            "google",
+            "visa",
+            "mastercard"
+          ],
+          "x": "x402protocol",
+          "added": "2026-04-13",
+          "internal_note": "Announced Apr 2 (4/02 Day). Linux Foundation stewardship. Signals x402 as the dominant L3 protocol — competing protocols (ACP, L402, Tempo MPP) now face steep odds."
+        },
+        {
+          "layer": "L3",
+          "id": "microsoft",
+          "name": "Microsoft",
+          "status": "announced",
+          "description": "x402 Foundation founding member. Brings Azure infrastructure and enterprise distribution to the x402 protocol ecosystem.",
+          "url": "https://www.microsoft.com",
+          "launched": "1975",
+          "tags": [
+            "offchain",
+            "b2b",
+            "enterprise",
+            "developer"
+          ],
+          "x": "Microsoft",
+          "added": "2026-04-13",
+          "internal_note": "x402 Foundation founding member (Apr 2). Azure + GitHub distribution makes Microsoft a critical enterprise adoption vector for x402."
         }
       ]
     },
@@ -3239,6 +3302,42 @@
           "launched": "2026",
           "added": "2026-04-10",
           "internal_note": "a16z lead. Issuer partners: Paxos, Bridge, MoonPay, Agora, M0, Bastion, Frax, Brale, MetaMask, Phantom. Builder partners: Ramp, Modern Treasury, Privy, Turnkey, LayerZero, BitGo. Source: @SamBroner (Mar 31, 230K views)."
+        },
+        {
+          "layer": "L2",
+          "id": "adyen",
+          "name": "Adyen",
+          "status": "announced",
+          "description": "Global payment platform and x402 Foundation founding member. Brings enterprise acquiring, routing, and settlement rails to the x402 ecosystem.",
+          "url": "https://www.adyen.com",
+          "launched": "2006",
+          "tags": [
+            "offchain",
+            "b2b",
+            "enterprise",
+            "cross-border"
+          ],
+          "x": "Adyen",
+          "added": "2026-04-13",
+          "internal_note": "x402 Foundation founding member (Apr 2). No agent-specific product announced yet — tracking as committed ecosystem participant."
+        },
+        {
+          "layer": "L2",
+          "id": "ant-international",
+          "name": "Ant International",
+          "status": "announced",
+          "description": "Alipay parent and x402 Foundation founding member. Brings cross-border payment infrastructure and Asia-Pacific distribution to the x402 ecosystem.",
+          "url": "https://www.antinternational.com",
+          "launched": "2015",
+          "tags": [
+            "cross-border",
+            "offchain",
+            "b2b",
+            "enterprise"
+          ],
+          "x": "AntGroup",
+          "added": "2026-04-13",
+          "internal_note": "x402 Foundation founding member (Apr 2). Alipay parent. Strongest signal for x402 adoption in Asia-Pacific markets."
         }
       ]
     },
