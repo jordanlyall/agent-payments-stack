@@ -352,7 +352,8 @@ async function cmdFetch() {
   const data = loadData();
   const allProjects = getAllProjects(data);
   const allNames = new Set(allProjects.map(p => p.name.toLowerCase()));
-  const allUrls  = new Set(allProjects.map(p => (p.url || '').toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '')));
+  const normalizeUrl = u => u.toLowerCase().replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+  const allUrls  = new Set(allProjects.map(p => normalizeUrl(p.url || '')));
 
   const pending = loadPending();
   const knownIds = new Set(pending.submissions.map(s => s.tallyId));
@@ -367,7 +368,7 @@ async function cmdFetch() {
     if (knownIds.has(sub.id)) { skippedCount++; continue; }
 
     const nameLower = sub.projectName.toLowerCase();
-    const urlClean  = (sub.url || '').toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '');
+    const urlClean  = normalizeUrl(sub.url || '');
     const inStack = allNames.has(nameLower) || (urlClean && allUrls.has(urlClean));
 
     if (inStack) {
