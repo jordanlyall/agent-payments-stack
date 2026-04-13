@@ -16,9 +16,9 @@
   "rail": {
     "activity": [
       {
-        "date": "2026-04-02",
-        "type": "proto",
-        "text": "x402 Foundation launched under Linux Foundation — 23 founding members including Visa, Mastercard, Google, Microsoft, AWS, Shopify, and Amex. Coinbase, Cloudflare, Stripe as initiators."
+        "date": "2026-04-13",
+        "type": "added",
+        "text": "x402 Foundation + 4 founding members added — Adyen, Shopify, Microsoft, Ant International now mapped. 12 of 23 founding members tracked."
       },
       {
         "date": "2026-04-13",
@@ -34,6 +34,11 @@
         "date": "2026-04-08",
         "type": "added",
         "text": "AgentCard added (L4, spend-controlled cards for agents); Agoragentic reclassified L2 → L5/live — 170+ verified listings on Base"
+      },
+      {
+        "date": "2026-04-02",
+        "type": "proto",
+        "text": "x402 Foundation launched under Linux Foundation — 23 founding members including Visa, Mastercard, Google, Microsoft, AWS, Shopify, and Amex. Coinbase, Cloudflare, Stripe as initiators."
       },
       {
         "date": "2026-04-02",
