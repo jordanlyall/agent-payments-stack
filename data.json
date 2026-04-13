@@ -564,9 +564,8 @@
           "status": "live",
           "description": "Enterprise payroll API — agents trigger compliant batch payments, compliance screening, yield queries, and salary streaming via HTTP 402 on Tempo.",
           "tags": [
-            "payroll",
             "x402",
-            "mpp",
+            "http",
             "b2b"
           ],
           "url": "https://remlo.xyz",
@@ -579,9 +578,8 @@
           "status": "early",
           "description": "Institutional yield and payment infrastructure on Arc. Merchants accept USDC/EURC via Nanopayments, funds auto-generate Treasury yield via USYC, agents manage treasury with ERC-8004 identity.",
           "tags": [
-            "yield",
-            "usdc",
-            "erc-8004",
+            "onchain",
+            "smart-contract",
             "b2b"
           ],
           "url": "https://themeridian.finance",
@@ -595,8 +593,7 @@
           "status": "early",
           "description": "Capital markets infrastructure for Agent Autonomous Organizations (AAOs) — blockchain-native entities run by AI agents with programmable governance.",
           "tags": [
-            "aao",
-            "governance",
+            "permissioned",
             "onchain"
           ],
           "url": "https://backed.app",
@@ -1478,8 +1475,8 @@
           "status": "early",
           "description": "Per-agent spending controls built on MPP (Stripe + Tempo) — budgets, spend limits, and auto-stop for autonomous agents.",
           "tags": [
-            "spend-controls",
-            "mpp",
+            "permissioned",
+            "http",
             "b2b"
           ],
           "url": "https://mppgate.com",
@@ -1492,9 +1489,8 @@
           "status": "early",
           "description": "Agent-native spending controls — agents get API keys and authorize USDC/BRLA payments within programmable owner-set rules with full audit trail.",
           "tags": [
-            "spend-controls",
-            "usdc",
-            "audit",
+            "permissioned",
+            "onchain",
             "b2b"
           ],
           "url": "https://bullet.cash",
@@ -2275,7 +2271,7 @@
           "description": "MCP monetization via Lightning — prefunded credit tranches with a pricing studio for agent-to-service billing.",
           "tags": [
             "lightning",
-            "mcp",
+            "api-native",
             "micropayment",
             "open-source"
           ],
@@ -2618,7 +2614,7 @@
           "token": "USDC",
           "tags": [
             "cross-border",
-            "stablecoin",
+            "onchain",
             "b2b",
             "stripe",
             "offchain"
@@ -3145,7 +3141,6 @@
           "tags": [
             "cross-border",
             "api-native",
-            "agent-native",
             "onchain"
           ],
           "x": "r3vl_xyz",
@@ -3787,8 +3782,7 @@
           "status": "live",
           "description": "Wallet as a Protocol — delegated capabilities for agents via programmable real-time policies without private key exposure. Millisecond signing via 2PC architecture.",
           "tags": [
-            "delegation",
-            "policy",
+            "permissioned",
             "developer"
           ],
           "url": "https://waap.xyz",
