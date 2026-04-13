@@ -81,23 +81,30 @@ function getAllProjects(data) {
   return data.layers.flatMap(l => l.projects);
 }
 
+const http = require('http');
+
 function fetchUrl(url) {
   return new Promise((resolve) => {
-    const mod = url.startsWith('https') ? https : require('http');
-    const timeout = setTimeout(() => { req.destroy(); resolve(null); }, 8000);
-    const req = mod.get(url, {
-      headers: { 'User-Agent': 'APS-Bot/1.0 (agentpaymentsstack.com)' },
-    }, (res) => {
-      if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location) {
-        clearTimeout(timeout);
-        resolve(fetchUrl(res.headers.location));
-        return;
-      }
-      let body = '';
-      res.on('data', chunk => { if (body.length < 12000) body += chunk; });
-      res.on('end', () => { clearTimeout(timeout); resolve(body || null); });
-    });
-    req.on('error', () => { clearTimeout(timeout); resolve(null); });
+    let parsed;
+    try { parsed = new URL(url); } catch { resolve(null); return; }
+    const mod = parsed.protocol === 'https:' ? https : http;
+    let req;
+    const timeout = setTimeout(() => { if (req) req.destroy(); resolve(null); }, 8000);
+    try {
+      req = mod.get(url, {
+        headers: { 'User-Agent': 'APS-Bot/1.0 (agentpaymentsstack.com)' },
+      }, (res) => {
+        if ([301, 302, 303, 307, 308].includes(res.statusCode) && res.headers.location) {
+          clearTimeout(timeout);
+          resolve(fetchUrl(res.headers.location));
+          return;
+        }
+        let body = '';
+        res.on('data', chunk => { if (body.length < 12000) body += chunk; });
+        res.on('end', () => { clearTimeout(timeout); resolve(body || null); });
+      });
+      req.on('error', () => { clearTimeout(timeout); resolve(null); });
+    } catch { clearTimeout(timeout); resolve(null); }
   });
 }
 
@@ -132,26 +139,32 @@ async function fetchSubmissions() {
   if (res.status !== 200) {
     throw new Error(`Tally API error ${res.status}: ${JSON.stringify(res.data)}`);
   }
-  return res.data;
+  // Build questionId → title map from top-level questions array
+  const questionMap = {};
+  for (const q of (res.data.questions || [])) {
+    questionMap[q.id] = q.title;
+  }
+  return { submissions: res.data.submissions || [], questionMap };
 }
 
-// Extract field values from a Tally submission (handles varied field naming)
-function parseSubmission(sub) {
+// Extract field values from a Tally submission using questionId→title map
+function parseSubmission(sub, questionMap) {
   const fields = {};
-  const rawFields = sub.fields || sub.data || [];
-  for (const field of rawFields) {
-    const label = (field.label || field.title || field.key || '').toLowerCase().trim();
-    const value = Array.isArray(field.value) ? field.value.join(', ') : String(field.value || '');
-    if (label) fields[label] = value;
+  for (const resp of (sub.responses || [])) {
+    const title = (questionMap[resp.questionId] || '').toLowerCase().trim();
+    const value = Array.isArray(resp.answer) ? resp.answer.join(', ') : String(resp.answer || '');
+    if (title) fields[title] = value;
   }
   return {
     id: sub.id,
-    submittedAt: sub.createdAt || sub.submittedAt,
-    projectName: fields['project name'] || fields['name'] || fields['project'] || '',
-    url: fields['url'] || fields['website'] || fields['project url'] || fields['link'] || '',
-    description: fields['description'] || fields['what does it do'] || fields['about'] || fields['tell us about your project'] || '',
-    layer: fields['layer'] || fields['stack layer'] || fields['which layer'] || '',
-    contact: fields['email'] || fields['contact'] || fields['twitter'] || fields['x handle'] || fields['x'] || '',
+    submittedAt: sub.submittedAt || sub.createdAt,
+    projectName: fields['project name'] || '',
+    url: fields['website url'] || fields['url'] || '',
+    description: fields['one-line description (what it does, for agents)'] || fields['description'] || '',
+    layer: fields['which layer best fits?'] || fields['layer'] || '',
+    status: fields['status'] || '',
+    metrics: fields['any metrics or context that support inclusion?'] || '',
+    contact: fields['your email'] || fields['your name'] || '',
     rawFields: fields,
   };
 }
@@ -182,6 +195,8 @@ Project name: ${submission.projectName}
 URL: ${submission.url}
 Description from submitter: ${submission.description}
 Layer (self-reported): ${submission.layer}
+Status (self-reported): ${submission.status}
+Metrics / context: ${submission.metrics}
 Contact: ${submission.contact}
 Submitted: ${submission.submittedAt}
 
@@ -331,9 +346,7 @@ async function cmdFetch() {
   }
 
   console.log('Fetching Tally submissions...');
-  const response = await fetchSubmissions();
-  const rawSubs = response.submissions || response.data || response || [];
-  const subList = Array.isArray(rawSubs) ? rawSubs : [];
+  const { submissions: subList, questionMap } = await fetchSubmissions();
   console.log(`  ${subList.length} total submissions from Tally`);
 
   const data = loadData();
@@ -348,7 +361,7 @@ async function cmdFetch() {
   let skippedCount = 0;
 
   for (const raw of subList) {
-    const sub = parseSubmission(raw);
+    const sub = parseSubmission(raw, questionMap);
     if (!sub.projectName) continue;
 
     if (knownIds.has(sub.id)) { skippedCount++; continue; }
