@@ -16,6 +16,16 @@
   "rail": {
     "activity": [
       {
+        "date": "2026-04-13",
+        "type": "added",
+        "text": "Boom and Agent Ads added via submit form — x402-native agent-to-agent marketplace and ad monetization layer for agent developers"
+      },
+      {
+        "date": "2026-04-10",
+        "type": "added",
+        "text": "The Better Money Company (L2) and Paragraph Publish (L5) added — stablecoin clearinghouse ($10M a16z) and agent-native content marketplace with $0.10 micropayments"
+      },
+      {
         "date": "2026-04-08",
         "type": "added",
         "text": "AgentCard added (L4, spend-controlled cards for agents); Agoragentic reclassified L2 → L5/live — 170+ verified listings on Base"
