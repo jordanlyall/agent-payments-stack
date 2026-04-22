@@ -2,24 +2,25 @@
   "meta": {
     "contract": "0x402085c248EeA27D92E8b30b2C58ed07f9E20001",
     "chain": "base",
-    "fetched_at": "2026-04-21T10:00:03.366Z",
-    "current_block": 44988127,
-    "start_block_30d": 43692127,
+    "fetched_at": "2026-04-22T10:00:03.654Z",
+    "current_block": 45031327,
+    "start_block_30d": 43735327,
     "note": "Volume decoded from x402ExactPermit2Proxy function call input data via Blockscout API",
     "source": "blockscout"
   },
   "volume_30d": {
-    "total_usd": 60.94,
-    "tx_count": 270,
+    "total_usd": 61.41,
+    "tx_count": 332,
     "by_token": {
-      "USDC": 60.936999999999976
+      "USDC": 61.412999999999975
     }
   },
   "volume_all_time": {
-    "tx_count": 305
+    "tx_count": 367
   },
   "daily_volume": {
-    "2026-04-21": 1.380000000000001,
+    "2026-04-22": 0.46000000000000024,
+    "2026-04-21": 1.396000000000001,
     "2026-04-20": 0.05600000000000002,
     "2026-04-17": 0.03200000000000002,
     "2026-04-16": 0.02000000000000001,
