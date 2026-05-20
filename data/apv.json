@@ -1,6 +1,6 @@
 {
   "meta": {
-    "fetched_at": "2026-05-19T15:08:00.930Z",
+    "fetched_at": "2026-05-20T15:08:27.807Z",
     "window": "30d",
     "sources": [
       "x402",
@@ -9,17 +9,17 @@
     "note": "APV = agent payment volume. x402: Dune query 5236154 (weekly, last 4 weeks). ACP: Blockscout USDC inflows to Virtuals ACP v1+v2 contracts on Base."
   },
   "apv": {
-    "volume_30d_usd": 530421.39,
-    "tx_count_30d": 1745047
+    "volume_30d_usd": 541633.44,
+    "tx_count_30d": 1800026
   },
   "x402": {
-    "volume_usd": 186269.72,
-    "tx_count": 1741982,
+    "volume_usd": 194880.64,
+    "tx_count": 1796955,
     "weekly": [
       {
         "week": "2026-05-18",
-        "volume_usd": 4366.03,
-        "tx_count": 65782
+        "volume_usd": 12976.95,
+        "tx_count": 120755
       },
       {
         "week": "2026-05-11",
@@ -39,8 +39,8 @@
     ]
   },
   "acp": {
-    "volume_usd": 344151.67,
-    "tx_count": 3065,
+    "volume_usd": 346752.8,
+    "tx_count": 3071,
     "by_contract": [
       {
         "label": "v1",
@@ -51,8 +51,8 @@
       {
         "label": "v2",
         "address": "0xa6C9BA866992cfD7fd6460ba912bfa405adA9df0",
-        "volume_usd": 344146.17,
-        "tx_count": 3059
+        "volume_usd": 346747.3,
+        "tx_count": 3065
       }
     ]
   }
