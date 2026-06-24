@@ -1,6 +1,6 @@
 {
   "meta": {
-    "fetched_at": "2026-06-23T15:03:49.813Z",
+    "fetched_at": "2026-06-24T14:59:13.038Z",
     "window": "30d",
     "sources": [
       "x402",
@@ -10,7 +10,7 @@
   },
   "apv": {
     "volume_30d_usd": 150618.01,
-    "tx_count_30d": 1765933
+    "tx_count_30d": 1765934
   },
   "x402": {
     "volume_usd": 126489.02,
@@ -40,13 +40,13 @@
   },
   "acp": {
     "volume_usd": 24128.99,
-    "tx_count": 139,
+    "tx_count": 140,
     "by_contract": [
       {
         "label": "v1",
         "address": "0x6a1FE26D54ab0d3E1e3168f2e0c0cDa5cC0A0A4A",
         "volume_usd": 0.02,
-        "tx_count": 6
+        "tx_count": 7
       },
       {
         "label": "v2",
